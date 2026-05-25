@@ -1,0 +1,748 @@
+{
+  "db_id": "regional_sales",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/regional_sales/regional_sales.sqlite",
+  "tables": [
+    {
+      "name": "Customers",
+      "type": "table",
+      "create_sql": "CREATE TABLE Customers\n(\n    CustomerID       INTEGER\n        constraint Customers_pk\n            primary key,\n    \"Customer Names\" TEXT\n)",
+      "row_count": 50,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "CustomerID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "customer id",
+            "description": "unique id number indicating which customer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Customer Names",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "customer names",
+            "description": "the name of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Products",
+      "type": "table",
+      "create_sql": "CREATE TABLE Products\n(\n    ProductID      INTEGER\n        constraint Products_pk\n            primary key,\n    \"Product Name\" TEXT\n)",
+      "row_count": 47,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ProductID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "product id",
+            "description": "unique id number representing each product",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Product Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "product name",
+            "description": "name of the product",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Regions",
+      "type": "table",
+      "create_sql": "CREATE TABLE Regions\n(\n    StateCode TEXT\n        constraint Regions_pk\n            primary key,\n    State     TEXT,\n    Region    TEXT\n)",
+      "row_count": 48,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "StateCode",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "state code",
+            "description": "the unique code identifying the state",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "State",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "full state name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Region",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the region where the state is located in",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Sales Orders",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Sales Orders\"\n(\n    OrderNumber        TEXT\n        constraint \"Sales Orders_pk\"\n            primary key,\n    \"Sales Channel\"    TEXT,\n    WarehouseCode      TEXT,\n    ProcuredDate       TEXT,\n    OrderDate          TEXT,\n    ShipDate           TEXT,\n    DeliveryDate       TEXT,\n    CurrencyCode       TEXT,\n    _SalesTeamID       INTEGER\n        constraint \"Sales Orders_Sales Team_SalesTeamID_fk\"\n            references \"Sales Team\"(SalesTeamID),\n    _CustomerID        INTEGER\n        constraint \"Sales Orders_Customers_CustomerID_fk\"\n            references Customers(CustomerID),\n    _StoreID           INTEGER\n        constraint \"Sales Orders_Store Locations_StoreID_fk\"\n            references \"Store Locations\"(StoreID),\n    _ProductID         INTEGER\n        constraint \"Sales Orders_Products_ProductID_fk\"\n            references Products(ProductID),\n    \"Order Quantity\"   INTEGER,\n    \"Discount Applied\" REAL,\n    \"Unit Price\"       TEXT,\n    \"Unit Cost\"        TEXT\n)",
+      "row_count": 7991,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "OrderNumber",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Order Number",
+            "description": "the unique number identifying the order",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Sales Channel",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Sales Channel",
+            "data_format": "text",
+            "value_description": " In-Store\n Online\n Distributor\n Wholesale"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "WarehouseCode",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Warehouse Code",
+            "description": "Warehouse Code",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif the warehouse code is the same, it means this product is shipped from the same ware house"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "ProcuredDate",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Procured Date",
+            "description": "Procured Date",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\ndate: month/date/year, 17--> 2017"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "OrderDate",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Order Date",
+            "description": "Order Date",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "ShipDate",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Ship Date",
+            "description": "Ship Date",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "DeliveryDate",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Delivery Date",
+            "description": "Delivery Date",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nthe difference \"DeliveryDate - OrderDate\" is smaller, it means faster delivery"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "CurrencyCode",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Currency Code",
+            "description": "Currency Code",
+            "data_format": "text",
+            "value_description": "USD"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "_SalesTeamID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "_Sales Team ID",
+            "description": "Sales Team ID",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "_CustomerID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "_Customer ID",
+            "description": "_Customer ID",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "_StoreID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "_Store ID",
+            "description": "_Store ID",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "_ProductID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "_Product ID",
+            "description": "_Product ID",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "Order Quantity",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Order Quantity",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\n1 - 8:\nhigher means order quantity is higher or customer needs more"
+          }
+        },
+        {
+          "cid": 13,
+          "name": "Discount Applied",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Discount Applied",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\n0.2: 20% discount"
+          }
+        },
+        {
+          "cid": 14,
+          "name": "Unit Price",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 15,
+          "name": "Unit Cost",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nnet profit = Unit Price - Unit Cost"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Sales Orders",
+          "from_column": "_ProductID",
+          "to_table": "Products",
+          "to_column": "ProductID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Sales Orders",
+          "from_column": "_StoreID",
+          "to_table": "Store Locations",
+          "to_column": "StoreID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "Sales Orders",
+          "from_column": "_CustomerID",
+          "to_table": "Customers",
+          "to_column": "CustomerID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 3,
+          "sequence": 0,
+          "from_table": "Sales Orders",
+          "from_column": "_SalesTeamID",
+          "to_table": "Sales Team",
+          "to_column": "SalesTeamID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Sales Team",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Sales Team\"\n(\n    SalesTeamID  INTEGER\n        constraint \"Sales Team_pk\"\n            primary key,\n    \"Sales Team\" TEXT,\n    Region       TEXT\n)",
+      "row_count": 28,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "SalesTeamID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "SalesTeam ID",
+            "description": "unique sales team id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Sales Team",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "sales team names",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Region",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the region where the state is located in",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Store Locations",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Store Locations\"\n(\n    StoreID            INTEGER\n        constraint \"Store Locations_pk\"\n            primary key,\n    \"City Name\"        TEXT,\n    County             TEXT,\n    StateCode          TEXT\n        constraint \"Store Locations_Regions_StateCode_fk\"\n            references Regions(StateCode),\n    State              TEXT,\n    Type               TEXT,\n    Latitude           REAL,\n    Longitude          REAL,\n    AreaCode           INTEGER,\n    Population         INTEGER,\n    \"Household Income\" INTEGER,\n    \"Median Income\"    INTEGER,\n    \"Land Area\"        INTEGER,\n    \"Water Area\"       INTEGER,\n    \"Time Zone\"        TEXT\n)",
+      "row_count": 367,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "StoreID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Store ID",
+            "description": "unique store id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "City Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "City Name",
+            "description": "City Name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "County",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "full county name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "StateCode",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "State Code",
+            "description": "state code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "State",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "full state name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "type of the store",
+            "data_format": "text",
+            "value_description": "City\nTown\nCDP (customer data platform)\nUnified Government\nConsolidated Government\nOther\nTownship\nUrban County \nBorough\nMetropolitan Government"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Latitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Latitude",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Longitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Longitude",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\ncoordinates or detailed position: (Latitude, Longitude)"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "AreaCode",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Area Code",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "Population",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Population",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "Household Income",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Household Income",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "Median Income",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Median Income",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "Land Area",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Land Area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "Water Area",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Water Area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "Time Zone",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Time Zone",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Store Locations",
+          "from_column": "StateCode",
+          "to_table": "Regions",
+          "to_column": "StateCode",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Sales Orders",
+      "from_column": "_ProductID",
+      "to_table": "Products",
+      "to_column": "ProductID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Sales Orders",
+      "from_column": "_StoreID",
+      "to_table": "Store Locations",
+      "to_column": "StoreID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "Sales Orders",
+      "from_column": "_CustomerID",
+      "to_table": "Customers",
+      "to_column": "CustomerID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 3,
+      "sequence": 0,
+      "from_table": "Sales Orders",
+      "from_column": "_SalesTeamID",
+      "to_table": "Sales Team",
+      "to_column": "SalesTeamID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Store Locations",
+      "from_column": "StateCode",
+      "to_table": "Regions",
+      "to_column": "StateCode",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

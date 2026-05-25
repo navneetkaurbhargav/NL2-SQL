@@ -1,0 +1,1620 @@
+{
+  "db_id": "legislator",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/legislator/legislator.sqlite",
+  "tables": [
+    {
+      "name": "current",
+      "type": "table",
+      "create_sql": "CREATE TABLE current\n(\n    ballotpedia_id      TEXT,\n    bioguide_id         TEXT,\n    birthday_bio        DATE,\n    cspan_id            REAL,\n    fec_id              TEXT,\n    first_name          TEXT,\n    gender_bio          TEXT,\n    google_entity_id_id TEXT,\n    govtrack_id         INTEGER,\n    house_history_id    REAL,\n    icpsr_id            REAL,\n    last_name           TEXT,\n    lis_id              TEXT,\n    maplight_id         REAL,\n    middle_name         TEXT,\n    nickname_name       TEXT,\n    official_full_name  TEXT,\n    opensecrets_id      TEXT,\n    religion_bio        TEXT,\n    suffix_name         TEXT,\n    thomas_id           INTEGER,\n    votesmart_id        REAL,\n    wikidata_id         TEXT,\n    wikipedia_id        TEXT,\n        primary key (bioguide_id, cspan_id)\n)",
+      "row_count": 541,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ballotpedia_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ballotpedia id",
+            "description": "The ballotpedia.org page name for the person (spaces are given as spaces, not underscores).",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on ballotpedia.org"
+          }
+        },
+        {
+          "cid": 1,
+          "name": "bioguide_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "bioguide id",
+            "description": "The alphanumeric ID for this legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "birthday_bio",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "birthday bio",
+            "description": "The legislator's birthday,",
+            "data_format": "date",
+            "value_description": "in YYYY-MM-DD format."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "cspan_id",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "cspan id",
+            "description": "The numeric ID for this legislator on C-SPAN's video website,",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on C-SPAN's video website"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "fec_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "fec id",
+            "description": "A list of IDs for this legislator in Federal Election Commission data.",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator hasn't not been registered in Federal Election Commission data."
+          }
+        },
+        {
+          "cid": 5,
+          "name": "first_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "first name of the legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "gender_bio",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "gender bio",
+            "description": "gender of the legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "google_entity_id_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "google entity id",
+            "description": "google entity id",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator are not google entities"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "govtrack_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "govtrack id",
+            "description": "The numeric ID for this legislator on GovTrack.us",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on GovTrack.us"
+          }
+        },
+        {
+          "cid": 9,
+          "name": "house_history_id",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "house history id",
+            "description": "The numeric ID for this legislator on http://history.house.gov/People/Search/",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nThe ID is present only for members who have served in the U.S. House."
+          }
+        },
+        {
+          "cid": 10,
+          "name": "icpsr_id",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "interuniversity consortium for political and social research id",
+            "description": "The numeric ID for this legislator in Keith Poole's VoteView.com website, originally based on an ID system by the Interuniversity Consortium for Political and Social Research (stored as an integer).",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on VoteView.com"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "last_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "last name of the legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "lis_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "legislator id",
+            "description": "The alphanumeric ID for this legislator found in Senate roll call votes",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nThe ID is present only for members who attended in Senate roll call votes"
+          }
+        },
+        {
+          "cid": 13,
+          "name": "maplight_id",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "maplight id",
+            "description": "The numeric ID for this legislator on maplight.org",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on maplight.org"
+          }
+        },
+        {
+          "cid": 14,
+          "name": "middle_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "middle name",
+            "description": "the middle name of the legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 15,
+          "name": "nickname_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "nickname",
+            "description": "nickname of the legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 16,
+          "name": "official_full_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "official full name",
+            "description": "official full name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "opensecrets_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "opensecrets id",
+            "description": "The alphanumeric ID for this legislator on OpenSecrets.org.",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on OpenSecrets.org."
+          }
+        },
+        {
+          "cid": 18,
+          "name": "religion_bio",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "religion bio",
+            "description": "The legislator's religion.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 19,
+          "name": "suffix_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "suffix name",
+            "description": "suffix name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 20,
+          "name": "thomas_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "thomas id",
+            "description": "The numeric ID for this legislator on http://thomas.gov and http://beta.congress.gov.",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on both http://thomas.gov and http://beta.congress.gov."
+          }
+        },
+        {
+          "cid": 21,
+          "name": "votesmart_id",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "votesmart id",
+            "description": "The numeric ID for this legislator on VoteSmart.org",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on VoteSmart.org"
+          }
+        },
+        {
+          "cid": 22,
+          "name": "wikidata_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "wikidata id",
+            "description": "the id for wikidata",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 23,
+          "name": "wikipedia_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "wikipedia id",
+            "description": "The Wikipedia page name for the person",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif a legislator has wikipedia id, it means he or she is famous or impact"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "current-terms",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"current-terms\"\n(\n    address            TEXT,\n    bioguide           TEXT,\n    caucus             TEXT,\n    chamber            TEXT,\n    class              REAL,\n    contact_form       TEXT,\n    district           REAL,\n    end                TEXT,\n    fax                TEXT,\n    last               TEXT,\n    name               TEXT,\n    office             TEXT,\n    party              TEXT,\n    party_affiliations TEXT,\n    phone              TEXT,\n    relation           TEXT,\n    rss_url            TEXT,\n    start              TEXT,\n    state              TEXT,\n    state_rank         TEXT,\n    title              TEXT,\n    type               TEXT,\n    url                TEXT,\n    primary key (bioguide, end),\n    foreign key (bioguide) references current(bioguide_id)\n)",
+      "row_count": 3078,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "address",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the address of this legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "bioguide",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "bioguide id",
+            "description": "The alphanumeric ID for this legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "caucus",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "caucus",
+            "data_format": "text",
+            "value_description": "For independents, the party that the legislator caucuses with, using the same values as the party field. Omitted if the legislator caucuses with the party indicated in the party field. When in doubt about the difference between the party and caucus fields, the party field is what displays after the legislator's name (i.e. \"(D)\") but the caucus field is what normally determines committee seniority. This field was added starting with terms for the 113th Congress."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "chamber",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "chamber",
+            "data_format": "text",
+            "value_description": "â¢ senate\nâ¢ house"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "class",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "class",
+            "data_format": "real",
+            "value_description": "For senators, their election class (1, 2, or 3). \ncommonsense evidence:\nonly senator has class, if the value is null or empty, it means this legislator is not senator."
+          }
+        },
+        {
+          "cid": 5,
+          "name": "contact_form",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The website URL of the contact page on the legislator's official website",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "district",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "district",
+            "data_format": "real",
+            "value_description": "For representatives, the district number they are serving from. \ncommonsense evidence:\nif null or empty, they are not representatives."
+          }
+        },
+        {
+          "cid": 7,
+          "name": "end",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the end of the term",
+            "data_format": "text",
+            "value_description": "end: The date the term ended (because the Congress ended or the legislator died or resigned, etc.). End dates follow the Constitutional end of a term. Since 1935, terms begin and end on January 3 at noon in odd-numbered years, and thus a term end date may also be a term start date. Prior to 1935, terms began on March 4 and ended either on March 3 or March 4. The end date is the last date on which the legislator served this term. Unlike the start date, whether Congress was in session or not does not affect the value of this field."
+          }
+        },
+        {
+          "cid": 8,
+          "name": "fax",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The fax number of the legislator's Washington, D.C. office",
+            "data_format": "text",
+            "value_description": "only valid if the term is current"
+          }
+        },
+        {
+          "cid": 9,
+          "name": "last",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the last known number",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "office",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "office",
+            "data_format": "text",
+            "value_description": "only valid if the term is current, otherwise the last known office"
+          }
+        },
+        {
+          "cid": 12,
+          "name": "party",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The political party of the legislator.",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nIf the legislator changed parties, this is the most recent party held during the term and party_affiliations will be set. Values are typically \"Democrat\", \"Independent\", or \"Republican\". The value typically matches the political party of the legislator on the ballot in his or her last election, although for state affiliate parties such as \"Democratic Farmer Labor\" we will use the national party name (\"Democrat\") instead to keep the values of this field normalized."
+          }
+        },
+        {
+          "cid": 13,
+          "name": "party_affiliations",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "party affiliations",
+            "description": "This field is present if the legislator changed party or caucus affiliation during the term.",
+            "data_format": "text",
+            "value_description": "The value is a list of time periods, with start and end dates, each of which has a party field and a caucus field if applicable, with the same meanings as the main party and caucus fields. The time periods cover the entire term, so the first start will match the term start, the last end will match the term end, and the last party (and caucus if present) will match the term party (and caucus)."
+          }
+        },
+        {
+          "cid": 14,
+          "name": "phone",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The phone number of the legislator's Washington, D.C. office",
+            "data_format": "text",
+            "value_description": "only valid if the term is current, otherwise the last known number"
+          }
+        },
+        {
+          "cid": 15,
+          "name": "relation",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 16,
+          "name": "rss_url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Really Simple Syndication URL",
+            "description": "The URL to the official website's RSS feed",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "start",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The date legislative service began: the date the legislator was sworn in, if known, or else the beginning of the legislator's term.",
+            "data_format": "text",
+            "value_description": "Since 1935 regularly elected terms begin on January 3 at noon on odd-numbered years, but when Congress does not first meet on January 3, term start dates might reflect that swearing-in occurred on a later date. (Prior to 1935, terms began on March 4 of odd-numbered years, see here.)"
+          }
+        },
+        {
+          "cid": 18,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "state code",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nAK: Alaska \nAL: Alabama \nAR: Arkansas \nAZ: Arizona \nCA: California \nCO: Colorado \nCT: Connecticut \nDE: Delaware \nFL: Florida \nGA: Georgia \nHI: Hawaii \nIA: Iowa \nID: Idaho \nIL: Illinois \nIN: Indiana \nKS: Kansas \nKY: Kentucky \nLA: Louisiana \nMA: Massachusetts \nMD: Maryland \nME: Maine \nMI: Michigan \nMN: Minnesota \nMO: Missouri \nMS: Mississippi \nMT: Montana \nNC: North Carolina \nND: North Dakota \nNE: Nebraska \nNH: New Hampshire \nNJ: New Jersey\n9 divisions of states in us: (please mention)\nhttps://www2.census.gov/geo/pdfs/maps-data/maps/reference/us_regdiv.pdf"
+          }
+        },
+        {
+          "cid": 19,
+          "name": "state_rank",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether they are the \"junior\" or \"senior\" senator",
+            "data_format": "text",
+            "value_description": "only valid if the term is current, otherwise the senator's rank at the time the term ended\ncommonsense evidence:\nonly senator has this value"
+          }
+        },
+        {
+          "cid": 20,
+          "name": "title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "title of the legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 21,
+          "name": "type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The type of the term.",
+            "data_format": "text",
+            "value_description": "Either \"sen\" for senators or \"rep\" for representatives and delegates to the House"
+          }
+        },
+        {
+          "cid": 22,
+          "name": "url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The official website URL of the legislator",
+            "data_format": "text",
+            "value_description": "only valid if the term is current"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "current-terms",
+          "from_column": "bioguide",
+          "to_table": "current",
+          "to_column": "bioguide_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "historical",
+      "type": "table",
+      "create_sql": "CREATE TABLE historical\n(\n    ballotpedia_id             TEXT,\n    bioguide_id                TEXT\n            primary key,\n    bioguide_previous_id       TEXT,\n    birthday_bio               TEXT,\n    cspan_id                   TEXT,\n    fec_id                     TEXT,\n    first_name                 TEXT,\n    gender_bio                 TEXT,\n    google_entity_id_id        TEXT,\n    govtrack_id                INTEGER,\n    house_history_alternate_id TEXT,\n    house_history_id           REAL,\n    icpsr_id                   REAL,\n    last_name                  TEXT,\n    lis_id                     TEXT,\n    maplight_id                TEXT,\n    middle_name                TEXT,\n    nickname_name              TEXT,\n    official_full_name         TEXT,\n    opensecrets_id             TEXT,\n    religion_bio               TEXT,\n    suffix_name                TEXT,\n    thomas_id                  TEXT,\n    votesmart_id               TEXT,\n    wikidata_id                TEXT,\n    wikipedia_id               TEXT\n)",
+      "row_count": 11864,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ballotpedia_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ballotpedia id",
+            "description": "The ballotpedia.org page name for the person (spaces are given as spaces, not underscores).",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on ballotpedia.org"
+          }
+        },
+        {
+          "cid": 1,
+          "name": "bioguide_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "bioguide id",
+            "description": "The alphanumeric ID for this legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "bioguide_previous_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "bioguide previous id",
+            "description": "The previous alphanumeric ID for this legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "birthday_bio",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "birthday bio",
+            "description": "The legislator's birthday,",
+            "data_format": "text",
+            "value_description": "in YYYY-MM-DD format."
+          }
+        },
+        {
+          "cid": 4,
+          "name": "cspan_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "cspan id",
+            "description": "The numeric ID for this legislator on C-SPAN's video website,",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on C-SPAN's video website"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "fec_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "fec id",
+            "description": "A list of IDs for this legislator in Federal Election Commission data.",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator hasn't not been registered in Federal Election Commission data."
+          }
+        },
+        {
+          "cid": 6,
+          "name": "first_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "first name of the legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "gender_bio",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "gender bio",
+            "description": "gender of the legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "google_entity_id_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "google entity id",
+            "description": "google entity id",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator are not google entities"
+          }
+        },
+        {
+          "cid": 9,
+          "name": "govtrack_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "govtrack id",
+            "description": "The numeric ID for this legislator on GovTrack.us",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on GovTrack.us"
+          }
+        },
+        {
+          "cid": 10,
+          "name": "house_history_alternate_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "house history alternate id",
+            "description": "The alternative numeric ID for this legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "house_history_id",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "house history id",
+            "description": "The numeric ID for this legislator on http://history.house.gov/People/Search/",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nThe ID is present only for members who have served in the U.S. House."
+          }
+        },
+        {
+          "cid": 12,
+          "name": "icpsr_id",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "interuniversity consortium for political and social research id",
+            "description": "The numeric ID for this legislator in Keith Poole's VoteView.com website, originally based on an ID system by the Interuniversity Consortium for Political and Social Research (stored as an integer).",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on VoteView.com"
+          }
+        },
+        {
+          "cid": 13,
+          "name": "last_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "last name of the legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "lis_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "legislator id",
+            "description": "The alphanumeric ID for this legislator found in Senate roll call votes",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nThe ID is present only for members who attended in Senate roll call votes"
+          }
+        },
+        {
+          "cid": 15,
+          "name": "maplight_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "maplight id",
+            "description": "The numeric ID for this legislator on maplight.org",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on maplight.org"
+          }
+        },
+        {
+          "cid": 16,
+          "name": "middle_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "middle name",
+            "description": "the middle name of the legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "nickname_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "nickname",
+            "description": "nickname of the legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 18,
+          "name": "official_full_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "official full name",
+            "description": "official full name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 19,
+          "name": "opensecrets_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "opensecrets id",
+            "description": "The alphanumeric ID for this legislator on OpenSecrets.org.",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on OpenSecrets.org."
+          }
+        },
+        {
+          "cid": 20,
+          "name": "religion_bio",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "religion bio",
+            "description": "The legislator's religion.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 21,
+          "name": "suffix_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "suffix name",
+            "description": "suffix name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 22,
+          "name": "thomas_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "thomas id",
+            "description": "The numeric ID for this legislator on http://thomas.gov and http://beta.congress.gov.",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on both http://thomas.gov and http://beta.congress.gov."
+          }
+        },
+        {
+          "cid": 23,
+          "name": "votesmart_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "votesmart id",
+            "description": "The numeric ID for this legislator on VoteSmart.org",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif this value is null or empty, it means this legislator doesn't have account on VoteSmart.org"
+          }
+        },
+        {
+          "cid": 24,
+          "name": "wikidata_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "wikidata id",
+            "description": "the id for wikidata",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 25,
+          "name": "wikipedia_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "wikipedia id",
+            "description": "The Wikipedia page name for the person",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif a legislator has wikipedia id, it means he or she is famous or impact"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "historical-terms",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"historical-terms\"\n(\n    address            TEXT,\n    bioguide           TEXT\n            primary key,\n    chamber            TEXT,\n    class              REAL,\n    contact_form       TEXT,\n    district           REAL,\n    end                TEXT,\n    fax                TEXT,\n    last               TEXT,\n    middle             TEXT,\n    name               TEXT,\n    office             TEXT,\n    party              TEXT,\n    party_affiliations TEXT,\n    phone              TEXT,\n    relation           TEXT,\n    rss_url            TEXT,\n    start              TEXT,\n    state              TEXT,\n    state_rank         TEXT,\n    title              TEXT,\n    type               TEXT,\n    url                TEXT,\n    foreign key (bioguide) references historical(bioguide_id)\n)",
+      "row_count": 11864,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "address",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the address of this legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "bioguide",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "bioguide id",
+            "description": "The alphanumeric ID for this legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "chamber",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "chamber",
+            "data_format": "text",
+            "value_description": "â¢ senate\nâ¢ house"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "class",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "class",
+            "data_format": "real",
+            "value_description": "For senators, their election class (1, 2, or 3). \ncommonsense evidence:\nonly senator has class, if the value is null or empty, it means this legislator is not senator."
+          }
+        },
+        {
+          "cid": 4,
+          "name": "contact_form",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The website URL of the contact page on the legislator's official website",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "district",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "district",
+            "data_format": "real",
+            "value_description": "For representatives, the district number they are serving from. \ncommonsense evidence:\nif null or empty, they are not representatives."
+          }
+        },
+        {
+          "cid": 6,
+          "name": "end",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the end of the term",
+            "data_format": "text",
+            "value_description": "end: The date the term ended (because the Congress ended or the legislator died or resigned, etc.). End dates follow the Constitutional end of a term. Since 1935, terms begin and end on January 3 at noon in odd-numbered years, and thus a term end date may also be a term start date. Prior to 1935, terms began on March 4 and ended either on March 3 or March 4. The end date is the last date on which the legislator served this term. Unlike the start date, whether Congress was in session or not does not affect the value of this field."
+          }
+        },
+        {
+          "cid": 7,
+          "name": "fax",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The fax number of the legislator's Washington, D.C. office",
+            "data_format": "text",
+            "value_description": "only valid if the term is current"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "last",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the last known number",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "middle",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "office",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "office",
+            "data_format": "text",
+            "value_description": "only valid if the term is current, otherwise the last known office"
+          }
+        },
+        {
+          "cid": 12,
+          "name": "party",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The political party of the legislator.",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nIf the legislator changed parties, this is the most recent party held during the term and party_affiliations will be set. Values are typically \"Democrat\", \"Independent\", or \"Republican\". The value typically matches the political party of the legislator on the ballot in his or her last election, although for state affiliate parties such as \"Democratic Farmer Labor\" we will use the national party name (\"Democrat\") instead to keep the values of this field normalized."
+          }
+        },
+        {
+          "cid": 13,
+          "name": "party_affiliations",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "party affiliations",
+            "description": "This field is present if the legislator changed party or caucus affiliation during the term.",
+            "data_format": "text",
+            "value_description": "The value is a list of time periods, with start and end dates, each of which has a party field and a caucus field if applicable, with the same meanings as the main party and caucus fields. The time periods cover the entire term, so the first start will match the term start, the last end will match the term end, and the last party (and caucus if present) will match the term party (and caucus)."
+          }
+        },
+        {
+          "cid": 14,
+          "name": "phone",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The phone number of the legislator's Washington, D.C. office",
+            "data_format": "text",
+            "value_description": "only valid if the term is current, otherwise the last known number"
+          }
+        },
+        {
+          "cid": 15,
+          "name": "relation",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 16,
+          "name": "rss_url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Really Simple Syndication URL",
+            "description": "The URL to the official website's RSS feed",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "start",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The date legislative service began: the date the legislator was sworn in, if known, or else the beginning of the legislator's term.",
+            "data_format": "text",
+            "value_description": "Since 1935 regularly elected terms begin on January 3 at noon on odd-numbered years, but when Congress does not first meet on January 3, term start dates might reflect that swearing-in occurred on a later date. (Prior to 1935, terms began on March 4 of odd-numbered years, see here.)"
+          }
+        },
+        {
+          "cid": 18,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "state code",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nAK: Alaska \nAL: Alabama \nAR: Arkansas \nAZ: Arizona \nCA: California \nCO: Colorado \nCT: Connecticut \nDE: Delaware \nFL: Florida \nGA: Georgia \nHI: Hawaii \nIA: Iowa \nID: Idaho \nIL: Illinois \nIN: Indiana \nKS: Kansas \nKY: Kentucky \nLA: Louisiana \nMA: Massachusetts \nMD: Maryland \nME: Maine \nMI: Michigan \nMN: Minnesota \nMO: Missouri \nMS: Mississippi \nMT: Montana \nNC: North Carolina \nND: North Dakota \nNE: Nebraska \nNH: New Hampshire \nNJ: New Jersey\n9 divisions of states in us: (please mention)\nhttps://www2.census.gov/geo/pdfs/maps-data/maps/reference/us_regdiv.pdf"
+          }
+        },
+        {
+          "cid": 19,
+          "name": "state_rank",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether they are the \"junior\" or \"senior\" senator",
+            "data_format": "text",
+            "value_description": "only valid if the term is current, otherwise the senator's rank at the time the term ended\ncommonsense evidence:\nonly senator has this value"
+          }
+        },
+        {
+          "cid": 20,
+          "name": "title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "title of the legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 21,
+          "name": "type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The type of the term.",
+            "data_format": "text",
+            "value_description": "Either \"sen\" for senators or \"rep\" for representatives and delegates to the House"
+          }
+        },
+        {
+          "cid": 22,
+          "name": "url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The official website URL of the legislator",
+            "data_format": "text",
+            "value_description": "only valid if the term is current"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "historical-terms",
+          "from_column": "bioguide",
+          "to_table": "historical",
+          "to_column": "bioguide_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "social-media",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"social-media\"\n(\n    bioguide     TEXT\n            primary key,\n    facebook     TEXT,\n    facebook_id  REAL,\n    govtrack     REAL,\n    instagram    TEXT,\n    instagram_id REAL,\n    thomas       INTEGER,\n    twitter      TEXT,\n    twitter_id   REAL,\n    youtube      TEXT,\n    youtube_id   TEXT,\n    foreign key (bioguide) references current(bioguide_id)\n)",
+      "row_count": 479,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "bioguide",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The unique alphanumeric ID for this legislator",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "facebook",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The username of the current official Facebook presence of the legislator.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "facebook_id",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The numeric ID of the current official Facebook presence of the legislator.",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "govtrack",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The numeric ID for this legislator on GovTrack.us",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "instagram",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The current official Instagram handle of the legislator.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "instagram_id",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The numeric ID of the current official Instagram handle of the legislator.",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "thomas",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The numeric ID for this legislator on http://thomas.gov and http://beta.congress.gov.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "twitter",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The current official Twitter handle of the legislator.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "twitter_id",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The numeric ID of the current official twitter handle of the legislator.",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "youtube",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The current official YouTube username of the legislator.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "youtube_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The current official YouTube channel ID of the legislator.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "social-media",
+          "from_column": "bioguide",
+          "to_table": "current",
+          "to_column": "bioguide_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "current-terms",
+      "from_column": "bioguide",
+      "to_table": "current",
+      "to_column": "bioguide_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "historical-terms",
+      "from_column": "bioguide",
+      "to_table": "historical",
+      "to_column": "bioguide_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "social-media",
+      "from_column": "bioguide",
+      "to_table": "current",
+      "to_column": "bioguide_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

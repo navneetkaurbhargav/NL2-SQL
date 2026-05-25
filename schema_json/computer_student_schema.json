@@ -1,0 +1,302 @@
+{
+  "db_id": "computer_student",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/computer_student/computer_student.sqlite",
+  "tables": [
+    {
+      "name": "advisedBy",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"advisedBy\"\n(\n    p_id       INTEGER,\n    p_id_dummy INTEGER,\n    constraint advisedBy_pk\n        primary key (p_id, p_id_dummy),\n    constraint advisedBy_person_p_id_p_id_fk\n        foreign key (p_id, p_id_dummy) references person (p_id, p_id)\n)",
+      "row_count": 113,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "p_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "person id",
+            "description": "id number identifying each person",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "p_id_dummy",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "person id dummy",
+            "description": "the id number identifying the advisor",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "advisedBy",
+          "from_column": "p_id",
+          "to_table": "person",
+          "to_column": "p_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "advisedBy",
+          "from_column": "p_id_dummy",
+          "to_table": "person",
+          "to_column": "p_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "course",
+      "type": "table",
+      "create_sql": "CREATE TABLE course\n(\n    course_id   INTEGER\n        constraint course_pk\n            primary key,\n    courseLevel TEXT\n)",
+      "row_count": 132,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "course_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "course id",
+            "description": "unique id number identifying courses",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "courseLevel",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "course level",
+            "description": "course level",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n Level_300: basic or medium undergraduate courses.\n Level_400: high-level or harder undergraduate course.\n Level_500: professional or master/graduate courses"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "person",
+      "type": "table",
+      "create_sql": "CREATE TABLE person\n(\n    p_id           INTEGER\n        constraint person_pk\n            primary key,\n    professor      INTEGER,\n    student        INTEGER,\n    hasPosition    TEXT,\n    inPhase        TEXT,\n    yearsInProgram TEXT\n)",
+      "row_count": 278,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "p_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "person ID",
+            "description": "the unique number identifying each person",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "professor",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "professor",
+            "description": "whether the person is a professor",
+            "data_format": "integer",
+            "value_description": "0: professor\n1: student"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "student",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "student",
+            "description": "whether the person is a student",
+            "data_format": "integer",
+            "value_description": "0: professor\n1: student"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "hasPosition",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "has position",
+            "description": "whether the person has a position in the faculty",
+            "data_format": "text",
+            "value_description": "0: the person is not a faculty member\nCommon Sense evidence:\nfaculty_aff: affiliated faculty\nfaculty_eme: faculty employee"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "inPhase",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "in phase",
+            "description": "the phase of qualification the person is undergoing",
+            "data_format": "text",
+            "value_description": "0: the person is not undergoing the phase of qualification"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "yearsInProgram",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "years in program",
+            "description": "the year of the program the person is at",
+            "data_format": "text",
+            "value_description": "0: the person is not in any programs\nCommon Sense evidence:\nyearX means the person is on the Xth year of the program"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "taughtBy",
+      "type": "table",
+      "create_sql": "CREATE TABLE taughtBy\n(\n    course_id INTEGER,\n    p_id      INTEGER,\n    primary key (course_id, p_id),\n    foreign key (p_id) references person(p_id),\n    foreign key (course_id) references course(course_id)\n)",
+      "row_count": 189,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "course_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "course ID",
+            "description": "the identification number identifying each course",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "p_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "person ID",
+            "description": "the identification number identifying each person",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "taughtBy",
+          "from_column": "course_id",
+          "to_table": "course",
+          "to_column": "course_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "taughtBy",
+          "from_column": "p_id",
+          "to_table": "person",
+          "to_column": "p_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "advisedBy",
+      "from_column": "p_id",
+      "to_table": "person",
+      "to_column": "p_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "advisedBy",
+      "from_column": "p_id_dummy",
+      "to_table": "person",
+      "to_column": "p_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "taughtBy",
+      "from_column": "course_id",
+      "to_table": "course",
+      "to_column": "course_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "taughtBy",
+      "from_column": "p_id",
+      "to_table": "person",
+      "to_column": "p_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

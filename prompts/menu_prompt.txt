@@ -1,0 +1,752 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "menu",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/menu/menu.sqlite",
+  "tables": [
+    {
+      "name": "Dish",
+      "type": "table",
+      "create_sql": "CREATE TABLE Dish\n(\n    id             INTEGER\n            primary key,\n    name           TEXT,\n    description    TEXT,\n    menus_appeared INTEGER,\n    times_appeared INTEGER,\n    first_appeared INTEGER,\n    last_appeared  INTEGER,\n    lowest_price   REAL,\n    highest_price  REAL\n)",
+      "row_count": 426713,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "unique id number indicating the dishes",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the dish",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "description of the dish",
+            "data_format": "text",
+            "value_description": "(no value)"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "menus_appeared",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "menus appeared",
+            "description": "how many menus have this dish",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "times_appeared",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "times appeared",
+            "description": "how many times this dish appears in the menu",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nif times_appeared > menus_appeard: this dish appeared in a menu more than once"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "first_appeared",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first appeared",
+            "description": "the year that this dish appears first",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\n1.\tthe year outside of [1851, 2012], it means this data is not correct \n2.\tif this dish lasts longer (last_appeared - first_appeard), it means its history is long or historical / classical"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "last_appeared",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last appeared",
+            "description": "the year that this dish appears the last time",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\n1.\tthe year outside of [1851, 2012], it means this data is not correct\n2.\tif this dish lasts longer (last_appeared - first_appeard), it means its history is long or historical / classical"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "lowest_price",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "lowest price",
+            "description": "the lowest price of the dish",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\n0: for free"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "highest_price",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "highest price",
+            "description": "the highest price of the dish",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Menu",
+      "type": "table",
+      "create_sql": "CREATE TABLE Menu\n(\n    id                   INTEGER\n            primary key,\n    name                 TEXT,\n    sponsor              TEXT,\n    event                TEXT,\n    venue                TEXT,\n    place                TEXT,\n    physical_description TEXT,\n    occasion             TEXT,\n    notes                TEXT,\n    call_number          TEXT,\n    keywords             TEXT,\n    language             TEXT,\n    date                 DATE,\n    location             TEXT,\n    location_type        TEXT,\n    currency             TEXT,\n    currency_symbol      TEXT,\n    status               TEXT,\n    page_count           INTEGER,\n    dish_count           INTEGER\n)",
+      "row_count": 17527,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique number identifying the menu",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the menu",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n\nif the value is not null or empty, it means this menu has special dishes.\n\notherwise, this menu is general and nothing special"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "sponsor",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the sponsor of this menu",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n\nif the value is null or empyt, it means this meanu is DIY by the restaurant."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "event",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the event that the menu was created for",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "venue",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the venue that the menu was created for",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "place",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the location that the menu was used",
+            "data_format": "text",
+            "value_description": "the location that the menu was used"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "physical_description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "physical description",
+            "description": "physical description of the menu",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "occasion",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "occasion of the menu",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "notes",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "notes",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "call_number",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "call number",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif null: not support for taking out or booking in advance"
+          }
+        },
+        {
+          "cid": 10,
+          "name": "keywords",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "keywords",
+            "data_format": "text",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "language",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "language",
+            "data_format": "text",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 12,
+          "name": "date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the date that this menu was created",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "location",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the location that the menu was used",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "location_type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 15,
+          "name": "currency",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the currency that the menu was used",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 16,
+          "name": "currency_symbol",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the currency symbol",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "status",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "status of the menu",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 18,
+          "name": "page_count",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "page count",
+            "description": "the number of pages of this menu",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 19,
+          "name": "dish_count",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "dish count",
+            "description": "the number of dishes of this menu",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "MenuItem",
+      "type": "table",
+      "create_sql": "CREATE TABLE MenuItem\n(\n    id           INTEGER\n            primary key,\n    menu_page_id INTEGER,\n    price        REAL,\n    high_price   REAL,\n    dish_id      INTEGER,\n    created_at   TEXT,\n    updated_at   TEXT,\n    xpos         REAL,\n    ypos         REAL,\n    foreign key (dish_id) references Dish(id),\n    foreign key (menu_page_id) references MenuPage(id)\n)",
+      "row_count": 1334410,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique id representing the menu item",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "menu_page_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "menu_page_id",
+            "description": "the id of menu page",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "price",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the price of this dish (menu item)",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "high_price",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "high price",
+            "description": "high price of this dish",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "dish_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "dish_id",
+            "description": "the id of the dish",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "created_at",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "created at",
+            "description": "the dates when the item was created",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "updated_at",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "updated at",
+            "description": "the dates when the item was updated",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "xpos",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "x position",
+            "description": "x-axis position of the dish in this menu page",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "ypos",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "y position",
+            "description": "y-axis position of the dish in this menu page",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "MenuItem",
+          "from_column": "menu_page_id",
+          "to_table": "MenuPage",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "MenuItem",
+          "from_column": "dish_id",
+          "to_table": "Dish",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "MenuPage",
+      "type": "table",
+      "create_sql": "CREATE TABLE MenuPage\n(\n    id          INTEGER\n            primary key,\n    menu_id     INTEGER,\n    page_number INTEGER,\n    image_id    REAL,\n    full_height INTEGER,\n    full_width  INTEGER,\n    uuid        TEXT,\n    foreign key (menu_id) references Menu(id)\n)",
+      "row_count": 66937,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique id number indentifying the menupage",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "menu_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "menu id",
+            "description": "the id of the menu",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "page_number",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "page number",
+            "description": "the page number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "image_id",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "image id",
+            "description": "the id of the image",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "full_height",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "full height",
+            "description": "full height of the menu page",
+            "data_format": "integer",
+            "value_description": "(mm)"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "full_width",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "full width",
+            "description": "full width of the menu page",
+            "data_format": "integer",
+            "value_description": "(mm)"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "uuid",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "MenuPage",
+          "from_column": "menu_id",
+          "to_table": "Menu",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "MenuItem",
+      "from_column": "menu_page_id",
+      "to_table": "MenuPage",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "MenuItem",
+      "from_column": "dish_id",
+      "to_table": "Dish",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "MenuPage",
+      "from_column": "menu_id",
+      "to_table": "Menu",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

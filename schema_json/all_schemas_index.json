@@ -1,0 +1,485 @@
+[
+  {
+    "db_id": "address",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/address/address.sqlite",
+    "table_count": 9,
+    "foreign_key_count": 10,
+    "schema_json": "schema_json/address_schema.json"
+  },
+  {
+    "db_id": "airline",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/airline/airline.sqlite",
+    "table_count": 3,
+    "foreign_key_count": 3,
+    "schema_json": "schema_json/airline_schema.json"
+  },
+  {
+    "db_id": "app_store",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/app_store/app_store.sqlite",
+    "table_count": 2,
+    "foreign_key_count": 1,
+    "schema_json": "schema_json/app_store_schema.json"
+  },
+  {
+    "db_id": "authors",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/authors/authors.sqlite",
+    "table_count": 5,
+    "foreign_key_count": 4,
+    "schema_json": "schema_json/authors_schema.json"
+  },
+  {
+    "db_id": "beer_factory",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/beer_factory/beer_factory.sqlite",
+    "table_count": 7,
+    "foreign_key_count": 10,
+    "schema_json": "schema_json/beer_factory_schema.json"
+  },
+  {
+    "db_id": "bike_share_1",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/bike_share_1/bike_share_1.sqlite",
+    "table_count": 4,
+    "foreign_key_count": 0,
+    "schema_json": "schema_json/bike_share_1_schema.json"
+  },
+  {
+    "db_id": "book_publishing_company",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/book_publishing_company/book_publishing_company.sqlite",
+    "table_count": 11,
+    "foreign_key_count": 10,
+    "schema_json": "schema_json/book_publishing_company_schema.json"
+  },
+  {
+    "db_id": "books",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/books/books.sqlite",
+    "table_count": 15,
+    "foreign_key_count": 14,
+    "schema_json": "schema_json/books_schema.json"
+  },
+  {
+    "db_id": "car_retails",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/car_retails/car_retails.sqlite",
+    "table_count": 8,
+    "foreign_key_count": 8,
+    "schema_json": "schema_json/car_retails_schema.json"
+  },
+  {
+    "db_id": "cars",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/cars/cars.sqlite",
+    "table_count": 4,
+    "foreign_key_count": 4,
+    "schema_json": "schema_json/cars_schema.json"
+  },
+  {
+    "db_id": "chicago_crime",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/chicago_crime/chicago_crime.sqlite",
+    "table_count": 7,
+    "foreign_key_count": 6,
+    "schema_json": "schema_json/chicago_crime_schema.json"
+  },
+  {
+    "db_id": "citeseer",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/citeseer/citeseer.sqlite",
+    "table_count": 3,
+    "foreign_key_count": 1,
+    "schema_json": "schema_json/citeseer_schema.json"
+  },
+  {
+    "db_id": "codebase_comments",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/codebase_comments/codebase_comments.sqlite",
+    "table_count": 4,
+    "foreign_key_count": 0,
+    "schema_json": "schema_json/codebase_comments_schema.json"
+  },
+  {
+    "db_id": "coinmarketcap",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/coinmarketcap/coinmarketcap.sqlite",
+    "table_count": 2,
+    "foreign_key_count": 0,
+    "schema_json": "schema_json/coinmarketcap_schema.json"
+  },
+  {
+    "db_id": "college_completion",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/college_completion/college_completion.sqlite",
+    "table_count": 4,
+    "foreign_key_count": 4,
+    "schema_json": "schema_json/college_completion_schema.json"
+  },
+  {
+    "db_id": "computer_student",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/computer_student/computer_student.sqlite",
+    "table_count": 4,
+    "foreign_key_count": 4,
+    "schema_json": "schema_json/computer_student_schema.json"
+  },
+  {
+    "db_id": "cookbook",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/cookbook/cookbook.sqlite",
+    "table_count": 4,
+    "foreign_key_count": 4,
+    "schema_json": "schema_json/cookbook_schema.json"
+  },
+  {
+    "db_id": "craftbeer",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/craftbeer/craftbeer.sqlite",
+    "table_count": 2,
+    "foreign_key_count": 1,
+    "schema_json": "schema_json/craftbeer_schema.json"
+  },
+  {
+    "db_id": "cs_semester",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/cs_semester/cs_semester.sqlite",
+    "table_count": 5,
+    "foreign_key_count": 4,
+    "schema_json": "schema_json/cs_semester_schema.json"
+  },
+  {
+    "db_id": "disney",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/disney/disney.sqlite",
+    "table_count": 5,
+    "foreign_key_count": 4,
+    "schema_json": "schema_json/disney_schema.json"
+  },
+  {
+    "db_id": "donor",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/donor/donor.sqlite",
+    "table_count": 4,
+    "foreign_key_count": 2,
+    "schema_json": "schema_json/donor_schema.json"
+  },
+  {
+    "db_id": "european_football_1",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/european_football_1/european_football_1.sqlite",
+    "table_count": 2,
+    "foreign_key_count": 1,
+    "schema_json": "schema_json/european_football_1_schema.json"
+  },
+  {
+    "db_id": "food_inspection",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/food_inspection/food_inspection.sqlite",
+    "table_count": 3,
+    "foreign_key_count": 2,
+    "schema_json": "schema_json/food_inspection_schema.json"
+  },
+  {
+    "db_id": "food_inspection_2",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/food_inspection_2/food_inspection_2.sqlite",
+    "table_count": 5,
+    "foreign_key_count": 6,
+    "schema_json": "schema_json/food_inspection_2_schema.json"
+  },
+  {
+    "db_id": "genes",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/genes/genes.sqlite",
+    "table_count": 3,
+    "foreign_key_count": 3,
+    "schema_json": "schema_json/genes_schema.json"
+  },
+  {
+    "db_id": "hockey",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/hockey/hockey.sqlite",
+    "table_count": 22,
+    "foreign_key_count": 42,
+    "schema_json": "schema_json/hockey_schema.json"
+  },
+  {
+    "db_id": "human_resources",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/human_resources/human_resources.sqlite",
+    "table_count": 3,
+    "foreign_key_count": 2,
+    "schema_json": "schema_json/human_resources_schema.json"
+  },
+  {
+    "db_id": "ice_hockey_draft",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/ice_hockey_draft/ice_hockey_draft.sqlite",
+    "table_count": 4,
+    "foreign_key_count": 3,
+    "schema_json": "schema_json/ice_hockey_draft_schema.json"
+  },
+  {
+    "db_id": "image_and_language",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/image_and_language/image_and_language.sqlite",
+    "table_count": 6,
+    "foreign_key_count": 9,
+    "schema_json": "schema_json/image_and_language_schema.json"
+  },
+  {
+    "db_id": "language_corpus",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/language_corpus/language_corpus.sqlite",
+    "table_count": 6,
+    "foreign_key_count": 8,
+    "schema_json": "schema_json/language_corpus_schema.json"
+  },
+  {
+    "db_id": "law_episode",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/law_episode/law_episode.sqlite",
+    "table_count": 6,
+    "foreign_key_count": 6,
+    "schema_json": "schema_json/law_episode_schema.json"
+  },
+  {
+    "db_id": "legislator",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/legislator/legislator.sqlite",
+    "table_count": 5,
+    "foreign_key_count": 3,
+    "schema_json": "schema_json/legislator_schema.json"
+  },
+  {
+    "db_id": "mental_health_survey",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/mental_health_survey/mental_health_survey.sqlite",
+    "table_count": 3,
+    "foreign_key_count": 2,
+    "schema_json": "schema_json/mental_health_survey_schema.json"
+  },
+  {
+    "db_id": "menu",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/menu/menu.sqlite",
+    "table_count": 4,
+    "foreign_key_count": 3,
+    "schema_json": "schema_json/menu_schema.json"
+  },
+  {
+    "db_id": "mondial_geo",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/mondial_geo/mondial_geo.sqlite",
+    "table_count": 34,
+    "foreign_key_count": 78,
+    "schema_json": "schema_json/mondial_geo_schema.json"
+  },
+  {
+    "db_id": "movie",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/movie/movie.sqlite",
+    "table_count": 3,
+    "foreign_key_count": 2,
+    "schema_json": "schema_json/movie_schema.json"
+  },
+  {
+    "db_id": "movie_3",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/movie_3/movie_3.sqlite",
+    "table_count": 16,
+    "foreign_key_count": 22,
+    "schema_json": "schema_json/movie_3_schema.json"
+  },
+  {
+    "db_id": "movie_platform",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/movie_platform/movie_platform.sqlite",
+    "table_count": 5,
+    "foreign_key_count": 8,
+    "schema_json": "schema_json/movie_platform_schema.json"
+  },
+  {
+    "db_id": "movielens",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/movielens/movielens.sqlite",
+    "table_count": 7,
+    "foreign_key_count": 6,
+    "schema_json": "schema_json/movielens_schema.json"
+  },
+  {
+    "db_id": "movies_4",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/movies_4/movies_4.sqlite",
+    "table_count": 17,
+    "foreign_key_count": 17,
+    "schema_json": "schema_json/movies_4_schema.json"
+  },
+  {
+    "db_id": "music_platform_2",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/music_platform_2/music_platform_2.sqlite",
+    "table_count": 4,
+    "foreign_key_count": 2,
+    "schema_json": "schema_json/music_platform_2_schema.json"
+  },
+  {
+    "db_id": "music_tracker",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/music_tracker/music_tracker.sqlite",
+    "table_count": 2,
+    "foreign_key_count": 1,
+    "schema_json": "schema_json/music_tracker_schema.json"
+  },
+  {
+    "db_id": "olympics",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/olympics/olympics.sqlite",
+    "table_count": 11,
+    "foreign_key_count": 10,
+    "schema_json": "schema_json/olympics_schema.json"
+  },
+  {
+    "db_id": "professional_basketball",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/professional_basketball/professional_basketball.sqlite",
+    "table_count": 9,
+    "foreign_key_count": 15,
+    "schema_json": "schema_json/professional_basketball_schema.json"
+  },
+  {
+    "db_id": "public_review_platform",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/public_review_platform/public_review_platform.sqlite",
+    "table_count": 15,
+    "foreign_key_count": 16,
+    "schema_json": "schema_json/public_review_platform_schema.json"
+  },
+  {
+    "db_id": "regional_sales",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/regional_sales/regional_sales.sqlite",
+    "table_count": 6,
+    "foreign_key_count": 5,
+    "schema_json": "schema_json/regional_sales_schema.json"
+  },
+  {
+    "db_id": "restaurant",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/restaurant/restaurant.sqlite",
+    "table_count": 3,
+    "foreign_key_count": 3,
+    "schema_json": "schema_json/restaurant_schema.json"
+  },
+  {
+    "db_id": "retail_complains",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/retail_complains/retail_complains.sqlite",
+    "table_count": 6,
+    "foreign_key_count": 6,
+    "schema_json": "schema_json/retail_complains_schema.json"
+  },
+  {
+    "db_id": "retail_world",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/retail_world/retail_world.sqlite",
+    "table_count": 8,
+    "foreign_key_count": 7,
+    "schema_json": "schema_json/retail_world_schema.json"
+  },
+  {
+    "db_id": "retails",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/retails/retails.sqlite",
+    "table_count": 8,
+    "foreign_key_count": 9,
+    "schema_json": "schema_json/retails_schema.json"
+  },
+  {
+    "db_id": "sales",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/sales/sales.sqlite",
+    "table_count": 4,
+    "foreign_key_count": 3,
+    "schema_json": "schema_json/sales_schema.json"
+  },
+  {
+    "db_id": "sales_in_weather",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/sales_in_weather/sales_in_weather.sqlite",
+    "table_count": 3,
+    "foreign_key_count": 2,
+    "schema_json": "schema_json/sales_in_weather_schema.json"
+  },
+  {
+    "db_id": "shakespeare",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/shakespeare/shakespeare.sqlite",
+    "table_count": 4,
+    "foreign_key_count": 3,
+    "schema_json": "schema_json/shakespeare_schema.json"
+  },
+  {
+    "db_id": "shipping",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/shipping/shipping.sqlite",
+    "table_count": 5,
+    "foreign_key_count": 4,
+    "schema_json": "schema_json/shipping_schema.json"
+  },
+  {
+    "db_id": "shooting",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/shooting/shooting.sqlite",
+    "table_count": 3,
+    "foreign_key_count": 2,
+    "schema_json": "schema_json/shooting_schema.json"
+  },
+  {
+    "db_id": "simpson_episodes",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/simpson_episodes/simpson_episodes.sqlite",
+    "table_count": 7,
+    "foreign_key_count": 7,
+    "schema_json": "schema_json/simpson_episodes_schema.json"
+  },
+  {
+    "db_id": "soccer_2016",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/soccer_2016/soccer_2016.sqlite",
+    "table_count": 21,
+    "foreign_key_count": 27,
+    "schema_json": "schema_json/soccer_2016_schema.json"
+  },
+  {
+    "db_id": "social_media",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/social_media/social_media.sqlite",
+    "table_count": 3,
+    "foreign_key_count": 2,
+    "schema_json": "schema_json/social_media_schema.json"
+  },
+  {
+    "db_id": "software_company",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/software_company/software_company.sqlite",
+    "table_count": 5,
+    "foreign_key_count": 3,
+    "schema_json": "schema_json/software_company_schema.json"
+  },
+  {
+    "db_id": "student_loan",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/student_loan/student_loan.sqlite",
+    "table_count": 10,
+    "foreign_key_count": 9,
+    "schema_json": "schema_json/student_loan_schema.json"
+  },
+  {
+    "db_id": "superstore",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/superstore/superstore.sqlite",
+    "table_count": 6,
+    "foreign_key_count": 16,
+    "schema_json": "schema_json/superstore_schema.json"
+  },
+  {
+    "db_id": "synthea",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/synthea/synthea.sqlite",
+    "table_count": 11,
+    "foreign_key_count": 18,
+    "schema_json": "schema_json/synthea_schema.json"
+  },
+  {
+    "db_id": "talkingdata",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/talkingdata/talkingdata.sqlite",
+    "table_count": 12,
+    "foreign_key_count": 7,
+    "schema_json": "schema_json/talkingdata_schema.json"
+  },
+  {
+    "db_id": "trains",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/trains/trains.sqlite",
+    "table_count": 2,
+    "foreign_key_count": 1,
+    "schema_json": "schema_json/trains_schema.json"
+  },
+  {
+    "db_id": "university",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/university/university.sqlite",
+    "table_count": 6,
+    "foreign_key_count": 5,
+    "schema_json": "schema_json/university_schema.json"
+  },
+  {
+    "db_id": "video_games",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/video_games/video_games.sqlite",
+    "table_count": 8,
+    "foreign_key_count": 7,
+    "schema_json": "schema_json/video_games_schema.json"
+  },
+  {
+    "db_id": "works_cycles",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/works_cycles/works_cycles.sqlite",
+    "table_count": 65,
+    "foreign_key_count": 87,
+    "schema_json": "schema_json/works_cycles_schema.json"
+  },
+  {
+    "db_id": "world",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/world/world.sqlite",
+    "table_count": 3,
+    "foreign_key_count": 2,
+    "schema_json": "schema_json/world_schema.json"
+  },
+  {
+    "db_id": "world_development_indicators",
+    "sqlite_path": "/Users/nav/Downloads/train/train_databases/world_development_indicators/world_development_indicators.sqlite",
+    "table_count": 6,
+    "foreign_key_count": 6,
+    "schema_json": "schema_json/world_development_indicators_schema.json"
+  }
+]

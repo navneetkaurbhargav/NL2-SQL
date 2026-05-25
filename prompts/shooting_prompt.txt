@@ -1,0 +1,323 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "shooting",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/shooting/shooting.sqlite",
+  "tables": [
+    {
+      "name": "incidents",
+      "type": "table",
+      "create_sql": "CREATE TABLE incidents\n(\n    case_number                TEXT  not null\n        primary key,\n    date                       DATE          not null,\n    location                   TEXT  not null,\n    subject_statuses           TEXT  not null,\n    subject_weapon             TEXT  not null,\n    subjects                   TEXT  not null,\n    subject_count              INTEGER           not null,\n    officers                  TEXT not null\n\n)",
+      "row_count": 219,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "case_number",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1
+        },
+        {
+          "cid": 1,
+          "name": "date",
+          "type": "DATE",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 2,
+          "name": "location",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 3,
+          "name": "subject_statuses",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 4,
+          "name": "subject_weapon",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 5,
+          "name": "subjects",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 6,
+          "name": "subject_count",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 7,
+          "name": "officers",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "officers",
+      "type": "table",
+      "create_sql": "CREATE TABLE officers\n(\n    case_number TEXT not null,\n    race        TEXT         null,\n    gender      TEXT         not null,\n    last_name   TEXT not null,\n    first_name  TEXT null,\n    full_name   TEXT not null,\n    foreign key (case_number) references incidents (case_number)\n)",
+      "row_count": 370,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "case_number",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "case number",
+            "description": "case number",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "race",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "race",
+            "description": "race",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "gender",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "gender",
+            "data_format": "text",
+            "value_description": "M: male;\n\nF: female"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "last_name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "last name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "first_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "first name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "full_name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "full name",
+            "description": "full name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "officers",
+          "from_column": "case_number",
+          "to_table": "incidents",
+          "to_column": "case_number",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "subjects",
+      "type": "table",
+      "create_sql": "CREATE TABLE subjects\n(\n    case_number TEXT not null,\n    race        TEXT         not null,\n    gender      TEXT         not null,\n    last_name   TEXT not null,\n    first_name  TEXT null,\n    full_name   TEXT not null,\n    foreign key (case_number) references incidents (case_number)\n)",
+      "row_count": 223,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "case_number",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "case number",
+            "description": "case number",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "race",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "race",
+            "description": "race",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "gender",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "gender",
+            "data_format": "text",
+            "value_description": "M: male;\n\nF: female"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "last_name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "last name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "first_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "first name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "full_name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "full name",
+            "description": "full name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "subjects",
+          "from_column": "case_number",
+          "to_table": "incidents",
+          "to_column": "case_number",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "officers",
+      "from_column": "case_number",
+      "to_table": "incidents",
+      "to_column": "case_number",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "subjects",
+      "from_column": "case_number",
+      "to_table": "incidents",
+      "to_column": "case_number",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

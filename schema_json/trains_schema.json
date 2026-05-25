@@ -1,0 +1,217 @@
+{
+  "db_id": "trains",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/trains/trains.sqlite",
+  "tables": [
+    {
+      "name": "cars",
+      "type": "table",
+      "create_sql": "CREATE TABLE `cars` (\n  `id` INTEGER NOT NULL,\n  `train_id` INTEGER DEFAULT NULL,\n  `position` INTEGER DEFAULT NULL,\n  `shape` TEXT DEFAULT NULL,\n  `len`TEXT DEFAULT NULL,\n  `sides` TEXT DEFAULT NULL,\n  `roof` TEXT DEFAULT NULL,\n  `wheels` INTEGER DEFAULT NULL,\n  `load_shape` TEXT DEFAULT NULL,\n  `load_num` INTEGER DEFAULT NULL,\n  PRIMARY KEY (`id`),\n  FOREIGN KEY (`train_id`) REFERENCES `trains` (`id`) ON DELETE CASCADE ON UPDATE CASCADE\n)",
+      "row_count": 63,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique id number representing the cars",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "train_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "train id",
+            "description": "the counterpart id for trains that the cars belong to",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "position",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "postion id of cars in the trains",
+            "data_format": "integer",
+            "value_description": "1-4:\ncommonsense evidence:\n1: head car\n4: tail car"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "shape",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "shape of the cars",
+            "data_format": "text",
+            "value_description": "â¢ rectangle\nâ¢ bucket\nâ¢ u_shaped\nâ¢ hexagon\nâ¢ elipse\ncommonsense evidence:\nregular shape: \nrectangle, u_shaped, hexagon"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "len",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "length",
+            "description": "length of the cars",
+            "data_format": "text",
+            "value_description": "â¢ short \nâ¢ long"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "sides",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "sides of the cars",
+            "data_format": "text",
+            "value_description": "â¢ not_double\nâ¢ double"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "roof",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "roof of the cars",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nâ¢ none: the roof is open\nâ¢ peaked\nâ¢ flat\nâ¢ arc\nâ¢ jagged"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "wheels",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "wheels of the cars",
+            "data_format": "integer",
+            "value_description": "â¢ 2:\nâ¢ 3:"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "load_shape",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "load shape",
+            "data_format": "text",
+            "value_description": "â¢ circle\nâ¢ hexagon\nâ¢ triangle\nâ¢ rectangle \nâ¢ diamond"
+          }
+        },
+        {
+          "cid": 9,
+          "name": "load_num",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "load number",
+            "description": "load number",
+            "data_format": "integer",
+            "value_description": "0-3:\ncommonsense evidence:\nâ¢ 0: empty load\nâ¢ 3: full load"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "cars",
+          "from_column": "train_id",
+          "to_table": "trains",
+          "to_column": "id",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "trains",
+      "type": "table",
+      "create_sql": "CREATE TABLE `trains` (\n  `id` INTEGER NOT NULL,\n  `direction` TEXT DEFAULT NULL,\n  PRIMARY KEY (`id`)\n)",
+      "row_count": 20,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique id representing the trains",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "direction",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the direction of trains that are running",
+            "data_format": "text",
+            "value_description": "â¢ east;\nâ¢ west;"
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "cars",
+      "from_column": "train_id",
+      "to_table": "trains",
+      "to_column": "id",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    }
+  ]
+}

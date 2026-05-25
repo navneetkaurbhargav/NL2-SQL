@@ -1,0 +1,943 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "chicago_crime",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/chicago_crime/chicago_crime.sqlite",
+  "tables": [
+    {
+      "name": "Community_Area",
+      "type": "table",
+      "create_sql": "CREATE TABLE Community_Area\n(\n    community_area_no   INTEGER\n            primary key,\n    community_area_name TEXT,\n    side                TEXT,\n    population          TEXT\n)",
+      "row_count": 77,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "community_area_no",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "community area number",
+            "description": "unique community area number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "community_area_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "community area name",
+            "description": "community area name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "side",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "district",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "population",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "population of the community",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Crime",
+      "type": "table",
+      "create_sql": "CREATE TABLE Crime\n(\n    report_no            INTEGER\n            primary key,\n    case_number          TEXT,\n    date                 TEXT,\n    block                TEXT,\n    iucr_no              TEXT,\n    location_description TEXT,\n    arrest               TEXT,\n    domestic             TEXT,\n    beat                 INTEGER,\n    district_no          INTEGER,\n    ward_no              INTEGER,\n    community_area_no    INTEGER,\n    fbi_code_no          TEXT,\n    latitude             TEXT,\n    longitude            TEXT,\n    foreign key (ward_no) references Ward(ward_no),\n    foreign key (iucr_no) references IUCR(iucr_no),\n    foreign key (district_no) references District(district_no),\n    foreign key (community_area_no) references Community_Area(community_area_no),\n    foreign key (fbi_code_no) references FBI_Code(fbi_code_no)\n)",
+      "row_count": 268002,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "report_no",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "report number",
+            "description": "unique Numeric identifier of the crime report.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "case_number",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "case number",
+            "description": "Case number assigned to the reported crime.",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \n\nThere is usually one case number for any reported crime except in the case of multiple homicide where a single report will produce one case number for each victim\n\nif case_number appears > 1, it means this is a multiple homicide"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "date",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Date of the occurrence of the incident being reported",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "block",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "A redacted address indicating in which city block the incident occurred",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "iucr_no",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Illinois Uniform Crime Reporting number",
+            "description": "Illinois Uniform Crime Reporting code: a four digit code used to classify criminal incidents when taking reports.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "location_description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "location description",
+            "description": "A description of the kind of area where incident occurred",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "arrest",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "A true/false value indicating if an arrest has been made",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "domestic",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "A true/false value indicating if the incident is as case of domestic violence",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "beat",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "district_no",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "district number",
+            "description": "A number indicating the geographic subdivision of the police district where the incident occurred",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "ward_no",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ward number",
+            "description": "A two digit number identifying the legislative district (ward) where the incident occurred.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "community_area_no",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "community area number",
+            "description": "A number identifying one of 77 geographic areas where the incident occurred",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "fbi_code_no",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "fbi code number",
+            "description": "A code identifying the type of crime reported according to the classification scheme used by the FBI.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "latitude",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The latitude where incident is reported to have occurred.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "longitude",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The longitude where incident is reported to have occurred.",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \n\nThe precise location / coordinate: combines the longitude and latitude for plotting purposes. (latitude, longitude)"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Crime",
+          "from_column": "fbi_code_no",
+          "to_table": "FBI_Code",
+          "to_column": "fbi_code_no",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Crime",
+          "from_column": "community_area_no",
+          "to_table": "Community_Area",
+          "to_column": "community_area_no",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "Crime",
+          "from_column": "district_no",
+          "to_table": "District",
+          "to_column": "district_no",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 3,
+          "sequence": 0,
+          "from_table": "Crime",
+          "from_column": "iucr_no",
+          "to_table": "IUCR",
+          "to_column": "iucr_no",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 4,
+          "sequence": 0,
+          "from_table": "Crime",
+          "from_column": "ward_no",
+          "to_table": "Ward",
+          "to_column": "ward_no",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "District",
+      "type": "table",
+      "create_sql": "CREATE TABLE District\n(\n    district_no   INTEGER\n            primary key,\n    district_name TEXT,\n    address       TEXT,\n    zip_code      INTEGER,\n    commander     TEXT,\n    email         TEXT,\n    phone         TEXT,\n    fax           TEXT,\n    tty           TEXT,\n    twitter       TEXT\n)",
+      "row_count": 22,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "district_no",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "district number",
+            "description": "unique number identifying the district",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "district_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "district name",
+            "description": "name of the district",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "address",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Street address of the police district building",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "zip_code",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "zip code",
+            "description": "ZIP code of the police district building",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "commander",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Name of the district's commanding officer",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n\nthe person who should be responsible for the crime case."
+          }
+        },
+        {
+          "cid": 5,
+          "name": "email",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Email address to contact district administrators",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "phone",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Main telephone number for the district",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "fax",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Fax number for the district",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "tty",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Number of the district teletype machine.",
+            "data_format": "text",
+            "value_description": "A teletype machine is a device that lets people who are deaf, hard of hearing, or speech-impaired use the telephone to communicate, by allowing them to type text messages."
+          }
+        },
+        {
+          "cid": 9,
+          "name": "twitter",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The district twitter handle.",
+            "data_format": "text",
+            "value_description": "Twitter is a social networking service on which users post and interact with brief messages known as \"tweets\""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "FBI_Code",
+      "type": "table",
+      "create_sql": "CREATE TABLE FBI_Code\n(\n    fbi_code_no   TEXT\n            primary key,\n    title         TEXT,\n    description   TEXT,\n    crime_against TEXT\n)",
+      "row_count": 26,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "fbi_code_no",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "fbi code number",
+            "description": "unique code made by fbi to classify the crime cases",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Short description of the kind of crime",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Detailed description of the kind of crime",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "crime_against",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "crime against",
+            "description": "States who the crime is against.",
+            "data_format": "text",
+            "value_description": "Values are Persons, Property, Society, or \"Persons and Society\""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "IUCR",
+      "type": "table",
+      "create_sql": "CREATE TABLE IUCR\n(\n    iucr_no               TEXT\n            primary key,\n    primary_description   TEXT,\n    secondary_description TEXT,\n    index_code            TEXT\n)",
+      "row_count": 401,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "iucr_no",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "iucr number",
+            "description": "Unique identifier for the incident classification",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "primary_description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "primary description",
+            "description": "The general description of the incident classification",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n\nIt's the general description"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "secondary_description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "secondary description",
+            "description": "The specific description of the incident classification",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n\nIt's the specific description"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "index_code",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "index code",
+            "description": "Uses values \"I\" and \"N\" to indicate crimes",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n\nâ¢ \"Indexed\" (severe, such as murder, rape, arson, and robbery)\n\nâ¢ \"Non-Indexed\" (less severe, such as vandalism, weapons violations, and peace disturbance)"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Neighborhood",
+      "type": "table",
+      "create_sql": "CREATE TABLE Neighborhood\n(\n    neighborhood_name TEXT\n            primary key,\n    community_area_no INTEGER,\n    foreign key (community_area_no) references Community_Area(community_area_no)\n)",
+      "row_count": 246,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "neighborhood_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "neighborhood name",
+            "description": "The neighborhood name as used in everyday communication",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "community_area_no",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "community area number",
+            "description": "The community area in which most of the neighborhood is located",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Neighborhood",
+          "from_column": "community_area_no",
+          "to_table": "Community_Area",
+          "to_column": "community_area_no",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Ward",
+      "type": "table",
+      "create_sql": "CREATE TABLE Ward\n(\n    ward_no                INTEGER\n            primary key,\n    alderman_first_name    TEXT,\n    alderman_last_name     TEXT,\n    alderman_name_suffix   TEXT,\n    ward_office_address    TEXT,\n    ward_office_zip        TEXT,\n    ward_email             TEXT,\n    ward_office_phone      TEXT,\n    ward_office_fax        TEXT,\n    city_hall_office_room  INTEGER,\n    city_hall_office_phone TEXT,\n    city_hall_office_fax   TEXT,\n    Population             INTEGER\n)",
+      "row_count": 50,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ward_no",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "alderman_first_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "alderman_last_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "alderman_name_suffix",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "ward_office_address",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ward_office_address",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "ward_office_zip",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "ward_email",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "ward_office_phone",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "ward_office_fax",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "city_hall_office_room",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "city_hall_office_phone",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "city_hall_office_fax",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "Population",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Crime",
+      "from_column": "fbi_code_no",
+      "to_table": "FBI_Code",
+      "to_column": "fbi_code_no",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Crime",
+      "from_column": "community_area_no",
+      "to_table": "Community_Area",
+      "to_column": "community_area_no",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "Crime",
+      "from_column": "district_no",
+      "to_table": "District",
+      "to_column": "district_no",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 3,
+      "sequence": 0,
+      "from_table": "Crime",
+      "from_column": "iucr_no",
+      "to_table": "IUCR",
+      "to_column": "iucr_no",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 4,
+      "sequence": 0,
+      "from_table": "Crime",
+      "from_column": "ward_no",
+      "to_table": "Ward",
+      "to_column": "ward_no",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Neighborhood",
+      "from_column": "community_area_no",
+      "to_table": "Community_Area",
+      "to_column": "community_area_no",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

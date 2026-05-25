@@ -1,0 +1,1294 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "movies_4",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/movies_4/movies_4.sqlite",
+  "tables": [
+    {
+      "name": "country",
+      "type": "table",
+      "create_sql": "CREATE TABLE country\n(\n    country_id       INTEGER not null\n            primary key,\n    country_iso_code TEXT  default NULL,\n    country_name     TEXT default NULL\n)",
+      "row_count": 88,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "country_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "country id",
+            "description": "the unique identifier of the country",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "country_iso_code",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "country iso code",
+            "description": "the ISO code",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nISO codes are typically used to identify countries and their subdivisions, and there are different types of ISO codes depending on the specific application. Here we use ISO 3166 code to identify countries."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "country_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "country name",
+            "description": "the name of the country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "department",
+      "type": "table",
+      "create_sql": "CREATE TABLE department\n(\n    department_id   INTEGER not null\n            primary key,\n    department_name TEXT default NULL\n)",
+      "row_count": 12,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "department_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "department id",
+            "description": "the unique identifier of the department",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "department_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "department name",
+            "description": "the name of the department",
+            "data_format": "",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "gender",
+      "type": "table",
+      "create_sql": "CREATE TABLE gender\n(\n    gender_id INTEGER not null\n            primary key,\n    gender    TEXT default NULL\n)",
+      "row_count": 3,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "gender_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "gender id",
+            "description": "the unique identifier of the gender",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "gender",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the gender",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nfemale/ male/ unspecified"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "genre",
+      "type": "table",
+      "create_sql": "CREATE TABLE genre\n(\n    genre_id   INTEGER not null\n            primary key,\n    genre_name TEXT default NULL\n)",
+      "row_count": 20,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "genre_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "genre id",
+            "description": "the unique identifier of the genre",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "genre_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the genre",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "keyword",
+      "type": "table",
+      "create_sql": "CREATE TABLE keyword\n(\n    keyword_id   INTEGER not null\n            primary key,\n    keyword_name TEXT default NULL\n)",
+      "row_count": 9794,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "keyword_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "keyword id",
+            "description": "the unique identifier of the keyword",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "keyword_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "keyword name",
+            "description": "the keyword",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "language",
+      "type": "table",
+      "create_sql": "CREATE TABLE language\n(\n    language_id   INTEGER not null\n            primary key,\n    language_code TEXT  default NULL,\n    language_name TEXT default NULL\n)",
+      "row_count": 88,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "language_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "language id",
+            "description": "the unique identifier of the language",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "language_code",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "language code",
+            "description": "the code of the language",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nHere we use ISO 639 codes to identify the language."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "language_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "language name",
+            "description": "the language name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "language_role",
+      "type": "table",
+      "create_sql": "CREATE TABLE language_role\n(\n    role_id       INTEGER not null\n            primary key,\n    language_role TEXT default NULL\n)",
+      "row_count": 2,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "role_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "role id",
+            "description": "the unique identifier of the language id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "language_role",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "language role",
+            "description": "the language role",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nIn the context of language roles in a movie or other audio-visual production, \"original\" and \"spoken\" refer to the languages in which the movie was originally produced, and the languages spoken by the characters in the movie, respectively."
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "movie",
+      "type": "table",
+      "create_sql": "CREATE TABLE movie\n(\n    movie_id    INTEGER not null\n            primary key,\n    title        TEXT  default NULL,\n    budget       INTEGER            default NULL,\n    homepage     TEXT  default NULL,\n    overview     TEXT  default NULL,\n    popularity   REAL default NULL,\n    release_date DATE           default NULL,\n    revenue      INTEGER     default NULL,\n    runtime      INTEGER           default NULL,\n    movie_status TEXT    default NULL,\n    tagline      TEXT  default NULL,\n    vote_average REAL  default NULL,\n    vote_count   INTEGER            default NULL\n)",
+      "row_count": 4627,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "movie_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "movie id",
+            "description": "the unique identifier of the movie",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the title of the movie",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "budget",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the budget for the movie",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nIf a movie has higher popularity, it means that it is well-liked by a large number of people. This can be determined by looking at the movie's ratings and reviews, as well as the box office performance and overall buzz surrounding the film. Higher popularity often translates to more success for the movie, both financially and critically."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "homepage",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the homepage of the movie",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "overview",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the overview of the movie",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "popularity",
+          "type": "REAL",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the popularity of the movie",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nIf a movie has higher popularity, it means that it is well-liked by a large number of people. This can be determined by looking at the movie's ratings and reviews, as well as the box office performance and overall buzz surrounding the film. Higher popularity often translates to more success for the movie, both financially and critically."
+          }
+        },
+        {
+          "cid": 6,
+          "name": "release_date",
+          "type": "DATE",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "release date",
+            "description": "the release date of the movie",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "revenue",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the revenue of the movie",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nA higher vote average indicates that a greater proportion of people who have seen the movie have given it positive ratings."
+          }
+        },
+        {
+          "cid": 8,
+          "name": "runtime",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the runtime of the movie",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "movie_status",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the status of the movie\nThe only value of this column is 'Released'.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "tagline",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the tagline of the movie",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "vote_average",
+          "type": "REAL",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "vote average",
+            "description": "the average vote for the movie",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nA higher vote average indicates that a greater proportion of people who have seen the movie have given it positive ratings."
+          }
+        },
+        {
+          "cid": 12,
+          "name": "vote_count",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "vote count",
+            "description": "the vote count for the movie",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nIf a movie has a higher vote average and vote count, it means that it has been well-received by audiences and critics. A higher vote count means that more people have rated the movie, which can indicate a greater level of interest in the film."
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "movie_cast",
+      "type": "table",
+      "create_sql": "CREATE TABLE movie_cast\n(\n    movie_id       INTEGER          default NULL,\n    person_id      INTEGER          default NULL,\n    character_name TEXT default NULL,\n    gender_id      INTEGER          default NULL,\n    cast_order     INTEGER       default NULL,\n    foreign key (gender_id) references gender(gender_id),\n    foreign key (movie_id) references movie(movie_id),\n    foreign key (person_id) references person(person_id)\n)",
+      "row_count": 59083,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "movie_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "movie id",
+            "description": "the id of the movie\nMaps to movie(movie_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "person_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "person id",
+            "description": "the id of the person\nMaps to person(person_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "character_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "character name",
+            "description": "the character name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "gender_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "gender id",
+            "description": "the id of the cast's gender\nMaps to gender(gender_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "cast_order",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "cast order",
+            "description": "the cast order of the cast",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nThe cast order of a movie or television show refers to the sequence in which the actors and actresses are listed in the credits. This order is typically determined by the relative importance of each actor's role in the production, with the main actors and actresses appearing first, followed by the supporting cast and extras."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "movie_cast",
+          "from_column": "person_id",
+          "to_table": "person",
+          "to_column": "person_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "movie_cast",
+          "from_column": "movie_id",
+          "to_table": "movie",
+          "to_column": "movie_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "movie_cast",
+          "from_column": "gender_id",
+          "to_table": "gender",
+          "to_column": "gender_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "movie_company",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"movie_company\"\n(\n    movie_id   INTEGER default NULL\n        references movie,\n    company_id INTEGER default NULL\n        references production_company\n)",
+      "row_count": 13677,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "movie_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "movie id",
+            "description": "the id of the movie \nMaps to movie(movie_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "company_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "company id",
+            "description": "the id of the company that produced the movie\nMaps to production_company(company_id)",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nIf movies with different movie_id have the same company_id, it means these movies were made by the same company."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "movie_company",
+          "from_column": "company_id",
+          "to_table": "production_company",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "movie_company",
+          "from_column": "movie_id",
+          "to_table": "movie",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "movie_crew",
+      "type": "table",
+      "create_sql": "CREATE TABLE movie_crew\n(\n    movie_id      INTEGER          default NULL,\n    person_id     INTEGER          default NULL,\n    department_id INTEGER          default NULL,\n    job           TEXT default NULL,\n    foreign key (department_id) references department(department_id),\n    foreign key (movie_id) references movie(movie_id),\n    foreign key (person_id) references person(person_id)\n)",
+      "row_count": 129581,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "movie_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "movie id",
+            "description": "the id of the movie that the crew worked for\nMaps to movie(movie_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "person_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "person id",
+            "description": "the id of the crew\nMaps to person(person_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "department_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "department id",
+            "description": "the id of the crew's department\nMaps to department(department_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "job",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the job of the crew",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nA movie may involve several crews with the same job title."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "movie_crew",
+          "from_column": "person_id",
+          "to_table": "person",
+          "to_column": "person_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "movie_crew",
+          "from_column": "movie_id",
+          "to_table": "movie",
+          "to_column": "movie_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "movie_crew",
+          "from_column": "department_id",
+          "to_table": "department",
+          "to_column": "department_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "movie_genres",
+      "type": "table",
+      "create_sql": "CREATE TABLE movie_genres\n(\n    movie_id INTEGER default NULL,\n    genre_id INTEGER default NULL,\n    foreign key (genre_id) references genre(genre_id),\n    foreign key (movie_id) references movie(movie_id)\n)",
+      "row_count": 12160,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "movie_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "movie id",
+            "description": "the id of the movie \nMaps to movie(movie_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "genre_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "genre id",
+            "description": "the id of the movie genre\nMaps to genre(genre_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "movie_genres",
+          "from_column": "movie_id",
+          "to_table": "movie",
+          "to_column": "movie_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "movie_genres",
+          "from_column": "genre_id",
+          "to_table": "genre",
+          "to_column": "genre_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "movie_keywords",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"movie_keywords\"\n(\n    movie_id   INTEGER default NULL\n        references movie,\n    keyword_id INTEGER default NULL\n        references keyword\n)",
+      "row_count": 36162,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "movie_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "movie id",
+            "description": "the id of the movie \nMaps to movie(movie_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "keyword_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "keyword id",
+            "description": "the id of the movie keyword\nMaps to keyword(keyword_id)",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nA movie may have many keywords. Audience could get the genre of the movie according to the movie keywords."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "movie_keywords",
+          "from_column": "keyword_id",
+          "to_table": "keyword",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "movie_keywords",
+          "from_column": "movie_id",
+          "to_table": "movie",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "movie_languages",
+      "type": "table",
+      "create_sql": "CREATE TABLE movie_languages\n(\n    movie_id         INTEGER default NULL,\n    language_id      INTEGER default NULL,\n    language_role_id INTEGER default NULL,\n    foreign key (language_id) references language(language_id),\n    foreign key (movie_id) references movie(movie_id),\n    foreign key (language_role_id) references language_role(role_id)\n)",
+      "row_count": 11740,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "movie_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "movie id",
+            "description": "the id of the movie \nMaps to movie(movie_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "language_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "language id",
+            "description": "the id of the movie language\nMaps to language(language_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "language_role_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "language role id",
+            "description": "the id of the role's language",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "movie_languages",
+          "from_column": "language_role_id",
+          "to_table": "language_role",
+          "to_column": "role_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "movie_languages",
+          "from_column": "movie_id",
+          "to_table": "movie",
+          "to_column": "movie_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "movie_languages",
+          "from_column": "language_id",
+          "to_table": "language",
+          "to_column": "language_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "person",
+      "type": "table",
+      "create_sql": "CREATE TABLE person\n(\n    person_id   INTEGER not null\n            primary key,\n    person_name TEXT default NULL\n)",
+      "row_count": 104838,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "person_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "person id",
+            "description": "the unique identifier of the person",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "person_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "person name",
+            "description": "the name of the person",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "production_company",
+      "type": "table",
+      "create_sql": "CREATE TABLE production_company\n(\n    company_id   INTEGER not null\n            primary key,\n    company_name TEXT default NULL\n)",
+      "row_count": 5047,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "company_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "company id",
+            "description": "the unique identifier of the company",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "company_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "company name",
+            "description": "the name of the company",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "production_country",
+      "type": "table",
+      "create_sql": "CREATE TABLE production_country\n(\n    movie_id   INTEGER default NULL,\n    country_id INTEGER default NULL,\n    foreign key (country_id) references country(country_id),\n    foreign key (movie_id) references movie(movie_id)\n)",
+      "row_count": 6436,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "movie_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "mivie id",
+            "description": "the unique identifier of the movie",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "country_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "country id",
+            "description": "the id of the country",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "production_country",
+          "from_column": "movie_id",
+          "to_table": "movie",
+          "to_column": "movie_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "production_country",
+          "from_column": "country_id",
+          "to_table": "country",
+          "to_column": "country_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "movie_cast",
+      "from_column": "person_id",
+      "to_table": "person",
+      "to_column": "person_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "movie_cast",
+      "from_column": "movie_id",
+      "to_table": "movie",
+      "to_column": "movie_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "movie_cast",
+      "from_column": "gender_id",
+      "to_table": "gender",
+      "to_column": "gender_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "movie_company",
+      "from_column": "company_id",
+      "to_table": "production_company",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "movie_company",
+      "from_column": "movie_id",
+      "to_table": "movie",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "movie_crew",
+      "from_column": "person_id",
+      "to_table": "person",
+      "to_column": "person_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "movie_crew",
+      "from_column": "movie_id",
+      "to_table": "movie",
+      "to_column": "movie_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "movie_crew",
+      "from_column": "department_id",
+      "to_table": "department",
+      "to_column": "department_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "movie_genres",
+      "from_column": "movie_id",
+      "to_table": "movie",
+      "to_column": "movie_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "movie_genres",
+      "from_column": "genre_id",
+      "to_table": "genre",
+      "to_column": "genre_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "movie_keywords",
+      "from_column": "keyword_id",
+      "to_table": "keyword",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "movie_keywords",
+      "from_column": "movie_id",
+      "to_table": "movie",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "movie_languages",
+      "from_column": "language_role_id",
+      "to_table": "language_role",
+      "to_column": "role_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "movie_languages",
+      "from_column": "movie_id",
+      "to_table": "movie",
+      "to_column": "movie_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "movie_languages",
+      "from_column": "language_id",
+      "to_table": "language",
+      "to_column": "language_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "production_country",
+      "from_column": "movie_id",
+      "to_table": "movie",
+      "to_column": "movie_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "production_country",
+      "from_column": "country_id",
+      "to_table": "country",
+      "to_column": "country_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

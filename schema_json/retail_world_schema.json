@@ -1,0 +1,825 @@
+{
+  "db_id": "retail_world",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/retail_world/retail_world.sqlite",
+  "tables": [
+    {
+      "name": "Categories",
+      "type": "table",
+      "create_sql": "CREATE TABLE Categories\n(\n    CategoryID INTEGER PRIMARY KEY AUTOINCREMENT,\n    CategoryName TEXT,\n    Description TEXT\n)",
+      "row_count": 8,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "CategoryID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Category ID",
+            "description": "the unique id for the category",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "CategoryName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Category Name",
+            "description": "the category name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the detailed description of the category",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Customers",
+      "type": "table",
+      "create_sql": "CREATE TABLE Customers\n(\n    CustomerID INTEGER PRIMARY KEY AUTOINCREMENT,\n    CustomerName TEXT,\n    ContactName TEXT,\n    Address TEXT,\n    City TEXT,\n    PostalCode TEXT,\n    Country TEXT\n)",
+      "row_count": 91,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "CustomerID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Customer ID",
+            "description": "the unique id for customers",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "CustomerName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Customer Name",
+            "description": "the customer name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "ContactName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Contact Name",
+            "description": "the contact person's name representing the company",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Address",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the address of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "City",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the city where the customer is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "PostalCode",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Postal Code",
+            "description": "the postal code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Employees",
+      "type": "table",
+      "create_sql": "CREATE TABLE Employees\n(\n    EmployeeID INTEGER PRIMARY KEY AUTOINCREMENT,\n    LastName TEXT,\n    FirstName TEXT,\n    BirthDate DATE,\n    Photo TEXT,\n    Notes TEXT\n)",
+      "row_count": 10,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "EmployeeID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Employee ID",
+            "description": "the unique id for employees",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "LastName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Last Name",
+            "description": "the employee's last name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "FirstName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "First Name",
+            "description": "the employee's first name",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nthe employee's full name is 'first_name last_name'."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "BirthDate",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Birth Date",
+            "description": "the birth date of the employee",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Photo",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the photo of the employee",
+            "data_format": "blob",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Notes",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "some additional information of the employee",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "OrderDetails",
+      "type": "table",
+      "create_sql": "CREATE TABLE OrderDetails(\n    OrderDetailID INTEGER PRIMARY KEY AUTOINCREMENT,\n    OrderID INTEGER,\n    ProductID INTEGER,\n    Quantity INTEGER,\n\tFOREIGN KEY (OrderID) REFERENCES Orders (OrderID),\n\tFOREIGN KEY (ProductID) REFERENCES Products (ProductID)\n)",
+      "row_count": 518,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "OrderDetailID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "order detail id",
+            "description": "id of the order detail",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "OrderID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Order ID",
+            "description": "the unique id for orders",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "ProductID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Product ID",
+            "description": "the unique id for products",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Quantity",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the quantity of the ordered products",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "OrderDetails",
+          "from_column": "ProductID",
+          "to_table": "Products",
+          "to_column": "ProductID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "OrderDetails",
+          "from_column": "OrderID",
+          "to_table": "Orders",
+          "to_column": "OrderID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "type": "table",
+      "create_sql": "CREATE TABLE Orders(\n    OrderID INTEGER PRIMARY KEY AUTOINCREMENT,\n    CustomerID INTEGER,\n    EmployeeID INTEGER,\n    OrderDate DATETIME,\n    ShipperID INTEGER,\n    FOREIGN KEY (EmployeeID) REFERENCES Employees (EmployeeID),\n    FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID),\n    FOREIGN KEY (ShipperID) REFERENCES Shippers (ShipperID)\n)",
+      "row_count": 196,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "OrderID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Order ID",
+            "description": "the unique id for orders",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "CustomerID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Customer ID",
+            "description": "the unique id for customers",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "EmployeeID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Employee ID",
+            "description": "the unique id for employees",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "OrderDate",
+          "type": "DATETIME",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Order Date",
+            "description": "the order date",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "ShipperID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Shipper ID",
+            "description": "the id of the shipper",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Orders",
+          "from_column": "ShipperID",
+          "to_table": "Shippers",
+          "to_column": "ShipperID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Orders",
+          "from_column": "CustomerID",
+          "to_table": "Customers",
+          "to_column": "CustomerID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "Orders",
+          "from_column": "EmployeeID",
+          "to_table": "Employees",
+          "to_column": "EmployeeID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "type": "table",
+      "create_sql": "CREATE TABLE Products(\n    ProductID INTEGER PRIMARY KEY AUTOINCREMENT,\n    ProductName TEXT,\n    SupplierID INTEGER,\n    CategoryID INTEGER,\n    Unit TEXT,\n    Price REAL DEFAULT 0,\n\tFOREIGN KEY (CategoryID) REFERENCES Categories (CategoryID),\n\tFOREIGN KEY (SupplierID) REFERENCES Suppliers (SupplierID)\n)",
+      "row_count": 77,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ProductID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Product ID",
+            "description": "the unique id for products",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "ProductName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Product Name",
+            "description": "the name of the product",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "SupplierID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Supplier ID",
+            "description": "the unique id for supplier",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "CategoryID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Category ID",
+            "description": "the unique id for the product category",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Unit",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unit of the product",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Price",
+          "type": "REAL",
+          "not_null": false,
+          "default": "0",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Price",
+            "description": "the price",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Products",
+          "from_column": "SupplierID",
+          "to_table": "Suppliers",
+          "to_column": "SupplierID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Products",
+          "from_column": "CategoryID",
+          "to_table": "Categories",
+          "to_column": "CategoryID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Shippers",
+      "type": "table",
+      "create_sql": "CREATE TABLE Shippers(\n    ShipperID INTEGER PRIMARY KEY AUTOINCREMENT,\n    ShipperName TEXT,\n    Phone TEXT\n)",
+      "row_count": 3,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ShipperID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Shipper ID",
+            "description": "the unique id for shippers",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "ShipperName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Shipper Name",
+            "description": "the shipped company name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Phone",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the phone of the company",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Suppliers",
+      "type": "table",
+      "create_sql": "CREATE TABLE Suppliers(\n    SupplierID INTEGER PRIMARY KEY AUTOINCREMENT,\n    SupplierName TEXT,\n    ContactName TEXT,\n    Address TEXT,\n    City TEXT,\n    PostalCode TEXT,\n    Country TEXT,\n    Phone TEXT\n)",
+      "row_count": 29,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "SupplierID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Supplier ID",
+            "description": "the unique id for suppliers",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "SupplierName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Supplier Name",
+            "description": "the supplier name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "ContactName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Contact Name",
+            "description": "the contact person's name representing the company",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Address",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the address of the supplier",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "City",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the city where the supplier is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "PostalCode",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Postal Code",
+            "description": "the postal code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Phone",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the phone number",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "OrderDetails",
+      "from_column": "ProductID",
+      "to_table": "Products",
+      "to_column": "ProductID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "OrderDetails",
+      "from_column": "OrderID",
+      "to_table": "Orders",
+      "to_column": "OrderID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Orders",
+      "from_column": "ShipperID",
+      "to_table": "Shippers",
+      "to_column": "ShipperID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Orders",
+      "from_column": "CustomerID",
+      "to_table": "Customers",
+      "to_column": "CustomerID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "Orders",
+      "from_column": "EmployeeID",
+      "to_table": "Employees",
+      "to_column": "EmployeeID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Products",
+      "from_column": "SupplierID",
+      "to_table": "Suppliers",
+      "to_column": "SupplierID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Products",
+      "from_column": "CategoryID",
+      "to_table": "Categories",
+      "to_column": "CategoryID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

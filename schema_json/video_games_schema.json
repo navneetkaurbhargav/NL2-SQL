@@ -1,0 +1,532 @@
+{
+  "db_id": "video_games",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/video_games/video_games.sqlite",
+  "tables": [
+    {
+      "name": "game",
+      "type": "table",
+      "create_sql": "CREATE TABLE game\n(\n    id        INTEGER not null\n            primary key,\n    genre_id  INTEGER          default NULL,\n    game_name TEXT default NULL,\n    foreign key (genre_id) references genre(id)\n)",
+      "row_count": 11317,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier of the game",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "genre_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "genre id",
+            "description": "the id of the game genre",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nIf game A and game B have the same genre, the user who likes game A may also like game B."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "game_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "game name",
+            "description": "the name of the game",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "game",
+          "from_column": "genre_id",
+          "to_table": "genre",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "game_platform",
+      "type": "table",
+      "create_sql": "CREATE TABLE game_platform\n(\n    id                INTEGER not null\n            primary key,\n    game_publisher_id INTEGER default NULL,\n    platform_id       INTEGER default NULL,\n    release_year      INTEGER default NULL,\n    foreign key (game_publisher_id) references game_publisher(id),\n    foreign key (platform_id) references platform(id)\n)",
+      "row_count": 16326,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier of the record",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "game_publisher_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "game publisher id",
+            "description": "the id of the game publisher",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "platform_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "platform id",
+            "description": "the id of the platform",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "release_year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "release year",
+            "description": "the release year of the game",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "game_platform",
+          "from_column": "platform_id",
+          "to_table": "platform",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "game_platform",
+          "from_column": "game_publisher_id",
+          "to_table": "game_publisher",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "game_publisher",
+      "type": "table",
+      "create_sql": "CREATE TABLE game_publisher\n(\n    id           INTEGER not null\n            primary key,\n    game_id      INTEGER default NULL,\n    publisher_id INTEGER default NULL,\n    foreign key (game_id) references game(id),\n    foreign key (publisher_id) references publisher(id)\n)",
+      "row_count": 11732,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier of the game publisher",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "game_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "game id",
+            "description": "the id of the game",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "publisher_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "publisher id",
+            "description": "the id of the publisher",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nIf game A and game B were published by the same publisher, the user who likes game A may also like game B if the user is a fan of the publisher company."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "game_publisher",
+          "from_column": "publisher_id",
+          "to_table": "publisher",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "game_publisher",
+          "from_column": "game_id",
+          "to_table": "game",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "genre",
+      "type": "table",
+      "create_sql": "CREATE TABLE genre\n(\n    id         INTEGER not null\n            primary key,\n    genre_name TEXT default NULL\n)",
+      "row_count": 12,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier of the game genre",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "genre_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the game genre",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nThe game genre can have a significant effect on the game. The genre refers to the category or type of game, such as action, adventure, strategy, or role-playing. The genre can determine the general style and gameplay of the game, as well as the expectations of the players. The genre can also affect the audience for the game, as different genres may appeal to different groups of players."
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "platform",
+      "type": "table",
+      "create_sql": "CREATE TABLE platform\n(\n    id            INTEGER not null\n            primary key,\n    platform_name TEXT default NULL\n)",
+      "row_count": 31,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier of the game platform",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "platform_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the platform",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nThe game platform, or the platform on which a game is played, can have a significant effect on the game. The platform can determine what hardware and software the game can run on, as well as the technical capabilities of the game. The platform can also affect the audience for the game, as different platforms may attract different groups of players."
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "publisher",
+      "type": "table",
+      "create_sql": "CREATE TABLE publisher\n(\n    id             INTEGER not null\n            primary key,\n    publisher_name TEXT default NULL\n)",
+      "row_count": 577,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier of the game publisher",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "publisher_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the publisher",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nThe publisher is the company or organization that finances, produces, and distributes the game. The publisher can influence the development of the game by providing resources, guidance, and support to the game's development team. The publisher can also affect the marketing and distribution of the game, as they are responsible for promoting the game and making it available to players."
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "region",
+      "type": "table",
+      "create_sql": "CREATE TABLE region\n(\n    id          INTEGER not null\n            primary key,\n    region_name TEXT default NULL\n)",
+      "row_count": 4,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier of the region",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "region_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the region name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "region_sales",
+      "type": "table",
+      "create_sql": "CREATE TABLE region_sales\n(\n    region_id        INTEGER           default NULL,\n    game_platform_id INTEGER           default NULL,\n    num_sales        REAL default NULL,\n    foreign key (game_platform_id) references game_platform(id),\n    foreign key (region_id) references region(id)\n)",
+      "row_count": 65320,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "region_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the id of the region",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "game_platform_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "game platform id",
+            "description": "the id of the game platform",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "num_sales",
+          "type": "REAL",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "number sales",
+            "description": "the number of sales in this region",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nThe number of games sold in the region = num_sales * 100000.\nThe game platform with higher num_sales is more popular in the region."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "region_sales",
+          "from_column": "region_id",
+          "to_table": "region",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "region_sales",
+          "from_column": "game_platform_id",
+          "to_table": "game_platform",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "game",
+      "from_column": "genre_id",
+      "to_table": "genre",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "game_platform",
+      "from_column": "platform_id",
+      "to_table": "platform",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "game_platform",
+      "from_column": "game_publisher_id",
+      "to_table": "game_publisher",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "game_publisher",
+      "from_column": "publisher_id",
+      "to_table": "publisher",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "game_publisher",
+      "from_column": "game_id",
+      "to_table": "game",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "region_sales",
+      "from_column": "region_id",
+      "to_table": "region",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "region_sales",
+      "from_column": "game_platform_id",
+      "to_table": "game_platform",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

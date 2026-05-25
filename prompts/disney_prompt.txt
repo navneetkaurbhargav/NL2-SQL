@@ -1,0 +1,477 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "disney",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/disney/disney.sqlite",
+  "tables": [
+    {
+      "name": "characters",
+      "type": "table",
+      "create_sql": "CREATE TABLE characters\n(\n    movie_title  TEXT\n            primary key,\n    release_date TEXT,\n    hero         TEXT,\n    villian      TEXT,\n    song         TEXT,\n    foreign key (hero) references \"voice-actors\"(character)\n)",
+      "row_count": 56,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "movie_title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "movie title",
+            "description": "unique title of the movie",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "release_date",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "release date",
+            "description": "The release date of the movie.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "hero",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The main character of the movie.",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n\nround role"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "villian",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The villain of the movie.",
+            "data_format": "text",
+            "value_description": "a character whose evil actions or motives are important to the plot."
+          }
+        },
+        {
+          "cid": 4,
+          "name": "song",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "A song associated with the movie.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "characters",
+          "from_column": "hero",
+          "to_table": "voice-actors",
+          "to_column": "character",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "director",
+      "type": "table",
+      "create_sql": "CREATE TABLE director\n(\n    name     TEXT\n            primary key,\n    director TEXT,\n    foreign key (name) references characters(movie_title)\n)",
+      "row_count": 56,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "unique movie name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "director",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the director",
+            "data_format": "text",
+            "value_description": "one director may have multiple movies.\n\nmore movies --> this director is more productive"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "director",
+          "from_column": "name",
+          "to_table": "characters",
+          "to_column": "movie_title",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "movies_total_gross",
+      "type": "table",
+      "create_sql": "CREATE TABLE movies_total_gross\n(\n    movie_title              TEXT,\n    release_date             TEXT,\n    genre                    TEXT,\n    MPAA_rating              TEXT,\n    total_gross              TEXT,\n    inflation_adjusted_gross TEXT,\n    primary key (movie_title, release_date),\n    foreign key (movie_title) references characters(movie_title)\n)",
+      "row_count": 579,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "movie_title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "movie title",
+            "description": "movie title",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "release_date",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "release date",
+            "description": "release date",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "genre",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "genre of the movie",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "MPAA_rating",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Motion Picture Association of America rating",
+            "description": "Motion Picture Association of America of the disney movie",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nâ¢ G: general audience\nâ¢ PG: mature audiences or parental guidance suggested\nâ¢ R: restricted: no children under 17 allowed without parents or adult guardians\nâ¢ PG-13: PARENTS STRONGLY CAUTIONED. Some material may be inappropriate for children under 13\nmovies need accompany with parents: PG, PG-13, PG-17;\nif \"Not rated\" or null, it means this film can show only gets permissions by theatre management\nif the film can show without need of permissions of theatre management, the MPAA_rating should not be \"Not rated\" or null"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "total_gross",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "total gross",
+            "description": "The total gross of the movie.",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nmore total_gross--> more popular movie"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "inflation_adjusted_gross",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "inflation adjusted gross",
+            "description": "The inflation-adjusted gross of the movie.",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nestimated inflation rate = inflation_adjusted_gross / total_gross;\nthe current gross = inflation_adjusted_gross"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "movies_total_gross",
+          "from_column": "movie_title",
+          "to_table": "characters",
+          "to_column": "movie_title",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "revenue",
+      "type": "table",
+      "create_sql": "CREATE TABLE revenue\n(\n    Year                              INTEGER\n            primary key,\n    \"Studio Entertainment[NI 1]\"      REAL,\n    \"Disney Consumer Products[NI 2]\"  REAL,\n    \"Disney Interactive[NI 3][Rev 1]\" INTEGER,\n    \"Walt Disney Parks and Resorts\"   REAL,\n    \"Disney Media Networks\"           TEXT,\n    Total                             INTEGER\n)",
+      "row_count": 26,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The year the movie was released.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Studio Entertainment[NI 1]",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The studio entertainment segment of the Walt Disney Company.",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Disney Consumer Products[NI 2]",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The consumer products segment of the Walt Disney Company.",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Disney Interactive[NI 3][Rev 1]",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The interactive segment of the Walt Disney Company.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Walt Disney Parks and Resorts",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The parks and resorts segment of the Walt Disney Company.",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Disney Media Networks",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The media networks segment of the Walt Disney Company.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Total",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The total box office gross for the movie.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "voice-actors",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"voice-actors\"\n(\n    character     TEXT\n            primary key,\n    \"voice-actor\" TEXT,\n    movie         TEXT,\n    foreign key (movie) references characters(movie_title)\n)",
+      "row_count": 922,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "character",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The unique name of the character.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "voice-actor",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The name of the voice actor.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "movie",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The name of the movie.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "voice-actors",
+          "from_column": "movie",
+          "to_table": "characters",
+          "to_column": "movie_title",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "characters",
+      "from_column": "hero",
+      "to_table": "voice-actors",
+      "to_column": "character",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "director",
+      "from_column": "name",
+      "to_table": "characters",
+      "to_column": "movie_title",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "movies_total_gross",
+      "from_column": "movie_title",
+      "to_table": "characters",
+      "to_column": "movie_title",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "voice-actors",
+      "from_column": "movie",
+      "to_table": "characters",
+      "to_column": "movie_title",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

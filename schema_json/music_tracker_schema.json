@@ -1,0 +1,189 @@
+{
+  "db_id": "music_tracker",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/music_tracker/music_tracker.sqlite",
+  "tables": [
+    {
+      "name": "tags",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"tags\"\n(\n    \"index\" INTEGER\n        constraint tags_pk\n            primary key,\n    id      INTEGER\n        constraint tags_torrents_id_fk\n            references torrents,\n    tag     TEXT\n)",
+      "row_count": 161283,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "index",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "index",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "release identifier which can be matched with id field in the torrents table",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "tag",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "tag",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "tags",
+          "from_column": "id",
+          "to_table": "torrents",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "torrents",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"torrents\"\n(\n    groupName     TEXT,\n    totalSnatched INTEGER,\n    artist        TEXT,\n    groupYear     INTEGER,\n    releaseType   TEXT,\n    groupId       INTEGER,\n    id            INTEGER\n        constraint torrents_pk\n            primary key\n)",
+      "row_count": 75719,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "groupName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "release title",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "totalSnatched",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "number of times the release has been downloaded",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "artist",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "artist / group name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "groupYear",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "release year",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "releaseType",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "release type (e.g., album, single, mixtape)",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "groupId",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Unique release identifier from What.CD. Used to ensure no releases are duplicates.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "unique identifier (essentially an index)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "tags",
+      "from_column": "id",
+      "to_table": "torrents",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

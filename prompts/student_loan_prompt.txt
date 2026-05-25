@@ -1,0 +1,518 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "student_loan",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/student_loan/student_loan.sqlite",
+  "tables": [
+    {
+      "name": "bool",
+      "type": "table",
+      "create_sql": "CREATE TABLE bool\n(\n    \"name\" TEXT default '' not null\n        primary key\n)",
+      "row_count": 2,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "disabled",
+      "type": "table",
+      "create_sql": "CREATE TABLE disabled\n(\n    \"name\" TEXT default '' not null\n        primary key,\n        foreign key (\"name\") references person (\"name\")\n            on update cascade on delete cascade\n)",
+      "row_count": 95,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the disabled students",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "disabled",
+          "from_column": "name",
+          "to_table": "person",
+          "to_column": "name",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "enlist",
+      "type": "table",
+      "create_sql": "CREATE TABLE enlist\n(\n    \"name\"  TEXT not null,\n    organ TEXT not null,\n        foreign key (\"name\") references person (\"name\")\n            on update cascade on delete cascade\n)",
+      "row_count": 306,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the enlisted students",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "organ",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "organization",
+            "description": "the organization that the student enlisted in",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "enlist",
+          "from_column": "name",
+          "to_table": "person",
+          "to_column": "name",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "enrolled",
+      "type": "table",
+      "create_sql": "CREATE TABLE `enrolled` (\n  `name` TEXT NOT NULL,\n  `school` TEXT NOT NULL,\n  `month` INTEGER NOT NULL DEFAULT 0,\n  PRIMARY KEY (`name`,`school`),\n  FOREIGN KEY (`name`) REFERENCES `person` (`name`) ON DELETE CASCADE ON UPDATE CASCADE\n)",
+      "row_count": 1194,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "school",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "month",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "enrolled",
+          "from_column": "name",
+          "to_table": "person",
+          "to_column": "name",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "filed_for_bankrupcy",
+      "type": "table",
+      "create_sql": "CREATE TABLE filed_for_bankrupcy\n(\n    \"name\" TEXT default '' not null\n        primary key,\n        foreign key (\"name\") references person (\"name\")\n            on update cascade on delete cascade\n)",
+      "row_count": 96,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "filed_for_bankrupcy",
+          "from_column": "name",
+          "to_table": "person",
+          "to_column": "name",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "longest_absense_from_school",
+      "type": "table",
+      "create_sql": "CREATE TABLE longest_absense_from_school\n(\n    \"name\"  TEXT default '' not null\n        primary key,\n    \"month\" INTEGER       default 0  null,\n        foreign key (\"name\") references person (\"name\")\n            on update cascade on delete cascade\n)",
+      "row_count": 1000,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "student's name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "month",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "0",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the duration of absence",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\n0 means that the student has never been absent."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "longest_absense_from_school",
+          "from_column": "name",
+          "to_table": "person",
+          "to_column": "name",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "male",
+      "type": "table",
+      "create_sql": "CREATE TABLE male\n(\n    \"name\" TEXT default '' not null\n        primary key,\n        foreign key (\"name\") references person (\"name\")\n            on update cascade on delete cascade\n)",
+      "row_count": 497,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "student's name who are male",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nthe students who are not in this list are female."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "male",
+          "from_column": "name",
+          "to_table": "person",
+          "to_column": "name",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "no_payment_due",
+      "type": "table",
+      "create_sql": "CREATE TABLE no_payment_due\n(\n    \"name\" TEXT default '' not null\n        primary key,\n    bool TEXT             null,\n        foreign key (\"name\") references person (\"name\")\n            on update cascade on delete cascade,\n        foreign key (bool) references bool (\"name\")\n            on update cascade on delete cascade\n)",
+      "row_count": 1000,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "student's name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "bool",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the student has payment dues",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n\tneg: the student doesn't have payment due\n\tpos: the student has payment due"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "no_payment_due",
+          "from_column": "bool",
+          "to_table": "bool",
+          "to_column": "name",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "no_payment_due",
+          "from_column": "name",
+          "to_table": "person",
+          "to_column": "name",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "person",
+      "type": "table",
+      "create_sql": "CREATE TABLE person\n(\n    \"name\" TEXT default '' not null\n        primary key\n)",
+      "row_count": 1000,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "student's name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "unemployed",
+      "type": "table",
+      "create_sql": "CREATE TABLE unemployed\n(\n    \"name\" TEXT default '' not null\n        primary key,\n        foreign key (\"name\") references person (\"name\")\n            on update cascade on delete cascade\n)",
+      "row_count": 98,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "student who is unemployed",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "unemployed",
+          "from_column": "name",
+          "to_table": "person",
+          "to_column": "name",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "disabled",
+      "from_column": "name",
+      "to_table": "person",
+      "to_column": "name",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "enlist",
+      "from_column": "name",
+      "to_table": "person",
+      "to_column": "name",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "enrolled",
+      "from_column": "name",
+      "to_table": "person",
+      "to_column": "name",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "filed_for_bankrupcy",
+      "from_column": "name",
+      "to_table": "person",
+      "to_column": "name",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "longest_absense_from_school",
+      "from_column": "name",
+      "to_table": "person",
+      "to_column": "name",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "male",
+      "from_column": "name",
+      "to_table": "person",
+      "to_column": "name",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "no_payment_due",
+      "from_column": "bool",
+      "to_table": "bool",
+      "to_column": "name",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "no_payment_due",
+      "from_column": "name",
+      "to_table": "person",
+      "to_column": "name",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "unemployed",
+      "from_column": "name",
+      "to_table": "person",
+      "to_column": "name",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

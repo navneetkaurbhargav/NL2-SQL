@@ -1,0 +1,203 @@
+{
+  "db_id": "european_football_1",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/european_football_1/european_football_1.sqlite",
+  "tables": [
+    {
+      "name": "divisions",
+      "type": "table",
+      "create_sql": "CREATE TABLE divisions\n(\n    division TEXT not null\n        primary key,\n    name     TEXT,\n    country  TEXT\n)",
+      "row_count": 21,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "division",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "division id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "name of the division",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "country",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "country of the division",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "matchs",
+      "type": "table",
+      "create_sql": "CREATE TABLE matchs\n(\n    Div      TEXT,\n    Date     DATE,\n    HomeTeam TEXT,\n    AwayTeam TEXT,\n    FTHG     INTEGER,\n    FTAG     INTEGER,\n    FTR      TEXT,\n    season   INTEGER,\n    foreign key (Div) references divisions(division)\n)",
+      "row_count": 123404,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Div",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Division",
+            "description": "Division Id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Match Date",
+            "data_format": "date",
+            "value_description": "YYYY-MM-DD"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "HomeTeam",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Name of Home Team",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "AwayTeam",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Name of Away Team",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "FTHG",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Final-time Home-team Goals",
+            "description": "Final-time Home-team Goals",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "FTAG",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Final-time Away-team Goals",
+            "description": "Final-time Away-team Goals",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "FTR",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Final-time Results",
+            "description": "Final-time Results",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nH stands for home victory, which means FTHG is higher than FTAG\n\nA stands for away victory, which means FTAG is higher than FTHG\n\nD stands for draft, which means FTHG equals to FTAG"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "season",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "season of the match",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "matchs",
+          "from_column": "Div",
+          "to_table": "divisions",
+          "to_column": "division",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "matchs",
+      "from_column": "Div",
+      "to_table": "divisions",
+      "to_column": "division",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

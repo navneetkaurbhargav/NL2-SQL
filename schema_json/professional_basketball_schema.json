@@ -1,0 +1,2624 @@
+{
+  "db_id": "professional_basketball",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/professional_basketball/professional_basketball.sqlite",
+  "tables": [
+    {
+      "name": "awards_coaches",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"awards_coaches\"\n(\n    id      INTEGER\n        primary key autoincrement,\n    year    INTEGER,\n    coachID TEXT,\n    award   TEXT,\n    lgID    TEXT,\n    note    TEXT,\n    foreign key (coachID, year) references coaches (coachID, year)\n        on update cascade on delete cascade\n)",
+      "row_count": 61,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "id of this row of data",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "which year did the coach receive the honor?",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "coachID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "id number of the coaches",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "award",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the award names",
+            "data_format": "text",
+            "value_description": "mainly categories: \"NBA\" & \"ABA\""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "lgID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "league ID",
+            "description": "the name of the league",
+            "data_format": "text",
+            "value_description": "mainly categories: \"NBA\" & \"ABA\""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "note",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "special notification",
+            "data_format": "text",
+            "value_description": "”null“ refers to that no special things\n”tie“ represents that coaches are tied for some awards"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "awards_coaches",
+          "from_column": "coachID",
+          "to_table": "coaches",
+          "to_column": "coachID",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "awards_coaches",
+          "from_column": "year",
+          "to_table": "coaches",
+          "to_column": "year",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "awards_players",
+      "type": "table",
+      "create_sql": "CREATE TABLE awards_players\n(\n    playerID TEXT not null,\n    award    TEXT not null,\n    year     INTEGER          not null,\n    lgID     TEXT null,\n    note     TEXT null,\n    pos      TEXT null,\n    primary key (playerID, year, award),\n    foreign key (playerID) references players (playerID)\n            on update cascade on delete cascade\n)",
+      "row_count": 1719,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "playerID",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ID number identifying the unique number of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "award",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the award",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "year",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the time of this award",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "lgID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "league ID",
+            "description": "the name of the league",
+            "data_format": "text",
+            "value_description": "mainly categories: \"NBA\" & \"ABA\""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "note",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "notification",
+            "data_format": "text",
+            "value_description": "”null“ refers to that no special things\n”tie“ represents that coaches are tied for some awards"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "pos",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "position",
+            "description": "the position of the player",
+            "data_format": "text",
+            "value_description": "C: Center\nF: Forward\nG: Guard"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "awards_players",
+          "from_column": "playerID",
+          "to_table": "players",
+          "to_column": "playerID",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "coaches",
+      "type": "table",
+      "create_sql": "CREATE TABLE coaches\n(\n    coachID     TEXT not null,\n    year        INTEGER          not null,\n    tmID        TEXT not null,\n    lgID        TEXT null,\n    stint       INTEGER          not null,\n    won         INTEGER          null,\n    lost        INTEGER          null,\n    post_wins   INTEGER          null,\n    post_losses INTEGER          null,\n    primary key (coachID, year, tmID, stint),\n    foreign key (tmID, year) references teams (tmID, year)\n            on update cascade on delete cascade\n)",
+      "row_count": 1689,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "coachID",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ID number identifying the unique number of the coach",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "year",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "tmID",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "team ID",
+            "description": "team name",
+            "data_format": "text",
+            "value_description": "abbreviated name"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "lgID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "league ID",
+            "description": "league name",
+            "data_format": "text",
+            "value_description": "mainly categories: \"NBA\" & \"ABA\""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "stint",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 4,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the period of the time coaching this team",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "won",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the number of won games",
+            "data_format": "integer",
+            "value_description": "0: no wins"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "lost",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the number of lost games",
+            "data_format": "integer",
+            "value_description": "0: win all the games"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "post_wins",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season wins",
+            "description": "the number of games won in the post-season (playoffs) games",
+            "data_format": "integer",
+            "value_description": "0: no wins\n\ncommonsense evidence:\n\nIf the team's post-season wins and losses are all zero, it implies that the team did not participate in the post-season (playoffs) that year."
+          }
+        },
+        {
+          "cid": 8,
+          "name": "post_losses",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season losses",
+            "description": "the number of games lost in the post-season (playoffs) games",
+            "data_format": "integer",
+            "value_description": "0: win all the games\n\ncommonsense evidence:\n\nIf the team's post-season wins and losses are all zero, it implies that the team did not participate in the post-season (playoffs) that year."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "coaches",
+          "from_column": "tmID",
+          "to_table": "teams",
+          "to_column": "tmID",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "coaches",
+          "from_column": "year",
+          "to_table": "teams",
+          "to_column": "year",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "draft",
+      "type": "table",
+      "create_sql": "CREATE TABLE draft\n(\n    id             INTEGER default 0 not null\n        primary key,\n    draftYear      INTEGER           null,\n    draftRound     INTEGER           null,\n    draftSelection INTEGER           null,\n    draftOverall   INTEGER          null,\n    tmID           TEXT  null,\n    firstName      TEXT  null,\n    lastName       TEXT  null,\n    suffixName     TEXT  null,\n    playerID       TEXT  null,\n    draftFrom      TEXT  null,\n    lgID           TEXT  null,\n    foreign key (tmID, draftYear) references teams (tmID, year)\n            on update cascade on delete cascade\n)",
+      "row_count": 8621,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique number to determine one row of the data",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "draftYear",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "which year does this draft happens",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "draftRound",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the Round number of this draft",
+            "data_format": "integer",
+            "value_description": "If the value is 0, it means that there is no draft in this year\n\n1 refers that this player was picked in the first round"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "draftSelection",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "league ID",
+            "description": "the position that the player was picked",
+            "data_format": "integer",
+            "value_description": "0：This signifies that it doesn't contain the draft information of this player\n\n7：this player was selected in the 7th position in this round\n\ncommonsense evidence:\n\ndraftRound: 1; \ndraftSelection: 7 \nrepresents: this player was selected in the round 1, 7th position."
+          }
+        },
+        {
+          "cid": 4,
+          "name": "draftOverall",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "draft overall rank",
+            "description": "The player's overall draft position for the year",
+            "data_format": "integer",
+            "value_description": "this is the overall draft rank of the player."
+          }
+        },
+        {
+          "cid": 5,
+          "name": "tmID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "team ID",
+            "description": "team name",
+            "data_format": "text",
+            "value_description": "abbreviated name"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "firstName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the first name of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "lastName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the last name of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "suffixName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the suffix name of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "playerID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ID number identifying the unique number of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "draftFrom",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the university that the drafted players come from",
+            "data_format": "text",
+            "value_description": "the name of the university"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "lgID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "league ID",
+            "description": "the league name",
+            "data_format": "text",
+            "value_description": "mainly categories: \"NBA\" & \"ABA\""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "draft",
+          "from_column": "tmID",
+          "to_table": "teams",
+          "to_column": "tmID",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "draft",
+          "from_column": "draftYear",
+          "to_table": "teams",
+          "to_column": "year",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "player_allstar",
+      "type": "table",
+      "create_sql": "CREATE TABLE player_allstar\n(\n    playerID        TEXT not null,\n    last_name       TEXT null,\n    first_name      TEXT null,\n    season_id       INTEGER          not null,\n    conference      TEXT null,\n    league_id       TEXT null,\n    games_played    INTEGER          null,\n    minutes         INTEGER          null,\n    points          INTEGER          null,\n    o_rebounds      INTEGER          null,\n    d_rebounds      INTEGER          null,\n    rebounds        INTEGER          null,\n    assists         INTEGER          null,\n    steals          INTEGER          null,\n    blocks          INTEGER          null,\n    turnovers       INTEGER          null,\n    personal_fouls  INTEGER          null,\n    fg_attempted    INTEGER          null,\n    fg_made         INTEGER          null,\n    ft_attempted    INTEGER          null,\n    ft_made         INTEGER          null,\n    three_attempted INTEGER          null,\n    three_made      INTEGER          null,\n    primary key (playerID, season_id),\n    foreign key (playerID) references players (playerID)\n            on update cascade on delete cascade\n)",
+      "row_count": 1608,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "playerID",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ID number identifying the unique number of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "last_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the last name of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "first_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the first name of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "season_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the id number of the season",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "conference",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "which conference that players belong to",
+            "data_format": "text",
+            "value_description": "two categories: west; east"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "league_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "league ID",
+            "description": "the league name",
+            "data_format": "text",
+            "value_description": "two categories: NBA; ABA"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "games_played",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "how many all star games that this player played in this season",
+            "data_format": "integer",
+            "value_description": "mostly it's 1"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "minutes",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "minutes of attendance",
+            "data_format": "integer",
+            "value_description": "18：played in 18 minutes"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "points",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "points",
+            "data_format": "integer",
+            "value_description": "19: get 19 points；\n\nnull --> doesn't get points"
+          }
+        },
+        {
+          "cid": 9,
+          "name": "o_rebounds",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "offense rebounds",
+            "description": "offense rebounds",
+            "data_format": "integer",
+            "value_description": "empty or null refers to none offense rebounds，\n\n1: one offense rebound"
+          }
+        },
+        {
+          "cid": 10,
+          "name": "d_rebounds",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "defense rebounds",
+            "description": "defense rebounds",
+            "data_format": "integer",
+            "value_description": "empty or null refers to none defense rebounds，\n\n1: one defense rebound"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "rebounds",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "total rebounds",
+            "data_format": "integer",
+            "value_description": "empty or null refers to none total rebounds，\n\n3: totally gets 3 rebounds including offence and defense rebounds\n\ncommensense evidence:\n\ntotal rebounds = offense rebounds + defense rebounds"
+          }
+        },
+        {
+          "cid": 12,
+          "name": "assists",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "assistants",
+            "description": "assistants",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 assistants"
+          }
+        },
+        {
+          "cid": 13,
+          "name": "steals",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "steals",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 steals"
+          }
+        },
+        {
+          "cid": 14,
+          "name": "blocks",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "blocks",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 blocks"
+          }
+        },
+        {
+          "cid": 15,
+          "name": "turnovers",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "turnovers",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 turnovers"
+          }
+        },
+        {
+          "cid": 16,
+          "name": "personal_fouls",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "personal fouls",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 personal fouls"
+          }
+        },
+        {
+          "cid": 17,
+          "name": "fg_attempted",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "field goal attempted",
+            "description": "field goal attempted",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 field goal attempts"
+          }
+        },
+        {
+          "cid": 18,
+          "name": "fg_made",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "field goal made",
+            "description": "field goal made",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 field goal made"
+          }
+        },
+        {
+          "cid": 19,
+          "name": "ft_attempted",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "free throw attempted",
+            "description": "free throw attempted",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 free throw attempts"
+          }
+        },
+        {
+          "cid": 20,
+          "name": "ft_made",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "free throw made",
+            "description": "free throw made",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 free throw made"
+          }
+        },
+        {
+          "cid": 21,
+          "name": "three_attempted",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "three point attempted",
+            "description": "three point attempted",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 three point attempts"
+          }
+        },
+        {
+          "cid": 22,
+          "name": "three_made",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "three point made",
+            "description": "three point made",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 three point made"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "player_allstar",
+          "from_column": "playerID",
+          "to_table": "players",
+          "to_column": "playerID",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "players",
+      "type": "table",
+      "create_sql": "CREATE TABLE players\n(\n    playerID      TEXT not null\n        primary key,\n    useFirst      TEXT null,\n    firstName     TEXT null,\n    middleName    TEXT null,\n    lastName      TEXT null,\n    nameGiven     TEXT null,\n    fullGivenName TEXT null,\n    nameSuffix    TEXT null,\n    nameNick      TEXT null,\n    pos           TEXT null,\n    firstseason   INTEGER          null,\n    lastseason    INTEGER         null,\n    height        REAL        null,\n    weight        INTEGER         null,\n    college       TEXT null,\n    collegeOther  TEXT null,\n    birthDate     DATE         null,\n    birthCity     TEXT null,\n    birthState    TEXT null,\n    birthCountry  TEXT null,\n    highSchool    TEXT null,\n    hsCity        TEXT null,\n    hsState       TEXT null,\n    hsCountry     TEXT null,\n    deathDate     DATE         null,\n    race          TEXT null\n)",
+      "row_count": 5062,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "playerID",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ID number identifying the unique number of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "useFirst",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "use first name",
+            "description": "",
+            "data_format": "text",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "firstName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the first name of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "middleName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the middle name of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "lastName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the last name of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "nameGiven",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "fullGivenName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "nameSuffix",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the suffix name of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "nameNick",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "nick name",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "pos",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "position",
+            "description": "the position of the player",
+            "data_format": "text",
+            "value_description": "C: Center\r\n\r\nF: Forward\r\n\r\nG: Guard \r\n\r\ncommonsense evidence:\r\nsome player can have two positions simultaneously"
+          }
+        },
+        {
+          "cid": 10,
+          "name": "firstseason",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "nothing special"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "lastseason",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "nothing special"
+          }
+        },
+        {
+          "cid": 12,
+          "name": "height",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "inch",
+            "data_format": "real",
+            "value_description": "inch"
+          }
+        },
+        {
+          "cid": 13,
+          "name": "weight",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "lb",
+            "data_format": "integer",
+            "value_description": "null or empty means it doesn't have this information"
+          }
+        },
+        {
+          "cid": 14,
+          "name": "college",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "college",
+            "data_format": "text",
+            "value_description": "null or empty means it doesn't have this information\r\n\r\nwhich colledge does this player graduate from"
+          }
+        },
+        {
+          "cid": 15,
+          "name": "collegeOther",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the college that transferred from",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\r\n\r\nsome players may have the record of transferring from other colleges"
+          }
+        },
+        {
+          "cid": 16,
+          "name": "birthDate",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "birthdate",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "birthCity",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "birthcity",
+            "data_format": "text",
+            "value_description": "null / empty refers to not recorded"
+          }
+        },
+        {
+          "cid": 18,
+          "name": "birthState",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "birth state",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 19,
+          "name": "birthCountry",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "birth country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 20,
+          "name": "highSchool",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "high school",
+            "data_format": "text",
+            "value_description": "null / empty refers to not recorded"
+          }
+        },
+        {
+          "cid": 21,
+          "name": "hsCity",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "high school city",
+            "description": "high school city",
+            "data_format": "text",
+            "value_description": "null / empty refers to not recorded"
+          }
+        },
+        {
+          "cid": 22,
+          "name": "hsState",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "high school state",
+            "description": "high school state",
+            "data_format": "text",
+            "value_description": "null / empty refers to not recorded"
+          }
+        },
+        {
+          "cid": 23,
+          "name": "hsCountry",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "high school country",
+            "description": "high school country",
+            "data_format": "text",
+            "value_description": "null / empty refers to not recorded"
+          }
+        },
+        {
+          "cid": 24,
+          "name": "deathDate",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "deathdate",
+            "data_format": "date",
+            "value_description": "0000-00-00 means this player is still alive\r\n\r\nwithin clear date：\r\n2011-11-10, which means this guy was died on \"2011-11-10\""
+          }
+        },
+        {
+          "cid": 25,
+          "name": "race",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "B：black,\r\nW: white\r\n\r\nnull or empty: nothing"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "players_teams",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"players_teams\"\n(\n    id                 INTEGER\n        primary key autoincrement,\n    playerID           TEXT not null\n        references players\n            on update cascade on delete cascade,\n    year               INTEGER,\n    stint              INTEGER,\n    tmID               TEXT,\n    lgID               TEXT,\n    GP                 INTEGER,\n    GS                 INTEGER,\n    minutes            INTEGER,\n    points             INTEGER,\n    oRebounds          INTEGER,\n    dRebounds          INTEGER,\n    rebounds           INTEGER,\n    assists            INTEGER,\n    steals             INTEGER,\n    blocks             INTEGER,\n    turnovers          INTEGER,\n    PF                 INTEGER,\n    fgAttempted        INTEGER,\n    fgMade             INTEGER,\n    ftAttempted        INTEGER,\n    ftMade             INTEGER,\n    threeAttempted     INTEGER,\n    threeMade          INTEGER,\n    PostGP             INTEGER,\n    PostGS             INTEGER,\n    PostMinutes        INTEGER,\n    PostPoints         INTEGER,\n    PostoRebounds      INTEGER,\n    PostdRebounds      INTEGER,\n    PostRebounds       INTEGER,\n    PostAssists        INTEGER,\n    PostSteals         INTEGER,\n    PostBlocks         INTEGER,\n    PostTurnovers      INTEGER,\n    PostPF             INTEGER,\n    PostfgAttempted    INTEGER,\n    PostfgMade         INTEGER,\n    PostftAttempted    INTEGER,\n    PostftMade         INTEGER,\n    PostthreeAttempted INTEGER,\n    PostthreeMade      INTEGER,\n    note               TEXT,\n    foreign key (tmID, year) references teams (tmID, year)\n        on update cascade on delete cascade\n)",
+      "row_count": 23751,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique number to identify this record",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "playerID",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ID number identifying the unique number of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "year",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "stint",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the period of the time player spent played for this team",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "tmID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "team ID",
+            "description": "team name",
+            "data_format": "text",
+            "value_description": "abbreviated name"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "lgID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "GP",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "game presentatons",
+            "description": "game presentatons (attendance)",
+            "data_format": "integer",
+            "value_description": "min: 0, max: 82\n\ncommonsense evidence:\n\nif this number is equal to 82, means full attendance"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "GS",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "game starting",
+            "description": "game starting",
+            "data_format": "",
+            "value_description": "min: 0, max: 82,\n\ncommonsense evidence:\n\nwhen GP = GS, it means that this player plays as the stating lineup fully."
+          }
+        },
+        {
+          "cid": 8,
+          "name": "minutes",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "minutes",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "points",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "points",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "oRebounds",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "offense rebounds",
+            "description": "offense rebounds",
+            "data_format": "integer",
+            "value_description": "empty or null refers to none offense rebounds，\n\n1: one offense rebound"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "dRebounds",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "defense rebounds",
+            "description": "defense rebounds",
+            "data_format": "integer",
+            "value_description": "empty or null refers to none defense rebounds，\n\n1: one defense rebound"
+          }
+        },
+        {
+          "cid": 12,
+          "name": "rebounds",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "total rebounds",
+            "data_format": "integer",
+            "value_description": "empty or null refers to none total rebounds，\n\n3: totally gets 3 rebounds including offense and defense rebounds\n\ncommensense evidence:\n\ntotal rebounds = offense rebounds + defense rebounds"
+          }
+        },
+        {
+          "cid": 13,
+          "name": "assists",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "assistants",
+            "description": "assistants",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 assistants"
+          }
+        },
+        {
+          "cid": 14,
+          "name": "steals",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "steals",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 steals"
+          }
+        },
+        {
+          "cid": 15,
+          "name": "blocks",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "blocks",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 blocks"
+          }
+        },
+        {
+          "cid": 16,
+          "name": "turnovers",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "turnovers",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 turnovers"
+          }
+        },
+        {
+          "cid": 17,
+          "name": "PF",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "personal fouls",
+            "description": "personal fouls",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 personal fouls"
+          }
+        },
+        {
+          "cid": 18,
+          "name": "fgAttempted",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "field goal attempted",
+            "description": "field goal attempted",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 field goal attempts"
+          }
+        },
+        {
+          "cid": 19,
+          "name": "fgMade",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "field goal made",
+            "description": "field goal made",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 field goal made"
+          }
+        },
+        {
+          "cid": 20,
+          "name": "ftAttempted",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "free throw attempted",
+            "description": "free throw attempted",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 free throw attempts"
+          }
+        },
+        {
+          "cid": 21,
+          "name": "ftMade",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "free throw made",
+            "description": "free throw made",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 free throw made"
+          }
+        },
+        {
+          "cid": 22,
+          "name": "threeAttempted",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "three point attempted",
+            "description": "three point attempted",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 three point attempts"
+          }
+        },
+        {
+          "cid": 23,
+          "name": "threeMade",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "three point made",
+            "description": "three point made",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n2: 2 three point made"
+          }
+        },
+        {
+          "cid": 24,
+          "name": "PostGP",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season game presentations",
+            "description": "post season game presentations",
+            "data_format": "integer",
+            "value_description": "0: this player doesn't present in the post season (playoffs)"
+          }
+        },
+        {
+          "cid": 25,
+          "name": "PostGS",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season game starting",
+            "description": "post season game starting",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 26,
+          "name": "PostMinutes",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season minutes",
+            "description": "post season minutes",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 27,
+          "name": "PostPoints",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season points",
+            "description": "post season points",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 28,
+          "name": "PostoRebounds",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season offense rebounds",
+            "description": "post season offense rebounds",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n1: 1 offense rebounds in the post season"
+          }
+        },
+        {
+          "cid": 29,
+          "name": "PostdRebounds",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season defense rebounds",
+            "description": "post season defense rebounds",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n1: 1 defense rebounds in the post season"
+          }
+        },
+        {
+          "cid": 30,
+          "name": "PostRebounds",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season defense rebounds",
+            "description": "post season defense rebounds",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n3: 3 rebounds in the post season totally"
+          }
+        },
+        {
+          "cid": 31,
+          "name": "PostAssists",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season assistants",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n1: 1 assistance in the post season"
+          }
+        },
+        {
+          "cid": 32,
+          "name": "PostSteals",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season steals",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n1: 1 offense steals in the post season"
+          }
+        },
+        {
+          "cid": 33,
+          "name": "PostBlocks",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season blocks",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n1: 1 block in the post season"
+          }
+        },
+        {
+          "cid": 34,
+          "name": "PostTurnovers",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season turnovers",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n1: 1 turnover in the post season"
+          }
+        },
+        {
+          "cid": 35,
+          "name": "PostPF",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season personal fouls",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n1: 2 personal fouls in the post season"
+          }
+        },
+        {
+          "cid": 36,
+          "name": "PostfgAttempted",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season field goal attempted",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n1: 1 field goal attempts in the post season"
+          }
+        },
+        {
+          "cid": 37,
+          "name": "PostfgMade",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season field goal made",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n1: 1 field goal made in the post season"
+          }
+        },
+        {
+          "cid": 38,
+          "name": "PostftAttempted",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season field free throw attempted",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n1: 1 free throw attempts in the post season"
+          }
+        },
+        {
+          "cid": 39,
+          "name": "PostftMade",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season free throw made",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n1: 1 free throw made in the post season"
+          }
+        },
+        {
+          "cid": 40,
+          "name": "PostthreeAttempted",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season three point attempted",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n1: 1 three point attempts in the post season"
+          }
+        },
+        {
+          "cid": 41,
+          "name": "PostthreeMade",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "post season three point made",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "null or empty refers to none\n\n1: 1 three point made in the post season"
+          }
+        },
+        {
+          "cid": 42,
+          "name": "note",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "players_teams",
+          "from_column": "tmID",
+          "to_table": "teams",
+          "to_column": "tmID",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "players_teams",
+          "from_column": "year",
+          "to_table": "teams",
+          "to_column": "year",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "players_teams",
+          "from_column": "playerID",
+          "to_table": "players",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "series_post",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"series_post\"\n(\n    id         INTEGER\n        primary key autoincrement,\n    year       INTEGER,\n    round      TEXT,\n    series     TEXT,\n    tmIDWinner TEXT,\n    lgIDWinner TEXT,\n    tmIDLoser  TEXT,\n    lgIDLoser  TEXT,\n    W          INTEGER,\n    L          INTEGER,\n    foreign key (tmIDWinner, year) references teams (tmID, year)\n        on update cascade on delete cascade,\n    foreign key (tmIDLoser, year) references teams (tmID, year)\n        on update cascade on delete cascade\n)",
+      "row_count": 775,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "unique number of this record",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "year",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "round",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "round",
+            "data_format": "text",
+            "value_description": "known abbreviations：\n\nF：final \nSF: semi-final \n\nQF：quater-final 1/4\n\nDF：division-final \n\nDSF：division semi-final"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "series",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "tmIDWinner",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "team id winner",
+            "description": "team id winner",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "lgIDWinner",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "league id winner",
+            "description": "league id winner",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "tmIDLoser",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "team id loser",
+            "description": "team id loser",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "lgIDLoser",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "league id loser",
+            "description": "league id loser",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "W",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "wins",
+            "description": "wins",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "L",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "loses",
+            "description": "loses",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "series_post",
+          "from_column": "tmIDLoser",
+          "to_table": "teams",
+          "to_column": "tmID",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "series_post",
+          "from_column": "year",
+          "to_table": "teams",
+          "to_column": "year",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "series_post",
+          "from_column": "tmIDWinner",
+          "to_table": "teams",
+          "to_column": "tmID",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 1,
+          "from_table": "series_post",
+          "from_column": "year",
+          "to_table": "teams",
+          "to_column": "year",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "teams",
+      "type": "table",
+      "create_sql": "CREATE TABLE teams\n(\n    year        INTEGER          not null,\n    lgID        TEXT null,\n    tmID        TEXT not null,\n    franchID    TEXT null,\n    confID      TEXT null,\n    divID       TEXT null,\n    `rank`      INTEGER          null,\n    confRank    INTEGER          null,\n    playoff     TEXT null,\n    name        TEXT null,\n    o_fgm       INTEGER          null,\n--     o_fga       int          null,\n    o_ftm       INTEGER          null,\n--     o_fta       int          null,\n--     o_3pm       int          null,\n--     o_3pa       int          null,\n--     o_oreb      int          null,\n--     o_dreb      int          null,\n--     o_reb       int          null,\n--     o_asts      int          null,\n--     o_pf        int          null,\n--     o_stl       int          null,\n--     o_to        int          null,\n--     o_blk       int          null,\n     o_pts       INTEGER          null,\n--     d_fgm       int          null,\n--     d_fga       int          null,\n--     d_ftm       int          null,\n--     d_fta       int          null,\n--     d_3pm       int          null,\n--     d_3pa       int          null,\n--     d_oreb      int          null,\n--     d_dreb      int          null,\n--     d_reb       int          null,\n--     d_asts      int          null,\n--     d_pf        int          null,\n--     d_stl       int          null,\n--     d_to        int          null,\n--     d_blk       int          null,\n     d_pts       INTEGER          null,\n--     o_tmRebound int          null,\n--     d_tmRebound int          null,\n    homeWon     INTEGER          null,\n    homeLost    INTEGER          null,\n    awayWon     INTEGER          null,\n    awayLost    INTEGER          null,\n--     neutWon     int          null,\n--     neutLoss    int          null,\n--     confWon     int          null,\n--     confLoss    int          null,\n--     divWon      int          null,\n--     divLoss     int          null,\n--     pace        int          null,\n    won         INTEGER          null,\n    lost        INTEGER          null,\n    games       INTEGER          null,\n--     min         int          null,\n    arena       TEXT null,\n--     attendance  int          null,\n--     bbtmID      varchar(255) null,\n    primary key (year, tmID)\n)",
+      "row_count": 1536,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "year",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "year",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "lgID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "league ID",
+            "description": "league name",
+            "data_format": "text",
+            "value_description": "main categories:\nNBA, ABA"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "tmID",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "team ID",
+            "description": "team id",
+            "data_format": "text",
+            "value_description": "abbreviated name"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "franchID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "confID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "divID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "division ID",
+            "description": "division ID",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "rank",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "rank",
+            "data_format": "integer",
+            "value_description": "less is better"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "confRank",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "playoff",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "another name: post season",
+            "data_format": "text",
+            "value_description": "for brevity, if the value is not null or empty, it means this team attends the playoffs, otherwise, means not attend"
+          }
+        },
+        {
+          "cid": 9,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "full name of the team",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "o_fgm",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "offense field goal made",
+            "description": "how many offense field goal made by this team in this season",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "o_ftm",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "offense free throw made",
+            "description": "how many offense free throw made by this team in this season",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "o_pts",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "offense points",
+            "description": "offense points",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "d_pts",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "defense points",
+            "description": "defense points",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "homeWon",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "home wins",
+            "description": "wins in the home",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 15,
+          "name": "homeLost",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "home loses",
+            "description": "loses in the home",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 16,
+          "name": "awayWon",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "away wins",
+            "description": "wins in the away",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "awayLost",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "away loses",
+            "description": "loses in the away",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 18,
+          "name": "won",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "total wins of this team in this year."
+          }
+        },
+        {
+          "cid": 19,
+          "name": "lost",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "total losts of this team in this year."
+          }
+        },
+        {
+          "cid": 20,
+          "name": "games",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "total number of games that this team played in this year (season)"
+          }
+        },
+        {
+          "cid": 21,
+          "name": "arena",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "arena",
+            "data_format": "text",
+            "value_description": "null or empty refers to the fact that this team doesn't have individual arenas, otherwise, it has individual arenas"
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "awards_coaches",
+      "from_column": "coachID",
+      "to_table": "coaches",
+      "to_column": "coachID",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "awards_coaches",
+      "from_column": "year",
+      "to_table": "coaches",
+      "to_column": "year",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "awards_players",
+      "from_column": "playerID",
+      "to_table": "players",
+      "to_column": "playerID",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "coaches",
+      "from_column": "tmID",
+      "to_table": "teams",
+      "to_column": "tmID",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "coaches",
+      "from_column": "year",
+      "to_table": "teams",
+      "to_column": "year",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "draft",
+      "from_column": "tmID",
+      "to_table": "teams",
+      "to_column": "tmID",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "draft",
+      "from_column": "draftYear",
+      "to_table": "teams",
+      "to_column": "year",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "player_allstar",
+      "from_column": "playerID",
+      "to_table": "players",
+      "to_column": "playerID",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "players_teams",
+      "from_column": "tmID",
+      "to_table": "teams",
+      "to_column": "tmID",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "players_teams",
+      "from_column": "year",
+      "to_table": "teams",
+      "to_column": "year",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "players_teams",
+      "from_column": "playerID",
+      "to_table": "players",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "series_post",
+      "from_column": "tmIDLoser",
+      "to_table": "teams",
+      "to_column": "tmID",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "series_post",
+      "from_column": "year",
+      "to_table": "teams",
+      "to_column": "year",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "series_post",
+      "from_column": "tmIDWinner",
+      "to_table": "teams",
+      "to_column": "tmID",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 1,
+      "from_table": "series_post",
+      "from_column": "year",
+      "to_table": "teams",
+      "to_column": "year",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    }
+  ]
+}

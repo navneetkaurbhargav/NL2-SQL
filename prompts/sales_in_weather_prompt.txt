@@ -1,0 +1,454 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "sales_in_weather",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/sales_in_weather/sales_in_weather.sqlite",
+  "tables": [
+    {
+      "name": "relation",
+      "type": "table",
+      "create_sql": "CREATE TABLE relation\n(\n    store_nbr   INTEGER\n            primary key,\n    station_nbr INTEGER,\n    foreign key (store_nbr) references sales_in_weather(store_nbr),\n    foreign key (station_nbr) references weather(station_nbr)\n)",
+      "row_count": 45,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "store_nbr",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "store number",
+            "description": "the id of stores",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "station_nbr",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "station number",
+            "description": "the id of weather stations",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "relation",
+          "from_column": "station_nbr",
+          "to_table": "weather",
+          "to_column": "station_nbr",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "relation",
+          "from_column": "store_nbr",
+          "to_table": "sales_in_weather",
+          "to_column": "store_nbr",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "sales_in_weather",
+      "type": "table",
+      "create_sql": "CREATE TABLE sales_in_weather\n(\n    date      DATE,\n    store_nbr INTEGER,\n    item_nbr  INTEGER,\n    units     INTEGER,\n    primary key (store_nbr, date, item_nbr)\n)",
+      "row_count": 4617600,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "date",
+            "description": "the date of sales",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "store_nbr",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "store number",
+            "description": "store number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "item_nbr",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "item number",
+            "description": "item / product number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "units",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the quantity sold of an item on a given day",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "weather",
+      "type": "table",
+      "create_sql": "CREATE TABLE weather\n(\n    station_nbr INTEGER,\n    date        DATE,\n    tmax        INTEGER,\n    tmin        INTEGER,\n    tavg        INTEGER,\n    depart      INTEGER,\n    dewpoint    INTEGER,\n    wetbulb     INTEGER,\n    heat        INTEGER,\n    cool        INTEGER,\n    sunrise     TEXT,\n    sunset      TEXT,\n    codesum     TEXT,\n    snowfall    REAL,\n    preciptotal REAL,\n    stnpressure REAL,\n    sealevel    REAL,\n    resultspeed REAL,\n    resultdir   INTEGER,\n    avgspeed    REAL,\n    primary key (station_nbr, date)\n)",
+      "row_count": 20517,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "station_nbr",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "station number",
+            "description": "the id of weather stations",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "date",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "tmax",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "temperature max",
+            "description": "max temperature",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "tmin",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "temperature min",
+            "description": "min temperature",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\ntemperature range / difference = tmax - tmin"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "tavg",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "temperature average",
+            "description": "average temperature",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "depart",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "departure from normal",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "Temperature departure from the normal indicates if the dekadal average temperatures were above or below the 30-year normal.\ncommonsense evidence:\nâ¢ if null: the temperature is 30-year normal\nâ¢ if the value is positive: the temperature is above the 30-year normal, \nâ¢ if the value is negative: the temperature is below the 30-year normal,"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "dewpoint",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "dew point",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nThe dew point is the temperature to which air must be cooled to become saturated with water vapor, assuming constant air pressure and water content."
+          }
+        },
+        {
+          "cid": 7,
+          "name": "wetbulb",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "wet bulb",
+            "description": "",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nâ¢ The wet-bulb temperature (WBT) is the temperature read by a thermometer covered in water-soaked (water at ambient temperature) cloth (a wet-bulb thermometer) over which air is passed.\nâ¢ At 100% relative humidity, the wet-bulb temperature is equal to the air temperature (dry-bulb temperature); \nâ¢ at lower humidity the wet-bulb temperature is lower than dry-bulb temperature because of evaporative cooling."
+          }
+        },
+        {
+          "cid": 8,
+          "name": "heat",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "calculated heating degree",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "cool",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "calculated cooling degree",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "sunrise",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "calculated sunrise",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "sunset",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "calculated sunset",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "codesum",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "code summarization",
+            "description": "code summarization for the weather",
+            "data_format": "text",
+            "value_description": "â¢ PY SPRAY \nâ¢ SQ SQUALL \nâ¢ DR LOW DRIFTING \nâ¢ SH SHOWER \nâ¢ FZ FREEZING \nâ¢ MI SHALLOW \nâ¢ PR PARTIAL \nâ¢ BC PATCHES \nâ¢ BL BLOWING \nâ¢ VC VICINITY \nâ¢ - LIGHT \nâ¢ + HEAVY \nâ¢ \"NO SIGN\" MODERATE"
+          }
+        },
+        {
+          "cid": 13,
+          "name": "snowfall",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "snowfall",
+            "data_format": "real",
+            "value_description": "snowfall (inches AND tenths)"
+          }
+        },
+        {
+          "cid": 14,
+          "name": "preciptotal",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "precipitation total",
+            "data_format": "real",
+            "value_description": "inches (240hr period ending at indicated local standard time)"
+          }
+        },
+        {
+          "cid": 15,
+          "name": "stnpressure",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "station pressure",
+            "description": "station pressure",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 16,
+          "name": "sealevel",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "sea level",
+            "description": "sea level",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "resultspeed",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "resultant speed",
+            "description": "resultant wind speed",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 18,
+          "name": "resultdir",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "resultant direction",
+            "description": "resultant wind direction",
+            "data_format": "integer",
+            "value_description": "who degree"
+          }
+        },
+        {
+          "cid": 19,
+          "name": "avgspeed",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "average speed",
+            "description": "average wind speed",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nif avgspeed is larger: much more wind"
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "relation",
+      "from_column": "station_nbr",
+      "to_table": "weather",
+      "to_column": "station_nbr",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "relation",
+      "from_column": "store_nbr",
+      "to_table": "sales_in_weather",
+      "to_column": "store_nbr",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

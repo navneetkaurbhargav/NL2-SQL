@@ -1,0 +1,1553 @@
+{
+  "db_id": "public_review_platform",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/public_review_platform/public_review_platform.sqlite",
+  "tables": [
+    {
+      "name": "Attributes",
+      "type": "table",
+      "create_sql": "CREATE TABLE Attributes\n(\n    attribute_id   INTEGER\n        constraint Attributes_pk\n            primary key,\n    attribute_name TEXT\n)",
+      "row_count": 80,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "attribute_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "attribute id",
+            "description": "unique number identifying the attribute",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "attribute_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "attribute name",
+            "description": "the name of the attribute",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Business",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Business\"\n(\n    business_id  INTEGER\n        constraint Business_pk\n            primary key,\n    active       TEXT,\n    city         TEXT,\n    state        TEXT,\n    stars        REAL,\n    review_count TEXT\n)",
+      "row_count": 15585,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "business_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "business id",
+            "description": "unique number identifying the business",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "active",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the business is still actively running until now",
+            "data_format": "text",
+            "value_description": "commonsense reasoning:\n� \"True\": the business is still running \n� \"False\": the business is closed or not running now"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The city where the business is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The state where the business is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "stars",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ratings of the business",
+            "data_format": "real",
+            "value_description": "5 � Great experience \n4 � Good experience \n3 � Average experience \n2 � Bad experience \n1 - Terrible experience \ncommonsense evidence: \n� the rating of >3 stars referring to \"wonderful experience\" or positive comments and vice versa"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "review_count",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "review count",
+            "description": "the total number of reviews the users have written for a business",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \n� If a business has a low total review count and a high star rating of >3, it means there is a low veracity of reviews. \n� higher review count and with high star rating of > 3 means this business is more popular or more appealing to users."
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Business_Attributes",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Business_Attributes\"\n(\n    attribute_id    INTEGER\n        constraint Business_Attributes_Attributes_attribute_id_fk\n            references Attributes,\n    business_id     INTEGER\n        constraint Business_Attributes_Business_business_id_fk\n            references Business,\n    attribute_value TEXT,\n    constraint Business_Attributes_pk\n        primary key (attribute_id, business_id)\n)",
+      "row_count": 206934,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "attribute_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "attribute id",
+            "description": "id number identifying the attribute",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "business_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "business id",
+            "description": "id number identifying the business",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "attribute_value",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "attribute value",
+            "description": "sort of the attributes for each business",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \n“None”, “No” or “FALSE” means the business does not have the attribute."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Business_Attributes",
+          "from_column": "business_id",
+          "to_table": "Business",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Business_Attributes",
+          "from_column": "attribute_id",
+          "to_table": "Attributes",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Business_Categories",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Business_Categories\"\n(\n    business_id INTEGER\n        constraint Business_Categories_Business_business_id_fk\n            references Business,\n    category_id INTEGER\n        constraint Business_Categories_Categories_category_id_fk\n            references Categories,\n    constraint Business_Categories_pk\n        primary key (business_id, category_id)\n)",
+      "row_count": 43703,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "business_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "business id",
+            "description": "id number identifying the business",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "category_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "category id",
+            "description": "id number identifying the categories",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Business_Categories",
+          "from_column": "category_id",
+          "to_table": "Categories",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Business_Categories",
+          "from_column": "business_id",
+          "to_table": "Business",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Business_Hours",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Business_Hours\"\n(\n    business_id  INTEGER\n        constraint Business_Hours_Business_business_id_fk\n            references Business,\n    day_id       INTEGER\n        constraint Business_Hours_Days_day_id_fk\n            references Days,\n    opening_time TEXT,\n    closing_time TEXT,\n    constraint Business_Hours_pk\n        primary key (business_id, day_id)\n)",
+      "row_count": 47831,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "business_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "business id",
+            "description": "id number identifying the business",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "day_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "day id",
+            "description": "id number identifying each day of the week",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "opening_time",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "opening time",
+            "description": "opening time of the business",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "closing_time",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "closing time",
+            "description": "closing time of the business",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \nhow much time does this business open: closing_time - opening_time"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Business_Hours",
+          "from_column": "day_id",
+          "to_table": "Days",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Business_Hours",
+          "from_column": "business_id",
+          "to_table": "Business",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "type": "table",
+      "create_sql": "CREATE TABLE Categories\n(\n    category_id   INTEGER\n        constraint Categories_pk\n            primary key,\n    category_name TEXT\n)",
+      "row_count": 591,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "category_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "category id",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "category_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "category name",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Checkins",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Checkins\"\n(\n    business_id   INTEGER\n        constraint Checkins_Business_business_id_fk\n            references Business,\n    day_id        INTEGER\n        constraint Checkins_Days_day_id_fk\n            references Days,\n    label_time_0  TEXT,\n    label_time_1  TEXT,\n    label_time_2  TEXT,\n    label_time_3  TEXT,\n    label_time_4  TEXT,\n    label_time_5  TEXT,\n    label_time_6  TEXT,\n    label_time_7  TEXT,\n    label_time_8  TEXT,\n    label_time_9  TEXT,\n    label_time_10 TEXT,\n    label_time_11 TEXT,\n    label_time_12 TEXT,\n    label_time_13 TEXT,\n    label_time_14 TEXT,\n    label_time_15 TEXT,\n    label_time_16 TEXT,\n    label_time_17 TEXT,\n    label_time_18 TEXT,\n    label_time_19 TEXT,\n    label_time_20 TEXT,\n    label_time_21 TEXT,\n    label_time_22 TEXT,\n    label_time_23 TEXT,\n    constraint Checkins_pk\n        primary key (business_id, day_id)\n)",
+      "row_count": 80038,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "business_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "business id",
+            "description": "id number identifying the business",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "day_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "day id",
+            "description": "id number identifying each day of the week",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "label_time_0",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "indicates times of checkins on a business",
+            "data_format": "text",
+            "value_description": "label_time_0: 12:00 a.m. \nlabel_time_23: 23:00 p.m. \ncommonsense evidence: If the label_time recorded \"None\" for check-in on one day, then it means the business is closed on that day."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "label_time_1",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "label_time_2",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "label_time_3",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "label_time_4",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "label_time_5",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "label_time_6",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "label_time_7",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "label_time_8",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "label_time_9",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "label_time_10",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "label_time_11",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "label_time_12",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 15,
+          "name": "label_time_13",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 16,
+          "name": "label_time_14",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "label_time_15",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 18,
+          "name": "label_time_16",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 19,
+          "name": "label_time_17",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 20,
+          "name": "label_time_18",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 21,
+          "name": "label_time_19",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 22,
+          "name": "label_time_20",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 23,
+          "name": "label_time_21",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 24,
+          "name": "label_time_22",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 25,
+          "name": "label_time_23",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Checkins",
+          "from_column": "day_id",
+          "to_table": "Days",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Checkins",
+          "from_column": "business_id",
+          "to_table": "Business",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Compliments",
+      "type": "table",
+      "create_sql": "CREATE TABLE Compliments\n(\n    compliment_id   INTEGER\n        constraint Compliments_pk\n            primary key,\n    compliment_type TEXT\n)",
+      "row_count": 11,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "compliment_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "compliment id",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "compliment_type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "compliment type",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Days",
+      "type": "table",
+      "create_sql": "CREATE TABLE Days\n(\n    day_id      INTEGER\n        constraint Days_pk\n            primary key,\n    day_of_week TEXT\n)",
+      "row_count": 7,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "day_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "day id",
+            "description": "the unique id identifying the day of the week",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "day_of_week",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "day of week",
+            "description": "indicate the day of the week",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Elite",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Elite\"\n(\n    user_id INTEGER\n        constraint Elite_Users_user_id_fk\n            references Users,\n    year_id INTEGER\n        constraint Elite_Years_year_id_fk\n            references Years,\n    constraint Elite_pk\n        primary key (user_id, year_id)\n)",
+      "row_count": 16366,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "user_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "user id",
+            "description": "id number identifying the users",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "year_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "year id",
+            "description": "id number identifying the year",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Elite",
+          "from_column": "year_id",
+          "to_table": "Years",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Elite",
+          "from_column": "user_id",
+          "to_table": "Users",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Reviews\"\n(\n    business_id         INTEGER\n        constraint Reviews_Business_business_id_fk\n            references Business,\n    user_id             INTEGER\n        constraint Reviews_Users_user_id_fk\n            references Users,\n    review_stars        INTEGER,\n    review_votes_funny  TEXT,\n    review_votes_useful TEXT,\n    review_votes_cool   TEXT,\n    review_length       TEXT,\n    constraint Reviews_pk\n        primary key (business_id, user_id)\n)",
+      "row_count": 322906,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "business_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "business id",
+            "description": "the number identifying the business",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "user_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "user id",
+            "description": "the number identifying the user who comments on this business",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "review_stars",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "review stars",
+            "description": "review on this business",
+            "data_format": "integer",
+            "value_description": "5 – Great experience \n4 – Good experience \n3 – Average experience \n2 – Bad experience \n1 - Terrible experience"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "review_votes_funny",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "review votes funny",
+            "description": "the amount of funny votes that the user received for the review",
+            "data_format": "text",
+            "value_description": "commonsense evidence: If the reviews receive an “Uber” number of votes for funny, they will also receive an “Uber”, “High” or “Medium” number of votes for “useful” and “cool”."
+          }
+        },
+        {
+          "cid": 4,
+          "name": "review_votes_useful",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "review votes useful",
+            "description": "how many useful votes that the user received for the review",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "review_votes_cool",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "review votes cool",
+            "description": "how many cool votes that the user received for the review",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "review_length",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "review length",
+            "description": "The length of the review written by the user",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Reviews",
+          "from_column": "user_id",
+          "to_table": "Users",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Reviews",
+          "from_column": "business_id",
+          "to_table": "Business",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Tips",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Tips\"\n(\n    business_id INTEGER\n        constraint Tips_Business_business_id_fk\n            references Business,\n    user_id     INTEGER\n        constraint Tips_Users_user_id_fk\n            references Users,\n    likes       INTEGER,\n    tip_length  TEXT,\n    constraint Tips_pk\n        primary key (business_id, user_id)\n)",
+      "row_count": 87157,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "business_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "business id",
+            "description": "the number identifying the business",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "user_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "user id",
+            "description": "the number identifying the user who comments on this business",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "likes",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Likes",
+            "description": "how many likes of this tips",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: more likes mean this tip is more valuable"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "tip_length",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "tip length",
+            "description": "length of the tip",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Tips",
+          "from_column": "user_id",
+          "to_table": "Users",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Tips",
+          "from_column": "business_id",
+          "to_table": "Business",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Users\"\n(\n    user_id                 INTEGER\n        constraint Users_pk\n            primary key,\n    user_yelping_since_year INTEGER,\n    user_average_stars      TEXT,\n    user_votes_funny        TEXT,\n    user_votes_useful       TEXT,\n    user_votes_cool         TEXT,\n    user_review_count       TEXT,\n    user_fans               TEXT\n)",
+      "row_count": 70817,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "user_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "user id",
+            "description": "the unique id number identifying which user",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "user_yelping_since_year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "user yelping since year",
+            "description": "the time when the user join Yelp",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "user_average_stars",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "user average stars",
+            "description": "the average ratings of all review",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "user_votes_funny",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "user votes funny",
+            "description": "total number of funny votes sent by the user",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "user_votes_useful",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "user votes useful",
+            "description": "how many useful votes created by the user",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "user_votes_cool",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "user votes cool",
+            "description": "how many cool votes created by the user",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "user_review_count",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "user review count",
+            "description": "total number of reviews the user has written",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "user_fans",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "user fans",
+            "description": "total number of fans / followers the user has",
+            "data_format": "text",
+            "value_description": "commonsense evidence: Users with “Uber” number of fans indicate that they have sent an “Uber” number of ‘cool’, ‘useful’ and ‘funny” votes."
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Users_Compliments",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Users_Compliments\"\n(\n    compliment_id         INTEGER\n        constraint Users_Compliments_Compliments_compliment_id_fk\n            references Compliments,\n    user_id               INTEGER\n        constraint Users_Compliments_Users_user_id_fk\n            references Users,\n    number_of_compliments TEXT,\n    constraint Users_Compliments_pk\n        primary key (compliment_id, user_id)\n)",
+      "row_count": 98810,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "compliment_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "compliment id",
+            "description": "the id number indicating the compliment",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "user_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "user id",
+            "description": "the id number indicating the user",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "number_of_compliments",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "number of compliments",
+            "description": "how many compliments a user has received from other users",
+            "data_format": "text",
+            "value_description": "commonsense evidence: more number_of_compliments indicates this user is more welcome or he / she is high-quality user"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Users_Compliments",
+          "from_column": "user_id",
+          "to_table": "Users",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Users_Compliments",
+          "from_column": "compliment_id",
+          "to_table": "Compliments",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Years",
+      "type": "table",
+      "create_sql": "CREATE TABLE Years\n(\n    year_id     INTEGER\n        constraint Years_pk\n            primary key,\n    actual_year INTEGER\n)",
+      "row_count": 10,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "year_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "year id",
+            "description": "the unique number identifying the year",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "actual_year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "actual year",
+            "description": "actual year",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Business_Attributes",
+      "from_column": "business_id",
+      "to_table": "Business",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Business_Attributes",
+      "from_column": "attribute_id",
+      "to_table": "Attributes",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Business_Categories",
+      "from_column": "category_id",
+      "to_table": "Categories",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Business_Categories",
+      "from_column": "business_id",
+      "to_table": "Business",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Business_Hours",
+      "from_column": "day_id",
+      "to_table": "Days",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Business_Hours",
+      "from_column": "business_id",
+      "to_table": "Business",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Checkins",
+      "from_column": "day_id",
+      "to_table": "Days",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Checkins",
+      "from_column": "business_id",
+      "to_table": "Business",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Elite",
+      "from_column": "year_id",
+      "to_table": "Years",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Elite",
+      "from_column": "user_id",
+      "to_table": "Users",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Reviews",
+      "from_column": "user_id",
+      "to_table": "Users",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Reviews",
+      "from_column": "business_id",
+      "to_table": "Business",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Tips",
+      "from_column": "user_id",
+      "to_table": "Users",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Tips",
+      "from_column": "business_id",
+      "to_table": "Business",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Users_Compliments",
+      "from_column": "user_id",
+      "to_table": "Users",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Users_Compliments",
+      "from_column": "compliment_id",
+      "to_table": "Compliments",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

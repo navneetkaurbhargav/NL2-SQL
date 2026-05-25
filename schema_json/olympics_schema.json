@@ -1,0 +1,780 @@
+{
+  "db_id": "olympics",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/olympics/olympics.sqlite",
+  "tables": [
+    {
+      "name": "city",
+      "type": "table",
+      "create_sql": "CREATE TABLE city\n(\n    id        INTEGER not null\n            primary key,\n    city_name TEXT default NULL\n)",
+      "row_count": 42,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier of the city",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "city_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "city name",
+            "description": "the name of the city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "competitor_event",
+      "type": "table",
+      "create_sql": "CREATE TABLE competitor_event\n(\n    event_id      INTEGER default NULL,\n    competitor_id INTEGER default NULL,\n    medal_id      INTEGER default NULL,\n    foreign key (competitor_id) references games_competitor(id),\n    foreign key (event_id) references event(id),\n    foreign key (medal_id) references medal(id)\n)",
+      "row_count": 260971,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "event_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "event id",
+            "description": "the id of the event\nMaps to event(id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "competitor_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "competitor id",
+            "description": "the id of the competitor\nMaps to games_competitor(id)",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nThe number of competitors who participated in a specific event could be calculated by grouping by event_id."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "medal_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "medal id",
+            "description": "the id of the medal\nMaps to medal(id)",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nFor a specific event, the competitor whose medal_id = 1 is the champion, the competitor whose medal_id = 2 is the runner-up, and the competitor whose medal_id = 3 got third place."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "competitor_event",
+          "from_column": "medal_id",
+          "to_table": "medal",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "competitor_event",
+          "from_column": "event_id",
+          "to_table": "event",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "competitor_event",
+          "from_column": "competitor_id",
+          "to_table": "games_competitor",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "event",
+      "type": "table",
+      "create_sql": "CREATE TABLE event\n(\n    id         INTEGER not null\n            primary key,\n    sport_id   INTEGER          default NULL,\n    event_name TEXT default NULL,\n    foreign key (sport_id) references sport(id)\n)",
+      "row_count": 757,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier of the event",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "sport_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "sport id",
+            "description": "the id of the sport\nMaps to sport(id)",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nThere may be different events for the same sport in Olympics."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "event_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "event name",
+            "description": "the name of the event",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "event",
+          "from_column": "sport_id",
+          "to_table": "sport",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "games",
+      "type": "table",
+      "create_sql": "CREATE TABLE games\n(\n    id         INTEGER not null\n            primary key,\n    games_year INTEGER          default NULL,\n    games_name TEXT default NULL,\n    season     TEXT default NULL\n)",
+      "row_count": 51,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier of the game",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "games_year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "games year",
+            "description": "the year of the game",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "games_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "games name",
+            "description": "the name of the game",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\ngames_name is 'games_year season'"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "season",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the season of the game",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nThe Olympics are held every four years and include both summer and winter games. The summer games include a wide range of sports, such as athletics, swimming, and gymnastics, while the winter games feature sports that are played on ice or snow, such as ice hockey, figure skating, and skiing."
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "games_city",
+      "type": "table",
+      "create_sql": "CREATE TABLE games_city\n(\n    games_id INTEGER default NULL,\n    city_id  INTEGER default NULL,\n    foreign key (city_id) references city(id),\n    foreign key (games_id) references games(id)\n)",
+      "row_count": 52,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "games_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "games id",
+            "description": "the id of the game\nMaps to games(id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "city_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "city id",
+            "description": "the id of the city that held the game\nMaps to city(id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "games_city",
+          "from_column": "games_id",
+          "to_table": "games",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "games_city",
+          "from_column": "city_id",
+          "to_table": "city",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "games_competitor",
+      "type": "table",
+      "create_sql": "CREATE TABLE games_competitor\n(\n    id        INTEGER not null\n            primary key,\n    games_id  INTEGER default NULL,\n    person_id INTEGER default NULL,\n    age       INTEGER default NULL,\n    foreign key (games_id) references games(id),\n    foreign key (person_id) references person(id)\n)",
+      "row_count": 180252,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier of the record",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "games_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "games id",
+            "description": "the id of the game\nMaps to games(id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "person_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "person id",
+            "description": "the id of the person\nMaps to person(id)",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nThe times a person participated in the Olympics games could be calculated by grouping by person_id."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "age",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the age of the person when he/she participated in the game",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nIf person A's age was 22 when he participated in game A and his age was 24 when he participated in game B, it means that game A was held two years earlier than game B."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "games_competitor",
+          "from_column": "person_id",
+          "to_table": "person",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "games_competitor",
+          "from_column": "games_id",
+          "to_table": "games",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "medal",
+      "type": "table",
+      "create_sql": "CREATE TABLE medal\n(\n    id         INTEGER not null\n            primary key,\n    medal_name TEXT default NULL\n)",
+      "row_count": 4,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier of the metal",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "medal_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "medal name",
+            "description": "the name of the medal",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "noc_region",
+      "type": "table",
+      "create_sql": "CREATE TABLE noc_region\n(\n    id          INTEGER not null\n            primary key,\n    noc         TEXT   default NULL,\n    region_name TEXT default NULL\n)",
+      "row_count": 231,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier of the noc region",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "noc",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the NOC code of the region",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nA NOC code is a number used by the International Olympic Committee (IOC) to identify each of the national Olympic committees (NOCs) from around the world."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "region_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "region name",
+            "description": "the name of the region",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "person",
+      "type": "table",
+      "create_sql": "CREATE TABLE person\n(\n    id        INTEGER not null\n        primary key,\n    full_name TEXT default NULL,\n    gender    TEXT  default NULL,\n    height    INTEGER          default NULL,\n    weight    INTEGER          default NULL\n)",
+      "row_count": 128854,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier of the person",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "full_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "full name",
+            "description": "the full name of the person",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nA person's full name is the complete name that they are known by, which typically includes their first name, middle name (if applicable), and last name."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "gender",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the gender of the person",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nM stands for male and F stands for female."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "height",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the height of the person",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "weight",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the weight of the person",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nThe unit of height is cm, and the unit of weight is kg. If the height or the weight of the person is 0, it means his/her height or weight is missing."
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "person_region",
+      "type": "table",
+      "create_sql": "CREATE TABLE person_region\n(\n    person_id INTEGER default NULL,\n    region_id INTEGER default NULL,\n    foreign key (person_id) references person(id),\n    foreign key (region_id) references noc_region(id)\n)",
+      "row_count": 130521,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "person_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the id of the person\nMaps to person(id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "region_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the id of the noc region\nMaps to noc_region(id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "person_region",
+          "from_column": "region_id",
+          "to_table": "noc_region",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "person_region",
+          "from_column": "person_id",
+          "to_table": "person",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "sport",
+      "type": "table",
+      "create_sql": "CREATE TABLE sport\n(\n    id         INTEGER not null\n            primary key,\n    sport_name TEXT default NULL\n)",
+      "row_count": 66,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier of the sport",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "sport_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "sport name",
+            "description": "the name of the sport",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "competitor_event",
+      "from_column": "medal_id",
+      "to_table": "medal",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "competitor_event",
+      "from_column": "event_id",
+      "to_table": "event",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "competitor_event",
+      "from_column": "competitor_id",
+      "to_table": "games_competitor",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "event",
+      "from_column": "sport_id",
+      "to_table": "sport",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "games_city",
+      "from_column": "games_id",
+      "to_table": "games",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "games_city",
+      "from_column": "city_id",
+      "to_table": "city",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "games_competitor",
+      "from_column": "person_id",
+      "to_table": "person",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "games_competitor",
+      "from_column": "games_id",
+      "to_table": "games",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "person_region",
+      "from_column": "region_id",
+      "to_table": "noc_region",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "person_region",
+      "from_column": "person_id",
+      "to_table": "person",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

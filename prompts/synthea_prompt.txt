@@ -1,0 +1,1712 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "synthea",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/synthea/synthea.sqlite",
+  "tables": [
+    {
+      "name": "all_prevalences",
+      "type": "table",
+      "create_sql": "CREATE TABLE all_prevalences\n(\n    ITEM                    TEXT\n            primary key,\n    \"POPULATION TYPE\"       TEXT,\n    OCCURRENCES             INTEGER,\n    \"POPULATION COUNT\"      INTEGER,\n    \"PREVALENCE RATE\"       REAL,\n    \"PREVALENCE PERCENTAGE\" REAL\n)",
+      "row_count": 244,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ITEM",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the prevalent disease",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "POPULATION TYPE",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "population type",
+            "description": "the population type - LIVING",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "OCCURRENCES",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the number of occurrences",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "POPULATION COUNT",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "population count",
+            "description": "the number of the counted populations",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "PREVALENCE RATE",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "prevalence rate",
+            "description": "the prevalence rate",
+            "data_format": "real",
+            "value_description": "commonsense evidence: prevalence rate = occurrences / population_count"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "PREVALENCE PERCENTAGE",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "prevalence percentage",
+            "description": "the prevalence percentage",
+            "data_format": "real",
+            "value_description": "commonsense evidence: prevalence rate = occurrences / population_count * 100"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "allergies",
+      "type": "table",
+      "create_sql": "CREATE TABLE allergies\n(\n    START       TEXT,\n    STOP        TEXT,\n    PATIENT     TEXT,\n    ENCOUNTER   TEXT,\n    CODE        INTEGER,\n    DESCRIPTION TEXT,\n    primary key (PATIENT, ENCOUNTER, CODE),\n    foreign key (ENCOUNTER) references encounters(ID),\n    foreign key (PATIENT) references patients(patient)\n)",
+      "row_count": 572,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "START",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the start date of the allergy",
+            "data_format": "text",
+            "value_description": "mm/dd/yy"
+          }
+        },
+        {
+          "cid": 1,
+          "name": "STOP",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the stop date of the allergy",
+            "data_format": "text",
+            "value_description": "mm/dd/yy\r\ncommonsense evidence: allergy period = stop - start"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "PATIENT",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the patient id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "ENCOUNTER",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the medical encounter id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "CODE",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the code of the allergy",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "DESCRIPTION",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the description of the allergy",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "allergies",
+          "from_column": "PATIENT",
+          "to_table": "patients",
+          "to_column": "patient",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "allergies",
+          "from_column": "ENCOUNTER",
+          "to_table": "encounters",
+          "to_column": "ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "careplans",
+      "type": "table",
+      "create_sql": "CREATE TABLE careplans\n(\n    ID                TEXT,\n    START             DATE,\n    STOP              DATE,\n    PATIENT           TEXT,\n    ENCOUNTER         TEXT,\n    CODE              REAL,\n    DESCRIPTION       TEXT,\n    REASONCODE        INTEGER,\n    REASONDESCRIPTION TEXT,\n    foreign key (ENCOUNTER) references encounters(ID),\n    foreign key (PATIENT) references patients(patient)\n)",
+      "row_count": 12125,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique id of the care plan",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "START",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the start date of the care plan",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "STOP",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the stop date of the care plan",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd\ncommonsense evidence: care plan period:\nstop - start"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "PATIENT",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the patient id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "ENCOUNTER",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the medical encounter id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "CODE",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the code of the care plan",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "DESCRIPTION",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the description of the care plan",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "REASONCODE",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the reason code",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "REASONDESCRIPTION",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "reason description",
+            "description": "the description of the reason why the patient needs the care plan",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "careplans",
+          "from_column": "PATIENT",
+          "to_table": "patients",
+          "to_column": "patient",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "careplans",
+          "from_column": "ENCOUNTER",
+          "to_table": "encounters",
+          "to_column": "ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "claims",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"claims\"\n(\n    ID             TEXT\n        primary key,\n    PATIENT        TEXT\n        references patients,\n    BILLABLEPERIOD DATE,\n    ORGANIZATION   TEXT,\n    ENCOUNTER      TEXT\n        references encounters,\n    DIAGNOSIS      TEXT,\n    TOTAL          INTEGER\n)",
+      "row_count": 20523,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique id of the claim",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "PATIENT",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the patient id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "BILLABLEPERIOD",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "billable period",
+            "description": "the start date of the billable",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "ORGANIZATION",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the claim organization",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "ENCOUNTER",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the medical encounter id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "DIAGNOSIS",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the diagnosis",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "TOTAL",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the length of the billable period",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "claims",
+          "from_column": "ENCOUNTER",
+          "to_table": "encounters",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "claims",
+          "from_column": "PATIENT",
+          "to_table": "patients",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "conditions",
+      "type": "table",
+      "create_sql": "CREATE TABLE conditions\n(\n    START       DATE,\n    STOP        DATE,\n    PATIENT     TEXT,\n    ENCOUNTER   TEXT,\n    CODE        INTEGER,\n    DESCRIPTION TEXT,\n    foreign key (ENCOUNTER) references encounters(ID),\n    foreign key (PATIENT) references patients(patient),\n    foreign key (DESCRIPTION) references all_prevalences(ITEM)\n)",
+      "row_count": 7040,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "START",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the start date of the allergy",
+            "data_format": "date",
+            "value_description": "mm/dd/yy"
+          }
+        },
+        {
+          "cid": 1,
+          "name": "STOP",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the stop date of the allergy",
+            "data_format": "date",
+            "value_description": "mm/dd/yy"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "PATIENT",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the patient id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "ENCOUNTER",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the medical encounter id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "CODE",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the code of the condition",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "DESCRIPTION",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the description of the patient condition",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "conditions",
+          "from_column": "DESCRIPTION",
+          "to_table": "all_prevalences",
+          "to_column": "ITEM",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "conditions",
+          "from_column": "PATIENT",
+          "to_table": "patients",
+          "to_column": "patient",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "conditions",
+          "from_column": "ENCOUNTER",
+          "to_table": "encounters",
+          "to_column": "ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "encounters",
+      "type": "table",
+      "create_sql": "CREATE TABLE encounters\n(\n    ID                TEXT\n            primary key,\n    DATE              DATE,\n    PATIENT           TEXT,\n    CODE              INTEGER,\n    DESCRIPTION       TEXT,\n    REASONCODE        INTEGER,\n    REASONDESCRIPTION TEXT,\n    foreign key (PATIENT) references patients(patient)\n)",
+      "row_count": 20524,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique id of the encounter",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "DATE",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the date of the encounter",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "PATIENT",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the patient id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "CODE",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the code of the care plan",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "DESCRIPTION",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the description of the care plan",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "REASONCODE",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the reason code",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "REASONDESCRIPTION",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "reason description",
+            "description": "the description of the reason why the patient needs the care plan",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "encounters",
+          "from_column": "PATIENT",
+          "to_table": "patients",
+          "to_column": "patient",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "immunizations",
+      "type": "table",
+      "create_sql": "CREATE TABLE immunizations\n(\n    DATE        DATE,\n    PATIENT     TEXT,\n    ENCOUNTER   TEXT,\n    CODE        INTEGER,\n    DESCRIPTION TEXT,\n    primary key (DATE, PATIENT, ENCOUNTER, CODE),\n    foreign key (ENCOUNTER) references encounters(ID),\n    foreign key (PATIENT) references patients(patient)\n)",
+      "row_count": 13189,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "DATE",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the date of the immunization",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 1,
+          "name": "PATIENT",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the patient id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "ENCOUNTER",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the medical encounter id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "CODE",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 4,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the code of the immunization",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "DESCRIPTION",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the description of the immunization",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "immunizations",
+          "from_column": "PATIENT",
+          "to_table": "patients",
+          "to_column": "patient",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "immunizations",
+          "from_column": "ENCOUNTER",
+          "to_table": "encounters",
+          "to_column": "ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "medications",
+      "type": "table",
+      "create_sql": "CREATE TABLE medications\n(\n    START             DATE,\n    STOP              DATE,\n    PATIENT           TEXT,\n    ENCOUNTER         TEXT,\n    CODE              INTEGER,\n    DESCRIPTION       TEXT,\n    REASONCODE        INTEGER,\n    REASONDESCRIPTION TEXT,\n    primary key (START, PATIENT, ENCOUNTER, CODE),\n    foreign key (ENCOUNTER) references encounters(ID),\n    foreign key (PATIENT) references patients(patient)\n)",
+      "row_count": 6048,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "START",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the start date of the care plan",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 1,
+          "name": "STOP",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the stop date of the care plan",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd\ncommonsense evidence: Time of taking medicine"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "PATIENT",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the patient id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "ENCOUNTER",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the medical encounter id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "CODE",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 4,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the code of the medication",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "DESCRIPTION",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the description of the medication",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "REASONCODE",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the reason code",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "REASONDESCRIPTION",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "reason description",
+            "description": "the description of the reason why the patient take the medication",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "medications",
+          "from_column": "PATIENT",
+          "to_table": "patients",
+          "to_column": "patient",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "medications",
+          "from_column": "ENCOUNTER",
+          "to_table": "encounters",
+          "to_column": "ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "observations",
+      "type": "table",
+      "create_sql": "CREATE TABLE observations\n(\n    DATE        DATE,\n    PATIENT     TEXT,\n    ENCOUNTER   TEXT,\n    CODE        TEXT,\n    DESCRIPTION TEXT,\n    VALUE       REAL,\n    UNITS       TEXT,\n    foreign key (ENCOUNTER) references encounters(ID),\n    foreign key (PATIENT) references patients(patient)\n)",
+      "row_count": 78899,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "DATE",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the date of the observation",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 1,
+          "name": "PATIENT",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the patient id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "ENCOUNTER",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the medical encounter id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "CODE",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the code of the observation type",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "DESCRIPTION",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the description of the observation",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "VALUE",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the observation value",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "UNITS",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the units of the observation value",
+            "data_format": "text",
+            "value_description": "commonsense evidence: DESCRIPTION + VALUE + UNITS could be a fact:\ne.g.: body height of patient xxx is 166.03 cm:\nbody height is in DESCRIPTION \n166.03 is in VALUE \ncm is in UNITS"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "observations",
+          "from_column": "PATIENT",
+          "to_table": "patients",
+          "to_column": "patient",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "observations",
+          "from_column": "ENCOUNTER",
+          "to_table": "encounters",
+          "to_column": "ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "patients",
+      "type": "table",
+      "create_sql": "CREATE TABLE patients\n(\n    patient    TEXT\n            primary key,\n    birthdate  DATE,\n    deathdate  DATE,\n    ssn        TEXT,\n    drivers    TEXT,\n    passport   TEXT,\n    prefix     TEXT,\n    first      TEXT,\n    last       TEXT,\n    suffix     TEXT,\n    maiden     TEXT,\n    marital    TEXT,\n    race       TEXT,\n    ethnicity  TEXT,\n    gender     TEXT,\n    birthplace TEXT,\n    address    TEXT\n)",
+      "row_count": 1462,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "patient",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique id for the patient",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "birthdate",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "birth date",
+            "description": "the birth date of the patient",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "deathdate",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "death date",
+            "description": "the death date of the patient",
+            "data_format": "date",
+            "value_description": "commonsense evidence: \n the age of the patient = death year - birth year \n if null, it means this patient is still alive"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "ssn",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "social security number",
+            "description": "the social security number of the patient",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "drivers",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the driver number of the patient",
+            "data_format": "text",
+            "value_description": "commonsense evidence: if not, this patient doesn't have driving license"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "passport",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the passport number",
+            "data_format": "text",
+            "value_description": "commonsense evidence: if not, this patient cannot go abroad, vice versa"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "prefix",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the prefix",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "first",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the first name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "last",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the last name",
+            "data_format": "text",
+            "value_description": "commonsense evidence: full name = first + last"
+          }
+        },
+        {
+          "cid": 9,
+          "name": "suffix",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the suffix of the patient",
+            "data_format": "text",
+            "value_description": "commonsense evidence: if suffix = PhD, JD, MD, it means this patient has doctoral degree. Otherwise, this patient is not."
+          }
+        },
+        {
+          "cid": 10,
+          "name": "maiden",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the maiden name of the patient",
+            "data_format": "text",
+            "value_description": "commonsense evidence: Only married women have the maiden name"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "marital",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the marital status of the patient",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \n M: married \n S: single"
+          }
+        },
+        {
+          "cid": 12,
+          "name": "race",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the race of the patient",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "ethnicity",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the ethnicity of the patient",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "gender",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the gender of the patient",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 15,
+          "name": "birthplace",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "birth place",
+            "description": "the birth place",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 16,
+          "name": "address",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the specific address",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "procedures",
+      "type": "table",
+      "create_sql": "CREATE TABLE procedures\n(\n    DATE              DATE,\n    PATIENT           TEXT,\n    ENCOUNTER         TEXT,\n    CODE              INTEGER,\n    DESCRIPTION       TEXT,\n    REASONCODE        INTEGER,\n    REASONDESCRIPTION TEXT,\n    foreign key (ENCOUNTER) references encounters(ID),\n    foreign key (PATIENT) references patients(patient)\n)",
+      "row_count": 10184,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "DATE",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the date of the procedure",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 1,
+          "name": "PATIENT",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the patient id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "ENCOUNTER",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the medical encounter id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "CODE",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the code of the procedure",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "DESCRIPTION",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the description of the procedure",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "REASONCODE",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "reason code",
+            "description": "the code of the reason",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "REASONDESCRIPTION",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "reason description",
+            "description": "the description of the reason why the patient take the procedure",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "procedures",
+          "from_column": "PATIENT",
+          "to_table": "patients",
+          "to_column": "patient",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "procedures",
+          "from_column": "ENCOUNTER",
+          "to_table": "encounters",
+          "to_column": "ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "allergies",
+      "from_column": "PATIENT",
+      "to_table": "patients",
+      "to_column": "patient",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "allergies",
+      "from_column": "ENCOUNTER",
+      "to_table": "encounters",
+      "to_column": "ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "careplans",
+      "from_column": "PATIENT",
+      "to_table": "patients",
+      "to_column": "patient",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "careplans",
+      "from_column": "ENCOUNTER",
+      "to_table": "encounters",
+      "to_column": "ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "claims",
+      "from_column": "ENCOUNTER",
+      "to_table": "encounters",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "claims",
+      "from_column": "PATIENT",
+      "to_table": "patients",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "conditions",
+      "from_column": "DESCRIPTION",
+      "to_table": "all_prevalences",
+      "to_column": "ITEM",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "conditions",
+      "from_column": "PATIENT",
+      "to_table": "patients",
+      "to_column": "patient",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "conditions",
+      "from_column": "ENCOUNTER",
+      "to_table": "encounters",
+      "to_column": "ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "encounters",
+      "from_column": "PATIENT",
+      "to_table": "patients",
+      "to_column": "patient",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "immunizations",
+      "from_column": "PATIENT",
+      "to_table": "patients",
+      "to_column": "patient",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "immunizations",
+      "from_column": "ENCOUNTER",
+      "to_table": "encounters",
+      "to_column": "ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "medications",
+      "from_column": "PATIENT",
+      "to_table": "patients",
+      "to_column": "patient",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "medications",
+      "from_column": "ENCOUNTER",
+      "to_table": "encounters",
+      "to_column": "ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "observations",
+      "from_column": "PATIENT",
+      "to_table": "patients",
+      "to_column": "patient",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "observations",
+      "from_column": "ENCOUNTER",
+      "to_table": "encounters",
+      "to_column": "ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "procedures",
+      "from_column": "PATIENT",
+      "to_table": "patients",
+      "to_column": "patient",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "procedures",
+      "from_column": "ENCOUNTER",
+      "to_table": "encounters",
+      "to_column": "ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

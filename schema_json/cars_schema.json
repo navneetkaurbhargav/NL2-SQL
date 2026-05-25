@@ -1,0 +1,358 @@
+{
+  "db_id": "cars",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/cars/cars.sqlite",
+  "tables": [
+    {
+      "name": "country",
+      "type": "table",
+      "create_sql": "CREATE TABLE country\n(\n    origin  INTEGER\n            primary key,\n    country TEXT\n)",
+      "row_count": 3,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "origin",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier for the origin country",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "country",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the origin country of the car",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "data",
+      "type": "table",
+      "create_sql": "CREATE TABLE data\n(\n    ID           INTEGER\n            primary key,\n    mpg          REAL,\n    cylinders    INTEGER,\n    displacement REAL,\n    horsepower   INTEGER,\n    weight       INTEGER,\n    acceleration REAL,\n    model        INTEGER,\n    car_name     TEXT,\n    foreign key (ID) references price(ID)\n)",
+      "row_count": 398,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "unique ID for each car",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "mpg",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "mileage per gallon",
+            "description": "mileage of the car in miles per gallon",
+            "data_format": "real",
+            "value_description": "commonsense evidence: The car with higher mileage is more fuel-efficient."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "cylinders",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "number of cylinders",
+            "description": "the number of cylinders present in the car",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "displacement",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "engine displacement in cubic mm",
+            "data_format": "real",
+            "value_description": "commonsense evidence: sweep volume = displacement / no_of cylinders"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "horsepower",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "horse power",
+            "description": "horse power associated with the car",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: horse power is the metric used to indicate the power produced by a car's engine - the higher the number, the more power is sent to the wheels and, in theory, the faster it will go."
+          }
+        },
+        {
+          "cid": 5,
+          "name": "weight",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "weight of the car in lbs",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: A bigger, heavier vehicle provides better crash protection than a smaller"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "acceleration",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "acceleration of the car in miles per squared hour",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "model",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the year when the car model was introduced in the market",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: 0 --> 1970"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "car_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "car name",
+            "description": "name of the car",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "data",
+          "from_column": "ID",
+          "to_table": "price",
+          "to_column": "ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "price",
+      "type": "table",
+      "create_sql": "CREATE TABLE price\n(\n    ID    INTEGER\n            primary key,\n    price REAL\n)",
+      "row_count": 398,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "unique ID for each car",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "price",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "price of the car in USD",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "production",
+      "type": "table",
+      "create_sql": "CREATE TABLE production\n(\n    ID         INTEGER,\n    model_year INTEGER,\n    country    INTEGER,\n    primary key (ID, model_year),\n    foreign key (country) references country(origin),\n    foreign key (ID) references data(ID),\n    foreign key (ID) references price(ID)\n)",
+      "row_count": 692,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the id of the car",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "model_year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "model year",
+            "description": "year when the car model was introduced in the market",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "country",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "country id to which the car belongs",
+            "data_format": "integer",
+            "value_description": "Japan --> Asia \r\nUSA --> North America"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "production",
+          "from_column": "ID",
+          "to_table": "price",
+          "to_column": "ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "production",
+          "from_column": "ID",
+          "to_table": "data",
+          "to_column": "ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "production",
+          "from_column": "country",
+          "to_table": "country",
+          "to_column": "origin",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "data",
+      "from_column": "ID",
+      "to_table": "price",
+      "to_column": "ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "production",
+      "from_column": "ID",
+      "to_table": "price",
+      "to_column": "ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "production",
+      "from_column": "ID",
+      "to_table": "data",
+      "to_column": "ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "production",
+      "from_column": "country",
+      "to_table": "country",
+      "to_column": "origin",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

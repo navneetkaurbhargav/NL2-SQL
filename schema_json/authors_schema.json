@@ -1,0 +1,437 @@
+{
+  "db_id": "authors",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/authors/authors.sqlite",
+  "tables": [
+    {
+      "name": "Author",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Author\"\n(\n    Id          INTEGER\n        constraint Author_pk\n            primary key,\n    Name        TEXT,\n    Affiliation TEXT\n)",
+      "row_count": 247030,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Id of the author",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Author Name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Affiliation",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Organization name with which the author is affiliated.",
+            "data_format": "text",
+            "value_description": "the name of an organization with which an author can be affiliated"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Conference",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Conference\"\n(\n    Id        INTEGER\n        constraint Conference_pk\n            primary key,\n    ShortName TEXT,\n    FullName  TEXT,\n    HomePage  TEXT\n)",
+      "row_count": 4545,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Conference Id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "ShortName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Short name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "FullName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Full name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "HomePage",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Homepage URL of conference",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Journal",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Journal\"\n(\n    Id        INTEGER\n        constraint Journal_pk\n            primary key,\n    ShortName TEXT,\n    FullName  TEXT,\n    HomePage  TEXT\n)",
+      "row_count": 15151,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Journal Id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "ShortName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Short name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "FullName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Full name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "HomePage",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Homepage URL of journal",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Paper",
+      "type": "table",
+      "create_sql": "CREATE TABLE Paper\n(\n    Id           INTEGER\n            primary key,\n    Title        TEXT,\n    Year         INTEGER,\n    ConferenceId INTEGER,\n    JournalId    INTEGER,\n    Keyword      TEXT,\n    foreign key (ConferenceId) references Conference(Id),\n    foreign key (JournalId) references Journal(Id)\n)",
+      "row_count": 2254920,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Id of the paper",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Title of the paper",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Year of the paper",
+            "data_format": "integer",
+            "value_description": "commonsense reasoning: if the year is \"0\", it means this paper is preprint, or not published"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "ConferenceId",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Conference Id in which paper was published",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "JournalId",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Journal Id in which paper was published",
+            "data_format": "integer",
+            "value_description": "commonsense reasoning: If a paper contain \"0\" in both ConferenceID and JournalId, it means this paper is preprint"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Keyword",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Keywords of the paper",
+            "data_format": "text",
+            "value_description": "commonsense reasoning: Keywords should contain words and phrases that suggest what the topic is about. \nSimilar keywords represent similar fields or sub-field."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Paper",
+          "from_column": "JournalId",
+          "to_table": "Journal",
+          "to_column": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Paper",
+          "from_column": "ConferenceId",
+          "to_table": "Conference",
+          "to_column": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "PaperAuthor",
+      "type": "table",
+      "create_sql": "CREATE TABLE PaperAuthor\n(\n    PaperId     INTEGER,\n    AuthorId    INTEGER,\n    Name        TEXT,\n    Affiliation TEXT,\n    foreign key (PaperId) references Paper(Id),\n    foreign key (AuthorId) references Author(Id)\n)",
+      "row_count": 2315574,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "PaperId",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Paper Id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "AuthorId",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Author Id",
+            "data_format": "integer",
+            "value_description": "commonsense reasoning: A paper can have more than one author. Co-authorship can be derived from (paper ID, author ID) pair."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Author Name (as written on paper)",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Affiliation",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Author Affiliation (as written on paper)",
+            "data_format": "text",
+            "value_description": "the name of an organization with which an author can be affiliated"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "PaperAuthor",
+          "from_column": "AuthorId",
+          "to_table": "Author",
+          "to_column": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "PaperAuthor",
+          "from_column": "PaperId",
+          "to_table": "Paper",
+          "to_column": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Paper",
+      "from_column": "JournalId",
+      "to_table": "Journal",
+      "to_column": "Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Paper",
+      "from_column": "ConferenceId",
+      "to_table": "Conference",
+      "to_column": "Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "PaperAuthor",
+      "from_column": "AuthorId",
+      "to_table": "Author",
+      "to_column": "Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "PaperAuthor",
+      "from_column": "PaperId",
+      "to_table": "Paper",
+      "to_column": "Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

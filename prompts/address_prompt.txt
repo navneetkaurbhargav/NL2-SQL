@@ -1,0 +1,1460 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "address",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/address/address.sqlite",
+  "tables": [
+    {
+      "name": "CBSA",
+      "type": "table",
+      "create_sql": "CREATE TABLE CBSA\n(\n    CBSA      INTEGER\n            primary key,\n    CBSA_name TEXT,\n    CBSA_type TEXT\n)",
+      "row_count": 465,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "CBSA",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the code of the cbsa officer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "CBSA_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "cbsa name",
+            "description": "the name and the position of the cbsa officer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "CBSA_type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "cbsa type",
+            "description": "the office type of the officer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "alias",
+      "type": "table",
+      "create_sql": "CREATE TABLE alias\n(\n    zip_code INTEGER\n            primary key,\n    alias    TEXT,\n    foreign key (zip_code) references zip_data(zip_code)\n)",
+      "row_count": 41701,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "zip_code",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "zip code",
+            "description": "the zip code of the alias",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "alias",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the alias of the city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "alias",
+          "from_column": "zip_code",
+          "to_table": "zip_data",
+          "to_column": "zip_code",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "area_code",
+      "type": "table",
+      "create_sql": "CREATE TABLE area_code\n(\n    zip_code  INTEGER,\n    area_code INTEGER,\n    primary key (zip_code, area_code),\n    foreign key (zip_code) references zip_data(zip_code)\n)",
+      "row_count": 53796,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "zip_code",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "zip code",
+            "description": "the zip code of the area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "area_code",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "area code",
+            "description": "the code of the area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "area_code",
+          "from_column": "zip_code",
+          "to_table": "zip_data",
+          "to_column": "zip_code",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "avoid",
+      "type": "table",
+      "create_sql": "CREATE TABLE avoid\n(\n    zip_code  INTEGER,\n    bad_alias TEXT,\n    primary key (zip_code, bad_alias),\n    foreign key (zip_code) references zip_data(zip_code)\n)",
+      "row_count": 24114,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "zip_code",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "zip code",
+            "description": "the zip code of the bad alias",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "bad_alias",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "bad alias",
+            "description": "the bad alias",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "avoid",
+          "from_column": "zip_code",
+          "to_table": "zip_data",
+          "to_column": "zip_code",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "congress",
+      "type": "table",
+      "create_sql": "CREATE TABLE congress\n(\n    cognress_rep_id TEXT\n            primary key,\n    first_name      TEXT,\n    last_name       TEXT,\n    CID             TEXT,\n    party           TEXT,\n    state           TEXT,\n    abbreviation    TEXT,\n    House           TEXT,\n    District        INTEGER,\n    land_area       REAL,\n    foreign key (abbreviation) references state(abbreviation)\n)",
+      "row_count": 540,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "cognress_rep_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "congress representative id",
+            "description": "the representative id of congress representatives",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "first_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "the first name of the congress representative",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "last_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "the last name of the congress representative",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "CID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique identifier for the congress representative",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "party",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the party of the representative",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the state that the representative is from",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "abbreviation",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the abbreviation of the state",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "House",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the house that the representative is from",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "District",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the id of the district that the representative represents",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: The state is divided into different districts. The districts under the same state will be numbered uniformly. \r\n'NA' means that the state is not divided into districts."
+          }
+        },
+        {
+          "cid": 9,
+          "name": "land_area",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "land area",
+            "description": "the land area of the district",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "congress",
+          "from_column": "abbreviation",
+          "to_table": "state",
+          "to_column": "abbreviation",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "country",
+      "type": "table",
+      "create_sql": "CREATE TABLE country\n(\n    zip_code INTEGER,\n    county   TEXT,\n    state    TEXT,\n    primary key (zip_code, county),\n    foreign key (zip_code) references zip_data(zip_code),\n    foreign key (state) references state(abbreviation)\n)",
+      "row_count": 51001,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "zip_code",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "zip code",
+            "description": "the zip code of the state in the country",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "county",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "country",
+            "description": "the country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the state of the country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "country",
+          "from_column": "state",
+          "to_table": "state",
+          "to_column": "abbreviation",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "country",
+          "from_column": "zip_code",
+          "to_table": "zip_data",
+          "to_column": "zip_code",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "state",
+      "type": "table",
+      "create_sql": "CREATE TABLE state\n(\n    abbreviation TEXT\n            primary key,\n    name         TEXT\n)",
+      "row_count": 62,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "abbreviation",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the abbreviation of the state name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the state name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "zip_congress",
+      "type": "table",
+      "create_sql": "CREATE TABLE zip_congress\n(\n    zip_code INTEGER,\n    district TEXT,\n    primary key (zip_code, district),\n    foreign key (district) references congress(cognress_rep_id),\n    foreign key (zip_code) references zip_data(zip_code)\n)",
+      "row_count": 45231,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "zip_code",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "zip code",
+            "description": "the zip code of the district",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "district",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the district",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "zip_congress",
+          "from_column": "zip_code",
+          "to_table": "zip_data",
+          "to_column": "zip_code",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "zip_congress",
+          "from_column": "district",
+          "to_table": "congress",
+          "to_column": "cognress_rep_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "zip_data",
+      "type": "table",
+      "create_sql": "CREATE TABLE zip_data\n(\n    zip_code                         INTEGER\n            primary key,\n    city                             TEXT,\n    state                            TEXT,\n    multi_county                     TEXT,\n    type                             TEXT,\n    organization                     TEXT,\n    time_zone                        TEXT,\n    daylight_savings                 TEXT,\n    latitude                         REAL,\n    longitude                        REAL,\n    elevation                        INTEGER,\n    state_fips                       INTEGER,\n    county_fips                      INTEGER,\n    region                           TEXT,\n    division                         TEXT,\n    population_2020                  INTEGER,\n    population_2010                  INTEGER,\n    households                       INTEGER,\n    avg_house_value                  INTEGER,\n    avg_income_per_household         INTEGER,\n    persons_per_household            REAL,\n    white_population                 INTEGER,\n    black_population                 INTEGER,\n    hispanic_population              INTEGER,\n    asian_population                 INTEGER,\n    american_indian_population       INTEGER,\n    hawaiian_population              INTEGER,\n    other_population                 INTEGER,\n    male_population                  INTEGER,\n    female_population                INTEGER,\n    median_age                       REAL,\n    male_median_age                  REAL,\n    female_median_age                REAL,\n    residential_mailboxes            INTEGER,\n    business_mailboxes               INTEGER,\n    total_delivery_receptacles       INTEGER,\n    businesses                       INTEGER,\n    \"1st_quarter_payroll\"            INTEGER,\n    annual_payroll                   INTEGER,\n    employees                        INTEGER,\n    water_area                       REAL,\n    land_area                        REAL,\n    single_family_delivery_units     INTEGER,\n    multi_family_delivery_units      INTEGER,\n    total_beneficiaries              INTEGER,\n    retired_workers                  INTEGER,\n    disabled_workers                 INTEGER,\n    parents_and_widowed              INTEGER,\n    spouses                          INTEGER,\n    children                         INTEGER,\n    over_65                          INTEGER,\n    monthly_benefits_all             INTEGER,\n    monthly_benefits_retired_workers INTEGER,\n    monthly_benefits_widowed         INTEGER,\n    CBSA                             INTEGER,\n    foreign key (state) references state(abbreviation),\n    foreign key (CBSA) references CBSA(CBSA)\n)",
+      "row_count": 41563,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "zip_code",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "zip code",
+            "description": "the zip code of the postal point",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the city where the postal point locates",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the state of the city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "multi_county",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "multi country",
+            "description": "whether the country that the city belongs to is multi_country",
+            "data_format": "text",
+            "value_description": "commonsense evidence: The meaning of multi_country is consisting of or involving multiple countries."
+          }
+        },
+        {
+          "cid": 4,
+          "name": "type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the type of the postal point",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "organization",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the organization to which the postal point belongs",
+            "data_format": "text",
+            "value_description": "commonsense evidence: 'No data' means the postal point is not affiliated with any organization"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "time_zone",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "time zone",
+            "description": "the time zone of the postal point location",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "daylight_savings",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "daylight savings",
+            "description": "whether the location implements daylight savings",
+            "data_format": "text",
+            "value_description": "commonsense evidence: Daylight saving is the practice of advancing clocks (typically by one hour) during warmer months so that darkness falls at a later clock time. As a result, there is one 23-hour day in late winter or early spring and one 25-hour day in autumn."
+          }
+        },
+        {
+          "cid": 8,
+          "name": "latitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the latitude of the postal point location",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "longitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the longitude of the postal point location",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "elevation",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the elevation of the postal point location",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "state_fips",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "state fips",
+            "description": "state-level FIPS code",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "county_fips",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "country fips",
+            "description": "country-level FIPS code",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: FIPS codes are numbers that uniquely identify geographic areas. The number of digits in FIPS codes varies depending on the level of geography."
+          }
+        },
+        {
+          "cid": 13,
+          "name": "region",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the region where the postal point locates",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "division",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the division of the organization",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 15,
+          "name": "population_2020",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "population 2020",
+            "description": "the population of the residential area in 2020",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: 'No data' means that the postal point is not affiliated with any organization. Or the organization has no division."
+          }
+        },
+        {
+          "cid": 16,
+          "name": "population_2010",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "population 2010",
+            "description": "the population of the residential area in 2010",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "households",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the number of the households in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 18,
+          "name": "avg_house_value",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "average house value",
+            "description": "the average house value in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 19,
+          "name": "avg_income_per_household",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "average income per household",
+            "description": "the average income per household in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 20,
+          "name": "persons_per_household",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "persons per household",
+            "description": "the number of persons per household residential area",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 21,
+          "name": "white_population",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "white population",
+            "description": "the population of white people in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 22,
+          "name": "black_population",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "black population",
+            "description": "the population of black people in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 23,
+          "name": "hispanic_population",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Hispanic population",
+            "description": "the population of Hispanic people in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 24,
+          "name": "asian_population",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Asian population",
+            "description": "the population of Asian people in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 25,
+          "name": "american_indian_population",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "American Indian population",
+            "description": "the population of American Indian people in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 26,
+          "name": "hawaiian_population",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Hawaiian population",
+            "description": "the population of Hawaiian people in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 27,
+          "name": "other_population",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "other population",
+            "description": "the population of other races in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 28,
+          "name": "male_population",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "male population",
+            "description": "the population of males in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 29,
+          "name": "female_population",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "female population",
+            "description": "the population of females in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 30,
+          "name": "median_age",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "median age",
+            "description": "the median age of the residential area",
+            "data_format": "real",
+            "value_description": "commonsense evidence: gender ratio in the residential area = male_population / female_population if female_population != 0"
+          }
+        },
+        {
+          "cid": 31,
+          "name": "male_median_age",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "male median age",
+            "description": "the male median age in the residential area",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 32,
+          "name": "female_median_age",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "female median age",
+            "description": "the female median age in the residential area",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 33,
+          "name": "residential_mailboxes",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "residential mailboxes",
+            "description": "the number of residential mailboxes in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 34,
+          "name": "business_mailboxes",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "business mailboxes",
+            "description": "the number of business mailboxes in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 35,
+          "name": "total_delivery_receptacles",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "total delivery receptacles",
+            "description": "the total number of delivery receptacles",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 36,
+          "name": "businesses",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the number of businesses in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 37,
+          "name": "1st_quarter_payroll",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "1st quarter payroll",
+            "description": "the total wages reported in the 1st quarter payroll report of the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 38,
+          "name": "annual_payroll",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "annual payroll",
+            "description": "the total wages reported in the annual payroll report of the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 39,
+          "name": "employees",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the number of employees in the residential area",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: Employers must submit periodic payroll reports to the Internal Revenue Service and state taxing authority. The report is used by employers to report wage information."
+          }
+        },
+        {
+          "cid": 40,
+          "name": "water_area",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "water area",
+            "description": "the water area of the residential area",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 41,
+          "name": "land_area",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "land area",
+            "description": "the land area of the residential area",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 42,
+          "name": "single_family_delivery_units",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "single-family delivery units",
+            "description": "the number of single-family delivery units in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 43,
+          "name": "multi_family_delivery_units",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "multi-family delivery units",
+            "description": "the number of single-family delivery units in the residential area",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: A single-family unit can be described as a single unit that accommodates only one family or tenant at a time on rent."
+          }
+        },
+        {
+          "cid": 44,
+          "name": "total_beneficiaries",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "total beneficiaries",
+            "description": "the total number of beneficiaries of the postal service",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: multi-family units are usually under a greater surface area with the capacity to accommodate more than one tenant or multiple families on rent at the same time"
+          }
+        },
+        {
+          "cid": 45,
+          "name": "retired_workers",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "retired workers",
+            "description": "the number of retired workers in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 46,
+          "name": "disabled_workers",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "disable workers",
+            "description": "the number of disabled workers in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 47,
+          "name": "parents_and_widowed",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "parents and widowed",
+            "description": "the number of parents and widowed in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 48,
+          "name": "spouses",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the number of spouses in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 49,
+          "name": "children",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the number of children in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 50,
+          "name": "over_65",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "over 65",
+            "description": "the number of people whose age is over 65 in the residential area",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 51,
+          "name": "monthly_benefits_all",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "monthly benefits all",
+            "description": "all benefit payments by month",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: no. of over_65 can refer to elders. Higher means more elders\r\nif the ratio: over_65 / children is higher: the aging is more serious."
+          }
+        },
+        {
+          "cid": 52,
+          "name": "monthly_benefits_retired_workers",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "monthly benefits retired workers",
+            "description": "monthly benefit payments for retired workers",
+            "data_format": "integer",
+            "value_description": "usd"
+          }
+        },
+        {
+          "cid": 53,
+          "name": "monthly_benefits_widowed",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "monthly benefits widowed",
+            "description": "monthly benefit payments for retired workers",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 54,
+          "name": "CBSA",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the code of the cbsa officer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "zip_data",
+          "from_column": "CBSA",
+          "to_table": "CBSA",
+          "to_column": "CBSA",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "zip_data",
+          "from_column": "state",
+          "to_table": "state",
+          "to_column": "abbreviation",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "alias",
+      "from_column": "zip_code",
+      "to_table": "zip_data",
+      "to_column": "zip_code",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "area_code",
+      "from_column": "zip_code",
+      "to_table": "zip_data",
+      "to_column": "zip_code",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "avoid",
+      "from_column": "zip_code",
+      "to_table": "zip_data",
+      "to_column": "zip_code",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "congress",
+      "from_column": "abbreviation",
+      "to_table": "state",
+      "to_column": "abbreviation",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "country",
+      "from_column": "state",
+      "to_table": "state",
+      "to_column": "abbreviation",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "country",
+      "from_column": "zip_code",
+      "to_table": "zip_data",
+      "to_column": "zip_code",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "zip_congress",
+      "from_column": "zip_code",
+      "to_table": "zip_data",
+      "to_column": "zip_code",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "zip_congress",
+      "from_column": "district",
+      "to_table": "congress",
+      "to_column": "cognress_rep_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "zip_data",
+      "from_column": "CBSA",
+      "to_table": "CBSA",
+      "to_column": "CBSA",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "zip_data",
+      "from_column": "state",
+      "to_table": "state",
+      "to_column": "abbreviation",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

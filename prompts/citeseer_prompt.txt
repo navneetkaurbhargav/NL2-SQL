@@ -1,0 +1,152 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "citeseer",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/citeseer/citeseer.sqlite",
+  "tables": [
+    {
+      "name": "cites",
+      "type": "table",
+      "create_sql": "CREATE TABLE cites\n(\n    cited_paper_id  TEXT not null,\n    citing_paper_id TEXT not null,\n    primary key (cited_paper_id, citing_paper_id)\n)",
+      "row_count": 4732,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "cited_paper_id",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "cited_paper_id is the ID of the paper being cited",
+            "data_format": "text",
+            "value_description": "cited_paper_id is the ID of the paper being cited"
+          }
+        },
+        {
+          "cid": 1,
+          "name": "citing_paper_id",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "citing_paper_id stands for the paper which contains the citation",
+            "data_format": "text",
+            "value_description": "citing_paper_id stands for the paper which contains the citation"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "content",
+      "type": "table",
+      "create_sql": "CREATE TABLE content\n(\n    paper_id     TEXT not null,\n    word_cited_id TEXT not null,\n    primary key (paper_id, word_cited_id),\n    foreign key (paper_id) references paper(paper_id)\n)",
+      "row_count": 105165,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "paper_id",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "paper id",
+            "description": "unique string ID of the paper",
+            "data_format": "text",
+            "value_description": "unique string ID of the paper"
+          }
+        },
+        {
+          "cid": 1,
+          "name": "word_cited_id",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "word cited id",
+            "description": "rtype",
+            "data_format": "text",
+            "value_description": "whether each word in the vocabulary is present (indicated by 1) or absent (indicated by 0) in the paper"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "content",
+          "from_column": "paper_id",
+          "to_table": "paper",
+          "to_column": "paper_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "paper",
+      "type": "table",
+      "create_sql": "CREATE TABLE paper\n(\n    paper_id    TEXT  not null\n        primary key,\n    class_label TEXT not null\n)",
+      "row_count": 3312,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "paper_id",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "paper id",
+            "description": "unique string ID of the paper",
+            "data_format": "text",
+            "value_description": "unique string ID of the paper"
+          }
+        },
+        {
+          "cid": 1,
+          "name": "class_label",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "class label",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "content",
+      "from_column": "paper_id",
+      "to_table": "paper",
+      "to_column": "paper_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

@@ -1,0 +1,1991 @@
+{
+  "db_id": "soccer_2016",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/soccer_2016/soccer_2016.sqlite",
+  "tables": [
+    {
+      "name": "Ball_by_Ball",
+      "type": "table",
+      "create_sql": "CREATE TABLE Ball_by_Ball\n(\n    Match_Id                 INTEGER,\n    Over_Id                  INTEGER,\n    Ball_Id                  INTEGER,\n    Innings_No               INTEGER,\n    Team_Batting             INTEGER,\n    Team_Bowling             INTEGER,\n    Striker_Batting_Position INTEGER,\n    Striker                  INTEGER,\n    Non_Striker              INTEGER,\n    Bowler                   INTEGER,\n    primary key (Match_Id, Over_Id, Ball_Id, Innings_No),\n    foreign key (Match_Id) references Match(Match_Id)\n)",
+      "row_count": 136590,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Match_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "match id",
+            "description": "Unique Number Which Identifies a match",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Over_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "over id",
+            "description": "Unique Number which Identifies an over in an Innings",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nThe match is made up of two innings and each team takes a turn at batting and bowling. An innings is made up of 50 overs. An over involves six deliveries from the bowler."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Ball_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "ball id",
+            "description": "Unique Number which Identifies a ball in an over",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Innings_No",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 4,
+          "bird_description": {
+            "semantic_name": "innings number",
+            "description": "Unique Number which Identifies an innings in a match",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Team_Batting",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "team batting",
+            "description": "Unique Number which Identifies Batting team in a match",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Team_Bowling",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "team bowling",
+            "description": "Unique Number which Identifies Bowling team in a match",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Striker_Batting_Position",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "striker batting position",
+            "description": "Unique Number which Identifies the position in which player came into bat",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Striker",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Unique Number which Identifies the player who is on strike for that particular ball",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "Non_Striker",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "non striker",
+            "description": "Unique Number which Identifies the player who is Non-striker for that particular ball",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "Bowler",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Unique Number which Identifies the player who is Bowling that particular ball",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Ball_by_Ball",
+          "from_column": "Match_Id",
+          "to_table": "Match",
+          "to_column": "Match_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Batsman_Scored",
+      "type": "table",
+      "create_sql": "CREATE TABLE Batsman_Scored\n(\n    Match_Id    INTEGER,\n    Over_Id     INTEGER,\n    Ball_Id     INTEGER,\n    Runs_Scored INTEGER,\n    Innings_No  INTEGER,\n    primary key (Match_Id, Over_Id, Ball_Id, Innings_No),\n    foreign key (Match_Id) references Match(Match_Id)\n)",
+      "row_count": 133097,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Match_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "match id",
+            "description": "Unique Number Which Identifies a match",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Over_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "over id",
+            "description": "Unique Number which Identifies an over in an Innings",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Ball_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "ball id",
+            "description": "Unique Number which Identifies a ball in an over",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Runs_Scored",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "runs scored",
+            "description": "Number of Runs scored by the batsman",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Innings_No",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 4,
+          "bird_description": {
+            "semantic_name": "innings number",
+            "description": "Unique Number which Identifies an innings in a match",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Batsman_Scored",
+          "from_column": "Match_Id",
+          "to_table": "Match",
+          "to_column": "Match_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Batting_Style",
+      "type": "table",
+      "create_sql": "CREATE TABLE Batting_Style\n(\n    Batting_Id   INTEGER\n            primary key,\n    Batting_hand TEXT\n)",
+      "row_count": 2,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Batting_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "batting id",
+            "description": "unique id for batting hand",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Batting_hand",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "batting hand",
+            "description": "the batting hand: left or right",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Bowling_Style",
+      "type": "table",
+      "create_sql": "CREATE TABLE Bowling_Style\n(\n    Bowling_Id    INTEGER\n            primary key,\n    Bowling_skill TEXT\n)",
+      "row_count": 14,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Bowling_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "bowling id",
+            "description": "unique id for bowling style",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Bowling_skill",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "bowling skill",
+            "description": "the bowling skill",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "City",
+      "type": "table",
+      "create_sql": "CREATE TABLE City\n(\n    City_Id    INTEGER\n            primary key,\n    City_Name  TEXT,\n    Country_id INTEGER\n)",
+      "row_count": 29,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "City_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "city id",
+            "description": "unique id for city",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "City_Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "city name",
+            "description": "city name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Country_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "country id",
+            "description": "id of country",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Country",
+      "type": "table",
+      "create_sql": "CREATE TABLE Country\n(\n    Country_Id   INTEGER\n            primary key,\n    Country_Name TEXT,\n    foreign key (Country_Id) references Country(Country_Id)\n)",
+      "row_count": 12,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Country_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "country id",
+            "description": "unique id for country",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Country_Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "country name",
+            "description": "country name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Country",
+          "from_column": "Country_Id",
+          "to_table": "Country",
+          "to_column": "Country_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Extra_Runs",
+      "type": "table",
+      "create_sql": "CREATE TABLE Extra_Runs\n(\n    Match_Id      INTEGER,\n    Over_Id       INTEGER,\n    Ball_Id       INTEGER,\n    Extra_Type_Id INTEGER,\n    Extra_Runs    INTEGER,\n    Innings_No    INTEGER,\n    primary key (Match_Id, Over_Id, Ball_Id, Innings_No),\n    foreign key (Extra_Type_Id) references Extra_Type(Extra_Id)\n)",
+      "row_count": 7469,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Match_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "match id",
+            "description": "Unique Number Which Identifies a match",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Over_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "over id",
+            "description": "Unique Number which Identifies an over in an Innings",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Ball_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "ball id",
+            "description": "Unique Number which Identifies a ball in an over",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Extra_Type_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "extra type id",
+            "description": "Unique Number which Identifies extra type",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Extra_Runs",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "extra runs",
+            "description": "Number of extra runs",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Innings_No",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 4,
+          "bird_description": {
+            "semantic_name": "innings number",
+            "description": "Unique Number which Identifies an innings in a match",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Extra_Runs",
+          "from_column": "Extra_Type_Id",
+          "to_table": "Extra_Type",
+          "to_column": "Extra_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Extra_Type",
+      "type": "table",
+      "create_sql": "CREATE TABLE Extra_Type\n(\n    Extra_Id   INTEGER\n            primary key,\n    Extra_Name TEXT\n)",
+      "row_count": 5,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Extra_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "extra id",
+            "description": "unique id for extra type",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Extra_Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "extra name",
+            "description": "extra type name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Match",
+      "type": "table",
+      "create_sql": "CREATE TABLE Match\n(\n    Match_Id         INTEGER\n            primary key,\n    Team_1           INTEGER,\n    Team_2           INTEGER,\n    Match_Date       DATE,\n    Season_Id        INTEGER,\n    Venue_Id         INTEGER,\n    Toss_Winner      INTEGER,\n    Toss_Decide      INTEGER,\n    Win_Type         INTEGER,\n    Win_Margin       INTEGER,\n    Outcome_type     INTEGER,\n    Match_Winner     INTEGER,\n    Man_of_the_Match INTEGER,\n    foreign key (Team_1) references Team(Team_Id),\n    foreign key (Team_2) references Team(Team_Id),\n    foreign key (Season_Id) references Season(Season_Id),\n    foreign key (Venue_Id) references Venue(Venue_Id),\n    foreign key (Toss_Winner) references Team(Team_Id),\n    foreign key (Toss_Decide) references Toss_Decision(Toss_Id),\n    foreign key (Win_Type) references Win_By(Win_Id),\n    foreign key (Outcome_type) references Out_Type(Out_Id),\n    foreign key (Match_Winner) references Team(Team_Id),\n    foreign key (Man_of_the_Match) references Player(Player_Id)\n)",
+      "row_count": 577,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Match_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "unique id for match",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Team_1",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "team 1",
+            "description": "the team id of the first team",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Team_2",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "team 2",
+            "description": "the team id for the second team",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Match_Date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "match date",
+            "description": "the date of the match",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Season_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "season id",
+            "description": "the id of the season",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Venue_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "venue id",
+            "description": "the id of the venue where the match held",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Toss_Winner",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "toss winner",
+            "description": "the id of the toss winner",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\nThe toss winner is a term used in cricket and is the team that wins the heads or tails toss of coin at the beginning of a match which then enables the team captain to decide whether to bat or bowl first on the pitch."
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Toss_Decide",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "toss decide",
+            "description": "the decision (batting or bowling) made after winning the toss",
+            "data_format": "integer",
+            "value_description": "â¢ field \r\nâ¢ bat"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "Win_Type",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "winning type",
+            "description": "the id of the winning type",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "Win_Margin",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "winning margin",
+            "description": "the points of the winning margin",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\nA winning margin bet is a wager on the final result of a game, within a certain range of points."
+          }
+        },
+        {
+          "cid": 10,
+          "name": "Outcome_type",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "outcome type",
+            "description": "the id of the outcome type",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "Match_Winner",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "match winner",
+            "description": "the team id of the match winner",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "Man_of_the_Match",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "man of the match",
+            "description": "the id of the man of the match",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\nIn team sport, a player of the match or man (or woman) of the match award is often given to the outstanding player in a particular match."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Match",
+          "from_column": "Man_of_the_Match",
+          "to_table": "Player",
+          "to_column": "Player_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Match",
+          "from_column": "Match_Winner",
+          "to_table": "Team",
+          "to_column": "Team_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "Match",
+          "from_column": "Outcome_type",
+          "to_table": "Out_Type",
+          "to_column": "Out_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 3,
+          "sequence": 0,
+          "from_table": "Match",
+          "from_column": "Win_Type",
+          "to_table": "Win_By",
+          "to_column": "Win_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 4,
+          "sequence": 0,
+          "from_table": "Match",
+          "from_column": "Toss_Decide",
+          "to_table": "Toss_Decision",
+          "to_column": "Toss_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 5,
+          "sequence": 0,
+          "from_table": "Match",
+          "from_column": "Toss_Winner",
+          "to_table": "Team",
+          "to_column": "Team_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 6,
+          "sequence": 0,
+          "from_table": "Match",
+          "from_column": "Venue_Id",
+          "to_table": "Venue",
+          "to_column": "Venue_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 7,
+          "sequence": 0,
+          "from_table": "Match",
+          "from_column": "Season_Id",
+          "to_table": "Season",
+          "to_column": "Season_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 8,
+          "sequence": 0,
+          "from_table": "Match",
+          "from_column": "Team_2",
+          "to_table": "Team",
+          "to_column": "Team_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 9,
+          "sequence": 0,
+          "from_table": "Match",
+          "from_column": "Team_1",
+          "to_table": "Team",
+          "to_column": "Team_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Out_Type",
+      "type": "table",
+      "create_sql": "CREATE TABLE Out_Type\n(\n    Out_Id   INTEGER\n            primary key,\n    Out_Name TEXT\n)",
+      "row_count": 9,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Out_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "out id",
+            "description": "unique id for out type",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Out_Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "out name",
+            "description": "out type name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Outcome",
+      "type": "table",
+      "create_sql": "CREATE TABLE Outcome\n(\n    Outcome_Id   INTEGER\n            primary key,\n    Outcome_Type TEXT\n)",
+      "row_count": 3,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Outcome_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "outcome id",
+            "description": "unique id for outcome",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Outcome_Type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "outcome type",
+            "description": "type of the outcome",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Player",
+      "type": "table",
+      "create_sql": "CREATE TABLE Player\n(\n    Player_Id     INTEGER\n            primary key,\n    Player_Name   TEXT,\n    DOB           DATE,\n    Batting_hand  INTEGER,\n    Bowling_skill INTEGER,\n    Country_Name  INTEGER,\n    foreign key (Batting_hand) references Batting_Style(Batting_Id),\n    foreign key (Bowling_skill) references Bowling_Style(Bowling_Id),\n    foreign key (Country_Name) references Country(Country_Id)\n)",
+      "row_count": 469,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Player_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "player id",
+            "description": "the id of the player",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Player_Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "player name",
+            "description": "the name of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "DOB",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "date of birth",
+            "description": "player's birthday",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Batting_hand",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "batting hand",
+            "description": "the id of the batting hand",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Bowling_skill",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "bowling skill",
+            "description": "the id of the bowling skill",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Country_Name",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "country name",
+            "description": "the name of the country where the player is from",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Player",
+          "from_column": "Country_Name",
+          "to_table": "Country",
+          "to_column": "Country_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Player",
+          "from_column": "Bowling_skill",
+          "to_table": "Bowling_Style",
+          "to_column": "Bowling_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "Player",
+          "from_column": "Batting_hand",
+          "to_table": "Batting_Style",
+          "to_column": "Batting_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Player_Match",
+      "type": "table",
+      "create_sql": "CREATE TABLE Player_Match\n(\n    Match_Id  INTEGER,\n    Player_Id INTEGER,\n    Role_Id   INTEGER,\n    Team_Id   INTEGER,\n    primary key (Match_Id, Player_Id, Role_Id),\n    foreign key (Match_Id) references Match(Match_Id),\n    foreign key (Player_Id) references Player(Player_Id),\n    foreign key (Team_Id) references Team(Team_Id),\n    foreign key (Role_Id) references Rolee(Role_Id)\n)",
+      "row_count": 12694,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Match_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "match id",
+            "description": "unique id for match",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Player_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "player id",
+            "description": "the id of the player",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Role_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "role id",
+            "description": "the id of the play's role in the match",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nif a player has multiple roles in a match, it means this player is versatile"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Team_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "team id",
+            "description": "the id of player's team",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Player_Match",
+          "from_column": "Role_Id",
+          "to_table": "Rolee",
+          "to_column": "Role_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Player_Match",
+          "from_column": "Team_Id",
+          "to_table": "Team",
+          "to_column": "Team_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "Player_Match",
+          "from_column": "Player_Id",
+          "to_table": "Player",
+          "to_column": "Player_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 3,
+          "sequence": 0,
+          "from_table": "Player_Match",
+          "from_column": "Match_Id",
+          "to_table": "Match",
+          "to_column": "Match_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Rolee",
+      "type": "table",
+      "create_sql": "CREATE TABLE Rolee\n(\n    Role_Id   INTEGER\n            primary key,\n    Role_Desc TEXT\n)",
+      "row_count": 4,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Role_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "role id",
+            "description": "the unique id for the role",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Role_Desc",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "role description",
+            "description": "the role description",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Season",
+      "type": "table",
+      "create_sql": "CREATE TABLE Season\n(\n    Season_Id         INTEGER\n            primary key,\n    Man_of_the_Series INTEGER,\n    Orange_Cap        INTEGER,\n    Purple_Cap        INTEGER,\n    Season_Year       INTEGER\n)",
+      "row_count": 9,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Season_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "season id",
+            "description": "the unique id for season",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Man_of_the_Series",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "man of the series",
+            "description": "the player id of man of the series",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\nIn team sport, a player of the series or man (or woman) of the series award is often given to the outstanding player in a particular series."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Orange_Cap",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "orange cap",
+            "description": "the player id who wins the orange cap",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\nThe Orange Cap is a coveted award for a batter who is participating in the Indian Premier League (IPL)"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Purple_Cap",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "purple cap",
+            "description": "the player id who wins the purple cap",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\nThe Purple Cap is awarded to the bowler who has emerged as the leading wicket-taker in a particular edition of the high-profile Indian Premier League (IPL)"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Season_Year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "season year",
+            "description": "the year of the season",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Team",
+      "type": "table",
+      "create_sql": "CREATE TABLE Team\n(\n    Team_Id   INTEGER\n            primary key,\n    Team_Name TEXT\n)",
+      "row_count": 13,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Team_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "team id",
+            "description": "the unique id for the team",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Team_Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "team name",
+            "description": "the team name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Toss_Decision",
+      "type": "table",
+      "create_sql": "CREATE TABLE Toss_Decision\n(\n    Toss_Id   INTEGER\n            primary key,\n    Toss_Name TEXT\n)",
+      "row_count": 2,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Toss_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "toss id",
+            "description": "the unique id for the toss",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Toss_Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "toss name",
+            "description": "the toss decision name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Umpire",
+      "type": "table",
+      "create_sql": "CREATE TABLE Umpire\n(\n    Umpire_Id      INTEGER\n            primary key,\n    Umpire_Name    TEXT,\n    Umpire_Country INTEGER,\n    foreign key (Umpire_Country) references Country(Country_Id)\n)",
+      "row_count": 52,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Umpire_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "umpire id",
+            "description": "the unique id of the umpire",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Umpire_Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "umpire name",
+            "description": "umpire's name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Umpire_Country",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "umpire country",
+            "description": "the id of the country where the umpire are from",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Umpire",
+          "from_column": "Umpire_Country",
+          "to_table": "Country",
+          "to_column": "Country_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Venue",
+      "type": "table",
+      "create_sql": "CREATE TABLE Venue\n(\n    Venue_Id   INTEGER\n            primary key,\n    Venue_Name TEXT,\n    City_Id    INTEGER,\n    foreign key (City_Id) references City(City_Id)\n)",
+      "row_count": 35,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Venue_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "venue id",
+            "description": "the unique id of the venue",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Venue_Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "venue name",
+            "description": "the name of the venue",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "City_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "city id",
+            "description": "the city id where the venue is located in",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Venue",
+          "from_column": "City_Id",
+          "to_table": "City",
+          "to_column": "City_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Wicket_Taken",
+      "type": "table",
+      "create_sql": "CREATE TABLE Wicket_Taken\n(\n    Match_Id   INTEGER,\n    Over_Id    INTEGER,\n    Ball_Id    INTEGER,\n    Player_Out INTEGER,\n    Kind_Out   INTEGER,\n    Fielders   INTEGER,\n    Innings_No INTEGER,\n    primary key (Match_Id, Over_Id, Ball_Id, Innings_No),\n    foreign key (Match_Id) references Match(Match_Id),\n    foreign key (Player_Out) references Player(Player_Id),\n    foreign key (Kind_Out) references Out_Type(Out_Id),\n    foreign key (Fielders) references Player(Player_Id)\n)",
+      "row_count": 6727,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Match_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "match id",
+            "description": "the id of the match",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Over_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "over id",
+            "description": "the id of the over in an inning",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Ball_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "ball id",
+            "description": "the id of the ball in an over",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Player_Out",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "player out",
+            "description": "the player id who got an out",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Kind_Out",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "kind out",
+            "description": "the id that represents the out type",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Fielders",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the id of fielders",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Innings_No",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 4,
+          "bird_description": {
+            "semantic_name": "innings number",
+            "description": "number which identifies an innings in a match",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Wicket_Taken",
+          "from_column": "Fielders",
+          "to_table": "Player",
+          "to_column": "Player_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Wicket_Taken",
+          "from_column": "Kind_Out",
+          "to_table": "Out_Type",
+          "to_column": "Out_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "Wicket_Taken",
+          "from_column": "Player_Out",
+          "to_table": "Player",
+          "to_column": "Player_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 3,
+          "sequence": 0,
+          "from_table": "Wicket_Taken",
+          "from_column": "Match_Id",
+          "to_table": "Match",
+          "to_column": "Match_Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Win_By",
+      "type": "table",
+      "create_sql": "CREATE TABLE Win_By\n(\n    Win_Id   INTEGER\n            primary key,\n    Win_Type TEXT\n)",
+      "row_count": 4,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Win_Id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "winning id",
+            "description": "the unique id for the winning",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Win_Type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "winning type",
+            "description": "the winning type",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Ball_by_Ball",
+      "from_column": "Match_Id",
+      "to_table": "Match",
+      "to_column": "Match_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Batsman_Scored",
+      "from_column": "Match_Id",
+      "to_table": "Match",
+      "to_column": "Match_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Country",
+      "from_column": "Country_Id",
+      "to_table": "Country",
+      "to_column": "Country_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Extra_Runs",
+      "from_column": "Extra_Type_Id",
+      "to_table": "Extra_Type",
+      "to_column": "Extra_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Match",
+      "from_column": "Man_of_the_Match",
+      "to_table": "Player",
+      "to_column": "Player_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Match",
+      "from_column": "Match_Winner",
+      "to_table": "Team",
+      "to_column": "Team_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "Match",
+      "from_column": "Outcome_type",
+      "to_table": "Out_Type",
+      "to_column": "Out_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 3,
+      "sequence": 0,
+      "from_table": "Match",
+      "from_column": "Win_Type",
+      "to_table": "Win_By",
+      "to_column": "Win_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 4,
+      "sequence": 0,
+      "from_table": "Match",
+      "from_column": "Toss_Decide",
+      "to_table": "Toss_Decision",
+      "to_column": "Toss_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 5,
+      "sequence": 0,
+      "from_table": "Match",
+      "from_column": "Toss_Winner",
+      "to_table": "Team",
+      "to_column": "Team_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 6,
+      "sequence": 0,
+      "from_table": "Match",
+      "from_column": "Venue_Id",
+      "to_table": "Venue",
+      "to_column": "Venue_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 7,
+      "sequence": 0,
+      "from_table": "Match",
+      "from_column": "Season_Id",
+      "to_table": "Season",
+      "to_column": "Season_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 8,
+      "sequence": 0,
+      "from_table": "Match",
+      "from_column": "Team_2",
+      "to_table": "Team",
+      "to_column": "Team_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 9,
+      "sequence": 0,
+      "from_table": "Match",
+      "from_column": "Team_1",
+      "to_table": "Team",
+      "to_column": "Team_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Player",
+      "from_column": "Country_Name",
+      "to_table": "Country",
+      "to_column": "Country_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Player",
+      "from_column": "Bowling_skill",
+      "to_table": "Bowling_Style",
+      "to_column": "Bowling_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "Player",
+      "from_column": "Batting_hand",
+      "to_table": "Batting_Style",
+      "to_column": "Batting_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Player_Match",
+      "from_column": "Role_Id",
+      "to_table": "Rolee",
+      "to_column": "Role_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Player_Match",
+      "from_column": "Team_Id",
+      "to_table": "Team",
+      "to_column": "Team_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "Player_Match",
+      "from_column": "Player_Id",
+      "to_table": "Player",
+      "to_column": "Player_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 3,
+      "sequence": 0,
+      "from_table": "Player_Match",
+      "from_column": "Match_Id",
+      "to_table": "Match",
+      "to_column": "Match_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Umpire",
+      "from_column": "Umpire_Country",
+      "to_table": "Country",
+      "to_column": "Country_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Venue",
+      "from_column": "City_Id",
+      "to_table": "City",
+      "to_column": "City_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Wicket_Taken",
+      "from_column": "Fielders",
+      "to_table": "Player",
+      "to_column": "Player_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Wicket_Taken",
+      "from_column": "Kind_Out",
+      "to_table": "Out_Type",
+      "to_column": "Out_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "Wicket_Taken",
+      "from_column": "Player_Out",
+      "to_table": "Player",
+      "to_column": "Player_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 3,
+      "sequence": 0,
+      "from_table": "Wicket_Taken",
+      "from_column": "Match_Id",
+      "to_table": "Match",
+      "to_column": "Match_Id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

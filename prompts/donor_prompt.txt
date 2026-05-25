@@ -1,0 +1,1094 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "donor",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/donor/donor.sqlite",
+  "tables": [
+    {
+      "name": "donations",
+      "type": "table",
+      "create_sql": "CREATE TABLE donations\n(\n    donationid                               TEXT not null\n            primary key,\n    projectid                               TEXT,\n    donor_acctid                             TEXT,\n    donor_city                               TEXT,\n    donor_state                              TEXT,\n    donor_zip                                TEXT,\n    is_teacher_acct                          TEXT,\n    donation_timestamp                       DATETIME,\n    donation_to_project                      REAL,\n    donation_optional_support                REAL,\n    donation_total                           REAL,\n    dollar_amount                            TEXT,\n    donation_included_optional_support       TEXT,\n    payment_method                           TEXT,\n    payment_included_acct_credit             TEXT,\n    payment_included_campaign_gift_card      TEXT,\n    payment_included_web_purchased_gift_card TEXT,\n    payment_was_promo_matched                TEXT,\n    via_giving_page                          TEXT,\n    for_honoree                              TEXT,\n    donation_message                         TEXT,\n    foreign key (projectid) references projects(projectid)\n)",
+      "row_count": 3097556,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "donationid",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "donation id",
+            "description": "unique donation identifier",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "projectid",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "project id",
+            "description": "project identifier that received the donation",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "donor_acctid",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "donor accid",
+            "description": "donor that made a donation",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "donor_city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "donor city",
+            "description": "donation city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "donor_state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "donor state",
+            "description": "donation state",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "donor_zip",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "donor zip",
+            "description": "donation zip code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "is_teacher_acct",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "is teacher acct",
+            "description": "whether donor is also a teacher",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n• f: false, it means this donor is not a teacher\n• t: true, it means this donor is a teacher"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "donation_timestamp",
+          "type": "DATETIME",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "donation timestamp",
+            "description": "the time of donation",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "donation_to_project",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "donation to project",
+            "description": "amount to project, excluding optional support (tip)",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "donation_optional_support",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "donation optional support",
+            "description": "amount of optional support",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "donation_total",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "donation total",
+            "description": "donated amount",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\ndonated amount = donation_to_project + donation_optional_support"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "dollar_amount",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "dollar amount",
+            "description": "donated amount in US dollars",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "donation_included_optional_support",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "donation included optional support",
+            "description": "whether optional support (tip) was included for DonorsChoose.org",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n• f: false, optional support (tip) was not included for DonorsChoose.org\n• t: true, optional support (tip) was included for DonorsChoose.org"
+          }
+        },
+        {
+          "cid": 13,
+          "name": "payment_method",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "payment method",
+            "description": "what card/payment option was used",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "payment_included_acct_credit",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "payment included acct credit",
+            "description": "whether a portion of a donation used account credits redemption",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n• f: false, a portion of a donation didn't use account credits redemption\n• t: true, a portion of a donation used account credits redemption"
+          }
+        },
+        {
+          "cid": 15,
+          "name": "payment_included_campaign_gift_card",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "payment included campaign gift card",
+            "description": "whether a portion of a donation included corporate sponsored gift card",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n• f: false, a portion of a donation included corporate sponsored gift card\n• t: true, a portion of a donation included corporate sponsored gift card"
+          }
+        },
+        {
+          "cid": 16,
+          "name": "payment_included_web_purchased_gift_card",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "payment included web purchased gift card",
+            "description": "whether a portion of a donation included citizen purchased gift card (ex: friend buy a gift card for you)",
+            "data_format": "text",
+            "value_description": "• f: false\n• t: true"
+          }
+        },
+        {
+          "cid": 17,
+          "name": "payment_was_promo_matched",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "payment was promo matched",
+            "description": "whether a donation was matched 1-1 with corporate funds",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n• f: false, a donation was not matched 1-1 with corporate funds\n• t: true, a donation was matched 1-1 with corporate funds"
+          }
+        },
+        {
+          "cid": 18,
+          "name": "via_giving_page",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "via giving page",
+            "description": "donation given via a giving / campaign page (example: Mustaches for Kids)",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 19,
+          "name": "for_honoree",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "for honoree",
+            "description": "donation made for an honoree",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n• f: false, this donation is not made for an honoree\n• t: true, this donation is made for an honoree"
+          }
+        },
+        {
+          "cid": 20,
+          "name": "donation_message",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "donation message",
+            "description": "donation comment/message.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "donations",
+          "from_column": "projectid",
+          "to_table": "projects",
+          "to_column": "projectid",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "essays",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"essays\"\n(\n    projectid         TEXT,\n    teacher_acctid    TEXT,\n    title             TEXT,\n    short_description TEXT,\n    need_statement    TEXT,\n    essay             TEXT\n)",
+      "row_count": 99998,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "projectid",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "project id",
+            "description": "unique project identifier",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "teacher_acctid",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "teacher acctid",
+            "description": "teacher id that created a project",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "title",
+            "description": "title of the project",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "short_description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "short description",
+            "description": "short description of a project",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "need_statement",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "need statement",
+            "description": "need statement of a project",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "essay",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "essay",
+            "description": "complete project essay",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "projects",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"projects\"\n(\n    projectid                              TEXT not null\n        primary key,\n    teacher_acctid                         TEXT,\n    schoolid                               TEXT,\n    school_ncesid                          TEXT,\n    school_latitude                        REAL,\n    school_longitude                       REAL,\n    school_city                            TEXT,\n    school_state                           TEXT,\n    school_zip                             INTEGER,\n    school_metro                           TEXT,\n    school_district                        TEXT,\n    school_county                          TEXT,\n    school_charter                         TEXT,\n    school_magnet                          TEXT,\n    school_year_round                      TEXT,\n    school_nlns                            TEXT,\n    school_kipp                            TEXT,\n    school_charter_ready_promise           TEXT,\n    teacher_prefix                         TEXT,\n    teacher_teach_for_america              TEXT,\n    teacher_ny_teaching_fellow             TEXT,\n    primary_focus_subject                  TEXT,\n    primary_focus_area                     TEXT,\n    secondary_focus_subject                TEXT,\n    secondary_focus_area                   TEXT,\n    resource_type                          TEXT,\n    poverty_level                          TEXT,\n    grade_level                            TEXT,\n    fulfillment_labor_materials            REAL,\n    total_price_excluding_optional_support REAL,\n    total_price_including_optional_support REAL,\n    students_reached                       INTEGER,\n    eligible_double_your_impact_match      TEXT,\n    eligible_almost_home_match             TEXT,\n    date_posted                            DATE\n)",
+      "row_count": 664098,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "projectid",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "project id",
+            "description": "project's unique identifier",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "teacher_acctid",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "teacher_acctid",
+            "description": "teacher's unique identifier (teacher that created a project)",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "schoolid",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "schoolid",
+            "description": "school's identifier (school where teacher works)",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "school_ncesid",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "school national center for education statistics id",
+            "description": "Public National Center for Ed Statistics id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "school_latitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "school latitude",
+            "description": "latitude of school",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "school_longitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "school longitude",
+            "description": "longitude of school",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "school_city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "school city",
+            "description": "city where the school is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "school_state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "school state",
+            "description": "state where the school is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "school_zip",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "school zip",
+            "description": "zipcode of school",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "school_metro",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "school metro",
+            "description": "metro where the school is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "school_district",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "school district",
+            "description": "district where the school is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "school_county",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "school county",
+            "description": "country where the school is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "school_charter",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "school charter",
+            "description": "whether it is a public charter school or not (no private schools in the dataset)",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "school_magnet",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "school magnet",
+            "description": "whether a public magnet school or not",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "school_year_round",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "school year round",
+            "description": "whether it is a public year round school or not",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 15,
+          "name": "school_nlns",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "school Nonleafy Normal Stature",
+            "description": "whether it is a public Nonleafy Normal Stature school or not",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 16,
+          "name": "school_kipp",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "school Knowledge Is Power Program",
+            "description": "whether it is a public Knowledge Power Program school or not",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "school_charter_ready_promise",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "school charter ready promise",
+            "description": "whether it is a public ready promise school or not",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 18,
+          "name": "teacher_prefix",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "teacher prefix",
+            "description": "teacher's gender",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nif the value is equal to \"Dr. \", it means this teacher acquired P.h.D or doctor degree."
+          }
+        },
+        {
+          "cid": 19,
+          "name": "teacher_teach_for_america",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "teachers teach for america",
+            "description": "Teach for America or not",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 20,
+          "name": "teacher_ny_teaching_fellow",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "teacher_new_york_teaching_fellow",
+            "description": "New York teaching fellow or not",
+            "data_format": "text",
+            "value_description": "• t: true\n• f: false\ncommonsense evidence:\nif true: it means that this teacher is a New York teacher"
+          }
+        },
+        {
+          "cid": 21,
+          "name": "primary_focus_subject",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "primary focus subject",
+            "description": "main subject for which project materials are intended",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 22,
+          "name": "primary_focus_area",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "primary focus area",
+            "description": "main subject area for which project materials are intended",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 23,
+          "name": "secondary_focus_subject",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "secondary focus subject",
+            "description": "secondary subject",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 24,
+          "name": "secondary_focus_area",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "secondary focus area",
+            "description": "secondary subject area",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 25,
+          "name": "resource_type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "resource type",
+            "description": "main type of resources requested by a project",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 26,
+          "name": "poverty_level",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "poverty level",
+            "description": "school's poverty level",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nhighest: 65%+ free of reduced lunch; high: 40-64%; moderate: 10-39%low: 0-9%"
+          }
+        },
+        {
+          "cid": 27,
+          "name": "grade_level",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "grade level",
+            "description": "grade level for which project materials are intended",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 28,
+          "name": "fulfillment_labor_materials",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "fulfillment labor materials",
+            "description": "cost of fulfillment",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nhigher means higher cost, or need more labors"
+          }
+        },
+        {
+          "cid": 29,
+          "name": "total_price_excluding_optional_support",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "total price excluding optional support",
+            "description": "project cost excluding optional tip that donors give to DonorsChoose.org while funding a project",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 30,
+          "name": "total_price_including_optional_support",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "total price including optional support",
+            "description": "project cost including optional tip that donors give to DonorsChoose.org while funding a project",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\ncost of optional tip = total_price_including_optional_support -total_price_excluding_optional_support"
+          }
+        },
+        {
+          "cid": 31,
+          "name": "students_reached",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "students reached",
+            "description": "number of students impacted by a project (if funded)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 32,
+          "name": "eligible_double_your_impact_match",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "eligible double your impact match",
+            "description": "project was eligible for a 50% off offer by a corporate partner (logo appears on a project, like Starbucks or Disney)",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 33,
+          "name": "eligible_almost_home_match",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "eligible almost home match",
+            "description": "project was eligible for a $100 boost offer by a corporate partner",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 34,
+          "name": "date_posted",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "date posted",
+            "description": "data a project went live on the site",
+            "data_format": "date",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "resources",
+      "type": "table",
+      "create_sql": "CREATE TABLE resources\n(\n    resourceid            TEXT not null\n            primary key,\n    projectid             TEXT,\n    vendorid              INTEGER,\n    vendor_name           TEXT,\n    project_resource_type TEXT,\n    item_name             TEXT,\n    item_number           TEXT,\n    item_unit_price       REAL,\n    item_quantity         INTEGER,\n    foreign key (projectid) references projects(projectid)\n)",
+      "row_count": 3666757,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "resourceid",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "resource id",
+            "description": "unique resource id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "projectid",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "project id",
+            "description": "project id that requested resources for a classroom",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "vendorid",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "vendor id",
+            "description": "vendor id that supplies resources to a project",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "vendor_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "vendor name",
+            "description": "vendor name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "project_resource_type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "project resource type",
+            "description": "type of resource",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "item_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "item name",
+            "description": "resource name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "item_number",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "item number",
+            "description": "resource item identifier",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "item_unit_price",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "item unit price",
+            "description": "unit price of the resource",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "item_quantity",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "item quantity",
+            "description": "number of a specific item requested by a teacher",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "resources",
+          "from_column": "projectid",
+          "to_table": "projects",
+          "to_column": "projectid",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "donations",
+      "from_column": "projectid",
+      "to_table": "projects",
+      "to_column": "projectid",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "resources",
+      "from_column": "projectid",
+      "to_table": "projects",
+      "to_column": "projectid",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

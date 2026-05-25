@@ -1,0 +1,393 @@
+{
+  "db_id": "codebase_comments",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/codebase_comments/codebase_comments.sqlite",
+  "tables": [
+    {
+      "name": "Method",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Method\"\n(\n    Id            INTEGER not null\n        primary key autoincrement,\n    Name          TEXT,\n    FullComment   TEXT,\n    Summary       TEXT,\n    ApiCalls      TEXT,\n    CommentIsXml  INTEGER,\n    SampledAt     INTEGER,\n    SolutionId    INTEGER,\n    Lang          TEXT,\n    NameTokenized TEXT\n)",
+      "row_count": 3508215,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "unique id number\r\nthat identifies methods",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "name of methods",
+            "data_format": "text",
+            "value_description": "the second part is the task of this method\r\ndelimited by \".\""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "FullComment",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Full Comment",
+            "description": "full comment of this method",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Summary",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Summary",
+            "description": "summary of the method",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "ApiCalls",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Api Calls",
+            "description": "linearized sequenced of API calls",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "CommentIsXml",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "CommentIs Xml",
+            "description": "whether the comment is XML format or not",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\n\r\n0: the comment for this method is not XML format.\r\n1: the comment for this method is XML format."
+          }
+        },
+        {
+          "cid": 6,
+          "name": "SampledAt",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Sampled At",
+            "description": "the time of sampling",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "SolutionId",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Solution Id",
+            "description": "id number of solutions",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "Lang",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Language",
+            "description": "language code of method",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "NameTokenized",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Name Tokenized",
+            "description": "tokenized name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "MethodParameter",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"MethodParameter\"\n(\n    Id       INTEGER not null\n        primary key autoincrement,\n    MethodId TEXT,\n    Type     TEXT,\n    Name     TEXT\n)",
+      "row_count": 5132027,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "unique id number identifying method parameters",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "MethodId",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Method Id",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "type of the method",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "name of the method",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n\nif the name is not a word like \"H\", \"z\", it means this method is not well-discriminative."
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Repo",
+      "type": "table",
+      "create_sql": "CREATE TABLE Repo\n(\n    Id            INTEGER not null\n        primary key autoincrement,\n    Url           TEXT,\n    Stars         INTEGER,\n    Forks         INTEGER,\n    Watchers      INTEGER,\n    ProcessedTime INTEGER\n)",
+      "row_count": 140990,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "unique id to identify repositories",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "github address of repository",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Stars",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "stars this repository has received",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Forks",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "forks that the repository has received",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Watchers",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "how many watchers of this repository",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "ProcessedTime",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Processed Time",
+            "description": "how much processed time of downloading this repository",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Solution",
+      "type": "table",
+      "create_sql": "CREATE TABLE Solution\n(\n    Id            INTEGER not null\n        primary key autoincrement,\n    RepoId        INTEGER,\n    Path          TEXT,\n    ProcessedTime INTEGER,\n    WasCompiled   INTEGER\n)",
+      "row_count": 338087,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "unique id to identify this solution",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "RepoId",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Repository Id",
+            "description": "id of repository",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Path",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Path",
+            "description": "path of this solution",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "ProcessedTime",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Processed Time",
+            "description": "processed time",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "WasCompiled",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Was Compiled",
+            "description": "whether this solution needs to be compiled or not",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\n0: this solution needs to be compiled if user wants to implement it.\n1: this solution can be implemented without needs of compilation"
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": []
+}

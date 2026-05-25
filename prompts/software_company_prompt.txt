@@ -1,0 +1,664 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "software_company",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/software_company/software_company.sqlite",
+  "tables": [
+    {
+      "name": "Customers",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Customers\"\n(\n    ID             INTEGER\n        constraint Customers_pk\n            primary key,\n    SEX            TEXT,\n    MARITAL_STATUS TEXT,\n    GEOID          INTEGER\n        constraint Customers_Demog_GEOID_fk\n            references Demog,\n    EDUCATIONNUM   INTEGER,\n    OCCUPATION     TEXT,\n    age            INTEGER\n)",
+      "row_count": 360000,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique number identifying the customer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "SEX",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the sex of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "MARITAL_STATUS",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "MARITAL STATUS",
+            "description": "",
+            "data_format": "text",
+            "value_description": "� Never-married\n� Married-civ-spouse\n� Divorced\n� Widowed\n� Other\ncommonsense evidence: \"Married-civ-spouse\", \"Divorced\", \"Widowed\" mean customer has been married."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "GEOID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "GEOGRAPHIC ID",
+            "description": "geographic identifier",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "EDUCATIONNUM",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "EDUCATION NUMBER",
+            "description": "the level of education",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: higher education number refers to higher education"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "OCCUPATION",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "occupation of customers",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "age",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "age of customers",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: � teenager: 13-19 years old.\n� elder: people aged over 65"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Customers",
+          "from_column": "GEOID",
+          "to_table": "Demog",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Demog",
+      "type": "table",
+      "create_sql": "CREATE TABLE Demog\n(\n    GEOID         INTEGER\n        constraint Demog_pk\n            primary key,\n    INHABITANTS_K REAL,\n    INCOME_K      REAL,\n    A_VAR1        REAL,\n    A_VAR2        REAL,\n    A_VAR3        REAL,\n    A_VAR4        REAL,\n    A_VAR5        REAL,\n    A_VAR6        REAL,\n    A_VAR7        REAL,\n    A_VAR8        REAL,\n    A_VAR9        REAL,\n    A_VAR10       REAL,\n    A_VAR11       REAL,\n    A_VAR12       REAL,\n    A_VAR13       REAL,\n    A_VAR14       REAL,\n    A_VAR15       REAL,\n    A_VAR16       REAL,\n    A_VAR17       REAL,\n    A_VAR18       REAL\n)",
+      "row_count": 200,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "GEOID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "GEOGRAPHIC ID",
+            "description": "unique geographic identifier",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "INHABITANTS_K",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "INHABITANTS (THOUSANDS)",
+            "description": "number of inhabitants",
+            "data_format": "real",
+            "value_description": "the unit is K (thousands)"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "INCOME_K",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "INCOME (THOUSANDS)",
+            "description": "average income per inhabitant per month",
+            "data_format": "real",
+            "value_description": "the unit is dollar, it indicates the average income per inhabitant per month.\ncommonsense evidence:\nsome computation like: total income per year = INHABITANTS_K x INCOME_K x 12"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "A_VAR1",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "A_VAR2",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "A_VAR3",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "A_VAR4",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "A_VAR5",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "A_VAR6",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "A_VAR7",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "A_VAR8",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "A_VAR9",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "A_VAR10",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "A_VAR11",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "A_VAR12",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 15,
+          "name": "A_VAR13",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 16,
+          "name": "A_VAR14",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "A_VAR15",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 18,
+          "name": "A_VAR16",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 19,
+          "name": "A_VAR17",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 20,
+          "name": "A_VAR18",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Mailings1_2",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Mailings1_2\"\n(\n    REFID    INTEGER\n        constraint Mailings1_2_pk\n            primary key\n        constraint Mailings1_2_Customers_ID_fk\n            references Customers,\n    REF_DATE DATETIME,\n    RESPONSE TEXT\n)",
+      "row_count": 60000,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "REFID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "REFERENCE ID",
+            "description": "unique id number identifying the customer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "REF_DATE",
+          "type": "DATETIME",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "REFERENCE DATE",
+            "description": "indicating the date when the mailing was sent",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "RESPONSE",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Response to the incentive mailing that marketing department sent",
+            "data_format": "text",
+            "value_description": "• True\n• False \ncommonsense evidence: \n1. any person who has not responded to a mailing within two months is considered to have responded negatively.\n2. true respond to the mailing, otherwise, no"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Mailings1_2",
+          "from_column": "REFID",
+          "to_table": "Customers",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Sales",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Sales\"\n(\n    EVENTID    INTEGER\n        constraint Sales_pk\n            primary key,\n    REFID      INTEGER\n        references Customers,\n    EVENT_DATE DATETIME,\n    AMOUNT     REAL\n)",
+      "row_count": 3420829,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "EVENTID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "EVENT ID",
+            "description": "unique id of event (sales)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "REFID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "REFERENCE ID",
+            "description": "Reference to customer ID",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "EVENT_DATE",
+          "type": "DATETIME",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "EVENT DATE",
+            "description": "date of sales",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "AMOUNT",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "AMOUNT",
+            "description": "amount of sales",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Sales",
+          "from_column": "REFID",
+          "to_table": "Customers",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "mailings3",
+      "type": "table",
+      "create_sql": "CREATE TABLE mailings3\n(\n    REFID    INTEGER\n        constraint mailings3_pk\n            primary key,\n    REF_DATE DATETIME,\n    RESPONSE TEXT\n)",
+      "row_count": 300000,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "REFID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "REFERENCE ID",
+            "description": "unique id number identifying the customer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "REF_DATE",
+          "type": "DATETIME",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "REFERENCE DATE",
+            "description": "indicating the date when the mailing was sent",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "RESPONSE",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Actual response to the marketing incentive email",
+            "data_format": "text",
+            "value_description": "• True\n• False \ncommonsense evidence: \n1. any person who has not responded to a mailing within two months is considered to have responded negatively.\n2. true respond to the mailing, otherwise, no"
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Customers",
+      "from_column": "GEOID",
+      "to_table": "Demog",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Mailings1_2",
+      "from_column": "REFID",
+      "to_table": "Customers",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Sales",
+      "from_column": "REFID",
+      "to_table": "Customers",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

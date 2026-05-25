@@ -1,0 +1,600 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "shipping",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/shipping/shipping.sqlite",
+  "tables": [
+    {
+      "name": "city",
+      "type": "table",
+      "create_sql": "CREATE TABLE city\n(\n    city_id    INTEGER\n            primary key,\n    city_name  TEXT,\n    state      TEXT,\n    population INTEGER,\n    area       REAL\n)",
+      "row_count": 601,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "city_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "city id",
+            "description": "unique identifier for the city",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "city_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "city name",
+            "description": "name of the city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "state in which the city is",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "population",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "population of the city",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "area",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "square miles the city covers",
+            "data_format": "real",
+            "value_description": "commonsense evidence: \npopulation density (land area per capita) = area / population"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "customer",
+      "type": "table",
+      "create_sql": "CREATE TABLE customer\n(\n    cust_id        INTEGER\n            primary key,\n    cust_name      TEXT,\n    annual_revenue INTEGER,\n    cust_type      TEXT,\n    address        TEXT,\n    city           TEXT,\n    state          TEXT,\n    zip            REAL,\n    phone          TEXT\n)",
+      "row_count": 100,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "cust_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "customer id",
+            "description": "Unique identifier for the customer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "cust_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "customer name",
+            "description": "Business name of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "annual_revenue",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "annual revenue",
+            "description": "Annual revenue of the customer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "cust_type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "customer type",
+            "description": "Whether the customer is a manufacturer or a wholes",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "address",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Physical street address of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "City of the customer's address",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "State of the customer's address",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \nplease mention its full name in the question, by referring to \nhttps://www23.statcan.gc.ca/imdb/p3VD.pl?Function=getVD&TVD=53971\ne.g., NY --> New York"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "zip",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Postal code of the customer's address",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "phone",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Telephone number to reach the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "driver",
+      "type": "table",
+      "create_sql": "CREATE TABLE driver\n(\n    driver_id  INTEGER\n            primary key,\n    first_name TEXT,\n    last_name  TEXT,\n    address    TEXT,\n    city       TEXT,\n    state      TEXT,\n    zip_code   INTEGER,\n    phone      TEXT\n)",
+      "row_count": 11,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "driver_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "driver id",
+            "description": "Unique identifier for the driver",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "first_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "First given name of the driver",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "last_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "Family name of the driver",
+            "data_format": "text",
+            "value_description": "commonsense evidence: full name = first_name + last_name"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "address",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Street address of the driver's home",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "City the driver lives in",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "State the driver lives in",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \nplease mention its full name in the question, by referring to \nhttps://www23.statcan.gc.ca/imdb/p3VD.pl?Function=getVD&TVD=53971 \ne.g., NY --> New York"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "zip_code",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "zip code",
+            "description": "postal code of the driver's address",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "phone",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "telephone number of the driver",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "shipment",
+      "type": "table",
+      "create_sql": "CREATE TABLE shipment\n(\n    ship_id   INTEGER\n            primary key,\n    cust_id   INTEGER,\n    weight    REAL,\n    truck_id  INTEGER,\n    driver_id INTEGER,\n    city_id   INTEGER,\n    ship_date TEXT,\n    foreign key (cust_id) references customer(cust_id),\n    foreign key (city_id) references city(city_id),\n    foreign key (driver_id) references driver(driver_id),\n    foreign key (truck_id) references truck(truck_id)\n)",
+      "row_count": 960,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ship_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "ship id",
+            "description": "Unique identifier of the shipment",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "cust_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "customer id",
+            "description": "A reference to the customer table that indicates which customer the shipment is for",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "weight",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The number of pounds being transported on the shipment",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "truck_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "truck id",
+            "description": "A reference to the truck table that indicates which truck is used in the shipment",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "driver_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "driver id",
+            "description": "A reference to the driver table that indicates which driver transported the goods in the shipment",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "city_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "city id",
+            "description": "A reference to the city table that indicates the destination of the shipment",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "ship_date",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ship date",
+            "description": "the date the items were received by the driver",
+            "data_format": "text",
+            "value_description": "yyyy-mm-dd"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "shipment",
+          "from_column": "truck_id",
+          "to_table": "truck",
+          "to_column": "truck_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "shipment",
+          "from_column": "driver_id",
+          "to_table": "driver",
+          "to_column": "driver_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "shipment",
+          "from_column": "city_id",
+          "to_table": "city",
+          "to_column": "city_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 3,
+          "sequence": 0,
+          "from_table": "shipment",
+          "from_column": "cust_id",
+          "to_table": "customer",
+          "to_column": "cust_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "truck",
+      "type": "table",
+      "create_sql": "CREATE TABLE truck\n(\n    truck_id   INTEGER\n            primary key,\n    make       TEXT,\n    model_year INTEGER\n)",
+      "row_count": 12,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "truck_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "truck id",
+            "description": "Unique identifier of the truck table",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "make",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The brand of the truck",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \n Peterbilt headquarter: Texas (TX) \n Mack headquarter: North Carolina (NC) \n Kenworth headquarter: Washington (WA) \ncan ask question about headquarters of the truck"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "model_year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "model year",
+            "description": "The year the truck was manufactured",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: The truck with earlier model year means this truck is newer."
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "shipment",
+      "from_column": "truck_id",
+      "to_table": "truck",
+      "to_column": "truck_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "shipment",
+      "from_column": "driver_id",
+      "to_table": "driver",
+      "to_column": "driver_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "shipment",
+      "from_column": "city_id",
+      "to_table": "city",
+      "to_column": "city_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 3,
+      "sequence": 0,
+      "from_table": "shipment",
+      "from_column": "cust_id",
+      "to_table": "customer",
+      "to_column": "cust_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

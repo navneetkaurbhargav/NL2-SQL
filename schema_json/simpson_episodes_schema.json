@@ -1,0 +1,818 @@
+{
+  "db_id": "simpson_episodes",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/simpson_episodes/simpson_episodes.sqlite",
+  "tables": [
+    {
+      "name": "Award",
+      "type": "table",
+      "create_sql": "CREATE TABLE Award\n(\n    award_id       INTEGER\n            primary key,\n    organization   TEXT,\n    year           INTEGER,\n    award_category TEXT,\n    award          TEXT,\n    person         TEXT,\n    role           TEXT,\n    episode_id     TEXT,\n    season         TEXT,\n    song           TEXT,\n    result         TEXT,\n    foreign key (person) references Person(name),\n    foreign key (episode_id) references Episode(episode_id)\n)",
+      "row_count": 75,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "award_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "award id",
+            "description": "the unique id for the award",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "organization",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the organization that holds the award",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "year of award",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "award_category",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the category of the award",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "award",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the award",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "person",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the person who gets the award",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "role",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the role of the honoree",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "episode_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "episode id",
+            "description": "S stands for 'Season' and E stands for 'Episode'",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "season",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the season of the awarded work",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "song",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the theme song of the awarded work",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "result",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the final award result",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n Nominee: the prospective recipient of the award. The nominee are people who were nominated but didn't win the award. \n Winner: the people who finally won the award"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Award",
+          "from_column": "episode_id",
+          "to_table": "Episode",
+          "to_column": "episode_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Award",
+          "from_column": "person",
+          "to_table": "Person",
+          "to_column": "name",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Character_Award",
+      "type": "table",
+      "create_sql": "CREATE TABLE Character_Award\n(\n    award_id  INTEGER,\n    character TEXT,\n    foreign key (award_id) references Award(award_id)\n)",
+      "row_count": 12,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "award_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "award id",
+            "description": "A unique identifier for the award",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "character",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the awarded character",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Character_Award",
+          "from_column": "award_id",
+          "to_table": "Award",
+          "to_column": "award_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Credit",
+      "type": "table",
+      "create_sql": "CREATE TABLE Credit\n(\n    episode_id TEXT,\n    category   TEXT,\n    person     TEXT,\n    role       TEXT,\n    credited   TEXT,\n    foreign key (episode_id) references Episode(episode_id),\n    foreign key (person) references Person(name)\n)",
+      "row_count": 4557,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "episode_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "episode id",
+            "description": "A unique identifier for episodes",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "category",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the category of the credit",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "person",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of cast and crew members",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "role",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the role of the person",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "credited",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the person is credited",
+            "data_format": "text",
+            "value_description": "true/ false\ncommonsense evidence:\n true: The person is included in the credit list\n false: The person isn't included in the credit list"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Credit",
+          "from_column": "person",
+          "to_table": "Person",
+          "to_column": "name",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Credit",
+          "from_column": "episode_id",
+          "to_table": "Episode",
+          "to_column": "episode_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Episode",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Episode\"\n(\n    episode_id       TEXT\n        constraint Episode_pk\n            primary key,\n    season           INTEGER,\n    episode          INTEGER,\n    number_in_series INTEGER,\n    title            TEXT,\n    summary          TEXT,\n    air_date         TEXT,\n    episode_image    TEXT,\n    rating           REAL,\n    votes            INTEGER\n)",
+      "row_count": 21,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "episode_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "episode id",
+            "description": "A unique identifier for episodes",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "season",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the season of the episode",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "episode",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the episode number of the episode",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "number_in_series",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "number in series",
+            "description": "the number in series",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the title of the episode",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "summary",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the summary of the episode",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "air_date",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "air date",
+            "description": "the air date of the episode",
+            "data_format": "text",
+            "value_description": "YYYY-MM-DD"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "episode_image",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "episode image",
+            "description": "the image of episode",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "rating",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the rating of episode",
+            "data_format": "real",
+            "value_description": "0.0 - 10.0\ncommonsense evidence:\nHigher ratings mean higher quality and better response.\n excellent: 7.0 < rating <= 10.0\n average: 5.0 < rating <= 7.0 \n bad: 0.0 < rating <= 5.0\nnot bad: average, excellent"
+          }
+        },
+        {
+          "cid": 9,
+          "name": "votes",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the votes of episode",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nHigher votes mean more audience supports (or popular)."
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Keyword",
+      "type": "table",
+      "create_sql": "CREATE TABLE Keyword\n(\n    episode_id TEXT,\n    keyword    TEXT,\n    primary key (episode_id, keyword),\n    foreign key (episode_id) references Episode(episode_id)\n)",
+      "row_count": 307,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "episode_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "episode id",
+            "description": "A unique identifier for episodes",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "keyword",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the keywords of episode",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Keyword",
+          "from_column": "episode_id",
+          "to_table": "Episode",
+          "to_column": "episode_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Person",
+      "type": "table",
+      "create_sql": "CREATE TABLE Person\n(\n    name          TEXT\n        constraint Person_pk\n            primary key,\n    birthdate     TEXT,\n    birth_name    TEXT,\n    birth_place   TEXT,\n    birth_region  TEXT,\n    birth_country TEXT,\n    height_meters REAL,\n    nickname      TEXT\n)",
+      "row_count": 369,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the crew",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "birthdate",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "birth date",
+            "description": "the birth date of the crew",
+            "data_format": "text",
+            "value_description": "YYYY-MM-DD"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "birth_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "birth name",
+            "description": "the birth name of the crew",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "birth_place",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "birth place",
+            "description": "the birth place of the crew",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "birth_region",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "birth region",
+            "description": "the birth region of the crew",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "birth_country",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "birth country",
+            "description": "the birth country of the crew",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "height_meters",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "height meters",
+            "description": "the height of the crew",
+            "data_format": "real",
+            "value_description": "the unit is meter"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "nickname",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the nickname of the crew",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Vote",
+      "type": "table",
+      "create_sql": "CREATE TABLE Vote\n(\n    episode_id TEXT,\n    stars      INTEGER,\n    votes      INTEGER,\n    percent    REAL,\n    foreign key (episode_id) references Episode(episode_id)\n)",
+      "row_count": 210,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "episode_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "episode id",
+            "description": "A unique identifier for episodes",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "stars",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the star score of the episode",
+            "data_format": "integer",
+            "value_description": "1-10\ncommonsense evidence:\nStar classification is a type of rating scale. The lowest star is 1 which means the worst, and the highest star is 10 which means the best."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "votes",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the number of votes of the star score",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "percent",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the percent of the vote number of the star score",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\npercent = the number of votes for the star / the total amount of votes for all stars"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Vote",
+          "from_column": "episode_id",
+          "to_table": "Episode",
+          "to_column": "episode_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Award",
+      "from_column": "episode_id",
+      "to_table": "Episode",
+      "to_column": "episode_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Award",
+      "from_column": "person",
+      "to_table": "Person",
+      "to_column": "name",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Character_Award",
+      "from_column": "award_id",
+      "to_table": "Award",
+      "to_column": "award_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Credit",
+      "from_column": "person",
+      "to_table": "Person",
+      "to_column": "name",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Credit",
+      "from_column": "episode_id",
+      "to_table": "Episode",
+      "to_column": "episode_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Keyword",
+      "from_column": "episode_id",
+      "to_table": "Episode",
+      "to_column": "episode_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Vote",
+      "from_column": "episode_id",
+      "to_table": "Episode",
+      "to_column": "episode_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

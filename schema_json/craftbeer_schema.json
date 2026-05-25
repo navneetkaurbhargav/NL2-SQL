@@ -1,0 +1,137 @@
+{
+  "db_id": "craftbeer",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/craftbeer/craftbeer.sqlite",
+  "tables": [
+    {
+      "name": "beers",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"beers\"\n(\n    id         INTEGER not null\n        primary key,\n    brewery_id INTEGER not null\n        constraint beers_ibfk_1\n            references breweries,\n    abv        REAL,\n    ibu        REAL,\n    name       TEXT    not null,\n    style      TEXT,\n    ounces     REAL    not null\n)",
+      "row_count": 2410,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1
+        },
+        {
+          "cid": 1,
+          "name": "brewery_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 2,
+          "name": "abv",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 3,
+          "name": "ibu",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 4,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 5,
+          "name": "style",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 6,
+          "name": "ounces",
+          "type": "REAL",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "beers",
+          "from_column": "brewery_id",
+          "to_table": "breweries",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "breweries",
+      "type": "table",
+      "create_sql": "CREATE TABLE breweries\n(\n    id    INTEGER          not null\n        primary key,\n    name  TEXT null,\n    city  TEXT null,\n    state TEXT null\n)",
+      "row_count": 558,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1
+        },
+        {
+          "cid": 1,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 2,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 3,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "beers",
+      "from_column": "brewery_id",
+      "to_table": "breweries",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

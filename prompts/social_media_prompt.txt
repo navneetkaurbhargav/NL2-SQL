@@ -1,0 +1,384 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "social_media",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/social_media/social_media.sqlite",
+  "tables": [
+    {
+      "name": "location",
+      "type": "table",
+      "create_sql": "CREATE TABLE location\n(\n    LocationID INTEGER\n        constraint location_pk\n            primary key,\n    Country    TEXT,\n    State      TEXT,\n    StateCode  TEXT,\n    City       TEXT\n)",
+      "row_count": 6211,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "LocationID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "location id",
+            "description": "unique id of the location",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "State",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the state",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "StateCode",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "state code",
+            "description": "state code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "City",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "twitter",
+      "type": "table",
+      "create_sql": "CREATE TABLE twitter\n(\n    TweetID         TEXT\n            primary key,\n    Weekday         TEXT,\n    Hour         INTEGER,\n    Day          INTEGER,\n    Lang         TEXT,\n    IsReshare    TEXT,\n    Reach        INTEGER,\n    RetweetCount INTEGER,\n    Likes        INTEGER,\n    Klout        INTEGER,\n    Sentiment    REAL,\n    \"text\"         TEXT,\n    LocationID   INTEGER,\n    UserID       TEXT,\n    foreign key (LocationID) references location(LocationID),\n    foreign key (UserID) references user(UserID)\n)",
+      "row_count": 99901,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "TweetID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "tweet id",
+            "description": "the unique id of the tweet",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Weekday",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the weekday that the tweet has been posted",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Hour",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the hour that the tweet has been posted",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Day",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the day that the tweet has been posted",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Lang",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "language",
+            "description": "the language of the tweet",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "IsReshare",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "is reshare",
+            "description": "whether the tweet is reshared",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\r\nA reshared tweet is when someone reshares or forwards a post to their own Twitter \r\n\ttrue: the tweet is reshared\r\n\tfalse: the tweet isn't reshared"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Reach",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the reach of the tweet",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\nreach counts the number of unique users who have seen your tweet"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "RetweetCount",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "retweet count",
+            "description": "the retweet count",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "Likes",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the number of likes",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "Klout",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the klout of the tweet",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "Sentiment",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the sentiment of the tweet",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\r\n\t>0: the sentiment of the tweet is positive. \r\n\t=0: the sentiment of the tweet is neutral.\r\n\t<0: the sentiment of the tweet is negative."
+          }
+        },
+        {
+          "cid": 11,
+          "name": "text",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the text of the tweet",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "LocationID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "location id",
+            "description": "the location id of the poster",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "UserID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "user id",
+            "description": "the user id of the poster",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "twitter",
+          "from_column": "UserID",
+          "to_table": "user",
+          "to_column": "UserID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "twitter",
+          "from_column": "LocationID",
+          "to_table": "location",
+          "to_column": "LocationID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "type": "table",
+      "create_sql": "CREATE TABLE user\n(\n    UserID TEXT\n        constraint user_pk\n            primary key,\n    Gender TEXT\n)",
+      "row_count": 99260,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "UserID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "user id",
+            "description": "the unique id of the user",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Gender",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "user's gender",
+            "data_format": "text",
+            "value_description": "Male / Female / Unknown"
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "twitter",
+      "from_column": "UserID",
+      "to_table": "user",
+      "to_column": "UserID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "twitter",
+      "from_column": "LocationID",
+      "to_table": "location",
+      "to_column": "LocationID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

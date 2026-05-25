@@ -1,0 +1,543 @@
+{
+  "db_id": "image_and_language",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/image_and_language/image_and_language.sqlite",
+  "tables": [
+    {
+      "name": "ATT_CLASSES",
+      "type": "table",
+      "create_sql": "CREATE TABLE ATT_CLASSES\n(\n    ATT_CLASS_ID INTEGER default 0 not null\n        primary key,\n    ATT_CLASS    TEXT      not null\n)",
+      "row_count": 699,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ATT_CLASS_ID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "ATTRIBUTE CLASS ID",
+            "description": "the unique attribute class ids",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "ATT_CLASS",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ATTRIBUTE CLASS",
+            "description": "the corresponding classes for attributes",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "IMG_OBJ",
+      "type": "table",
+      "create_sql": "CREATE TABLE IMG_OBJ\n(\n    IMG_ID        INTEGER default 0 not null,\n    OBJ_SAMPLE_ID INTEGER    default 0 not null,\n    OBJ_CLASS_ID  INTEGER              null,\n    X             INTEGER              null,\n    Y             INTEGER             null,\n    W             INTEGER              null,\n    H             INTEGER              null,\n    primary key (IMG_ID, OBJ_SAMPLE_ID),\n    foreign key (OBJ_CLASS_ID) references OBJ_CLASSES (OBJ_CLASS_ID)\n)",
+      "row_count": 1750617,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "IMG_ID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "IMAGE ID",
+            "description": "the id representing images",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "OBJ_SAMPLE_ID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "OBJECT SAMPLE ID",
+            "description": "the id of the object sample",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "OBJ_CLASS_ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "OBJECT CLASS ID",
+            "description": "the id indicating class of the objects",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "X",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "x coordinate",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Y",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "y coordinate",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "W",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "width of the bounding box of the object",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "H",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "height of the bounding box of the object",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\n\nbounding box of the object: (x, y, W, H)"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "IMG_OBJ",
+          "from_column": "OBJ_CLASS_ID",
+          "to_table": "OBJ_CLASSES",
+          "to_column": "OBJ_CLASS_ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "IMG_OBJ_ATT",
+      "type": "table",
+      "create_sql": "CREATE TABLE IMG_OBJ_ATT\n(\n    IMG_ID        INTEGER default 0 not null,\n    ATT_CLASS_ID  INTEGER    default 0 not null,\n    OBJ_SAMPLE_ID INTEGER    default 0 not null,\n    primary key (IMG_ID, ATT_CLASS_ID, OBJ_SAMPLE_ID),\n    foreign key (ATT_CLASS_ID) references ATT_CLASSES (ATT_CLASS_ID),\n    foreign key (IMG_ID, OBJ_SAMPLE_ID) references IMG_OBJ (IMG_ID, OBJ_SAMPLE_ID)\n)",
+      "row_count": 1074674,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "IMG_ID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "IMAGE ID",
+            "description": "id number of each image",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "ATT_CLASS_ID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "ATTRIBUTE CLASS ID",
+            "description": "attribute class number for image",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\n\nif one IMG_ID has many ATT_CLASS_ID, it refers to that this image has multiple attributes"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "OBJ_SAMPLE_ID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "OBJECT SAMPLE ID",
+            "description": "object sample id",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\n\nâ¢ if one IMG_ID has many OBJ_SAMPLE_ID, it refers to that this image has multiple objects\n\nâ¢ if one ATT_CLASS_ID has many OBJ_SAMPLE_ID, it refers to that this attribute is composed of multiple objects."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "IMG_OBJ_ATT",
+          "from_column": "IMG_ID",
+          "to_table": "IMG_OBJ",
+          "to_column": "IMG_ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "IMG_OBJ_ATT",
+          "from_column": "OBJ_SAMPLE_ID",
+          "to_table": "IMG_OBJ",
+          "to_column": "OBJ_SAMPLE_ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "IMG_OBJ_ATT",
+          "from_column": "ATT_CLASS_ID",
+          "to_table": "ATT_CLASSES",
+          "to_column": "ATT_CLASS_ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "IMG_REL",
+      "type": "table",
+      "create_sql": "CREATE TABLE IMG_REL\n(\n    IMG_ID         INTEGER default 0 not null,\n    PRED_CLASS_ID  INTEGER    default 0 not null,\n    OBJ1_SAMPLE_ID INTEGER    default 0 not null,\n    OBJ2_SAMPLE_ID INTEGER   default 0 not null,\n    primary key (IMG_ID, PRED_CLASS_ID, OBJ1_SAMPLE_ID, OBJ2_SAMPLE_ID),\n    foreign key (PRED_CLASS_ID) references PRED_CLASSES (PRED_CLASS_ID),\n    foreign key (IMG_ID, OBJ1_SAMPLE_ID) references IMG_OBJ (IMG_ID, OBJ_SAMPLE_ID),\n    foreign key (IMG_ID, OBJ2_SAMPLE_ID) references IMG_OBJ (IMG_ID, OBJ_SAMPLE_ID)\n)",
+      "row_count": 763159,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "IMG_ID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "IMAGE ID",
+            "description": "the image id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "PRED_CLASS_ID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "PREDICTION CLASS ID",
+            "description": "the prediction relationship class between objects",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\n\nif OBJ1_SAMPLE_ID = OBJ2_SAMPLE_ID, this relationship is the self-relation."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "OBJ1_SAMPLE_ID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "OBJECT1 SAMPLE ID",
+            "description": "the sample id of the first object",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "OBJ2_SAMPLE_ID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 4,
+          "bird_description": {
+            "semantic_name": "OBJECT2 SAMPLE ID",
+            "description": "the sample id of the second object",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\n\nif (OBJ1_SAMPLE_ID, OBJ2_SAMPLE_ID) has multiple PRED_CLASS_ID, it means these two objects have multiple relations."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "IMG_REL",
+          "from_column": "IMG_ID",
+          "to_table": "IMG_OBJ",
+          "to_column": "IMG_ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "IMG_REL",
+          "from_column": "OBJ2_SAMPLE_ID",
+          "to_table": "IMG_OBJ",
+          "to_column": "OBJ_SAMPLE_ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "IMG_REL",
+          "from_column": "IMG_ID",
+          "to_table": "IMG_OBJ",
+          "to_column": "IMG_ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 1,
+          "from_table": "IMG_REL",
+          "from_column": "OBJ1_SAMPLE_ID",
+          "to_table": "IMG_OBJ",
+          "to_column": "OBJ_SAMPLE_ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "IMG_REL",
+          "from_column": "PRED_CLASS_ID",
+          "to_table": "PRED_CLASSES",
+          "to_column": "PRED_CLASS_ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "OBJ_CLASSES",
+      "type": "table",
+      "create_sql": "CREATE TABLE OBJ_CLASSES\n(\n    OBJ_CLASS_ID INTEGER default 0 not null\n        primary key,\n    OBJ_CLASS    TEXT      not null\n)",
+      "row_count": 300,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "OBJ_CLASS_ID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "OBJECT CLASS ID",
+            "description": "unique id number identifying object classes",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "OBJ_CLASS",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "OBJECT CLASS",
+            "description": "the explanation about object classes",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "PRED_CLASSES",
+      "type": "table",
+      "create_sql": "CREATE TABLE PRED_CLASSES\n(\n    PRED_CLASS_ID INTEGER default 0 not null\n        primary key,\n    PRED_CLASS    TEXT     not null\n)",
+      "row_count": 150,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "PRED_CLASS_ID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "PREDICTION CLASS ID",
+            "description": "the unique prediction id for the class",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "PRED_CLASS",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "PREDICTION CLASS",
+            "description": "the caption for the prediction class id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "IMG_OBJ",
+      "from_column": "OBJ_CLASS_ID",
+      "to_table": "OBJ_CLASSES",
+      "to_column": "OBJ_CLASS_ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "IMG_OBJ_ATT",
+      "from_column": "IMG_ID",
+      "to_table": "IMG_OBJ",
+      "to_column": "IMG_ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "IMG_OBJ_ATT",
+      "from_column": "OBJ_SAMPLE_ID",
+      "to_table": "IMG_OBJ",
+      "to_column": "OBJ_SAMPLE_ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "IMG_OBJ_ATT",
+      "from_column": "ATT_CLASS_ID",
+      "to_table": "ATT_CLASSES",
+      "to_column": "ATT_CLASS_ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "IMG_REL",
+      "from_column": "IMG_ID",
+      "to_table": "IMG_OBJ",
+      "to_column": "IMG_ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "IMG_REL",
+      "from_column": "OBJ2_SAMPLE_ID",
+      "to_table": "IMG_OBJ",
+      "to_column": "OBJ_SAMPLE_ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "IMG_REL",
+      "from_column": "IMG_ID",
+      "to_table": "IMG_OBJ",
+      "to_column": "IMG_ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 1,
+      "from_table": "IMG_REL",
+      "from_column": "OBJ1_SAMPLE_ID",
+      "to_table": "IMG_OBJ",
+      "to_column": "OBJ_SAMPLE_ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "IMG_REL",
+      "from_column": "PRED_CLASS_ID",
+      "to_table": "PRED_CLASSES",
+      "to_column": "PRED_CLASS_ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

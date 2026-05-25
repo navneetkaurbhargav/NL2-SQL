@@ -1,0 +1,1003 @@
+{
+  "db_id": "movie_platform",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/movie_platform/movie_platform.sqlite",
+  "tables": [
+    {
+      "name": "lists",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"lists\"\n(\n    user_id                     INTEGER\n        references lists_users (user_id),\n    list_id                     INTEGER not null\n        primary key,\n    list_title                  TEXT,\n    list_movie_number           INTEGER,\n    list_update_timestamp_utc   TEXT,\n    list_creation_timestamp_utc TEXT,\n    list_followers              INTEGER,\n    list_url                    TEXT,\n    list_comments               INTEGER,\n    list_description            TEXT,\n    list_cover_image_url        TEXT,\n    list_first_image_url        TEXT,\n    list_second_image_url       TEXT,\n    list_third_image_url        TEXT\n)",
+      "row_count": 79565,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "user_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ID related to the user who created the list.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "list_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ID of the list on Mubi",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "list_title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Name of the list",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "list_movie_number",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Number of movies added to the list",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "list_update_timestamp_utc",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Last update timestamp for the list",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "list_creation_timestamp_utc",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Creation timestamp for the list",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "list_followers",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Number of followers on the list",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "list_url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "URL to the list page on Mubi",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "list_comments",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Number of comments on the list",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "list_description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "List description made by the user",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "list_cover_image_url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "list_first_image_url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "list_second_image_url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "list_third_image_url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "lists",
+          "from_column": "user_id",
+          "to_table": "lists_users",
+          "to_column": "user_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "lists_users",
+      "type": "table",
+      "create_sql": "CREATE TABLE lists_users\n(\n    user_id                 INTEGER not null ,\n    list_id                 INTEGER not null ,\n    list_update_date_utc    TEXT,\n    list_creation_date_utc  TEXT,\n    user_trialist           INTEGER,\n    user_subscriber         INTEGER,\n    user_avatar_image_url   TEXT,\n    user_cover_image_url    TEXT,\n    user_eligible_for_trial TEXT,\n    user_has_payment_method TEXT,\n    primary key (user_id, list_id),\n    foreign key (list_id) references lists(list_id),\n    foreign key (user_id) references lists(user_id)\n)",
+      "row_count": 80311,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "user_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ID related to the user who created the list.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "list_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ID of the list on Mubi",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "list_update_date_utc",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Last update date for the list",
+            "data_format": "text",
+            "value_description": "YYYY-MM-DD"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "list_creation_date_utc",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Creation date for the list",
+            "data_format": "text",
+            "value_description": "YYYY-MM-DD"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "user_trialist",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the user was a tralist when he created the list",
+            "data_format": "integer",
+            "value_description": "1 = the user was a trialist when he created the list\n 0 = the user was not a trialist when he created the list"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "user_subscriber",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the user was a subscriber when he created the list",
+            "data_format": "integer",
+            "value_description": "1 = the user was a subscriber when he created the list \n0 = the user was not a subscriber when he created the list"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "user_avatar_image_url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "User profile image URL on Mubi",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "user_cover_image_url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "User profile cover image URL on Mubi",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "user_eligible_for_trial",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the user was eligible for trial when he created the list",
+            "data_format": "text",
+            "value_description": "1 = the user was eligible for trial when he created the list \n0 = the user was not eligible for trial when he created the list"
+          }
+        },
+        {
+          "cid": 9,
+          "name": "user_has_payment_method",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the user was a paying subscriber when he created the list",
+            "data_format": "text",
+            "value_description": "1 = the user was a paying subscriber when he created the list \n0 = the user was not a paying subscriber when he created the list"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "lists_users",
+          "from_column": "user_id",
+          "to_table": "lists",
+          "to_column": "user_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "lists_users",
+          "from_column": "list_id",
+          "to_table": "lists",
+          "to_column": "list_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "movies",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"movies\"\n(\n    movie_id             INTEGER not null\n        primary key,\n    movie_title          TEXT,\n    movie_release_year   INTEGER,\n    movie_url            TEXT,\n    movie_title_language TEXT,\n    movie_popularity     INTEGER,\n    movie_image_url      TEXT,\n    director_id          TEXT,\n    director_name        TEXT,\n    director_url         TEXT\n)",
+      "row_count": 226087,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "movie_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ID related to the movie on Mubi",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "movie_title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Name of the movie",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "movie_release_year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Release year of the movie",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "movie_url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "URL to the movie page on Mubi",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "movie_title_language",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "By default, the title is in English.",
+            "data_format": "text",
+            "value_description": "Only contains one value which is 'en'"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "movie_popularity",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Number of Mubi users who love this movie",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "movie_image_url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Image URL to the movie on Mubi",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "director_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ID related to the movie director on Mubi",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "director_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Full Name of the movie director",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "director_url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "URL to the movie director page on Mubi",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "ratings",
+      "type": "table",
+      "create_sql": "CREATE TABLE ratings\n(\n    movie_id                INTEGER,\n    rating_id               INTEGER,\n    rating_url              TEXT,\n    rating_score            INTEGER,\n    rating_timestamp_utc    TEXT,\n    critic                  TEXT,\n    critic_likes            INTEGER,\n    critic_comments         INTEGER,\n    user_id                 INTEGER,\n    user_trialist           INTEGER,\n    user_subscriber         INTEGER,\n    user_eligible_for_trial INTEGER,\n    user_has_payment_method INTEGER,\n    foreign key (movie_id) references movies(movie_id),\n    foreign key (user_id) references lists_users(user_id),\n    foreign key (rating_id) references ratings(rating_id),\n    foreign key (user_id) references ratings_users(user_id)\n)",
+      "row_count": 15517252,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "movie_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Movie ID related to the rating",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "rating_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Rating ID on Mubi",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "rating_url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "URL to the rating on Mubi",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "rating_score",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Rating score ranging from 1 (lowest) to 5 (highest)",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nThe score is proportional to the user's liking.\nThe higher the score is, the more the user likes the movie"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "rating_timestamp_utc",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Timestamp for the movie rating made by the user on Mubi",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "critic",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Critic made by the user rating the movie.",
+            "data_format": "text",
+            "value_description": "If value = \"None\", the user did not write a critic when rating the movie."
+          }
+        },
+        {
+          "cid": 6,
+          "name": "critic_likes",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Number of likes related to the critic made by the user rating the movie",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "critic_comments",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Number of comments related to the critic made by the user rating the movie",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "user_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ID related to the user rating the movie",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "user_trialist",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether user was a tralist when he rated the movie",
+            "data_format": "integer",
+            "value_description": "1 = the user was a trialist when he rated the movie \n0 = the user was not a trialist when he rated the movie"
+          }
+        },
+        {
+          "cid": 10,
+          "name": "user_subscriber",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "user_eligible_for_trial",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "user_has_payment_method",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "ratings",
+          "from_column": "user_id",
+          "to_table": "ratings_users",
+          "to_column": "user_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "ratings",
+          "from_column": "rating_id",
+          "to_table": "ratings",
+          "to_column": "rating_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "ratings",
+          "from_column": "user_id",
+          "to_table": "lists_users",
+          "to_column": "user_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 3,
+          "sequence": 0,
+          "from_table": "ratings",
+          "from_column": "movie_id",
+          "to_table": "movies",
+          "to_column": "movie_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "ratings_users",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"ratings_users\"\n(\n    user_id                 INTEGER\n        references lists_users (user_id),\n    rating_date_utc         TEXT,\n    user_trialist           INTEGER,\n    user_subscriber         INTEGER,\n    user_avatar_image_url   TEXT,\n    user_cover_image_url    TEXT,\n    user_eligible_for_trial INTEGER,\n    user_has_payment_method INTEGER\n)",
+      "row_count": 4297641,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "user_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ID related to the user rating the movie",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "rating_date_utc",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Rating date for the movie rating.",
+            "data_format": "text",
+            "value_description": "YYYY-MM-DD"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "user_trialist",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the user was a trialist when he rated the movie",
+            "data_format": "integer",
+            "value_description": "1 = the user was a trialist when he rated the movie\n 0 = the user was not a trialist when he rated the movie"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "user_subscriber",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the user was a subscriber when he rated the movie",
+            "data_format": "integer",
+            "value_description": "1 = the user was a subscriber when he rated the movie \n0 = the user was not a subscriber when he rated the movie"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "user_avatar_image_url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "URL to the user profile image on Mubi",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "user_cover_image_url",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "URL to the user profile cover image on Mubi",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "user_eligible_for_trial",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the user was eligible for trial when he rated the movie",
+            "data_format": "integer",
+            "value_description": "1 = the user was eligible for trial when he rated the movie\n 0 = the user was not eligible for trial when he rated the movie"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "user_has_payment_method",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the user was a paying subscriber when he rated the movie",
+            "data_format": "integer",
+            "value_description": "1 = the user was a paying subscriber when he rated the movie \n0 = the user was not a paying subscriber when he rated"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "ratings_users",
+          "from_column": "user_id",
+          "to_table": "lists_users",
+          "to_column": "user_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "lists",
+      "from_column": "user_id",
+      "to_table": "lists_users",
+      "to_column": "user_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "lists_users",
+      "from_column": "user_id",
+      "to_table": "lists",
+      "to_column": "user_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "lists_users",
+      "from_column": "list_id",
+      "to_table": "lists",
+      "to_column": "list_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "ratings",
+      "from_column": "user_id",
+      "to_table": "ratings_users",
+      "to_column": "user_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "ratings",
+      "from_column": "rating_id",
+      "to_table": "ratings",
+      "to_column": "rating_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "ratings",
+      "from_column": "user_id",
+      "to_table": "lists_users",
+      "to_column": "user_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 3,
+      "sequence": 0,
+      "from_table": "ratings",
+      "from_column": "movie_id",
+      "to_table": "movies",
+      "to_column": "movie_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "ratings_users",
+      "from_column": "user_id",
+      "to_table": "lists_users",
+      "to_column": "user_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

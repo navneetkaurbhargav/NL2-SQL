@@ -1,0 +1,1903 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "movie_3",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/movie_3/movie_3.sqlite",
+  "tables": [
+    {
+      "name": "actor",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"actor\"\n(\n    actor_id    INTEGER\n        primary key autoincrement,\n    first_name  TEXT                               not null,\n    last_name   TEXT                               not null,\n    last_update DATETIME default CURRENT_TIMESTAMP not null\n)",
+      "row_count": 200,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "actor_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "actor id",
+            "description": "unique id number identifying the actor",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "first_name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "First name of the actor",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "last_name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "Last name of the actor",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "last_update",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last update",
+            "description": "The time of the latest update",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "address",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"address\"\n(\n    address_id  INTEGER\n        primary key autoincrement,\n    address     TEXT                               not null,\n    address2    TEXT,\n    district    TEXT                               not null,\n    city_id     INTEGER                            not null\n        references city\n            on update cascade,\n    postal_code TEXT,\n    phone       TEXT                               not null,\n    last_update DATETIME default CURRENT_TIMESTAMP not null\n)",
+      "row_count": 603,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "address_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "address id",
+            "description": "unique id number identifying the address",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "address",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The first address line",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "address2",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "address 2",
+            "description": "the second address line",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\naddress2 is the additional address if any"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "district",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "city_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer unsigned",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "postal_code",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "postal code",
+            "description": "",
+            "data_format": "text",
+            "value_description": "a postal code is a series of letters or digits or both, sometimes including spaces or punctuation, included in a postal address for the purpose of sorting mail."
+          }
+        },
+        {
+          "cid": 6,
+          "name": "phone",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "phone number",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "last_update",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last update",
+            "description": "The time of the latest update",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "address",
+          "from_column": "city_id",
+          "to_table": "city",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "category",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"category\"\n(\n    category_id INTEGER\n        primary key autoincrement,\n    name        TEXT                               not null,\n    last_update DATETIME default CURRENT_TIMESTAMP not null\n)",
+      "row_count": 16,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "category_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "category id",
+            "description": "unique id number identifying the category",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "name of the category",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "last_update",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last update",
+            "description": "The time of the latest update",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "city",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"city\"\n(\n    city_id     INTEGER\n        primary key autoincrement,\n    city        TEXT                               not null,\n    country_id  INTEGER                            not null\n        references country\n            on update cascade,\n    last_update DATETIME default CURRENT_TIMESTAMP not null\n)",
+      "row_count": 600,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "city_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "city id",
+            "description": "unique id number identifying the city",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "name of the city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "country_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "country id",
+            "description": "number identifying the country which the city belongs to",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "last_update",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last update",
+            "description": "The time of the latest update",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "city",
+          "from_column": "country_id",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "country",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"country\"\n(\n    country_id  INTEGER\n        primary key autoincrement,\n    country     TEXT                               not null,\n    last_update DATETIME default CURRENT_TIMESTAMP not null\n)",
+      "row_count": 109,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "country_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "country id",
+            "description": "unique id number identifying the country",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "the name of the country",
+            "description": "number identifying the country",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n Africa: (Algeria, Angola, Cameroon, Chad, Congo, The Democratic Republic of the, Egypt, Ethiopia, Gambia...)\n Asia: (Afghanistan, Armenia, Azerbaijan, \nBahrain, Bangladesh, Brunei, Cambodia, China, Hong Kong, India, Indonesia, Iran, Iraq, Israel...)\n Oceania (American Samoa, Australia, French Polynesia...)\n North America (Anguilla, Canada, Dominican Republic, Ecuador, Greenland...)\n South America (Argentina, Bolivia, Brazil, Chile, \nColombia, Ecuador, French Guiana....)\n Europe (Austria, Belarus, Bulgaria, Czech Republic, Estonia, Faroe Islands, Finland, France, Germany, Greece, Holy See (Vatican City State), Hungary, Italy...)\ndetails: https://worldpopulationreview.com/country-rankings/list-of-countries-by-continent\nquestion can mention i.e., Europe instead of Austria, etc."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "last_update",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last update",
+            "description": "The time of the latest update",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "customer",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"customer\"\n(\n    customer_id INTEGER\n        primary key autoincrement,\n    store_id    INTEGER                            not null\n        references store\n            on update cascade,\n    first_name  TEXT                               not null,\n    last_name   TEXT                               not null,\n    email       TEXT,\n    address_id  INTEGER                            not null\n        references address\n            on update cascade,\n    active      INTEGER  default 1                 not null,\n    create_date DATETIME                           not null,\n    last_update DATETIME default CURRENT_TIMESTAMP not null\n)",
+      "row_count": 599,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "customer_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "country id",
+            "description": "unique id number identifying the country",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "store_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "store id",
+            "description": "unique id number identifying the store",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "first_name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "First name of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "last_name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "Last name of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "email",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Email address of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "address_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "address id",
+            "description": "Address id number of the customer.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "active",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "1",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Wether the customer is active or not.",
+            "data_format": "integer",
+            "value_description": "1: active\n0: not active"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "create_date",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "create date",
+            "description": "The date when the record is created.",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "last_update",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last update",
+            "description": "The time of the latest update",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "customer",
+          "from_column": "address_id",
+          "to_table": "address",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "customer",
+          "from_column": "store_id",
+          "to_table": "store",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "film",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"film\"\n(\n    film_id              INTEGER\n        primary key autoincrement,\n    title                TEXT                               not null,\n    description          TEXT,\n    release_year         TEXT,\n    language_id          INTEGER                            not null\n        references language\n            on update cascade,\n    original_language_id INTEGER\n        references language\n            on update cascade,\n    rental_duration      INTEGER  default 3                 not null,\n    rental_rate          REAL     default 4.99              not null,\n    length               INTEGER,\n    replacement_cost     REAL     default 19.99             not null,\n    rating               TEXT     default 'G',\n    special_features     TEXT,\n    last_update          DATETIME default CURRENT_TIMESTAMP not null\n)",
+      "row_count": 1000,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "film_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "film id",
+            "description": "unique id number identifying the film",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "title",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "title",
+            "description": "title of the film",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "description",
+            "description": "main content of the film",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "release_year",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "release year",
+            "description": "the year when the film is released",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "language_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "language id",
+            "description": "the language id of the film",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "original_language_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "original language id",
+            "description": "the original language id of the film",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "rental_duration",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "3",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "rental duration",
+            "description": "how long this film can be rent at once",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\ndays\nprice / day = rental_rate / retal_duration"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "rental_rate",
+          "type": "REAL",
+          "not_null": true,
+          "default": "4.99",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "rental rate",
+            "description": "the rate of renting this film",
+            "data_format": "real",
+            "value_description": "higher -> expensive"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "length",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "length",
+            "description": "Duration time of the film screening",
+            "data_format": "integer",
+            "value_description": "minutes"
+          }
+        },
+        {
+          "cid": 9,
+          "name": "replacement_cost",
+          "type": "REAL",
+          "not_null": true,
+          "default": "19.99",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "replacement cost",
+            "description": "cost of replacing this film",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "rating",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "'G'",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "rating",
+            "description": "The Motion Picture Association film rating",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nG ?General Audiences\nPG ? Parental Guidance Suggested\nPG-13 ? Parents Strongly Cautioned\nR ? Restricted\nNC-17 ? Adults Only"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "special_features",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "special features",
+            "description": "features of this film",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "last_update",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last update",
+            "description": "The time of the latest update",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "film",
+          "from_column": "original_language_id",
+          "to_table": "language",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "film",
+          "from_column": "language_id",
+          "to_table": "language",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "film_actor",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"film_actor\"\n(\n    actor_id    INTEGER                            not null\n        references actor\n            on update cascade,\n    film_id     INTEGER                            not null\n        references film\n            on update cascade,\n    last_update DATETIME default CURRENT_TIMESTAMP not null,\n    primary key (actor_id, film_id)\n)",
+      "row_count": 5462,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "actor_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "actor id",
+            "description": "unique id number identifying the actor",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "film_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "film id",
+            "description": "id number identifying the film",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "last_update",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last update",
+            "description": "The time of the latest update",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "film_actor",
+          "from_column": "film_id",
+          "to_table": "film",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "film_actor",
+          "from_column": "actor_id",
+          "to_table": "actor",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "film_category",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"film_category\"\n(\n    film_id     INTEGER                            not null\n        references film\n            on update cascade,\n    category_id INTEGER                            not null\n        references category\n            on update cascade,\n    last_update DATETIME default CURRENT_TIMESTAMP not null,\n    primary key (film_id, category_id)\n)",
+      "row_count": 1000,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "film_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "film id",
+            "description": "unique id number identifying the film",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "category_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "category id",
+            "description": "id number identifying the category",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "last_update",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last update",
+            "description": "The time of the latest update",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "film_category",
+          "from_column": "category_id",
+          "to_table": "category",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "film_category",
+          "from_column": "film_id",
+          "to_table": "film",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "film_text",
+      "type": "table",
+      "create_sql": "CREATE TABLE film_text\n(\n    film_id     INTEGER     not null\n        primary key,\n    title       TEXT not null,\n    description TEXT         null\n)",
+      "row_count": 1000,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "film_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "film id",
+            "description": "unique id number identifying the film",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "title",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "title",
+            "description": "title of the film",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "description",
+            "description": "main content of the film",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "inventory",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"inventory\"\n(\n    inventory_id INTEGER\n        primary key autoincrement,\n    film_id      INTEGER                            not null\n        references film\n            on update cascade,\n    store_id     INTEGER                            not null\n        references store\n            on update cascade,\n    last_update  DATETIME default CURRENT_TIMESTAMP not null\n)",
+      "row_count": 4581,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "inventory_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "inventory id",
+            "description": "unique id number identifying the inventory",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "film_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "film id",
+            "description": "unique id number identifying the film",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "store_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "store id",
+            "description": "id of the store",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "last_update",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last update",
+            "description": "the last update time of the film",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "inventory",
+          "from_column": "store_id",
+          "to_table": "store",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "inventory",
+          "from_column": "film_id",
+          "to_table": "film",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "language",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"language\"\n(\n    language_id INTEGER\n        primary key autoincrement,\n    name        TEXT                               not null,\n    last_update DATETIME default CURRENT_TIMESTAMP not null\n)",
+      "row_count": 6,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "language_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "language id",
+            "description": "unique id number identifying the language",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "name",
+            "description": "name of the language",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "last_update",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last update",
+            "description": "The time of the latest update",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "payment",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"payment\"\n(\n    payment_id   INTEGER\n        primary key autoincrement,\n    customer_id  INTEGER                            not null\n        references customer\n            on update cascade,\n    staff_id     INTEGER                            not null\n        references staff\n            on update cascade,\n    rental_id    INTEGER\n                                                    references rental\n                                                        on update cascade on delete set null,\n    amount       REAL                               not null,\n    payment_date DATETIME                           not null,\n    last_update  DATETIME default CURRENT_TIMESTAMP not null\n)",
+      "row_count": 16049,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "payment_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "payment id",
+            "description": "unique id number identifying the payment",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "customer_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "customer id",
+            "description": "unique id number identifying the customer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "staff_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "staff id",
+            "description": "unique id number identifying the staff",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "rental_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "rental id",
+            "description": "unique id number identifying the rental",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "amount",
+          "type": "REAL",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "amount",
+            "description": "unique id number identifying the amount",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "payment_date",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "payment date",
+            "description": "the date when the payment ocurs",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "last_update",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last update",
+            "description": "The time of the latest update",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "payment",
+          "from_column": "rental_id",
+          "to_table": "rental",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "SET NULL",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "payment",
+          "from_column": "staff_id",
+          "to_table": "staff",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "payment",
+          "from_column": "customer_id",
+          "to_table": "customer",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "rental",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"rental\"\n(\n    rental_id    INTEGER\n        primary key autoincrement,\n    rental_date  DATETIME                           not null,\n    inventory_id INTEGER                            not null\n        references inventory\n            on update cascade,\n    customer_id  INTEGER                            not null\n        references customer\n            on update cascade,\n    return_date  DATETIME,\n    staff_id     INTEGER                            not null\n        references staff\n            on update cascade,\n    last_update  DATETIME default CURRENT_TIMESTAMP not null,\n    unique (rental_date, inventory_id, customer_id)\n)",
+      "row_count": 16044,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "rental_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "rental id",
+            "description": "unique id number identifying the rental",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "rental_date",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "rental date",
+            "description": "date when the rental occurs",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "inventory_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "inventory id",
+            "description": "id number identifying the inventory",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "customer_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "customer id",
+            "description": "id number identifying the customer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "return_date",
+          "type": "DATETIME",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "return date",
+            "description": "date when the rental returns",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "staff_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "staff id",
+            "description": "id number identifying the staff",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "last_update",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last update",
+            "description": "The time of the latest update",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "rental",
+          "from_column": "staff_id",
+          "to_table": "staff",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "rental",
+          "from_column": "customer_id",
+          "to_table": "customer",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "rental",
+          "from_column": "inventory_id",
+          "to_table": "inventory",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "staff",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"staff\"\n(\n    staff_id    INTEGER\n        primary key autoincrement,\n    first_name  TEXT                               not null,\n    last_name   TEXT                               not null,\n    address_id  INTEGER                            not null\n        references address\n            on update cascade,\n    picture     BLOB,\n    email       TEXT,\n    store_id    INTEGER                            not null\n        references store\n            on update cascade,\n    active      INTEGER  default 1                 not null,\n    username    TEXT                               not null,\n    password    TEXT,\n    last_update DATETIME default CURRENT_TIMESTAMP not null\n)",
+      "row_count": 2,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "staff_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "staff id",
+            "description": "unique id number identifying the staff",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "first_name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "First name of the actor",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "last_name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "Last name of the actor",
+            "data_format": "text",
+            "value_description": "full name = (first name, last name)"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "address_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "address id",
+            "description": "id number identifying the address",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "picture",
+          "type": "BLOB",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "picture of the staff",
+            "description": "",
+            "data_format": "blob",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "email",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "email of the staff",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "store_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "store id",
+            "description": "id number identifying the store",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "active",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "1",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Whether the staff is active or not.",
+            "data_format": "integer",
+            "value_description": "1: active\n0: not active"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "username",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "username to login the staff",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "password",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "password to login the staff",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "last_update",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last update",
+            "description": "The time of the latest update",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "staff",
+          "from_column": "store_id",
+          "to_table": "store",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "staff",
+          "from_column": "address_id",
+          "to_table": "address",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "store",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"store\"\n(\n    store_id         INTEGER\n        primary key autoincrement,\n    manager_staff_id INTEGER                            not null\n        unique\n        references staff\n            on update cascade,\n    address_id       INTEGER                            not null\n        references address\n            on update cascade,\n    last_update      DATETIME default CURRENT_TIMESTAMP not null\n)",
+      "row_count": 2,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "store_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "store id",
+            "description": "unique id number identifying the store",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "manager_staff_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "manager staff id",
+            "description": "id number identifying the manager staff",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "address_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "address id",
+            "description": "id number identifying the address",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "last_update",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": "CURRENT_TIMESTAMP",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last update",
+            "description": "The time of the latest update",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "store",
+          "from_column": "address_id",
+          "to_table": "address",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "store",
+          "from_column": "manager_staff_id",
+          "to_table": "staff",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "address",
+      "from_column": "city_id",
+      "to_table": "city",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "city",
+      "from_column": "country_id",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "customer",
+      "from_column": "address_id",
+      "to_table": "address",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "customer",
+      "from_column": "store_id",
+      "to_table": "store",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "film",
+      "from_column": "original_language_id",
+      "to_table": "language",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "film",
+      "from_column": "language_id",
+      "to_table": "language",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "film_actor",
+      "from_column": "film_id",
+      "to_table": "film",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "film_actor",
+      "from_column": "actor_id",
+      "to_table": "actor",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "film_category",
+      "from_column": "category_id",
+      "to_table": "category",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "film_category",
+      "from_column": "film_id",
+      "to_table": "film",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "inventory",
+      "from_column": "store_id",
+      "to_table": "store",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "inventory",
+      "from_column": "film_id",
+      "to_table": "film",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "payment",
+      "from_column": "rental_id",
+      "to_table": "rental",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "SET NULL",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "payment",
+      "from_column": "staff_id",
+      "to_table": "staff",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "payment",
+      "from_column": "customer_id",
+      "to_table": "customer",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "rental",
+      "from_column": "staff_id",
+      "to_table": "staff",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "rental",
+      "from_column": "customer_id",
+      "to_table": "customer",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "rental",
+      "from_column": "inventory_id",
+      "to_table": "inventory",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "staff",
+      "from_column": "store_id",
+      "to_table": "store",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "staff",
+      "from_column": "address_id",
+      "to_table": "address",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "store",
+      "from_column": "address_id",
+      "to_table": "address",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "store",
+      "from_column": "manager_staff_id",
+      "to_table": "staff",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

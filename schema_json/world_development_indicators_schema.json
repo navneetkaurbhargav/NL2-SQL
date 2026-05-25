@@ -1,0 +1,1112 @@
+{
+  "db_id": "world_development_indicators",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/world_development_indicators/world_development_indicators.sqlite",
+  "tables": [
+    {
+      "name": "Country",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Country\"\n(\n    CountryCode                                TEXT not null\n        primary key,\n    ShortName                                  TEXT,\n    TableName                                  TEXT,\n    LongName                                   TEXT,\n    Alpha2Code                                 TEXT,\n    CurrencyUnit                               TEXT,\n    SpecialNotes                               TEXT,\n    Region                                     TEXT,\n    IncomeGroup                                TEXT,\n    Wb2Code                                    TEXT,\n    NationalAccountsBaseYear                   TEXT,\n    NationalAccountsReferenceYear              TEXT,\n    SnaPriceValuation                          TEXT,\n    LendingCategory                            TEXT,\n    OtherGroups                                TEXT,\n    SystemOfNationalAccounts                   TEXT,\n    AlternativeConversionFactor                TEXT,\n    PppSurveyYear                              TEXT,\n    BalanceOfPaymentsManualInUse               TEXT,\n    ExternalDebtReportingStatus                TEXT,\n    SystemOfTrade                              TEXT,\n    GovernmentAccountingConcept                TEXT,\n    ImfDataDisseminationStandard               TEXT,\n    LatestPopulationCensus                     TEXT,\n    LatestHouseholdSurvey                      TEXT,\n    SourceOfMostRecentIncomeAndExpenditureData TEXT,\n    VitalRegistrationComplete                  TEXT,\n    LatestAgriculturalCensus                   TEXT,\n    LatestIndustrialData                       INTEGER,\n    LatestTradeData                            INTEGER,\n    LatestWaterWithdrawalData                  INTEGER\n)",
+      "row_count": 247,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "CountryCode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Country Code",
+            "description": "unique code identifying countries",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "ShortName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Short Name",
+            "description": "Short names of countries",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "TableName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Table Name",
+            "description": "table names of countries",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "LongName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Long Name",
+            "description": "long or full name of countries",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Alpha2Code",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Alpha to Code",
+            "description": "2 digit code of countries",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "CurrencyUnit",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Currency Unit",
+            "description": "Currency Unit used in this country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "SpecialNotes",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Special Notes",
+            "description": "Special Notes",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Region",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Region",
+            "description": "region that country belongs to",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "IncomeGroup",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Income Group",
+            "description": "income level of countries",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "Wb2Code",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "world bank to code",
+            "description": "world bank to code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "NationalAccountsBaseYear",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "National Accounts Base Year",
+            "description": "the year used as the base period for constant price calculations in the country's national accounts",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "NationalAccountsReferenceYear",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "National Accounts Reference Year",
+            "description": "National Accounts Reference Year",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "SnaPriceValuation",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "SNA Price Valuation",
+            "description": "SNA Price Valuation",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "LendingCategory",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Lending Category",
+            "description": "Lending category",
+            "data_format": "text",
+            "value_description": "• IDA: International Development Associations: (IDA) is the part of the World Bank that helps the world's poorest countries.\n• IBRD: The International Bank for Reconstruction and Development (IBRD) is a global development cooperative owned by 189 member countries.\n• Blend: Blend is the cloud banking infrastructure powering billions of dollars in financial transactions every day."
+          }
+        },
+        {
+          "cid": 14,
+          "name": "OtherGroups",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Other groups",
+            "description": "other groups",
+            "data_format": "text",
+            "value_description": "• HIPC: Heavily Indebted Poor Countries\n• Euro Area: The euro area consists of those Member States of the European Union that have adopted the euro as their currency."
+          }
+        },
+        {
+          "cid": 15,
+          "name": "SystemOfNationalAccounts",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "System Of National Accounts",
+            "description": "System Of National Accounts",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 16,
+          "name": "AlternativeConversionFactor",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Alternative Conversion Factor",
+            "description": "Alternative conversion factor is the underlying annual exchange rate used for the World Bank Atlas method",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "PppSurveyYear",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "purchasing power parity survey year",
+            "description": "purchasing power parity survey year",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 18,
+          "name": "BalanceOfPaymentsManualInUse",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Balance Of Payments Manual In Use",
+            "description": "Balance Of Payments Manual In Use",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 19,
+          "name": "ExternalDebtReportingStatus",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "External Debt Reporting Status",
+            "description": "External Debt Reporting Status",
+            "data_format": "text",
+            "value_description": "• Actual\n• Preliminary\n• Estimate\ncommonsense reasoning:\nIf ExternalDebtReportingStatus='Actual', it means this external debt reporting is real and actual, and finished\nif 'Estimate', it means external debt reporting is finished by estimation.\nif 'preliminary', it means this external debt reporting is not finished"
+          }
+        },
+        {
+          "cid": 20,
+          "name": "SystemOfTrade",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "System Of Trade",
+            "description": "System Of Trade",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 21,
+          "name": "GovernmentAccountingConcept",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Government Accounting Concept",
+            "description": "Government Accounting Concept",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 22,
+          "name": "ImfDataDisseminationStandard",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "International Monetory Fund Data Dissemination Standard",
+            "description": "IMF Standards for Data Dissemination",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 23,
+          "name": "LatestPopulationCensus",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Latest Population Census",
+            "description": "Latest Population Census",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 24,
+          "name": "LatestHouseholdSurvey",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Latest Household Survey",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 25,
+          "name": "SourceOfMostRecentIncomeAndExpenditureData",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Source Of Most Recent Income And Expenditure Data",
+            "description": "Source Of Most Recent Income And Expenditure Data",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 26,
+          "name": "VitalRegistrationComplete",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Vital Registration Complete",
+            "description": "Vital Registration Complete",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 27,
+          "name": "LatestAgriculturalCensus",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Latest Agricultural Census",
+            "description": "Latest Agricultural Census",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 28,
+          "name": "LatestIndustrialData",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Latest Industrial Data",
+            "description": "Latest Industrial Data",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 29,
+          "name": "LatestTradeData",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Latest Trade Data",
+            "description": "Latest Trade Data",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 30,
+          "name": "LatestWaterWithdrawalData",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Latest Water Withdrawal Data",
+            "description": "Latest Water Withdrawal Data",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "CountryNotes",
+      "type": "table",
+      "create_sql": "CREATE TABLE CountryNotes\n(\n    Countrycode TEXT NOT NULL ,\n    Seriescode  TEXT NOT NULL ,\n    Description TEXT,\n    primary key (Countrycode, Seriescode),\n    FOREIGN KEY (Seriescode) REFERENCES Series(SeriesCode),\n    FOREIGN KEY (Countrycode) REFERENCES Country(CountryCode)\n)",
+      "row_count": 4857,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Countrycode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Country code",
+            "description": "code identifying unique countries",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Seriescode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "Series code",
+            "description": "Series code of countries",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "description",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "CountryNotes",
+          "from_column": "Countrycode",
+          "to_table": "Country",
+          "to_column": "CountryCode",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "CountryNotes",
+          "from_column": "Seriescode",
+          "to_table": "Series",
+          "to_column": "SeriesCode",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Footnotes",
+      "type": "table",
+      "create_sql": "CREATE TABLE Footnotes\n(\n    Countrycode TEXT NOT NULL ,\n    Seriescode  TEXT NOT NULL ,\n    Year        TEXT,\n    Description TEXT,\n    primary key (Countrycode, Seriescode, Year),\n    FOREIGN KEY (Seriescode) REFERENCES Series(SeriesCode),\n    FOREIGN KEY (Countrycode) REFERENCES Country(CountryCode)\n)",
+      "row_count": 532415,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Countrycode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1
+        },
+        {
+          "cid": 1,
+          "name": "Seriescode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2
+        },
+        {
+          "cid": 2,
+          "name": "Year",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 3
+        },
+        {
+          "cid": 3,
+          "name": "Description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Footnotes",
+          "from_column": "Countrycode",
+          "to_table": "Country",
+          "to_column": "CountryCode",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Footnotes",
+          "from_column": "Seriescode",
+          "to_table": "Series",
+          "to_column": "SeriesCode",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Indicators",
+      "type": "table",
+      "create_sql": "CREATE TABLE Indicators\n(\n    CountryName   TEXT,\n    CountryCode   TEXT NOT NULL ,\n    IndicatorName TEXT,\n    IndicatorCode TEXT NOT NULL ,\n    Year          INTEGER NOT NULL ,\n    Value         INTEGER,\n    primary key (CountryCode, IndicatorCode, Year),\n    FOREIGN KEY (CountryCode) REFERENCES Country(CountryCode)\n)",
+      "row_count": 5656458,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "CountryName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Country code",
+            "description": "code identifying unique countries",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "CountryCode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Series code",
+            "description": "Series code of countries",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "IndicatorName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Indicator Name",
+            "description": "indicator name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "IndicatorCode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "Indicator Code",
+            "description": "indicator code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Year",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "year",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Value",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "value",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Indicators",
+          "from_column": "CountryCode",
+          "to_table": "Country",
+          "to_column": "CountryCode",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Series",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Series\"\n(\n    SeriesCode                       TEXT not null\n        primary key,\n    Topic                            TEXT,\n    IndicatorName                    TEXT,\n    ShortDefinition                  TEXT,\n    LongDefinition                   TEXT,\n    UnitOfMeasure                    TEXT,\n    Periodicity                      TEXT,\n    BasePeriod                       TEXT,\n    OtherNotes                       INTEGER,\n    AggregationMethod                TEXT,\n    LimitationsAndExceptions         TEXT,\n    NotesFromOriginalSource          TEXT,\n    GeneralComments                  TEXT,\n    Source                           TEXT,\n    StatisticalConceptAndMethodology TEXT,\n    DevelopmentRelevance             TEXT,\n    RelatedSourceLinks               TEXT,\n    OtherWebLinks                    INTEGER,\n    RelatedIndicators                INTEGER,\n    LicenseType                      TEXT\n)",
+      "row_count": 1345,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "SeriesCode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Series Code",
+            "description": "unique code identifying series",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Topic",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "topic of series",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "IndicatorName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Indicator Name",
+            "description": "Indicator Name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "ShortDefinition",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Short Definition",
+            "description": "Short Definition of series",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "LongDefinition",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Long Definition",
+            "description": "Long Definition of series",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "UnitOfMeasure",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Unit Of Measure",
+            "description": "Unit Of Measure",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Periodicity",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Periodicity",
+            "description": "Periodicity",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "BasePeriod",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Base Period",
+            "description": "a period of business or economic activity used as a basis or reference point especially for indexing, calculating, estimating, or adjudicating prices, taxes, compensation, income, and production",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "OtherNotes",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Other Notes",
+            "description": "Other Notes",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "AggregationMethod",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Aggregation Method",
+            "description": "Aggregation Method",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "LimitationsAndExceptions",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Limitations And Exceptions",
+            "description": "Limitations And Exceptions",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "NotesFromOriginalSource",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Notes From Original Source",
+            "description": "Notes From Original Source",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "GeneralComments",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "General Comments",
+            "description": "General Comments",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "Source",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Source",
+            "description": "source of this data",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "StatisticalConceptAndMethodology",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Statistical Concept And Methodology",
+            "description": "Statistical Concept And Methodology",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 15,
+          "name": "DevelopmentRelevance",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Development Relevance",
+            "description": "Development Relevance",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 16,
+          "name": "RelatedSourceLinks",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Related Source Links",
+            "description": "Related Source Links",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "OtherWebLinks",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Other Web Links",
+            "description": "Other Web Links",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 18,
+          "name": "RelatedIndicators",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Related Indicators",
+            "description": "Related Indicators",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 19,
+          "name": "LicenseType",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "License Type",
+            "description": "License Type",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "SeriesNotes",
+      "type": "table",
+      "create_sql": "CREATE TABLE SeriesNotes\n(\n    Seriescode  TEXT not null ,\n    Year        TEXT not null ,\n    Description TEXT,\n    primary key (Seriescode, Year),\n    foreign key (Seriescode) references Series(SeriesCode)\n)",
+      "row_count": 369,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Seriescode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Series code",
+            "description": "code identifying the series",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Year",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "year",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Description of series",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "SeriesNotes",
+          "from_column": "Seriescode",
+          "to_table": "Series",
+          "to_column": "SeriesCode",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "CountryNotes",
+      "from_column": "Countrycode",
+      "to_table": "Country",
+      "to_column": "CountryCode",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "CountryNotes",
+      "from_column": "Seriescode",
+      "to_table": "Series",
+      "to_column": "SeriesCode",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Footnotes",
+      "from_column": "Countrycode",
+      "to_table": "Country",
+      "to_column": "CountryCode",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Footnotes",
+      "from_column": "Seriescode",
+      "to_table": "Series",
+      "to_column": "SeriesCode",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Indicators",
+      "from_column": "CountryCode",
+      "to_table": "Country",
+      "to_column": "CountryCode",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "SeriesNotes",
+      "from_column": "Seriescode",
+      "to_table": "Series",
+      "to_column": "SeriesCode",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

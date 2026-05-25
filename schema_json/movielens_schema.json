@@ -1,0 +1,542 @@
+{
+  "db_id": "movielens",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/movielens/movielens.sqlite",
+  "tables": [
+    {
+      "name": "actors",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"actors\"\n(\n    actorid   INTEGER not null\n        primary key,\n    a_gender  TEXT    not null,\n    a_quality INTEGER not null\n)",
+      "row_count": 98690,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "actorid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "actor id",
+            "description": "unique identificator number of actors",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "a_gender",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "actor gender",
+            "description": "actor gender",
+            "data_format": "text",
+            "value_description": "M: male;\r\nF: female"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "a_quality",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "actor quality",
+            "description": "actor quality",
+            "data_format": "integer",
+            "value_description": "higher is better, lower is the worse"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "directors",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"directors\"\n(\n    directorid  INTEGER not null\n        primary key,\n    d_quality   INTEGER not null,\n    avg_revenue INTEGER not null\n)",
+      "row_count": 2201,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "directorid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "director id",
+            "description": "unique identification number of actors directors",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "d_quality",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "director quality",
+            "description": "director quality",
+            "data_format": "integer",
+            "value_description": "higher value is better, lower is the worse"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "avg_revenue",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "average revenue",
+            "description": "average revenue",
+            "data_format": "integer",
+            "value_description": "higher value is the higher, lower is the lower"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "movies",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"movies\"\n(\n    movieid     INTEGER default 0 not null\n        primary key,\n    year        INTEGER           not null,\n    isEnglish   TEXT              not null,\n    country     TEXT              not null,\n    runningtime INTEGER           not null\n)",
+      "row_count": 3832,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "movieid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "movie id",
+            "description": "unique identifier number of movies",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "year",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "year",
+            "description": "year",
+            "data_format": "integer",
+            "value_description": "4: newest;\n\n1: oldest\n\nhigher value means newer published date"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "isEnglish",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "is English",
+            "description": "is English",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "runningtime",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "movies2actors",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"movies2actors\"\n(\n    movieid  INTEGER not null\n        references movies\n            on update cascade on delete cascade,\n    actorid  INTEGER not null\n        references actors\n            on update cascade on delete cascade,\n    cast_num INTEGER not null,\n    primary key (movieid, actorid)\n)",
+      "row_count": 138349,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "movieid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "movie id",
+            "description": "identifier number of movies",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "actorid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "actor id",
+            "description": "identifier number of actors",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "cast_num",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "cast number",
+            "description": "cast number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "movies2actors",
+          "from_column": "actorid",
+          "to_table": "actors",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "movies2actors",
+          "from_column": "movieid",
+          "to_table": "movies",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "movies2directors",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"movies2directors\"\n(\n    movieid    INTEGER not null\n        references movies\n            on update cascade on delete cascade,\n    directorid INTEGER not null\n        references directors\n            on update cascade on delete cascade,\n    genre      TEXT    not null,\n    primary key (movieid, directorid)\n)",
+      "row_count": 4141,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "movieid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "movie id",
+            "description": "identifier number of movies",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "directorid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "director id",
+            "description": "identifier number of directors",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "genre",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "genre",
+            "description": "genre of movies",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "movies2directors",
+          "from_column": "directorid",
+          "to_table": "directors",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "movies2directors",
+          "from_column": "movieid",
+          "to_table": "movies",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "u2base",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"u2base\"\n(\n    userid  INTEGER default 0 not null\n        references users\n            on update cascade on delete cascade,\n    movieid INTEGER           not null\n        references movies\n            on update cascade on delete cascade,\n    rating  TEXT              not null,\n    primary key (userid, movieid)\n)",
+      "row_count": 996159,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "userid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "user id",
+            "description": "identifier number of users",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "movieid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "movie id",
+            "description": "identifier number of movie",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "rating",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "rating",
+            "description": "ratings of movies",
+            "data_format": "text",
+            "value_description": "higher value refers to higher satisfactory, each value is the rating of movies left by users."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "u2base",
+          "from_column": "movieid",
+          "to_table": "movies",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "u2base",
+          "from_column": "userid",
+          "to_table": "users",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "users",
+      "type": "table",
+      "create_sql": "CREATE TABLE users\n(\n    userid     INTEGER default 0 not null\n        primary key,\n    age        TEXT    not null,\n    u_gender   TEXT    not null,\n    occupation TEXT   not null\n)",
+      "row_count": 6039,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "userid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "user id",
+            "description": "unique identifier number of users",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "age",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "age",
+            "description": "age",
+            "data_format": "text",
+            "value_description": "1: 1-18 years old; \n18: 18-25 years old; \n25: 25-35 years old; \n35: 35-45 years old; \n45: 45-50 years old; \n50: 50-56 years old; \n56: over 56 years old"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "u_gender",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "user gender",
+            "description": "user gender",
+            "data_format": "text",
+            "value_description": "M / F: Male / Female"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "occupation",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "occupation",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "movies2actors",
+      "from_column": "actorid",
+      "to_table": "actors",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "movies2actors",
+      "from_column": "movieid",
+      "to_table": "movies",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "movies2directors",
+      "from_column": "directorid",
+      "to_table": "directors",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "movies2directors",
+      "from_column": "movieid",
+      "to_table": "movies",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "u2base",
+      "from_column": "movieid",
+      "to_table": "movies",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "u2base",
+      "from_column": "userid",
+      "to_table": "users",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    }
+  ]
+}

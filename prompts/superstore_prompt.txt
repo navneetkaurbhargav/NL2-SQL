@@ -1,0 +1,1282 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "superstore",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/superstore/superstore.sqlite",
+  "tables": [
+    {
+      "name": "central_superstore",
+      "type": "table",
+      "create_sql": "CREATE TABLE central_superstore\n(\n    \"Row ID\"      INTEGER\n            primary key,\n    \"Order ID\"    TEXT,\n    \"Order Date\"  DATE,\n    \"Ship Date\"   DATE,\n    \"Ship Mode\"   TEXT,\n    \"Customer ID\" TEXT,\n    Region        TEXT,\n    \"Product ID\"  TEXT,\n    Sales         REAL,\n    Quantity      INTEGER,\n    Discount      REAL,\n    Profit        REAL,\n    foreign key (\"Customer ID\", Region) references people(\"Customer ID\",Region),\n    foreign key (\"Product ID\", Region) references product(\"Product ID\",Region)\n)",
+      "row_count": 4646,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Row ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "row id",
+            "description": "the unique id for rows",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Order ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "order id",
+            "description": "the unique identifier for the order",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Order Date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "order date",
+            "description": "the date of the order",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Ship Date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ship date",
+            "description": "the date of the shipment",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd\ncommonsense evidence: \n'shipment time' refers to the time interval between order_date and ship_date."
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Ship Mode",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ship mode",
+            "description": "the ship mode of the order",
+            "data_format": "text",
+            "value_description": "First Class / Second Class / Standard Class\ncommonsense evidence: Among three ship modes, First Class has the fastest delivery speed, followed by Second Class and the speed of the Standard Class is the slowest."
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Customer ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "customer id",
+            "description": "the id of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Region",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "region of the customer's address",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Product ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "product id",
+            "description": "the id of the product",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "Sales",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the sales of the product",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "Quantity",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the quantity of the product",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "Discount",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the discount of the product",
+            "data_format": "real",
+            "value_description": "commonsense evidence: original price = sales / (1- discount)"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "Profit",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the profit that the company got by selling the product",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\ntotal cost of products =  sales / (1- discount) * quantity - profit\ndeficiency: if the value is negative"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "central_superstore",
+          "from_column": "Product ID",
+          "to_table": "product",
+          "to_column": "Product ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "central_superstore",
+          "from_column": "Region",
+          "to_table": "product",
+          "to_column": "Region",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "central_superstore",
+          "from_column": "Customer ID",
+          "to_table": "people",
+          "to_column": "Customer ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 1,
+          "from_table": "central_superstore",
+          "from_column": "Region",
+          "to_table": "people",
+          "to_column": "Region",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "east_superstore",
+      "type": "table",
+      "create_sql": "CREATE TABLE east_superstore\n(\n    \"Row ID\"      INTEGER\n            primary key,\n    \"Order ID\"    TEXT,\n    \"Order Date\"  DATE,\n    \"Ship Date\"   DATE,\n    \"Ship Mode\"   TEXT,\n    \"Customer ID\" TEXT,\n    Region        TEXT,\n    \"Product ID\"  TEXT,\n    Sales         REAL,\n    Quantity      INTEGER,\n    Discount      REAL,\n    Profit        REAL,\n    foreign key (\"Customer ID\", Region) references people(\"Customer ID\",Region),\n    foreign key (\"Product ID\", Region) references product(\"Product ID\",Region)\n)",
+      "row_count": 5696,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Row ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "row id",
+            "description": "the unique id for rows",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Order ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "order id",
+            "description": "the unique identifier for the order",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Order Date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "order date",
+            "description": "the date of the order",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Ship Date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ship date",
+            "description": "the date of the shipment",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd\ncommonsense evidence: 'shipment time' refers to the time interval between order_date and ship_date."
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Ship Mode",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ship mode",
+            "description": "the ship mode of the order",
+            "data_format": "text",
+            "value_description": "First Class / Second Class / Standard Class\ncommonsense evidence: Among three ship modes, First Class has the fastest delivery speed, followed by Second Class and the speed of the Standard Class is the slowest."
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Customer ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "customer id",
+            "description": "the id of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Region",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "region of the customer's address",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Product ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "product id",
+            "description": "the id of the product",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "Sales",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the sales of the product",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "Quantity",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the quantity of the product",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "Discount",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the discount of the product",
+            "data_format": "real",
+            "value_description": "commonsense evidence: original price = sales / (1- discount)"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "Profit",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the profit that the company got by selling the product",
+            "data_format": "real",
+            "value_description": "commonsense evidence: total cost of products =  sales / (1- discount) * quantity - profit\ndeficiency: if the value is negative"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "east_superstore",
+          "from_column": "Product ID",
+          "to_table": "product",
+          "to_column": "Product ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "east_superstore",
+          "from_column": "Region",
+          "to_table": "product",
+          "to_column": "Region",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "east_superstore",
+          "from_column": "Customer ID",
+          "to_table": "people",
+          "to_column": "Customer ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 1,
+          "from_table": "east_superstore",
+          "from_column": "Region",
+          "to_table": "people",
+          "to_column": "Region",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "people",
+      "type": "table",
+      "create_sql": "CREATE TABLE people\n(\n    \"Customer ID\"   TEXT,\n    \"Customer Name\" TEXT,\n    Segment         TEXT,\n    Country         TEXT,\n    City            TEXT,\n    State           TEXT,\n    \"Postal Code\"   INTEGER,\n    Region          TEXT,\n    primary key (\"Customer ID\", Region)\n)",
+      "row_count": 2501,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Customer ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the id of the customers",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Customer Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the customers",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Segment",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the segment that the customers belong to",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \n consumer \n home office: synonym: headquarter. \n corporate"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country of people",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "City",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the city of people",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "State",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the state of people",
+            "data_format": "text",
+            "value_description": "commonsense evidence: please mention its full name in the question, by referring to \nhttps://www23.statcan.gc.ca/imdb/p3VD.pl?Function=getVD&TVD=53971\ne.g., New York --> NY"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Postal Code",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the postal code",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Region",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the region of people",
+            "data_format": "text",
+            "value_description": " Central: \n East: \n West: \n South:"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "product",
+      "type": "table",
+      "create_sql": "CREATE TABLE product\n(\n    \"Product ID\"   TEXT,\n    \"Product Name\" TEXT,\n    Category       TEXT,\n    \"Sub-Category\" TEXT,\n    Region         TEXT,\n    primary key (\"Product ID\", Region)\n)",
+      "row_count": 5298,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Product ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the id of products",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Product Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of products",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Category",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the categories of products",
+            "data_format": "text",
+            "value_description": " Furniture \n Office Supplies \n Technology"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Sub-Category",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the sub-categories of products",
+            "data_format": "text",
+            "value_description": " Bookcases \n Chairs \n Furnishings \n Tables \n Appliances \n Art \n Binders \n Envelopes \n Fasteners \n Labels \n Paper \n Storage \n Supplies \n Accessories \n Copiers \n Machines \n Phones"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Region",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the region of products",
+            "data_format": "text",
+            "value_description": " Central: \n East: \n West: \n South:"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "south_superstore",
+      "type": "table",
+      "create_sql": "CREATE TABLE south_superstore\n(\n    \"Row ID\"      INTEGER\n            primary key,\n    \"Order ID\"    TEXT,\n    \"Order Date\"  DATE,\n    \"Ship Date\"   DATE,\n    \"Ship Mode\"   TEXT,\n    \"Customer ID\" TEXT,\n    Region        TEXT,\n    \"Product ID\"  TEXT,\n    Sales         REAL,\n    Quantity      INTEGER,\n    Discount      REAL,\n    Profit        REAL,\n    foreign key (\"Customer ID\", Region) references people(\"Customer ID\",Region),\n    foreign key (\"Product ID\", Region) references product(\"Product ID\",Region)\n)",
+      "row_count": 3240,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Row ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "row id",
+            "description": "the unique id for rows",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Order ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "order id",
+            "description": "the unique identifier for the order",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Order Date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "order date",
+            "description": "the date of the order",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Ship Date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ship date",
+            "description": "the date of the shipment",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd \ncommonsense evidence: 'shipment time' refers to the time interval between order_date and ship_date."
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Ship Mode",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ship mode",
+            "description": "the ship mode of the order",
+            "data_format": "text",
+            "value_description": "First Class / Second Class / Standard Class\ncommonsense evidence: Among three ship modes, First Class has the fastest delivery speed, followed by Second Class and the speed of the Standard Class is the slowest."
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Customer ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "customer id",
+            "description": "the id of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Region",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "region of the customer's address",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Product ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "product id",
+            "description": "the id of the product",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "Sales",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the sales of the product",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "Quantity",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the quantity of the product",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "Discount",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the discount of the product",
+            "data_format": "real",
+            "value_description": "commonsense evidence: original price = sales / (1- discount)"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "Profit",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the profit that the company got by selling the product",
+            "data_format": "real",
+            "value_description": "commonsense evidence: total cost of products =  sales / (1- discount) * quantity - profit\ndeficiency: if the value is negative"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "south_superstore",
+          "from_column": "Product ID",
+          "to_table": "product",
+          "to_column": "Product ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "south_superstore",
+          "from_column": "Region",
+          "to_table": "product",
+          "to_column": "Region",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "south_superstore",
+          "from_column": "Customer ID",
+          "to_table": "people",
+          "to_column": "Customer ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 1,
+          "from_table": "south_superstore",
+          "from_column": "Region",
+          "to_table": "people",
+          "to_column": "Region",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "west_superstore",
+      "type": "table",
+      "create_sql": "CREATE TABLE west_superstore\n(\n    \"Row ID\"      INTEGER\n            primary key,\n    \"Order ID\"    TEXT,\n    \"Order Date\"  DATE,\n    \"Ship Date\"   DATE,\n    \"Ship Mode\"   TEXT,\n    \"Customer ID\" TEXT,\n    Region        TEXT,\n    \"Product ID\"  TEXT,\n    Sales         REAL,\n    Quantity      INTEGER,\n    Discount      REAL,\n    Profit        REAL,\n    foreign key (\"Customer ID\", Region) references people(\"Customer ID\",Region),\n    foreign key (\"Product ID\", Region) references product(\"Product ID\",Region)\n)",
+      "row_count": 6406,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Row ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "row id",
+            "description": "the unique id for rows",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Order ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "order id",
+            "description": "the unique identifier for the order",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Order Date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "order date",
+            "description": "the date of the order",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Ship Date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ship date",
+            "description": "the date of the shipment",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd\ncommonsense evidence: 'shipment time' refers to the time interval between order_date and ship_date."
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Ship Mode",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ship mode",
+            "description": "the ship mode of the order",
+            "data_format": "text",
+            "value_description": "First Class / Second Class / Standard Class\ncommonsense evidence: Among three ship modes, First Class has the fastest delivery speed, followed by Second Class and the speed of the Standard Class is the slowest."
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Customer ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "customer id",
+            "description": "the id of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Region",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "region of the customer's address",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Product ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "product id",
+            "description": "the id of the product",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "Sales",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the sales of the product",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "Quantity",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the quantity of the product",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "Discount",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the discount of the product",
+            "data_format": "real",
+            "value_description": "commonsense evidence: original price = sales / (1- discount)"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "Profit",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the profit that the company got by selling the product",
+            "data_format": "real",
+            "value_description": "commonsense evidence: total cost of products =  sales / (1- discount) * quantity - profit\ndeficiency: if the value is negative"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "west_superstore",
+          "from_column": "Product ID",
+          "to_table": "product",
+          "to_column": "Product ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "west_superstore",
+          "from_column": "Region",
+          "to_table": "product",
+          "to_column": "Region",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "west_superstore",
+          "from_column": "Customer ID",
+          "to_table": "people",
+          "to_column": "Customer ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 1,
+          "from_table": "west_superstore",
+          "from_column": "Region",
+          "to_table": "people",
+          "to_column": "Region",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "central_superstore",
+      "from_column": "Product ID",
+      "to_table": "product",
+      "to_column": "Product ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "central_superstore",
+      "from_column": "Region",
+      "to_table": "product",
+      "to_column": "Region",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "central_superstore",
+      "from_column": "Customer ID",
+      "to_table": "people",
+      "to_column": "Customer ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 1,
+      "from_table": "central_superstore",
+      "from_column": "Region",
+      "to_table": "people",
+      "to_column": "Region",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "east_superstore",
+      "from_column": "Product ID",
+      "to_table": "product",
+      "to_column": "Product ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "east_superstore",
+      "from_column": "Region",
+      "to_table": "product",
+      "to_column": "Region",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "east_superstore",
+      "from_column": "Customer ID",
+      "to_table": "people",
+      "to_column": "Customer ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 1,
+      "from_table": "east_superstore",
+      "from_column": "Region",
+      "to_table": "people",
+      "to_column": "Region",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "south_superstore",
+      "from_column": "Product ID",
+      "to_table": "product",
+      "to_column": "Product ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "south_superstore",
+      "from_column": "Region",
+      "to_table": "product",
+      "to_column": "Region",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "south_superstore",
+      "from_column": "Customer ID",
+      "to_table": "people",
+      "to_column": "Customer ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 1,
+      "from_table": "south_superstore",
+      "from_column": "Region",
+      "to_table": "people",
+      "to_column": "Region",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "west_superstore",
+      "from_column": "Product ID",
+      "to_table": "product",
+      "to_column": "Product ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "west_superstore",
+      "from_column": "Region",
+      "to_table": "product",
+      "to_column": "Region",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "west_superstore",
+      "from_column": "Customer ID",
+      "to_table": "people",
+      "to_column": "Customer ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 1,
+      "from_table": "west_superstore",
+      "from_column": "Region",
+      "to_table": "people",
+      "to_column": "Region",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

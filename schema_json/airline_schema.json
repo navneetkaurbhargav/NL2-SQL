@@ -1,0 +1,550 @@
+{
+  "db_id": "airline",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/airline/airline.sqlite",
+  "tables": [
+    {
+      "name": "Air Carriers",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"Air Carriers\"\n(\n    Code        INTEGER\n            primary key,\n    Description TEXT\n)",
+      "row_count": 1656,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Code",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the code of the air carriers",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the description of air carriers",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Airlines",
+      "type": "table",
+      "create_sql": "CREATE TABLE Airlines\n(\n    FL_DATE               TEXT,\n    OP_CARRIER_AIRLINE_ID INTEGER,\n    TAIL_NUM              TEXT,\n    OP_CARRIER_FL_NUM     INTEGER,\n    ORIGIN_AIRPORT_ID     INTEGER,\n    ORIGIN_AIRPORT_SEQ_ID INTEGER,\n    ORIGIN_CITY_MARKET_ID INTEGER,\n    ORIGIN                TEXT,\n    DEST_AIRPORT_ID       INTEGER,\n    DEST_AIRPORT_SEQ_ID   INTEGER,\n    DEST_CITY_MARKET_ID   INTEGER,\n    DEST                  TEXT,\n    CRS_DEP_TIME          INTEGER,\n    DEP_TIME              INTEGER,\n    DEP_DELAY             INTEGER,\n    DEP_DELAY_NEW         INTEGER,\n    ARR_TIME              INTEGER,\n    ARR_DELAY             INTEGER,\n    ARR_DELAY_NEW         INTEGER,\n    CANCELLED             INTEGER,\n    CANCELLATION_CODE     TEXT,\n    CRS_ELAPSED_TIME      INTEGER,\n    ACTUAL_ELAPSED_TIME   INTEGER,\n    CARRIER_DELAY         INTEGER,\n    WEATHER_DELAY         INTEGER,\n    NAS_DELAY             INTEGER,\n    SECURITY_DELAY        INTEGER,\n    LATE_AIRCRAFT_DELAY   INTEGER,\n    FOREIGN KEY (ORIGIN) REFERENCES Airports(Code),\n    FOREIGN KEY (DEST) REFERENCES Airports(Code),\n    FOREIGN KEY (OP_CARRIER_AIRLINE_ID) REFERENCES \"Air Carriers\"(Code)\n)",
+      "row_count": 701352,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "FL_DATE",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "flight date",
+            "description": "flight date",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "OP_CARRIER_AIRLINE_ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "operator carrier airline id",
+            "description": "operator carrier airline id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "TAIL_NUM",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "tail number",
+            "description": "plane's tail number",
+            "data_format": "text",
+            "value_description": "plane's tail number"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "OP_CARRIER_FL_NUM",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "operator carrier flight number",
+            "description": "operator carrier flight number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "ORIGIN_AIRPORT_ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "origin airport id",
+            "description": "origin airport id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "ORIGIN_AIRPORT_SEQ_ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "origin airport sequence id",
+            "description": "origin airport sequence id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "ORIGIN_CITY_MARKET_ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "origin city market id",
+            "description": "origin city market id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "ORIGIN",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "airport of origin",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n\n• the origin city could be inferred by this code:\n\nyou can refer to https://www.iata.org/en/publications/directories/code-search/?airport.search=mia\n\nto quickly check"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "DEST_AIRPORT_ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "destination airport id",
+            "description": "ID of the destination airport",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "DEST_AIRPORT_SEQ_ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "destination airport sequence id",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "DEST_CITY_MARKET_ID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "destination city market id",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "DEST",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "destination",
+            "description": "Destination airport",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n\n• the dest city could be inferred by this code:\n\nyou can refer to https://www.iata.org/en/publications/directories/code-search/?airport.search=mia\n\nto quickly check"
+          }
+        },
+        {
+          "cid": 12,
+          "name": "CRS_DEP_TIME",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "scheduled local departure time",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "DEP_TIME",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "departure time",
+            "description": "Flight departure time",
+            "data_format": "integer",
+            "value_description": "stored as the integer"
+          }
+        },
+        {
+          "cid": 14,
+          "name": "DEP_DELAY",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Departure delay",
+            "description": "Departure delay indicator",
+            "data_format": "integer",
+            "value_description": "in minutes\n\ncommonsense evidence:\n\n• if this value is positive: it means this flight delays; if the value is negative, it means this flight departs in advance (-4)\n\n• if this value <= 0, it means this flight departs on time"
+          }
+        },
+        {
+          "cid": 15,
+          "name": "DEP_DELAY_NEW",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "departure delay new",
+            "description": "departure delay new",
+            "data_format": "integer",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 16,
+          "name": "ARR_TIME",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "arrival time",
+            "description": "Flight arrival time.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "ARR_DELAY",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "arrival delay",
+            "description": "arrival delay time",
+            "data_format": "integer",
+            "value_description": "in minutes\n\ncommonsense evidence:\n\n• if this value is positive: it means this flight will arrives late (delay); If the value is negative, this flight arrives earlier than scheduled. (-4)\n\n• if this value <= 0, it means this flight arrives on time"
+          }
+        },
+        {
+          "cid": 18,
+          "name": "ARR_DELAY_NEW",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "arrival delay new",
+            "description": "arrival delay new",
+            "data_format": "integer",
+            "value_description": "not useful"
+          }
+        },
+        {
+          "cid": 19,
+          "name": "CANCELLED",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Flight cancellation indicator.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 20,
+          "name": "CANCELLATION_CODE",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "cancellation code",
+            "description": "cancellation code",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n\nC--> A: more serious reasons lead to this cancellation"
+          }
+        },
+        {
+          "cid": 21,
+          "name": "CRS_ELAPSED_TIME",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "scheduled elapsed time",
+            "description": "scheduled elapsed time",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 22,
+          "name": "ACTUAL_ELAPSED_TIME",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "actual elapsed time",
+            "description": "actual elapsed time",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\n\nif ACTUAL_ELAPSED_TIME < CRS_ELAPSED_TIME: this flight is faster than scheduled;\n\nif ACTUAL_ELAPSED_TIME > CRS_ELAPSED_TIME: this flight is slower than scheduled"
+          }
+        },
+        {
+          "cid": 23,
+          "name": "CARRIER_DELAY",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "carrier delay",
+            "description": "carrier delay",
+            "data_format": "integer",
+            "value_description": "minutes"
+          }
+        },
+        {
+          "cid": 24,
+          "name": "WEATHER_DELAY",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "weather delay",
+            "description": "delay caused by the wheather problem",
+            "data_format": "integer",
+            "value_description": "minutes"
+          }
+        },
+        {
+          "cid": 25,
+          "name": "NAS_DELAY",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "National Aviavtion System delay",
+            "description": "delay, in minutes, attributable to the National Aviation System",
+            "data_format": "integer",
+            "value_description": "minutes"
+          }
+        },
+        {
+          "cid": 26,
+          "name": "SECURITY_DELAY",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "security delay",
+            "description": "delay attribute to security",
+            "data_format": "integer",
+            "value_description": "minutes"
+          }
+        },
+        {
+          "cid": 27,
+          "name": "LATE_AIRCRAFT_DELAY",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "late aircraft delay",
+            "description": "delay attribute to late aircraft",
+            "data_format": "integer",
+            "value_description": "minutes"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Airlines",
+          "from_column": "OP_CARRIER_AIRLINE_ID",
+          "to_table": "Air Carriers",
+          "to_column": "Code",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Airlines",
+          "from_column": "DEST",
+          "to_table": "Airports",
+          "to_column": "Code",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "Airlines",
+          "from_column": "ORIGIN",
+          "to_table": "Airports",
+          "to_column": "Code",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Airports",
+      "type": "table",
+      "create_sql": "CREATE TABLE Airports\n(\n    Code        TEXT\n            primary key,\n    Description TEXT\n)",
+      "row_count": 6510,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Code",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "IATA code of the air airports",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the description of airports",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Airlines",
+      "from_column": "OP_CARRIER_AIRLINE_ID",
+      "to_table": "Air Carriers",
+      "to_column": "Code",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Airlines",
+      "from_column": "DEST",
+      "to_table": "Airports",
+      "to_column": "Code",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "Airlines",
+      "from_column": "ORIGIN",
+      "to_table": "Airports",
+      "to_column": "Code",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

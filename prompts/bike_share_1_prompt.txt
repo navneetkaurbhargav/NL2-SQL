@@ -1,0 +1,697 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "bike_share_1",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/bike_share_1/bike_share_1.sqlite",
+  "tables": [
+    {
+      "name": "station",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"station\"\n(\n    id                INTEGER not null\n        primary key,\n    name              TEXT,\n    lat               REAL,\n    long              REAL,\n    dock_count        INTEGER,\n    city              TEXT,\n    installation_date TEXT\n)",
+      "row_count": 70,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "unique ID for each station",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Station name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "lat",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "latitude",
+            "description": "latitude",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nCan represent the location of the station when combined with longitude."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "long",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "longitude",
+            "description": "longitude",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nCan represent the location of the station when combined with \nlatitude."
+          }
+        },
+        {
+          "cid": 4,
+          "name": "dock_count",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "dock count",
+            "description": "number of bikes the station can hold",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "installation_date",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "installation date",
+            "description": "installation date",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "status",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"status\"\n(\n    station_id      INTEGER,\n    bikes_available INTEGER,\n    docks_available INTEGER,\n    time            TEXT\n)",
+      "row_count": 71984434,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "station_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "station id",
+            "description": "station id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "bikes_available",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "number of available bikes",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\n0 means no bike can be borrowed."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "docks_available",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "number of available docks",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\n0 means no bike can be returned to this station."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "time",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "trip",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"trip\"\n(\n    id                 INTEGER not null\n        primary key,\n    duration           INTEGER,\n    start_date         TEXT,\n    start_station_name TEXT,\n    start_station_id   INTEGER,\n    end_date           TEXT,\n    end_station_name   TEXT,\n    end_station_id     INTEGER,\n    bike_id            INTEGER,\n    subscription_type  TEXT,\n    zip_code           INTEGER\n)",
+      "row_count": 658901,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "duration",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The duration of the trip in seconds.",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nduration = end_date - start_date"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "start_date",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "start date",
+            "description": "start date",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "start_station_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "start station name",
+            "description": "The name of the start station",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nIt represents the station name the bike borrowed from."
+          }
+        },
+        {
+          "cid": 4,
+          "name": "start_station_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "start station id",
+            "description": "The ID of the start station",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "end_date",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "end date",
+            "description": "end date",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "end_station_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "end station name",
+            "description": "The name of the end station",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nIt represents the station name the bike returned to."
+          }
+        },
+        {
+          "cid": 7,
+          "name": "end_station_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "end station id",
+            "description": "The ID of the end station",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "bike_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "bike id",
+            "description": "The ID of the bike",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "subscription_type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "subscription type",
+            "description": "subscription type",
+            "data_format": "text",
+            "value_description": "Allowed input: Subscriber, Customer."
+          }
+        },
+        {
+          "cid": 10,
+          "name": "zip_code",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "zip code",
+            "description": "zip code",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "weather",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"weather\"\n(\n    date                           TEXT,\n    max_temperature_f              INTEGER,\n    mean_temperature_f             INTEGER,\n    min_temperature_f              INTEGER,\n    max_dew_point_f                INTEGER,\n    mean_dew_point_f               INTEGER,\n    min_dew_point_f                INTEGER,\n    max_humidity                   INTEGER,\n    mean_humidity                  INTEGER,\n    min_humidity                   INTEGER,\n    max_sea_level_pressure_inches  REAL,\n    mean_sea_level_pressure_inches REAL,\n    min_sea_level_pressure_inches  REAL,\n    max_visibility_miles           INTEGER,\n    mean_visibility_miles          INTEGER,\n    min_visibility_miles           INTEGER,\n    max_wind_Speed_mph             INTEGER,\n    mean_wind_speed_mph            INTEGER,\n    max_gust_speed_mph             INTEGER,\n    precipitation_inches           TEXT,\n    cloud_cover                    INTEGER,\n    events                         TEXT,\n    wind_dir_degrees               INTEGER,\n    zip_code                       TEXT\n)",
+      "row_count": 3665,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "date",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "max_temperature_f",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "max temperature in Fahrenheit degree",
+            "description": "max temperature in Fahrenheit degree",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nIt represents the hottest temperature."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "mean_temperature_f",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "mean temperature in Fahrenheit degree",
+            "description": "mean temperature in Fahrenheit degree",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "min_temperature_f",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "min temperature in Fahrenheit degree",
+            "description": "min temperature in Fahrenheit degree",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nIt represents the coldest temperature."
+          }
+        },
+        {
+          "cid": 4,
+          "name": "max_dew_point_f",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "max dew point in Fahrenheit degree",
+            "description": "max dew point in Fahrenheit degree",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "mean_dew_point_f",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "mean dew point in Fahrenheit degree",
+            "description": "mean dew point in Fahrenheit degree",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "min_dew_point_f",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "min dew point in Fahrenheit degree",
+            "description": "min dew point in Fahrenheit degree",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "max_humidity",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "max humidity",
+            "description": "max humidity",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "mean_humidity",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "mean humidity",
+            "description": "mean humidity",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "min_humidity",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "min humidity",
+            "description": "min humidity",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "max_sea_level_pressure_inches",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "max sea level pressure in inches",
+            "description": "max sea level pressure in inches",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "mean_sea_level_pressure_inches",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "mean sea level pressure in inches",
+            "description": "mean sea level pressure in inches",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "min_sea_level_pressure_inches",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "min sea level pressure in inches",
+            "description": "min sea level pressure in inches",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "max_visibility_miles",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "max visibility in miles",
+            "description": "max visibility in miles",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "mean_visibility_miles",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "mean visibility in miles",
+            "description": "mean visibility in miles",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 15,
+          "name": "min_visibility_miles",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "min visibility in miles",
+            "description": "min visibility in miles",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 16,
+          "name": "max_wind_Speed_mph",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "max wind Speed in mph",
+            "description": "max wind Speed in mph",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "mean_wind_speed_mph",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "mean wind Speed in mph",
+            "description": "mean wind Speed in mph",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 18,
+          "name": "max_gust_speed_mph",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "max gust Speed in mph",
+            "description": "max gust Speed in mph",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 19,
+          "name": "precipitation_inches",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "precipitation in inches",
+            "description": "precipitation in inches",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 20,
+          "name": "cloud_cover",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "cloud cover",
+            "description": "cloud cover",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 21,
+          "name": "events",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "Allowed input: [null], Rain, other"
+          }
+        },
+        {
+          "cid": 22,
+          "name": "wind_dir_degrees",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "wind direction degrees",
+            "description": "wind direction degrees",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 23,
+          "name": "zip_code",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "zip code",
+            "description": "zip code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": []
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

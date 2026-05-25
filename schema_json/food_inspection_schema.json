@@ -1,0 +1,431 @@
+{
+  "db_id": "food_inspection",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/food_inspection/food_inspection.sqlite",
+  "tables": [
+    {
+      "name": "businesses",
+      "type": "table",
+      "create_sql": "CREATE TABLE `businesses` (\n  `business_id` INTEGER NOT NULL,\n  `name` TEXT NOT NULL,\n  `address` TEXT DEFAULT NULL,\n  `city` TEXT DEFAULT NULL,\n  `postal_code` TEXT DEFAULT NULL,\n  `latitude` REAL DEFAULT NULL,\n  `longitude` REAL DEFAULT NULL,\n  `phone_number` INTEGER DEFAULT NULL,\n  `tax_code` TEXT DEFAULT NULL,\n  `business_certificate` INTEGER NOT NULL,\n  `application_date` DATE DEFAULT NULL,\n  `owner_name` TEXT NOT NULL,\n  `owner_address` TEXT DEFAULT NULL,\n  `owner_city` TEXT DEFAULT NULL,\n  `owner_state` TEXT DEFAULT NULL,\n  `owner_zip` TEXT DEFAULT NULL,\n  PRIMARY KEY (`business_id`)\n)",
+      "row_count": 6358,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "business_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "business id",
+            "description": "the unique id of the business",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the eatery",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "address",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the eatery address",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the city where the eatery is located in",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "postal_code",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "postal code",
+            "description": "the postal code of the eatery",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "latitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the latitude of the position",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "longitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the longitude of the position",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nthe distance between eatery A and eatery B = \\sqrt{(latitude_A-latitude_B)^2 + (longitude_A-longitude_B)^2}"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "phone_number",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "phone number",
+            "description": "the phone number of the eatery",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "tax_code",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "tax code",
+            "description": "the tax code of the eatery",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "business_certificate",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "business certificate",
+            "description": "the business certificate number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "application_date",
+          "type": "DATE",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "application date",
+            "description": "the application date of the eatery",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "owner_name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "owner name",
+            "description": "the owner's name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "owner_address",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "owner address",
+            "description": "the owner's address",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "owner_city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "owner city",
+            "description": "the city where the owner is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "owner_state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "owner state",
+            "description": "the state where the owner is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 15,
+          "name": "owner_zip",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "owner zip",
+            "description": "the zip code of the owner",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "inspections",
+      "type": "table",
+      "create_sql": "CREATE TABLE `inspections` (\n  `business_id` INTEGER NOT NULL,\n  `score` INTEGER DEFAULT NULL,\n  `date` DATE NOT NULL,\n  `type` TEXT NOT NULL,\n  FOREIGN KEY (`business_id`) REFERENCES `businesses` (`business_id`)\n)",
+      "row_count": 23764,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "business_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "business id",
+            "description": "the unique id of the business",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "score",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "score",
+            "description": "the inspection score",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nThe scores range from 1 to 100, where 100 means that the establishment meets all required standards."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "date",
+          "type": "DATE",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the inspection date",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "type",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the inspection type",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "inspections",
+          "from_column": "business_id",
+          "to_table": "businesses",
+          "to_column": "business_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "violations",
+      "type": "table",
+      "create_sql": "CREATE TABLE `violations` (\n  `business_id` INTEGER NOT NULL,\n  `date` DATE NOT NULL,\n  `violation_type_id` TEXT NOT NULL,\n  `risk_category` TEXT NOT NULL,\n  `description` TEXT NOT NULL,\n  FOREIGN KEY (`business_id`) REFERENCES `businesses` (`business_id`)\n)",
+      "row_count": 36050,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "business_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "business id",
+            "description": "the unique id of the business",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "date",
+          "type": "DATE",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the date of the violation",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "violation_type_id",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "violation type id",
+            "description": "the unique type id of the violation",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "risk_category",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "risk category",
+            "description": "risk category\nHigh / Moderate / Low risk",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nHigh risks have more safety and health hazards than low risks"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "description",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the description of the violation",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "violations",
+          "from_column": "business_id",
+          "to_table": "businesses",
+          "to_column": "business_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "inspections",
+      "from_column": "business_id",
+      "to_table": "businesses",
+      "to_column": "business_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "violations",
+      "from_column": "business_id",
+      "to_table": "businesses",
+      "to_column": "business_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

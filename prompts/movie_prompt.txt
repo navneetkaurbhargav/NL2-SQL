@@ -1,0 +1,468 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "movie",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/movie/movie.sqlite",
+  "tables": [
+    {
+      "name": "actor",
+      "type": "table",
+      "create_sql": "CREATE TABLE actor\n(\n    ActorID           INTEGER\n        constraint actor_pk\n            primary key,\n    Name              TEXT,\n    \"Date of Birth\"   DATE,\n    \"Birth City\"      TEXT,\n    \"Birth Country\"   TEXT,\n    \"Height (Inches)\" INTEGER,\n    Biography         TEXT,\n    Gender            TEXT,\n    Ethnicity         TEXT,\n    NetWorth          TEXT\n)",
+      "row_count": 2713,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ActorID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "actor id",
+            "description": "the unique id for the actor",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "actor's name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Date of Birth",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "date of birth",
+            "description": "actor's birth date",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Birth City",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "birth city",
+            "description": "actor's birth city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Birth Country",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "birth country",
+            "description": "actor's birth country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Height (Inches)",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "height inches",
+            "description": "actor's height",
+            "data_format": "integer",
+            "value_description": "the unit is inch"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Biography",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "actor's biography",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Gender",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "actor's gender",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "Ethnicity",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "actor's ethnicity",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "NetWorth",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "actor's networth",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nThe actor with more networth is richer."
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "characters",
+      "type": "table",
+      "create_sql": "CREATE TABLE characters\n(\n    MovieID          INTEGER,\n    ActorID          INTEGER,\n    \"Character Name\" TEXT,\n    creditOrder      INTEGER,\n    pay              TEXT,\n    screentime       TEXT,\n    primary key (MovieID, ActorID),\n    foreign key (ActorID) references actor(ActorID),\n    foreign key (MovieID) references movie(MovieID)\n)",
+      "row_count": 4312,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "MovieID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "movie id",
+            "description": "the unique id for the movie",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "ActorID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "actor id",
+            "description": "the unique id for the actor",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Character Name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "character name",
+            "description": "the name of the character",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "creditOrder",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "credit order",
+            "description": "order of the character in the credit list",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "pay",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the salary of the character",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "screentime",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the screentime of the character",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nScreentime is directly proportional to the importance of the characters."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "characters",
+          "from_column": "MovieID",
+          "to_table": "movie",
+          "to_column": "MovieID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "characters",
+          "from_column": "ActorID",
+          "to_table": "actor",
+          "to_column": "ActorID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "movie",
+      "type": "table",
+      "create_sql": "CREATE TABLE movie\n(\n    MovieID        INTEGER\n        constraint movie_pk\n            primary key,\n    Title          TEXT,\n    \"MPAA Rating\"  TEXT,\n    Budget         INTEGER,\n    Gross          INTEGER,\n    \"Release Date\" TEXT,\n    Genre          TEXT,\n    Runtime        INTEGER,\n    Rating         REAL,\n    \"Rating Count\" INTEGER,\n    Summary        TEXT\n)",
+      "row_count": 634,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "MovieID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "movie id",
+            "description": "the unique id for the movie",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the title of the movie",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "MPAA Rating",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "motion picture association of america rating",
+            "description": "MPAA rating of the movie",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nMPAA rating is the movie rating for parents to use as a guide to determine the appropriateness of a film's content for children and teenagers. \n rated G: General audiences  All ages admitted\n rated PG: Parental guidance suggested  Some material may not be suitable for pre-teenagers\n rated R: Restricted  Under 17 requires accompanying parent or adult guardian\n rated X: No one under 17 admitted"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Budget",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the budget of the movie",
+            "data_format": "integer",
+            "value_description": "the unit is dollar"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Gross",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the gross of the movie",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Release Date",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "release date",
+            "data_format": "text",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Genre",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the genre of the movie",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Runtime",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the runtime of the movie",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "Rating",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the rating of the movie",
+            "data_format": "real",
+            "value_description": "0.0 - 10.0\ncommonsense evidence:\nHigher ratings mean higher quality and better response."
+          }
+        },
+        {
+          "cid": 9,
+          "name": "Rating Count",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "rating count",
+            "description": "the number of the ratings",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "Summary",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the summary of the movie",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "characters",
+      "from_column": "MovieID",
+      "to_table": "movie",
+      "to_column": "MovieID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "characters",
+      "from_column": "ActorID",
+      "to_table": "actor",
+      "to_column": "ActorID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

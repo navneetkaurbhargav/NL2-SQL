@@ -1,0 +1,3979 @@
+{
+  "db_id": "mondial_geo",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/mondial_geo/mondial_geo.sqlite",
+  "tables": [
+    {
+      "name": "borders",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"borders\"\n(\n    Country1 TEXT default '' not null\n        constraint borders_ibfk_1\n            references country,\n    Country2 TEXT default '' not null\n        constraint borders_ibfk_2\n            references country,\n    Length   REAL,\n    primary key (Country1, Country2)\n)",
+      "row_count": 320,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Country1",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "a country code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Country2",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "a country code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Length",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "length of the border between country1 and country2",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "borders",
+          "from_column": "Country2",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "borders",
+          "from_column": "Country1",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "city",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"city\"\n(\n    Name       TEXT default '' not null,\n    Country    TEXT default '' not null\n        constraint city_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Province   TEXT default '' not null,\n    Population INTEGER,\n    Longitude  REAL,\n    Latitude   REAL,\n    primary key (Name, Province),\n    constraint city_ibfk_2\n        foreign key (Province, Country) references province\n            on update cascade on delete cascade\n)",
+      "row_count": 3111,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "name of city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the code of the country where it belongs to",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Province",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the province where it belongs to",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Population",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "population of the city",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Longitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "geographic longitude",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Latitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "geographic latitude",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "city",
+          "from_column": "Province",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "city",
+          "from_column": "Country",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "city",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "continent",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"continent\"\n(\n    Name TEXT default '' not null\n        primary key,\n    Area REAL\n)",
+      "row_count": 5,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "name of the continent",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Area",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "total area of the continent.",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "country",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"country\"\n(\n    Name       TEXT            not null\n        constraint ix_county_Name\n            unique,\n    Code       TEXT default '' not null\n        primary key,\n    Capital    TEXT,\n    Province   TEXT,\n    Area       REAL,\n    Population INTEGER\n)",
+      "row_count": 238,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Code",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "country code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Capital",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the capital,",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Province",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the province where the capital belongs to,",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Area",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the total area,",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Population",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the population number.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "desert",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"desert\"\n(\n    Name      TEXT default '' not null\n        primary key,\n    Area      REAL,\n    Longitude REAL,\n    Latitude  REAL\n)",
+      "row_count": 63,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the desert",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Area",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the total area of the desert",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Longitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Longitude",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Latitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Latitude",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\r\n\r\ncoordinate: (Longitude, Latitude)"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "economy",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"economy\"\n(\n    Country     TEXT default '' not null\n        primary key\n        constraint economy_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    GDP         REAL,\n    Agriculture REAL,\n    Service     REAL,\n    Industry    REAL,\n    Inflation   REAL\n)",
+      "row_count": 238,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "GDP",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "gross domestic product",
+            "description": "gross domestic product",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Agriculture",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "percentage of agriculture of the GDP",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Service",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "percentage of services of the GDP,",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Industry",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "percentage of industry of the GDP",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Inflation",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "inflation rate (per annum),",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "economy",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "encompasses",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"encompasses\"\n(\n    Country    TEXT not null\n        constraint encompasses_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Continent  TEXT not null\n        constraint encompasses_ibfk_2\n            references continent\n            on update cascade on delete cascade,\n    Percentage REAL,\n    primary key (Country, Continent)\n)",
+      "row_count": 242,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "a country code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Continent",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the continent name.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Percentage",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "how much of the area of a country belongs to the continent",
+            "data_format": "real",
+            "value_description": "%"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "encompasses",
+          "from_column": "Continent",
+          "to_table": "continent",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "encompasses",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "ethnicGroup",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"ethnicGroup\"\n(\n    Country    TEXT default '' not null\n        constraint ethnicGroup_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Name       TEXT default '' not null,\n    Percentage REAL,\n    primary key (Name, Country)\n)",
+      "row_count": 540,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "name of the language",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Percentage",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "percentage of the language in this country.",
+            "data_format": "real",
+            "value_description": "%"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "ethnicGroup",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "geo_desert",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"geo_desert\"\n(\n    Desert   TEXT default '' not null\n        constraint geo_desert_ibfk_3\n            references desert\n            on update cascade on delete cascade,\n    Country  TEXT default '' not null\n        constraint geo_desert_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Province TEXT default '' not null,\n    primary key (Province, Country, Desert),\n    constraint geo_desert_ibfk_2\n        foreign key (Province, Country) references province\n            on update cascade on delete cascade\n)",
+      "row_count": 155,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Desert",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the desert",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code where it is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Province",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the province of this country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "geo_desert",
+          "from_column": "Province",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "geo_desert",
+          "from_column": "Country",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "geo_desert",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "geo_desert",
+          "from_column": "Desert",
+          "to_table": "desert",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "geo_estuary",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"geo_estuary\"\n(\n    River    TEXT default '' not null\n        constraint geo_estuary_ibfk_3\n            references river\n            on update cascade on delete cascade,\n    Country  TEXT default '' not null\n        constraint geo_estuary_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Province TEXT default '' not null,\n    primary key (Province, Country, River),\n    constraint geo_estuary_ibfk_2\n        foreign key (Province, Country) references province\n            on update cascade on delete cascade\n)",
+      "row_count": 266,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "River",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the river",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code where it is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Province",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the province of this country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "geo_estuary",
+          "from_column": "Province",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "geo_estuary",
+          "from_column": "Country",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "geo_estuary",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "geo_estuary",
+          "from_column": "River",
+          "to_table": "river",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "geo_island",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"geo_island\"\n(\n    Island   TEXT default '' not null\n        constraint geo_island_ibfk_3\n            references island\n            on update cascade on delete cascade,\n    Country  TEXT default '' not null\n        constraint geo_island_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Province TEXT default '' not null,\n    primary key (Province, Country, Island),\n    constraint geo_island_ibfk_2\n        foreign key (Province, Country) references province\n            on update cascade on delete cascade\n)",
+      "row_count": 202,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Island",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the island",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code where it is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Province",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the province of this country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "geo_island",
+          "from_column": "Province",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "geo_island",
+          "from_column": "Country",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "geo_island",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "geo_island",
+          "from_column": "Island",
+          "to_table": "island",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "geo_lake",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"geo_lake\"\n(\n    Lake     TEXT default '' not null\n        constraint geo_lake_ibfk_3\n            references lake\n            on update cascade on delete cascade,\n    Country  TEXT default '' not null\n        constraint geo_lake_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Province TEXT default '' not null,\n    primary key (Province, Country, Lake),\n    constraint geo_lake_ibfk_2\n        foreign key (Province, Country) references province\n            on update cascade on delete cascade\n)",
+      "row_count": 254,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Lake",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the lake",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code where it is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Province",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the province of this country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "geo_lake",
+          "from_column": "Province",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "geo_lake",
+          "from_column": "Country",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "geo_lake",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "geo_lake",
+          "from_column": "Lake",
+          "to_table": "lake",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "geo_mountain",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"geo_mountain\"\n(\n    Mountain TEXT default '' not null\n        constraint geo_mountain_ibfk_3\n            references mountain\n            on update cascade on delete cascade,\n    Country  TEXT default '' not null\n        constraint geo_mountain_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Province TEXT default '' not null,\n    primary key (Province, Country, Mountain),\n    constraint geo_mountain_ibfk_2\n        foreign key (Province, Country) references province\n            on update cascade on delete cascade\n)",
+      "row_count": 296,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Mountain",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the mountain",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code where it is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Province",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the province of this country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "geo_mountain",
+          "from_column": "Province",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "geo_mountain",
+          "from_column": "Country",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "geo_mountain",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "geo_mountain",
+          "from_column": "Mountain",
+          "to_table": "mountain",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "geo_river",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"geo_river\"\n(\n    River    TEXT default '' not null\n        constraint geo_river_ibfk_3\n            references river\n            on update cascade on delete cascade,\n    Country  TEXT default '' not null\n        constraint geo_river_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Province TEXT default '' not null,\n    primary key (Province, Country, River),\n    constraint geo_river_ibfk_2\n        foreign key (Province, Country) references province\n            on update cascade on delete cascade\n)",
+      "row_count": 852,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "River",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the river",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code where it is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Province",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the province of this country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "geo_river",
+          "from_column": "Province",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "geo_river",
+          "from_column": "Country",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "geo_river",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "geo_river",
+          "from_column": "River",
+          "to_table": "river",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "geo_sea",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"geo_sea\"\n(\n    Sea      TEXT default '' not null\n        constraint geo_sea_ibfk_3\n            references sea\n            on update cascade on delete cascade,\n    Country  TEXT default '' not null\n        constraint geo_sea_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Province TEXT default '' not null,\n    primary key (Province, Country, Sea),\n    constraint geo_sea_ibfk_2\n        foreign key (Province, Country) references province\n            on update cascade on delete cascade\n)",
+      "row_count": 736,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Sea",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the sea",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code where it is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Province",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the province of this country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "geo_sea",
+          "from_column": "Province",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "geo_sea",
+          "from_column": "Country",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "geo_sea",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "geo_sea",
+          "from_column": "Sea",
+          "to_table": "sea",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "geo_source",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"geo_source\"\n(\n    River    TEXT default '' not null\n        constraint geo_source_ibfk_3\n            references river\n            on update cascade on delete cascade,\n    Country  TEXT default '' not null\n        constraint geo_source_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Province TEXT default '' not null,\n    primary key (Province, Country, River),\n    constraint geo_source_ibfk_2\n        foreign key (Province, Country) references province\n            on update cascade on delete cascade\n)",
+      "row_count": 220,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "River",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the river",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code where it is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Province",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the province of this country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "geo_source",
+          "from_column": "Province",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "geo_source",
+          "from_column": "Country",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "geo_source",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "geo_source",
+          "from_column": "River",
+          "to_table": "river",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "isMember",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"isMember\"\n(\n    Country      TEXT default '' not null\n        constraint isMember_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Organization TEXT default '' not null\n        constraint isMember_ibfk_2\n            references organization\n            on update cascade on delete cascade,\n    Type         TEXT default 'member',\n    primary key (Country, Organization)\n)",
+      "row_count": 8009,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Organization",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "'member'",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "isMember",
+          "from_column": "Organization",
+          "to_table": "organization",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "isMember",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "island",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"island\"\n(\n    Name      TEXT default '' not null\n        primary key,\n    Islands   TEXT,\n    Area      REAL,\n    Height    REAL,\n    Type      TEXT,\n    Longitude REAL,\n    Latitude  REAL\n)",
+      "row_count": 276,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the island",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Islands",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the group of islands where it belongs to",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Area",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the area of the island",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Height",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the maximal elevation of the island",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the type of the island",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Longitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Longitude",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Latitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Latitude",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "islandIn",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"islandIn\"\n(\n    Island TEXT\n        constraint islandIn_ibfk_4\n            references island\n            on update cascade on delete cascade,\n    Sea    TEXT\n        constraint islandIn_ibfk_3\n            references sea\n            on update cascade on delete cascade,\n    Lake   TEXT\n        constraint islandIn_ibfk_1\n            references lake\n            on update cascade on delete cascade,\n    River  TEXT\n        constraint islandIn_ibfk_2\n            references river\n            on update cascade on delete cascade\n)",
+      "row_count": 350,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Island",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Sea",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Lake",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "River",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "islandIn",
+          "from_column": "River",
+          "to_table": "river",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "islandIn",
+          "from_column": "Lake",
+          "to_table": "lake",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "islandIn",
+          "from_column": "Sea",
+          "to_table": "sea",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 3,
+          "sequence": 0,
+          "from_table": "islandIn",
+          "from_column": "Island",
+          "to_table": "island",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "lake",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"lake\"\n(\n    Name      TEXT default '' not null\n        primary key,\n    Area      REAL,\n    Depth     REAL,\n    Altitude  REAL,\n    Type      TEXT,\n    River     TEXT,\n    Longitude REAL,\n    Latitude  REAL\n)",
+      "row_count": 130,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the lake",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Area",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the total area of the lake",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Depth",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the depth of the lake",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Altitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the altitude (above sea level) of the lake",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the type of the lake",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "River",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the river that flows out of the lake",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Longitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "longitude of lake",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Latitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "latitude of lake",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "language",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"language\"\n(\n    Country    TEXT default '' not null\n        constraint language_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Name       TEXT default '' not null,\n    Percentage REAL,\n    primary key (Name, Country)\n)",
+      "row_count": 144,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "name of the language",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Percentage",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "percentage of the language in this country",
+            "data_format": "real",
+            "value_description": "%"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "language",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "located",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"located\"\n(\n    City     TEXT,\n    Province TEXT,\n    Country  TEXT\n        constraint located_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    River    TEXT\n        constraint located_ibfk_3\n            references river\n            on update cascade on delete cascade,\n    Lake     TEXT\n        constraint located_ibfk_4\n            references lake\n            on update cascade on delete cascade,\n    Sea      TEXT\n        constraint located_ibfk_5\n            references sea\n            on update cascade on delete cascade,\n    constraint located_ibfk_2\n        foreign key (City, Province) references city\n            on update cascade on delete cascade,\n    constraint located_ibfk_6\n        foreign key (Province, Country) references province\n            on update cascade on delete cascade\n)",
+      "row_count": 858,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "City",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Province",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the province where the city belongs to",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code where the city belongs to",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "River",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the river where it is located at",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Lake",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the lake where it is located at",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Sea",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the sea where it is located at",
+            "data_format": "text",
+            "value_description": "Note that for a given city, there can be several lakes/seas/rivers where it is located at."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "located",
+          "from_column": "Province",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "located",
+          "from_column": "Country",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "located",
+          "from_column": "City",
+          "to_table": "city",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 1,
+          "from_table": "located",
+          "from_column": "Province",
+          "to_table": "city",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "located",
+          "from_column": "Sea",
+          "to_table": "sea",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 3,
+          "sequence": 0,
+          "from_table": "located",
+          "from_column": "Lake",
+          "to_table": "lake",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 4,
+          "sequence": 0,
+          "from_table": "located",
+          "from_column": "River",
+          "to_table": "river",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 5,
+          "sequence": 0,
+          "from_table": "located",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "locatedOn",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"locatedOn\"\n(\n    City     TEXT default '' not null,\n    Province TEXT default '' not null,\n    Country  TEXT default '' not null\n        constraint locatedOn_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Island   TEXT default '' not null\n        constraint locatedOn_ibfk_2\n            references island\n            on update cascade on delete cascade,\n    primary key (City, Province, Country, Island),\n    constraint locatedOn_ibfk_3\n        foreign key (City, Province) references city\n            on update cascade on delete cascade,\n    constraint locatedOn_ibfk_4\n        foreign key (Province, Country) references province\n            on update cascade on delete cascade\n)",
+      "row_count": 435,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "City",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Province",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the province where the city belongs to",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code where the city belongs to",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Island",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 4,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the island it is (maybe only partially) located on",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "locatedOn",
+          "from_column": "Province",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "locatedOn",
+          "from_column": "Country",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "locatedOn",
+          "from_column": "City",
+          "to_table": "city",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 1,
+          "from_table": "locatedOn",
+          "from_column": "Province",
+          "to_table": "city",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "locatedOn",
+          "from_column": "Island",
+          "to_table": "island",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 3,
+          "sequence": 0,
+          "from_table": "locatedOn",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "mergesWith",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"mergesWith\"\n(\n    Sea1 TEXT default '' not null\n        constraint mergesWith_ibfk_1\n            references sea\n            on update cascade on delete cascade,\n    Sea2 TEXT default '' not null\n        constraint mergesWith_ibfk_2\n            references sea\n            on update cascade on delete cascade,\n    primary key (Sea1, Sea2)\n)",
+      "row_count": 55,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Sea1",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1
+        },
+        {
+          "cid": 1,
+          "name": "Sea2",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "mergesWith",
+          "from_column": "Sea2",
+          "to_table": "sea",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "mergesWith",
+          "from_column": "Sea1",
+          "to_table": "sea",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "mountain",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"mountain\"\n(\n    Name      TEXT default '' not null\n        primary key,\n    Mountains TEXT,\n    Height    REAL,\n    Type      TEXT,\n    Longitude REAL,\n    Latitude  REAL\n)",
+      "row_count": 0,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the mountain",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Mountains",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the mountains where it belongs to",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Height",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the maximal elevation of the summit of the mountain",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the sea where it finally flows to",
+            "data_format": "text",
+            "value_description": "(note that at most one out of {river,lake,sea} can be non-null"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Longitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the length of the river",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Latitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the longitude of its source",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "mountainOnIsland",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"mountainOnIsland\"\n(\n    Mountain TEXT default '' not null\n        constraint mountainOnIsland_ibfk_2\n            references mountain\n            on update cascade on delete cascade,\n    Island   TEXT default '' not null\n        constraint mountainOnIsland_ibfk_1\n            references island\n            on update cascade on delete cascade,\n    primary key (Mountain, Island)\n)",
+      "row_count": 68,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Mountain",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1
+        },
+        {
+          "cid": 1,
+          "name": "Island",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "mountainOnIsland",
+          "from_column": "Island",
+          "to_table": "island",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "mountainOnIsland",
+          "from_column": "Mountain",
+          "to_table": "mountain",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "organization",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"organization\"\n(\n    Abbreviation TEXT not null\n        primary key,\n    Name         TEXT not null\n        constraint ix_organization_OrgNameUnique\n            unique,\n    City         TEXT,\n    Country      TEXT\n        constraint organization_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Province     TEXT,\n    Established  DATE,\n    constraint organization_ibfk_2\n        foreign key (City, Province) references city\n            on update cascade on delete cascade,\n    constraint organization_ibfk_3\n        foreign key (Province, Country) references province\n            on update cascade on delete cascade\n)",
+      "row_count": 154,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Abbreviation",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "its abbreviation",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the full name of the organization",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "City",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the city where the headquarters are located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the code of the country where the headquarters are located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Province",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the province where the headquarters are located,",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Established",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "date of establishment",
+            "data_format": "date",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "organization",
+          "from_column": "Province",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 0,
+          "sequence": 1,
+          "from_table": "organization",
+          "from_column": "Country",
+          "to_table": "province",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "organization",
+          "from_column": "City",
+          "to_table": "city",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 1,
+          "from_table": "organization",
+          "from_column": "Province",
+          "to_table": "city",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "organization",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "politics",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"politics\"\n(\n    Country      TEXT default '' not null\n        primary key\n        constraint politics_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Independence DATE,\n    Dependent    TEXT\n        constraint politics_ibfk_2\n            references country\n            on update cascade on delete cascade,\n    Government   TEXT\n)",
+      "row_count": 239,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Independence",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "date of independence",
+            "data_format": "date",
+            "value_description": "Commonsense evidence:\r\n\r\nif the value is null or empty, it means this country is not independent"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Dependent",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code where the area belongs to",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Government",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "type of government",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "politics",
+          "from_column": "Dependent",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "politics",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "population",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"population\"\n(\n    Country           TEXT default '' not null\n        primary key\n        constraint population_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Population_Growth REAL,\n    Infant_Mortality  REAL\n)",
+      "row_count": 238,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Population_Growth",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "population growth",
+            "description": "population growth rate",
+            "data_format": "real",
+            "value_description": "per annum"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Infant_Mortality",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "infant mortality",
+            "description": "infant mortality",
+            "data_format": "real",
+            "value_description": "per thousand"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "population",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "province",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"province\"\n(\n    Name       TEXT not null,\n    Country    TEXT not null\n        constraint province_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Population INTEGER,\n    Area       REAL,\n    Capital    TEXT,\n    CapProv    TEXT,\n    primary key (Name, Country)\n)",
+      "row_count": 1450,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the administrative division",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code where it belongs to",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Population",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the population of the province",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Area",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the total area of the province,",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Capital",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the capital",
+            "data_format": "text",
+            "value_description": "if null, doesn't have capital"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "CapProv",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "capital province",
+            "description": "the name of the province where the capital belongs to",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\r\n\r\nnote that capprov is not necessarily equal to name"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "province",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "religion",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"religion\"\n(\n    Country    TEXT default '' not null\n        constraint religion_ibfk_1\n            references country\n            on update cascade on delete cascade,\n    Name       TEXT default '' not null,\n    Percentage REAL,\n    primary key (Name, Country)\n)",
+      "row_count": 454,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "name of the religion",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Percentage",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "percentage of the language in this country",
+            "data_format": "real",
+            "value_description": "%"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "religion",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "river",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"river\"\n(\n    Name             TEXT default '' not null\n        primary key,\n    River            TEXT,\n    Lake             TEXT\n        constraint river_ibfk_1\n            references lake\n            on update cascade on delete cascade,\n    Sea              TEXT,\n    Length           REAL,\n    SourceLongitude  REAL,\n    SourceLatitude   REAL,\n    Mountains        TEXT,\n    SourceAltitude   REAL,\n    EstuaryLongitude REAL,\n    EstuaryLatitude  REAL\n)",
+      "row_count": 218,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the river",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "River",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the river where it finally flows to",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Lake",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the lake where it finally flows to",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Sea",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the sea where it finally flows to",
+            "data_format": "text",
+            "value_description": "(note that at most one out of {river,lake,sea} can be non-null"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Length",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the length of the river",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "SourceLongitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the longitude of its source",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "SourceLatitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the latitude of its source",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Mountains",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the mountains where its source is located",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "SourceAltitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the elevation (above sea level) of its source",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "EstuaryLongitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the coordinates of its estuary",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "EstuaryLatitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the latitude of its estuary",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "river",
+          "from_column": "Lake",
+          "to_table": "lake",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "sea",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"sea\"\n(\n    Name  TEXT default '' not null\n        primary key,\n    Depth REAL\n)",
+      "row_count": 35,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the sea",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Depth",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the maximal depth of the sea",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "target",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"target\"\n(\n    Country TEXT not null\n        primary key\n        constraint target_Country_fkey\n            references country\n            on update cascade on delete cascade,\n    Target  TEXT\n)",
+      "row_count": 205,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Target",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "target",
+          "from_column": "Country",
+          "to_table": "country",
+          "to_column": null,
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "borders",
+      "from_column": "Country2",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "borders",
+      "from_column": "Country1",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "city",
+      "from_column": "Province",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "city",
+      "from_column": "Country",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "city",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "economy",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "encompasses",
+      "from_column": "Continent",
+      "to_table": "continent",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "encompasses",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "ethnicGroup",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "geo_desert",
+      "from_column": "Province",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "geo_desert",
+      "from_column": "Country",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "geo_desert",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "geo_desert",
+      "from_column": "Desert",
+      "to_table": "desert",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "geo_estuary",
+      "from_column": "Province",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "geo_estuary",
+      "from_column": "Country",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "geo_estuary",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "geo_estuary",
+      "from_column": "River",
+      "to_table": "river",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "geo_island",
+      "from_column": "Province",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "geo_island",
+      "from_column": "Country",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "geo_island",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "geo_island",
+      "from_column": "Island",
+      "to_table": "island",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "geo_lake",
+      "from_column": "Province",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "geo_lake",
+      "from_column": "Country",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "geo_lake",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "geo_lake",
+      "from_column": "Lake",
+      "to_table": "lake",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "geo_mountain",
+      "from_column": "Province",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "geo_mountain",
+      "from_column": "Country",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "geo_mountain",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "geo_mountain",
+      "from_column": "Mountain",
+      "to_table": "mountain",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "geo_river",
+      "from_column": "Province",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "geo_river",
+      "from_column": "Country",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "geo_river",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "geo_river",
+      "from_column": "River",
+      "to_table": "river",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "geo_sea",
+      "from_column": "Province",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "geo_sea",
+      "from_column": "Country",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "geo_sea",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "geo_sea",
+      "from_column": "Sea",
+      "to_table": "sea",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "geo_source",
+      "from_column": "Province",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "geo_source",
+      "from_column": "Country",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "geo_source",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "geo_source",
+      "from_column": "River",
+      "to_table": "river",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "isMember",
+      "from_column": "Organization",
+      "to_table": "organization",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "isMember",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "islandIn",
+      "from_column": "River",
+      "to_table": "river",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "islandIn",
+      "from_column": "Lake",
+      "to_table": "lake",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "islandIn",
+      "from_column": "Sea",
+      "to_table": "sea",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 3,
+      "sequence": 0,
+      "from_table": "islandIn",
+      "from_column": "Island",
+      "to_table": "island",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "language",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "located",
+      "from_column": "Province",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "located",
+      "from_column": "Country",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "located",
+      "from_column": "City",
+      "to_table": "city",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 1,
+      "from_table": "located",
+      "from_column": "Province",
+      "to_table": "city",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "located",
+      "from_column": "Sea",
+      "to_table": "sea",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 3,
+      "sequence": 0,
+      "from_table": "located",
+      "from_column": "Lake",
+      "to_table": "lake",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 4,
+      "sequence": 0,
+      "from_table": "located",
+      "from_column": "River",
+      "to_table": "river",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 5,
+      "sequence": 0,
+      "from_table": "located",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "locatedOn",
+      "from_column": "Province",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "locatedOn",
+      "from_column": "Country",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "locatedOn",
+      "from_column": "City",
+      "to_table": "city",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 1,
+      "from_table": "locatedOn",
+      "from_column": "Province",
+      "to_table": "city",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "locatedOn",
+      "from_column": "Island",
+      "to_table": "island",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 3,
+      "sequence": 0,
+      "from_table": "locatedOn",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "mergesWith",
+      "from_column": "Sea2",
+      "to_table": "sea",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "mergesWith",
+      "from_column": "Sea1",
+      "to_table": "sea",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "mountainOnIsland",
+      "from_column": "Island",
+      "to_table": "island",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "mountainOnIsland",
+      "from_column": "Mountain",
+      "to_table": "mountain",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "organization",
+      "from_column": "Province",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 1,
+      "from_table": "organization",
+      "from_column": "Country",
+      "to_table": "province",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "organization",
+      "from_column": "City",
+      "to_table": "city",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 1,
+      "from_table": "organization",
+      "from_column": "Province",
+      "to_table": "city",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "organization",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "politics",
+      "from_column": "Dependent",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "politics",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "population",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "province",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "religion",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "river",
+      "from_column": "Lake",
+      "to_table": "lake",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "target",
+      "from_column": "Country",
+      "to_table": "country",
+      "to_column": null,
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    }
+  ]
+}

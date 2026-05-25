@@ -1,0 +1,535 @@
+{
+  "db_id": "cs_semester",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/cs_semester/cs_semester.sqlite",
+  "tables": [
+    {
+      "name": "RA",
+      "type": "table",
+      "create_sql": "CREATE TABLE RA\n(\n    student_id INTEGER,\n    capability INTEGER,\n    prof_id    INTEGER,\n    salary     TEXT,\n    primary key (student_id, prof_id),\n    foreign key (prof_id) references prof(prof_id),\n    foreign key (student_id) references student(student_id)\n)",
+      "row_count": 35,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "student_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "student id",
+            "description": "the id numbe representing each student",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "capability",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the capability of student on research\n(Evaluated by the professor)",
+            "data_format": "integer",
+            "value_description": "higher --> higher research ability / capability"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "prof_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "professor id",
+            "description": "professor who advises this student",
+            "data_format": "integer",
+            "value_description": "this value may be repetitive since one professor may advise many students in this semester\ncommonsense evidence:\nif a professor advise > 2 students in this semester, it means this professor's research work is heavy\nor: this professor's popularity on research is higher"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "salary",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the salary of this student.",
+            "data_format": "text",
+            "value_description": "med: average salary\nhigh: higher salary than others\nlow: lower salary\nfree: unpaid RA"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "RA",
+          "from_column": "student_id",
+          "to_table": "student",
+          "to_column": "student_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "RA",
+          "from_column": "prof_id",
+          "to_table": "prof",
+          "to_column": "prof_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "course",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"course\"\n(\n    course_id INTEGER\n        constraint course_pk\n            primary key,\n    name      TEXT,\n    credit    INTEGER,\n    diff      INTEGER\n)",
+      "row_count": 13,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "course_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "course id",
+            "description": "unique id representing the course",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "name of the course",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "credit",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "credit of the course",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\nhigher means more important"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "diff",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "difficulty",
+            "description": "difficulty of the course",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\nhigher --> more difficult\r\nsmaller --> less difficult"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "prof",
+      "type": "table",
+      "create_sql": "CREATE TABLE prof\n(\n    prof_id         INTEGER\n        constraint prof_pk\n            primary key,\n    gender          TEXT,\n    first_name      TEXT,\n    last_name       TEXT,\n    email           TEXT,\n    popularity      INTEGER,\n    teachingability INTEGER,\n    graduate_from   TEXT\n)",
+      "row_count": 10,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "prof_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "professor id",
+            "description": "unique id for professors",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "gender",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "gender",
+            "description": "gender of the professor",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "first_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "the first name of the professor",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "last_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "the last name of the professor",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\r\nfull name: first name, last name"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "email",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "email of the professor",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "popularity",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "popularity of the professor",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\nhigher --> more popular"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "teachingability",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "teaching ability",
+            "description": "the teaching ability of the professor",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\nhigher --> more teaching ability, his / her lectures may have better quality"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "graduate_from",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "graduate from",
+            "description": "the school where the professor graduated from",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "registration",
+      "type": "table",
+      "create_sql": "CREATE TABLE registration\n(\n    course_id  INTEGER,\n    student_id INTEGER,\n    grade      TEXT,\n    sat        INTEGER,\n    primary key (course_id, student_id),\n    foreign key (course_id) references course(course_id),\n    foreign key (student_id) references student(student_id)\n)",
+      "row_count": 101,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "course_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "course id",
+            "description": "the id of courses",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "student_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "student id",
+            "description": "the id of students",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "grade",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the grades that the students acquire in this course",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n A: excellent -- 4\n B: good -- 3\n C: fair -- 2\n D: poorly pass -- 1\n null or empty: this student fails to pass this course\n gpa of students for this semester = sum (credits x grade) / sum (credits)"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "sat",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "satisfying degree",
+            "description": "student satisfaction with the course",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "registration",
+          "from_column": "student_id",
+          "to_table": "student",
+          "to_column": "student_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "registration",
+          "from_column": "course_id",
+          "to_table": "course",
+          "to_column": "course_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "student",
+      "type": "table",
+      "create_sql": "CREATE TABLE student\n(\n    student_id   INTEGER\n            primary key,\n    f_name       TEXT,\n    l_name       TEXT,\n    phone_number TEXT,\n    email        TEXT,\n    intelligence INTEGER,\n    gpa          REAL,\n    type         TEXT\n)",
+      "row_count": 38,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "student_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "student id",
+            "description": "the unique id to identify students",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "f_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "the first name of the student",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "l_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "the last name of the student",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nfull name: f_name, l_name"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "phone_number",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "phone number",
+            "description": "phone number",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "email",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "email",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "intelligence",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "intelligence of the student",
+            "data_format": "integer",
+            "value_description": "higher --> more intelligent"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "gpa",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "graduate point average",
+            "description": "gpa",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "type of the student",
+            "data_format": "text",
+            "value_description": " TPG: taught postgraduate student(master)\n RPG: research postgraduate student (master)\n UG: undergraduate student(bachelor)\ncommonsense evidence:\nboth TPG and RPG are students pursuing a masters degree; UG are students pursuing the bachelor degree"
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "RA",
+      "from_column": "student_id",
+      "to_table": "student",
+      "to_column": "student_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "RA",
+      "from_column": "prof_id",
+      "to_table": "prof",
+      "to_column": "prof_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "registration",
+      "from_column": "student_id",
+      "to_table": "student",
+      "to_column": "student_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "registration",
+      "from_column": "course_id",
+      "to_table": "course",
+      "to_column": "course_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

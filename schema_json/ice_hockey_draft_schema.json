@@ -1,0 +1,630 @@
+{
+  "db_id": "ice_hockey_draft",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/ice_hockey_draft/ice_hockey_draft.sqlite",
+  "tables": [
+    {
+      "name": "PlayerInfo",
+      "type": "table",
+      "create_sql": "CREATE TABLE PlayerInfo\n(\n    ELITEID           INTEGER\n            primary key,\n    PlayerName        TEXT,\n    birthdate         TEXT,\n    birthyear         DATE,\n    birthmonth        INTEGER,\n    birthday          INTEGER,\n    birthplace        TEXT,\n    nation            TEXT,\n    height            INTEGER,\n    weight            INTEGER,\n    position_info     TEXT,\n    shoots            TEXT,\n    draftyear         INTEGER,\n    draftround        INTEGER,\n    overall           INTEGER,\n    overallby         TEXT,\n    CSS_rank          INTEGER,\n    sum_7yr_GP        INTEGER,\n    sum_7yr_TOI       INTEGER,\n    GP_greater_than_0 TEXT,\n    foreign key (height) references height_info(height_id),\n    foreign key (weight) references weight_info(weight_id)\n)",
+      "row_count": 2171,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ELITEID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "ELITE ID",
+            "description": "the unique number identifying the players who attended the draft",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "PlayerName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Player Name",
+            "description": "the name of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "birthdate",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the birthdate of the player",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "birthyear",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the birth year of the player",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "birthmonth",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the birth month of the player",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "birthday",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the birthday of the player",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "birthplace",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the player of the birthplace",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "nation",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the nation of the player",
+            "data_format": "text",
+            "value_description": "commonsense evidence: can ask questions about their corresponding continents. or group nations with their continents. You can refer to https://worldpopulationreview.com/country-rankings/list-of-countries-by-continent\ne.g.: Slovakia --> Europe"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "height",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the id number identifying heights",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "weight",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the id number identifying weights",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "position_info",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "position information",
+            "description": "position information of the player",
+            "data_format": "text",
+            "value_description": "commonsense evidence: There are six different positions in hockey: \nleft wing,  \nright wing,  \ncenter,  \nleft defenseman, \nright defenseman \ngoalie. \nLeft wings, right wings, and centers are all considered forwards, while left and right defensemen are considered the defense."
+          }
+        },
+        {
+          "cid": 11,
+          "name": "shoots",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \n L: Left-shooted \n R: Right-shooted \n '-': no preference"
+          }
+        },
+        {
+          "cid": 12,
+          "name": "draftyear",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "draft year",
+            "description": "draft year",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "draftround",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "draft round",
+            "description": "draft round",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "overall",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "overall orders of draft picks",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 15,
+          "name": "overallby",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "drafted by which team",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 16,
+          "name": "CSS_rank",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Central Scouting Service ranking",
+            "description": "Central Scouting Service ranking",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: higher rank refers to higher prospects for the draft"
+          }
+        },
+        {
+          "cid": 17,
+          "name": "sum_7yr_GP",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "sum 7-year game plays",
+            "description": "Total NHL games played in players first 7 years of NHL career",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: higher --> more attendance in the first 7 years"
+          }
+        },
+        {
+          "cid": 18,
+          "name": "sum_7yr_TOI",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "sum 7-year time on ice",
+            "description": "Total NHL Time on Ice in players first 7 years of NHL career",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: higher --> more playing time in the first 7 years of career"
+          }
+        },
+        {
+          "cid": 19,
+          "name": "GP_greater_than_0",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "game play greater than 0",
+            "description": "Played a game or not in players first 7 years of NHL career",
+            "data_format": "text",
+            "value_description": " yes \n no"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "PlayerInfo",
+          "from_column": "weight",
+          "to_table": "weight_info",
+          "to_column": "weight_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "PlayerInfo",
+          "from_column": "height",
+          "to_table": "height_info",
+          "to_column": "height_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "SeasonStatus",
+      "type": "table",
+      "create_sql": "CREATE TABLE SeasonStatus\n(\n    ELITEID   INTEGER,\n    SEASON    TEXT,\n    TEAM      TEXT,\n    LEAGUE    TEXT,\n    GAMETYPE  TEXT,\n    GP        INTEGER,\n    G         INTEGER,\n    A         INTEGER,\n    P         INTEGER,\n    PIM       INTEGER,\n    PLUSMINUS INTEGER,\n    foreign key (ELITEID) references PlayerInfo(ELITEID)\n)",
+      "row_count": 5485,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ELITEID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ELITE ID",
+            "description": "the id number of the players",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "SEASON",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "season when players are playing",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "TEAM",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "which team the player belong to",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "LEAGUE",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "league",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "GAMETYPE",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "GAME TYPE",
+            "description": "type of games",
+            "data_format": "text",
+            "value_description": " Regular season  playoffs (post season)"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "GP",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Game Plays",
+            "description": "number of games",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "G",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Goals in Draft Year",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "A",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Assists in Draft Year",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "P",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Points in Draft Year",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: higher --> more valuable"
+          }
+        },
+        {
+          "cid": 9,
+          "name": "PIM",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Penalty Minutes",
+            "description": "Penalty Minutes in Draft Year",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: higher --> This player has committed more rule violations."
+          }
+        },
+        {
+          "cid": 10,
+          "name": "PLUSMINUS",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Plus Minutes",
+            "description": "Goal Differential in Draft Year",
+            "data_format": "integer",
+            "value_description": "Goal Differential"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "SeasonStatus",
+          "from_column": "ELITEID",
+          "to_table": "PlayerInfo",
+          "to_column": "ELITEID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "height_info",
+      "type": "table",
+      "create_sql": "CREATE TABLE height_info\n(\n    height_id      INTEGER\n            primary key,\n    height_in_cm   INTEGER,\n    height_in_inch TEXT\n)",
+      "row_count": 16,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "height_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "height id",
+            "description": "the unique height id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "height_in_cm",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "height in cm",
+            "description": "height in cm",
+            "data_format": "integer",
+            "value_description": "e.g. 180 --> the height is 180 cm"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "height_in_inch",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "height in inch",
+            "description": "height in inch",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "weight_info",
+      "type": "table",
+      "create_sql": "CREATE TABLE weight_info\n(\n    weight_id     INTEGER\n            primary key,\n    weight_in_kg  INTEGER,\n    weight_in_lbs INTEGER\n)",
+      "row_count": 46,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "weight_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "weight id",
+            "description": "the unique weight id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "weight_in_kg",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "weight in kg",
+            "description": "weight in kg",
+            "data_format": "integer",
+            "value_description": "e.g. 70: -->70 kg"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "weight_in_lbs",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "weight in lbs",
+            "description": "weight in lbs",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "PlayerInfo",
+      "from_column": "weight",
+      "to_table": "weight_info",
+      "to_column": "weight_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "PlayerInfo",
+      "from_column": "height",
+      "to_table": "height_info",
+      "to_column": "height_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "SeasonStatus",
+      "from_column": "ELITEID",
+      "to_table": "PlayerInfo",
+      "to_column": "ELITEID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

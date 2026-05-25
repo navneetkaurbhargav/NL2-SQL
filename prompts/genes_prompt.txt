@@ -1,0 +1,323 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "genes",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/genes/genes.sqlite",
+  "tables": [
+    {
+      "name": "Classification",
+      "type": "table",
+      "create_sql": "CREATE TABLE Classification\n(\n    GeneID       TEXT   not null\n        primary key,\n    Localization TEXT not null\n)",
+      "row_count": 862,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "GeneID",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "gene id",
+            "description": "unique identifier number of genes",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Localization",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "location",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Genes",
+      "type": "table",
+      "create_sql": "CREATE TABLE Genes\n(\n    GeneID       TEXT   not null,\n    Essential    TEXT not null,\n    Class        TEXT not null,\n    Complex      TEXT null,\n    Phenotype    TEXT not null,\n    Motif        TEXT not null,\n    Chromosome   INTEGER          not null,\n    Function     TEXT not null,\n    Localization TEXT not null,\n    foreign key (GeneID) references Classification (GeneID)\n            on update cascade on delete cascade\n)",
+      "row_count": 4346,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "GeneID",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "gene id",
+            "description": "identifier number of genes",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Essential",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "essential",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Class",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "class",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Complex",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Complex",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Phenotype",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Phenotype",
+            "data_format": "text",
+            "value_description": "?: means: doesn't exit the phenotype"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Motif",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Motif",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Chromosome",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Chromosome",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Function",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Function",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "Localization",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Genes",
+          "from_column": "GeneID",
+          "to_table": "Classification",
+          "to_column": "GeneID",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Interactions",
+      "type": "table",
+      "create_sql": "CREATE TABLE Interactions\n(\n    GeneID1         TEXT     not null,\n    GeneID2         TEXT      not null,\n    Type            TEXT    not null,\n    Expression_Corr REAL not null,\n    primary key (GeneID1, GeneID2),\n    foreign key (GeneID1) references Classification (GeneID)\n            on update cascade on delete cascade,\n    foreign key (GeneID2) references Classification (GeneID)\n            on update cascade on delete cascade\n)",
+      "row_count": 910,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "GeneID1",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "gene id 1",
+            "description": "identifier number of genes",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "GeneID2",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "gene id 2",
+            "description": "identifier number of genes",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Type",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Type",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Expression_Corr",
+          "type": "REAL",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Expression correlation score",
+            "description": "Expression correlation score",
+            "data_format": "real",
+            "value_description": "range: (0,1)\n\nif the value is the positive then it's \"positively correlated\"\n\nif the value is the negative then it's \"negatively correlated\"\n\nif the value is very high positively, it means two genes are highly correlated"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Interactions",
+          "from_column": "GeneID2",
+          "to_table": "Classification",
+          "to_column": "GeneID",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Interactions",
+          "from_column": "GeneID1",
+          "to_table": "Classification",
+          "to_column": "GeneID",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Genes",
+      "from_column": "GeneID",
+      "to_table": "Classification",
+      "to_column": "GeneID",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Interactions",
+      "from_column": "GeneID2",
+      "to_table": "Classification",
+      "to_column": "GeneID",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Interactions",
+      "from_column": "GeneID1",
+      "to_table": "Classification",
+      "to_column": "GeneID",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

@@ -1,0 +1,680 @@
+{
+  "db_id": "cookbook",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/cookbook/cookbook.sqlite",
+  "tables": [
+    {
+      "name": "Ingredient",
+      "type": "table",
+      "create_sql": "CREATE TABLE Ingredient\n(\n    ingredient_id INTEGER\n            primary key,\n    category      TEXT,\n    name          TEXT,\n    plural        TEXT\n)",
+      "row_count": 3346,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ingredient_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "ingredient id",
+            "description": "the unique identifier for the ingredient",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "category",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the category of the ingredient",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the ingredient",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "plural",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the plural suffix of the ingredient",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Nutrition",
+      "type": "table",
+      "create_sql": "CREATE TABLE Nutrition\n(\n    recipe_id     INTEGER\n            primary key,\n    protein       REAL,\n    carbo         REAL,\n    alcohol       REAL,\n    total_fat     REAL,\n    sat_fat       REAL,\n    cholestrl     REAL,\n    sodium        REAL,\n    iron          REAL,\n    vitamin_c     REAL,\n    vitamin_a     REAL,\n    fiber         REAL,\n    pcnt_cal_carb REAL,\n    pcnt_cal_fat  REAL,\n    pcnt_cal_prot REAL,\n    calories      REAL,\n    foreign key (recipe_id) references Recipe(recipe_id)\n)",
+      "row_count": 878,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "recipe_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "recipe id",
+            "description": "the id of the recipe",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "protein",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the protein content in the recipe",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "carbo",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the carbo content in the recipe",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "alcohol",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the alcohol content in the recipe",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "total_fat",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "total fat",
+            "description": "the total fat content in the recipe",
+            "data_format": "real",
+            "value_description": "commonsense evidence: higher --> higher possibility to gain weight"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "sat_fat",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "saturated fat",
+            "description": "the saturated fat content in the recipe",
+            "data_format": "real",
+            "value_description": "commonsense evidence: unsaturated fat = total_fat - saturated fat"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "cholestrl",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "cholesterol",
+            "description": "the cholesterol content in the recipe",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "sodium",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the sodium content in the recipe",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nSalt/Sodium-Free - Less than 5 mg of sodium per serving\nVery Low Sodium - 35 mg of sodium or less per serving\nLow Sodium -140 mg of sodium or less per serving\nReduced Sodium - At least 25% less sodium than the regular product\nLight in Sodium or Lightly Salted - At least 50% less sodium than the regular product\nNo-Salt-Added or Unsalted - No salt is added during processing - but these products may not be salt/sodium-free unless stated"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "iron",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the iron content in the recipe",
+            "data_format": "real",
+            "value_description": "commonsense evidence: if iron > 20mg, it will lead to  \n constipation \n feeling sick \n being sick \n stomach pain \nquestion could mention any of functions listed before."
+          }
+        },
+        {
+          "cid": 9,
+          "name": "vitamin_c",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "vitamin c",
+            "description": "the vitamin c content in the recipe",
+            "data_format": "real",
+            "value_description": "commonsense evidence: Vitamin C, also known as ascorbic acid, if the VC is higher, it will:\n helping to protect cells and keeping them healthy \n maintaining healthy skin, blood vessels, bones and cartilage \n helping with wound healing \nquestion could mention any of functions listed before."
+          }
+        },
+        {
+          "cid": 10,
+          "name": "vitamin_a",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "vitamin a",
+            "description": "the vitamin a content in the recipe",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nhigher --> beneficial to \n helping your body's natural defense against illness and infection (the immune system) work properly \n helping vision in dim light \n keeping skin and the lining of some parts of the body, such as the nose, healthy \nquestion could mention any of functions listed before."
+          }
+        },
+        {
+          "cid": 11,
+          "name": "fiber",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the fiber a content in the recipe",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "pcnt_cal_carb",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "percentage calculation carbo",
+            "description": "percentage of carbo in total nutrient composition",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "pcnt_cal_fat",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "percentage calculation fat",
+            "description": "percentage of fat in total nutrient composition",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "pcnt_cal_prot",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "percentage calculation protein",
+            "description": "percentage of protein in total nutrient composition",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 15,
+          "name": "calories",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the calories of the recipe",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Nutrition",
+          "from_column": "recipe_id",
+          "to_table": "Recipe",
+          "to_column": "recipe_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Quantity",
+      "type": "table",
+      "create_sql": "CREATE TABLE Quantity\n(\n    quantity_id   INTEGER\n            primary key,\n    recipe_id     INTEGER,\n    ingredient_id INTEGER,\n    max_qty       REAL,\n    min_qty       REAL,\n    unit          TEXT,\n    preparation   TEXT,\n    optional      TEXT,\n    foreign key (recipe_id) references Recipe(recipe_id),\n    foreign key (ingredient_id) references Ingredient(ingredient_id),\n    foreign key (recipe_id) references Nutrition(recipe_id)\n)",
+      "row_count": 5116,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "quantity_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "quantity id",
+            "description": "the unique identifier for the quantity",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "recipe_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "recipe id",
+            "description": "the id of the recipe",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "ingredient_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ingredient id",
+            "description": "the id of the ingredient",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "max_qty",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "maximum quantity",
+            "description": "the max quantity of the ingredient",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "min_qty",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "minimum quantity",
+            "description": "the min quantity of the ingredient",
+            "data_format": "real",
+            "value_description": "commonsense evidence: If max_qty equals to min_qty, it means that the ingredient must be rationed."
+          }
+        },
+        {
+          "cid": 5,
+          "name": "unit",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unit of the ingredient",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "preparation",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "commonsense evidence: 'No data' means the ingredient doesn't need preprocessing."
+          }
+        },
+        {
+          "cid": 7,
+          "name": "optional",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the ingredient is optional",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Quantity",
+          "from_column": "recipe_id",
+          "to_table": "Nutrition",
+          "to_column": "recipe_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Quantity",
+          "from_column": "ingredient_id",
+          "to_table": "Ingredient",
+          "to_column": "ingredient_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "Quantity",
+          "from_column": "recipe_id",
+          "to_table": "Recipe",
+          "to_column": "recipe_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Recipe",
+      "type": "table",
+      "create_sql": "CREATE TABLE Recipe\n(\n    recipe_id  INTEGER\n            primary key,\n    title      TEXT,\n    subtitle   TEXT,\n    servings   INTEGER,\n    yield_unit TEXT,\n    prep_min   INTEGER,\n    cook_min   INTEGER,\n    stnd_min   INTEGER,\n    source     TEXT,\n    intro      TEXT,\n    directions TEXT\n)",
+      "row_count": 1031,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "recipe_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "recipe id",
+            "description": "the unique identifier for the recipe",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the title of the recipe",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "subtitle",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the subtitle of the recipe",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "servings",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the number of people the recipe can serve",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "yield_unit",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "yield unit",
+            "description": "the unit of the yield for the recipe",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "prep_min",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "preparation minute",
+            "description": "the preparation minute of the recipe",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "cook_min",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "cooked minute",
+            "description": "the cooked minute of the recipe",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "stnd_min",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "stand minute",
+            "description": "the stand minute of the price",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: The stand minute stands for the time to take the dish away from the heat source. \nthe total time of the recipe = prep_min + cook_min + stnd_min"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "source",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the source of the recipe",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "intro",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "introduction",
+            "description": "the introduction of the recipe",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "directions",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the directions of the recipe",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Nutrition",
+      "from_column": "recipe_id",
+      "to_table": "Recipe",
+      "to_column": "recipe_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Quantity",
+      "from_column": "recipe_id",
+      "to_table": "Nutrition",
+      "to_column": "recipe_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Quantity",
+      "from_column": "ingredient_id",
+      "to_table": "Ingredient",
+      "to_column": "ingredient_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "Quantity",
+      "from_column": "recipe_id",
+      "to_table": "Recipe",
+      "to_column": "recipe_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

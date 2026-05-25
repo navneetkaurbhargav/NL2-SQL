@@ -1,0 +1,466 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "university",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/university/university.sqlite",
+  "tables": [
+    {
+      "name": "country",
+      "type": "table",
+      "create_sql": "CREATE TABLE country\n(\n    id           INTEGER not null\n            primary key,\n    country_name TEXT default NULL\n)",
+      "row_count": 74,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "id",
+            "description": "unique id number identifying country",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "country_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "country name",
+            "description": "the name of the country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "ranking_criteria",
+      "type": "table",
+      "create_sql": "CREATE TABLE ranking_criteria\n(\n    id                INTEGER not null\n            primary key,\n    ranking_system_id INTEGER          default NULL,\n    criteria_name     TEXT default NULL,\n    foreign key (ranking_system_id) references ranking_system(id)\n)",
+      "row_count": 21,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "id",
+            "description": "unique id number identifying ranking criteria",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "ranking_system_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ranking system id",
+            "description": "id number identifying ranking system",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "criteria_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "criteria name",
+            "description": "name of the criteria",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "ranking_criteria",
+          "from_column": "ranking_system_id",
+          "to_table": "ranking_system",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "ranking_system",
+      "type": "table",
+      "create_sql": "CREATE TABLE ranking_system\n(\n    id          INTEGER not null\n            primary key,\n    system_name TEXT default NULL\n)",
+      "row_count": 3,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "id",
+            "description": "unique id number identifying ranking system",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "system_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "system name",
+            "description": "id number identifying ranking system",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "university",
+      "type": "table",
+      "create_sql": "CREATE TABLE university\n(\n    id              INTEGER not null\n            primary key,\n    country_id      INTEGER          default NULL,\n    university_name TEXT default NULL,\n    foreign key (country_id) references country(id)\n)",
+      "row_count": 1247,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "id",
+            "description": "unique id number identifying university",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "country_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "country id",
+            "description": "the country where the university locates",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "university_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "university name",
+            "description": "name of the university",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "university",
+          "from_column": "country_id",
+          "to_table": "country",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "university_ranking_year",
+      "type": "table",
+      "create_sql": "CREATE TABLE university_ranking_year\n(\n    university_id       INTEGER default NULL,\n    ranking_criteria_id INTEGER default NULL,\n    year                INTEGER default NULL,\n    score               INTEGER default NULL,\n    foreign key (ranking_criteria_id) references ranking_criteria(id),\n    foreign key (university_id) references university(id)\n)",
+      "row_count": 29612,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "university_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "university id",
+            "description": "the id of the university",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "ranking_criteria_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "ranking criteria id",
+            "description": "the id of the ranking criteria",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ranking year",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "score",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "ranking score",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "university_ranking_year",
+          "from_column": "university_id",
+          "to_table": "university",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "university_ranking_year",
+          "from_column": "ranking_criteria_id",
+          "to_table": "ranking_criteria",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "university_year",
+      "type": "table",
+      "create_sql": "CREATE TABLE university_year\n(\n    university_id              INTEGER           default NULL,\n    year                       INTEGER           default NULL,\n    num_students               INTEGER           default NULL,\n    student_staff_ratio        REAL default NULL,\n    pct_international_students INTEGER           default NULL,\n    pct_female_students        INTEGER           default NULL,\n    foreign key (university_id) references university(id)\n)",
+      "row_count": 1085,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "university_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "university id",
+            "description": "id of the university",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "num_students",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "number of students",
+            "description": "the total number of students for the year",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "student_staff_ratio",
+          "type": "REAL",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "student staff ratio",
+            "description": "",
+            "data_format": "real",
+            "value_description": "commonsense evidence: student_staff_ratio = number of students / number of staff"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "pct_international_students",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "pct internation student",
+            "description": "the percentage of international students among all students",
+            "data_format": "real",
+            "value_description": "commonsense evidence: pct_international_student = number of interbational students / number of students"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "pct_female_students",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "pct female students",
+            "description": "the percentage of female students",
+            "data_format": "real",
+            "value_description": "commonsense evidence: pct_female_students = number of female students / number of students"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "university_year",
+          "from_column": "university_id",
+          "to_table": "university",
+          "to_column": "id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "ranking_criteria",
+      "from_column": "ranking_system_id",
+      "to_table": "ranking_system",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "university",
+      "from_column": "country_id",
+      "to_table": "country",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "university_ranking_year",
+      "from_column": "university_id",
+      "to_table": "university",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "university_ranking_year",
+      "from_column": "ranking_criteria_id",
+      "to_table": "ranking_criteria",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "university_year",
+      "from_column": "university_id",
+      "to_table": "university",
+      "to_column": "id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

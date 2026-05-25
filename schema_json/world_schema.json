@@ -1,0 +1,417 @@
+{
+  "db_id": "world",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/world/world.sqlite",
+  "tables": [
+    {
+      "name": "City",
+      "type": "table",
+      "create_sql": "CREATE TABLE `City` (\n  `ID` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n  `Name` TEXT NOT NULL DEFAULT '',\n  `CountryCode` TEXT NOT NULL DEFAULT '',\n  `District` TEXT NOT NULL DEFAULT '',\n  `Population` INTEGER NOT NULL DEFAULT 0,\n  FOREIGN KEY (`CountryCode`) REFERENCES `Country` (`Code`)\n)",
+      "row_count": 4079,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique id for the city",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the name of the city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "CountryCode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Country Code",
+            "description": "the country code of the country that the city is belonged",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "District",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the district where the city locates",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Population",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the number of the population in the area",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\n\nmore population --> more crowded"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "City",
+          "from_column": "CountryCode",
+          "to_table": "Country",
+          "to_column": "Code",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "Country",
+      "type": "table",
+      "create_sql": "CREATE TABLE `Country` (\n  `Code` TEXT NOT NULL DEFAULT '',\n  `Name` TEXT NOT NULL DEFAULT '',\n  `Continent` TEXT NOT NULL DEFAULT 'Asia',\n  `Region` TEXT NOT NULL DEFAULT '',\n  `SurfaceArea` REAL NOT NULL DEFAULT 0.00,\n  `IndepYear` INTEGER DEFAULT NULL,\n  `Population` INTEGER NOT NULL DEFAULT 0,\n  `LifeExpectancy` REAL DEFAULT NULL,\n  `GNP` REAL DEFAULT NULL,\n  `GNPOld` REAL DEFAULT NULL,\n  `LocalName` TEXT NOT NULL DEFAULT '',\n  `GovernmentForm` TEXT NOT NULL DEFAULT '',\n  `HeadOfState` TEXT DEFAULT NULL,\n  `Capital` INTEGER DEFAULT NULL,\n  `Code2` TEXT NOT NULL DEFAULT '',\n  PRIMARY KEY (`Code`)\n)",
+      "row_count": 239,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Code",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the unique country code of the country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Continent",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "'Asia'",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the continent that the country locates",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Region",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the region that the country locates",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "SurfaceArea",
+          "type": "REAL",
+          "not_null": true,
+          "default": "0.00",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Surface Area",
+            "description": "the surface area of the country",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "IndepYear",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Independence Year",
+            "description": "the year that the country declared independence",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Population",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the number of the population in the area",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\n\r\nmore population --> more crowded"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "LifeExpectancy",
+          "type": "REAL",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Life Expectancy",
+            "description": "the life expectancy at birth of the country",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\r\n\r\n Life expectancy at birth is defined as how long, on average, a newborn can expect to live if current death rates do not change"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "GNP",
+          "type": "REAL",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Gross National Product",
+            "description": "the GNP of the country",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\r\n\r\n GNP measures the total monetary value of the output produced by a country's residents."
+          }
+        },
+        {
+          "cid": 9,
+          "name": "GNPOld",
+          "type": "REAL",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Gross National Product Old",
+            "description": "Gross national product - old value.",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "LocalName",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Local Name",
+            "description": "The country's local name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "GovernmentForm",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Government Form",
+            "description": "The country's goverment form.",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\r\n\r\nRepublic: governmentform contains \"Republic\""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "HeadOfState",
+          "type": "TEXT",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Head Of State",
+            "description": "The head of state full name.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "Capital",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The country's capital",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\n\r\nif the capital is null, it means this country doesn't have a city where a region's government is located"
+          }
+        },
+        {
+          "cid": 14,
+          "name": "Code2",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The second country code.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "CountryLanguage",
+      "type": "table",
+      "create_sql": "CREATE TABLE `CountryLanguage` (\n  `CountryCode` TEXT NOT NULL DEFAULT '',\n  `Language` TEXT NOT NULL DEFAULT '',\n  `IsOfficial`TEXT NOT NULL DEFAULT 'F',\n  `Percentage` REAL NOT NULL DEFAULT 0.0,\n  PRIMARY KEY (`CountryCode`,`Language`),\n  FOREIGN KEY (`CountryCode`) REFERENCES `Country` (`Code`)\n)",
+      "row_count": 984,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "CountryCode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Country Code",
+            "description": "The unique code for country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Language",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "''",
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Country language",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "IsOfficial",
+          "type": "TEXT",
+          "not_null": true,
+          "default": "'F'",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Is Official",
+            "description": "Information on whether the language is official in a given country",
+            "data_format": "text",
+            "value_description": "T / F"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Percentage",
+          "type": "REAL",
+          "not_null": true,
+          "default": "0.0",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Percentage of language use",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "CountryLanguage",
+          "from_column": "CountryCode",
+          "to_table": "Country",
+          "to_column": "Code",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "City",
+      "from_column": "CountryCode",
+      "to_table": "Country",
+      "to_column": "Code",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "CountryLanguage",
+      "from_column": "CountryCode",
+      "to_table": "Country",
+      "to_column": "Code",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

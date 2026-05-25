@@ -1,0 +1,1021 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "retail_complains",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/retail_complains/retail_complains.sqlite",
+  "tables": [
+    {
+      "name": "callcenterlogs",
+      "type": "table",
+      "create_sql": "CREATE TABLE callcenterlogs\n(\n    \"Date received\" DATE,\n    \"Complaint ID\"  TEXT,\n    \"rand client\"   TEXT,\n    phonefinal      TEXT,\n    \"vru+line\"      TEXT,\n    call_id         INTEGER,\n    priority        INTEGER,\n    type            TEXT,\n    outcome         TEXT,\n    server          TEXT,\n    ser_start       TEXT,\n    ser_exit        TEXT,\n    ser_time        TEXT,\n    primary key (\"Complaint ID\"),\n    foreign key (\"rand client\") references client(client_id)\n)",
+      "row_count": 3999,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Date received",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "complaint date",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Complaint ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "unique id number representing each complaint",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "rand client",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "client id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "phonefinal",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "phone final",
+            "description": "final phone number",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "vru+line",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voice response unit line",
+            "description": "voice response unit line",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "call_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "call id",
+            "description": "id number identifying the call",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "priority",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "priority of the complaint",
+            "data_format": "integer",
+            "value_description": "0, 1, 2, \nnull: not available,\nhigher: -> higher priority,\n-> more serious/urgent complaint"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "type of complaint",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "outcome",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the outcome of processing of complaints",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "server",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "server",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "ser_start",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "server start",
+            "description": "server start time",
+            "data_format": "text",
+            "value_description": "HH:MM:SS"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "ser_exit",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "server exit",
+            "description": "server exit time",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "ser_time",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "server time",
+            "description": "server time",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nlonger server time referring to more verbose/longer complaint"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "callcenterlogs",
+          "from_column": "rand client",
+          "to_table": "client",
+          "to_column": "client_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "client",
+      "type": "table",
+      "create_sql": "CREATE TABLE client\n(\n    client_id   TEXT\n            primary key,\n    sex         TEXT,\n    day         INTEGER,\n    month       INTEGER,\n    year        INTEGER,\n    age         INTEGER,\n    social      TEXT,\n    first       TEXT,\n    middle      TEXT,\n    last        TEXT,\n    phone       TEXT,\n    email       TEXT,\n    address_1   TEXT,\n    address_2   TEXT,\n    city        TEXT,\n    state       TEXT,\n    zipcode     INTEGER,\n    district_id INTEGER,\n    foreign key (district_id) references district(district_id)\n)",
+      "row_count": 5369,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "client_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "client id",
+            "description": "unique id client number",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "sex",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "sex of client",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "day",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "day of the birthday",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "month",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "month of the birthday",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "year when is born",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "age",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "age",
+            "data_format": "integer",
+            "value_description": "teenager: 13-19\nadult: 19-65\nelder: > 65"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "social",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "social number",
+            "data_format": "text",
+            "value_description": "ssn: us id number for each person"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "first",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "first name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "middle",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "middle name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "last",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "last name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "phone",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "phone number",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "email",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "email",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\ngoogle email / account: @gamil.com\nmicrosoft email / account: xxx@outlook.com"
+          }
+        },
+        {
+          "cid": 12,
+          "name": "address_1",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "address 1",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "address_2",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "address 2",
+            "data_format": "text",
+            "value_description": "entire address = (address_1, address_2)"
+          }
+        },
+        {
+          "cid": 14,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 15,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "state code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 16,
+          "name": "zipcode",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "zipcode",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "district_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "district id",
+            "description": "district id number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "client",
+          "from_column": "district_id",
+          "to_table": "district",
+          "to_column": "district_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "district",
+      "type": "table",
+      "create_sql": "CREATE TABLE district\n(\n    district_id  INTEGER\n            primary key,\n    city         TEXT,\n    state_abbrev TEXT,\n    division     TEXT,\n    foreign key (state_abbrev) references state(StateCode)\n)",
+      "row_count": 77,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "district_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "district id",
+            "description": "unique id number representing district",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "state_abbrev",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "state abbreviated code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "division",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "division",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "district",
+          "from_column": "state_abbrev",
+          "to_table": "state",
+          "to_column": "StateCode",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "events",
+      "type": "table",
+      "create_sql": "CREATE TABLE events\n(\n    \"Date received\"                DATE,\n    Product                        TEXT,\n    \"Sub-product\"                  TEXT,\n    Issue                          TEXT,\n    \"Sub-issue\"                    TEXT,\n    \"Consumer complaint narrative\" TEXT,\n    Tags                           TEXT,\n    \"Consumer consent provided?\"   TEXT,\n    \"Submitted via\"                TEXT,\n    \"Date sent to company\"         TEXT,\n    \"Company response to consumer\" TEXT,\n    \"Timely response?\"             TEXT,\n    \"Consumer disputed?\"           TEXT,\n    \"Complaint ID\"                 TEXT,\n    Client_ID                      TEXT,\n    primary key (\"Complaint ID\", Client_ID),\n    foreign key (\"Complaint ID\") references callcenterlogs(\"Complaint ID\"),\n    foreign key (Client_ID) references client(client_id)\n)",
+      "row_count": 23419,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Date received",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Date received",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Product",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "complaining about which product",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Sub-product",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "sub product if exists",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\ndetailed product"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Issue",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "problems leading to this complaints",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Sub-issue",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "sub problems leading to this complaints if exists",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nmore detailed issue"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "Consumer complaint narrative",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Consumer complaint narrative",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Tags",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "tags of client",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Consumer consent provided?",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Tags Consumer consent provided?",
+            "description": "whether the tags labeled under permission of the clients",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n null, 'N/A' or empty value: indicating that the company didn't get the permission of consent.\n if the value is not empty: customers provide the consent for this tag."
+          }
+        },
+        {
+          "cid": 8,
+          "name": "Submitted via",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Submitted via",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "Date sent to company",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Date sent to company",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\ndelay of the complaints = 'Date sent to company'"
+          }
+        },
+        {
+          "cid": 10,
+          "name": "Company response to consumer",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Company response to consumer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "Timely response?",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the response of the company is timely",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "Consumer disputed?",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the consumer dispute about the response from the company.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "Complaint ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "id number indicating which complaint",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "Client_ID",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "Client ID",
+            "description": "id number indicating which client",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "events",
+          "from_column": "Client_ID",
+          "to_table": "client",
+          "to_column": "client_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "events",
+          "from_column": "Complaint ID",
+          "to_table": "callcenterlogs",
+          "to_column": "Complaint ID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "reviews",
+      "type": "table",
+      "create_sql": "CREATE TABLE reviews\n(\n    \"Date\"        DATE\n            primary key,\n    Stars       INTEGER,\n    Reviews     TEXT,\n    Product     TEXT,\n    district_id INTEGER,\n    foreign key (district_id) references district(district_id)\n)",
+      "row_count": 377,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Stars",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Reviews",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Product",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "district_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "reviews",
+          "from_column": "district_id",
+          "to_table": "district",
+          "to_column": "district_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "state",
+      "type": "table",
+      "create_sql": "CREATE TABLE state\n(\n    StateCode TEXT\n        constraint state_pk\n            primary key,\n    State     TEXT,\n    Region    TEXT\n)",
+      "row_count": 48,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "StateCode",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "State",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Region",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "callcenterlogs",
+      "from_column": "rand client",
+      "to_table": "client",
+      "to_column": "client_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "client",
+      "from_column": "district_id",
+      "to_table": "district",
+      "to_column": "district_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "district",
+      "from_column": "state_abbrev",
+      "to_table": "state",
+      "to_column": "StateCode",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "events",
+      "from_column": "Client_ID",
+      "to_table": "client",
+      "to_column": "client_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "events",
+      "from_column": "Complaint ID",
+      "to_table": "callcenterlogs",
+      "to_column": "Complaint ID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "reviews",
+      "from_column": "district_id",
+      "to_table": "district",
+      "to_column": "district_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

@@ -1,0 +1,297 @@
+{
+  "db_id": "coinmarketcap",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/coinmarketcap/coinmarketcap.sqlite",
+  "tables": [
+    {
+      "name": "coins",
+      "type": "table",
+      "create_sql": "CREATE TABLE coins\n(\n    id            INTEGER not null\n        primary key,\n    name          TEXT,\n    slug          TEXT,\n    symbol        TEXT,\n    status        TEXT,\n    category      TEXT,\n    description   TEXT,\n    subreddit     TEXT,\n    notice        TEXT,\n    tags          TEXT,\n    tag_names     TEXT,\n    website       TEXT,\n    platform_id   INTEGER,\n    date_added    TEXT,\n    date_launched TEXT\n)",
+      "row_count": 8927,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1
+        },
+        {
+          "cid": 1,
+          "name": "name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 2,
+          "name": "slug",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 3,
+          "name": "symbol",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 4,
+          "name": "status",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 5,
+          "name": "category",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 6,
+          "name": "description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 7,
+          "name": "subreddit",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 8,
+          "name": "notice",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 9,
+          "name": "tags",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 10,
+          "name": "tag_names",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 11,
+          "name": "website",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 12,
+          "name": "platform_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 13,
+          "name": "date_added",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 14,
+          "name": "date_launched",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "historical",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"historical\"\n(\n    date               DATE,\n    coin_id            INTEGER,\n    cmc_rank           INTEGER,\n    market_cap         REAL,\n    price              REAL,\n    open               REAL,\n    high               REAL,\n    low                REAL,\n    close              REAL,\n    time_high          TEXT,\n    time_low           TEXT,\n    volume_24h         REAL,\n    percent_change_1h  REAL,\n    percent_change_24h REAL,\n    percent_change_7d  REAL,\n    circulating_supply REAL,\n    total_supply       REAL,\n    max_supply         REAL,\n    num_market_pairs   INTEGER\n)",
+      "row_count": 4441972,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 1,
+          "name": "coin_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 2,
+          "name": "cmc_rank",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 3,
+          "name": "market_cap",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 4,
+          "name": "price",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 5,
+          "name": "open",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 6,
+          "name": "high",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 7,
+          "name": "low",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 8,
+          "name": "close",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 9,
+          "name": "time_high",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 10,
+          "name": "time_low",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 11,
+          "name": "volume_24h",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 12,
+          "name": "percent_change_1h",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 13,
+          "name": "percent_change_24h",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 14,
+          "name": "percent_change_7d",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 15,
+          "name": "circulating_supply",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 16,
+          "name": "total_supply",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 17,
+          "name": "max_supply",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        },
+        {
+          "cid": 18,
+          "name": "num_market_pairs",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": []
+}

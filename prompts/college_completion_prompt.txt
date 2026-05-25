@@ -1,0 +1,1573 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "college_completion",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/college_completion/college_completion.sqlite",
+  "tables": [
+    {
+      "name": "institution_details",
+      "type": "table",
+      "create_sql": "CREATE TABLE institution_details\n(\n    unitid                               INTEGER\n        constraint institution_details_pk\n            primary key,\n    chronname                            TEXT,\n    city                                 TEXT,\n    state                                TEXT,\n    level                                TEXT,\n    control                              TEXT,\n    basic                                TEXT,\n    hbcu                                 TEXT,\n    flagship                             TEXT,\n    long_x                               REAL,\n    lat_y                                REAL,\n    site                                 TEXT,\n    student_count                        INTEGER,\n    awards_per_value                     REAL,\n    awards_per_state_value               REAL,\n    awards_per_natl_value                REAL,\n    exp_award_value                      INTEGER,\n    exp_award_state_value                INTEGER,\n    exp_award_natl_value                 INTEGER,\n    exp_award_percentile                 INTEGER,\n    ft_pct                               REAL,\n    fte_value                            INTEGER,\n    fte_percentile                       INTEGER,\n    med_sat_value                        TEXT,\n    med_sat_percentile                   TEXT,\n    aid_value                            INTEGER,\n    aid_percentile                       INTEGER,\n    endow_value                          TEXT,\n    endow_percentile                     TEXT,\n    grad_100_value                       REAL,\n    grad_100_percentile                  INTEGER,\n    grad_150_value                       REAL,\n    grad_150_percentile                  INTEGER,\n    pell_value                           REAL,\n    pell_percentile                      INTEGER,\n    retain_value                         REAL,\n    retain_percentile                    INTEGER,\n    ft_fac_value                         REAL,\n    ft_fac_percentile                    INTEGER,\n    vsa_year                             TEXT,\n    vsa_grad_after4_first                TEXT,\n    vsa_grad_elsewhere_after4_first      TEXT,\n    vsa_enroll_after4_first              TEXT,\n    vsa_enroll_elsewhere_after4_first    TEXT,\n    vsa_grad_after6_first                TEXT,\n    vsa_grad_elsewhere_after6_first      TEXT,\n    vsa_enroll_after6_first              TEXT,\n    vsa_enroll_elsewhere_after6_first    TEXT,\n    vsa_grad_after4_transfer             TEXT,\n    vsa_grad_elsewhere_after4_transfer   TEXT,\n    vsa_enroll_after4_transfer           TEXT,\n    vsa_enroll_elsewhere_after4_transfer TEXT,\n    vsa_grad_after6_transfer             TEXT,\n    vsa_grad_elsewhere_after6_transfer   TEXT,\n    vsa_enroll_after6_transfer           TEXT,\n    vsa_enroll_elsewhere_after6_transfer TEXT,\n    similar                              TEXT,\n    state_sector_ct                      INTEGER,\n    carnegie_ct                          INTEGER,\n    counted_pct                          TEXT,\n    nicknames                            TEXT,\n    cohort_size                          INTEGER\n)",
+      "row_count": 3798,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "unitid",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Unit ID number",
+            "description": "unique Education Unit ID number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "chronname",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Institution name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Institution city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Institution state",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "level",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Level of institution",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n4-year: bachelor's degree\n2-year: associate's degree"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "control",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Control of institution",
+            "data_format": "text",
+            "value_description": "Public, \nPrivate not-for-profit, \nPrivate for-profit"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "basic",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Carnegie Foundation for the Advancement of Teaching Basic Classification (2010 version)",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "hbcu",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Historically Black College and Universities",
+            "description": "Denotes Historically Black College and Universities",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "flagship",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Denotes Public flagship institutions",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "long_x",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Institution longitude",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "lat_y",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Institution latitude",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\ninstitute Coordinate"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "site",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Institution Web site address",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "student_count",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "student count",
+            "description": "Total number of undergraduates in 2010",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "awards_per_value",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "awards per value",
+            "description": "Completions per 100 FTE (full-time equivalency) undergraduate students (average 2011, 2012, and 2013)",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "awards_per_state_value",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "awards per state value",
+            "description": "Completions per 100 FTE (full-time equivalency) undergraduate students, state and sector average",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\n if his institute's completion (or graduation) rate exceeds the average for the state and sector in which it belongs:\nawards_per_value > awards_per_state_value\n if his institute's completion (or graduation) rate falls below the average for the state and sector in which it belongs:\nawards_per_value < awards_per_state_value"
+          }
+        },
+        {
+          "cid": 15,
+          "name": "awards_per_natl_value",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "awards per national value",
+            "description": "Completions per 100 FTE (full-time equivalency) undergraduate students, national sector average",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\n if his institute's completion (or graduation) rate exceeds the average for the nationalin which it belongs:\nawards_per_value > awards_per_natl_value\n if his institute's completion (or graduation) rate falls below the average for the state and industry in which it belongs:\nawards_per_value < awards_per_natl_value"
+          }
+        },
+        {
+          "cid": 16,
+          "name": "exp_award_value",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "expected award value",
+            "description": "Estimated educational spending per academic award in 2013. Includes all certificates and degrees",
+            "data_format": "integer",
+            "value_description": "expenses related to instruction, research, public service, student services, academic support, institutional support, operations and maintenance. Includes all certificates and degrees"
+          }
+        },
+        {
+          "cid": 17,
+          "name": "exp_award_state_value",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "expected award state value",
+            "description": "Spending per completion, state and sector average",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 18,
+          "name": "exp_award_natl_value",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "expected award national value",
+            "description": "Spending per completion, national sector average",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 19,
+          "name": "exp_award_percentile",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 20,
+          "name": "ft_pct",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Full-time percentage",
+            "description": "Percentage of undergraduates who attend full-time",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 21,
+          "name": "fte_value",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Full-time percentage",
+            "description": "total number of full-time equivalent undergraduates",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 22,
+          "name": "fte_percentile",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 23,
+          "name": "med_sat_value",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "median SAT value",
+            "description": "Median estimated SAT value for incoming students",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 24,
+          "name": "med_sat_percentile",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "median SAT percentile",
+            "description": "Institution's percent rank for median SAT value within sector",
+            "data_format": "text",
+            "value_description": "Institution's percent rank for median SAT value within sector"
+          }
+        },
+        {
+          "cid": 25,
+          "name": "aid_value",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "aid value",
+            "description": "The average amount of student aid going to undergraduate recipients",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 26,
+          "name": "aid_percentile",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "aid percentile",
+            "description": "Institution's percent rank for average amount of student aid going to undergraduate recipients within sector",
+            "data_format": "integer",
+            "value_description": "Institution's percent rank for average amount of student aid going to undergraduate recipients within sector"
+          }
+        },
+        {
+          "cid": 27,
+          "name": "endow_value",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "endow value",
+            "description": "End-of-year endowment value per full-time equivalent student",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 28,
+          "name": "endow_percentile",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "endow percentile",
+            "description": "Institution's percent rank for endowment value per full-time equivalent student within sector",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 29,
+          "name": "grad_100_value",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "graduation 100 value",
+            "description": "percentage of first-time, full-time, degree-seeking undergraduates who complete a degree or certificate program within 100 percent of expected time (bachelor's-seeking group at 4-year institutions)",
+            "data_format": "real",
+            "value_description": "%, \ncommonsense evidence:\nlower means harder to graduate for bachelor"
+          }
+        },
+        {
+          "cid": 30,
+          "name": "grad_100_percentile",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "graduation 100 percentile",
+            "description": "Institution's percent rank for completers within 100 percent of normal time within sector",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 31,
+          "name": "grad_150_value",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "graduation 150 value",
+            "description": "percentage of first-time, full-time, degree-seeking undergraduates who complete a degree or certificate program within 150 percent of expected time (bachelor's-seeking group at 4-year institutions)",
+            "data_format": "real",
+            "value_description": "%, \ncommonsense evidence:\nlower means harder to graduate for bachelor"
+          }
+        },
+        {
+          "cid": 32,
+          "name": "grad_150_percentile",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "graduation 150 percentile",
+            "description": "Institution's percent rank for completers within 150 percent of normal time within sector",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 33,
+          "name": "pell_value",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "pell value",
+            "description": "percentage of undergraduates receiving a Pell Grant",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 34,
+          "name": "pell_percentile",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "pell percentile",
+            "description": "Institution's percent rank for undergraduate Pell recipients within sector",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 35,
+          "name": "retain_value",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "retain value",
+            "description": "share of freshman students retained for a second year",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 36,
+          "name": "retain_percentile",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "retain percentile",
+            "description": "Institution's percent rank for freshman retention percentage within sector",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 37,
+          "name": "ft_fac_value",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "full time faculty value",
+            "description": "Percentage of employees devoted to instruction, research or public service who are full-time and do not work for an associated medical school",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 38,
+          "name": "ft_fac_percentile",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "full time faculty percentile",
+            "description": "Institution's percent rank for full-time faculty share within sector",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 39,
+          "name": "vsa_year",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability year",
+            "description": "Most recent year of Student Success and Progress Rate data available from the Voluntary System of Accountability",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 40,
+          "name": "vsa_grad_after4_first",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability after 4 year first time",
+            "description": "First-time, full-time students who graduated from this institution within four years",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 41,
+          "name": "vsa_grad_elsewhere_after4_first",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability graduation elsewhere after 4 year first time",
+            "description": "First-time, full-time students who graduated from another institution within four years",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 42,
+          "name": "vsa_enroll_after4_first",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability enrollment after 4 year first time",
+            "description": "First-time, full-time students who are still enrolled at this institution after four years",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 43,
+          "name": "vsa_enroll_elsewhere_after4_first",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability enrollment elsewhere after 4 year first time",
+            "description": "First-time, full-time students who are enrolled at another institution after four years",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 44,
+          "name": "vsa_grad_after6_first",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability graduation elsewhere after 6 year first time",
+            "description": "First-time, full-time students who graduated from this institution within six years",
+            "data_format": "text",
+            "value_description": "null: not available"
+          }
+        },
+        {
+          "cid": 45,
+          "name": "vsa_grad_elsewhere_after6_first",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability graduation elsewhere after 6 year first time",
+            "description": "First-time, full-time students who graduated from another institution within six years",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 46,
+          "name": "vsa_enroll_after6_first",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability enrollment after 6 year first time",
+            "description": "First-time, full-time students who are still enrolled at this institution after six years",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 47,
+          "name": "vsa_enroll_elsewhere_after6_first",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability enrollment elsewhere after 6 year first time",
+            "description": "First-time, full-time students who are enrolled at another institution after six years",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 48,
+          "name": "vsa_grad_after4_transfer",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability transfer after 6 year first time",
+            "description": "Full-time transfer students who graduated from this institution within four years",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 49,
+          "name": "vsa_grad_elsewhere_after4_transfer",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability graduation elsewhere after 4 year",
+            "description": "Full-time transfer students who graduated from this institution within four years",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 50,
+          "name": "vsa_enroll_after4_transfer",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability enrollment after 4 years transfer",
+            "description": "Full-time transfer students who are still enrolled at this institution after four years",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 51,
+          "name": "vsa_enroll_elsewhere_after4_transfer",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability enrollment elsewhere after 4 years transfer",
+            "description": "Full-time transfer students who are enrolled at another institution after four years",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 52,
+          "name": "vsa_grad_after6_transfer",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability enrollment elsewhere after 6 years transfer",
+            "description": "Full-time transfer students who graduated from this institution within six years",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 53,
+          "name": "vsa_grad_elsewhere_after6_transfer",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability graduation elsewhere after 6 years transfer",
+            "description": "Full-time transfer students who graduated from another institution within six years",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 54,
+          "name": "vsa_enroll_after6_transfer",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability enrollment after 6 years transfer",
+            "description": "Full-time transfer students who are still enrolled at this institution after six years",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 55,
+          "name": "vsa_enroll_elsewhere_after6_transfer",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "voluntary system of accountability enrollment elsewhere after 6 years transfer",
+            "description": "Full-time transfer students who are enrolled at another institution after six years",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 56,
+          "name": "similar",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 57,
+          "name": "state_sector_ct",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 58,
+          "name": "carnegie_ct",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 59,
+          "name": "counted_pct",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 60,
+          "name": "nicknames",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 61,
+          "name": "cohort_size",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "institution_grads",
+      "type": "table",
+      "create_sql": "CREATE TABLE institution_grads\n(\n    unitid        INTEGER,\n    year          INTEGER,\n    gender        TEXT,\n    race          TEXT,\n    cohort        TEXT,\n    grad_cohort   TEXT,\n    grad_100      TEXT,\n    grad_150      TEXT,\n    grad_100_rate TEXT,\n    grad_150_rate TEXT,\n    foreign key (unitid) references institution_details(unitid)\n)",
+      "row_count": 1302102,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "unitid",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "unit id",
+            "description": "Education Unit ID number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "year of data release",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "gender",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "gender of students",
+            "data_format": "text",
+            "value_description": "'B' = both genders; 'M' = male; 'F' = female"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "race",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "race/ethnicity of students",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n'X' = all students; 'Ai' = American Indian; 'A' = Asian; 'B' = Black; 'H' = Hispanic; 'W' = White"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "cohort",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "degree-seeking cohort type",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n '4y bach' = Bachelor's/equivalent-seeking cohort at 4-year institutions; \n '4y other' = Students seeking another type of degree or certificate at a 4-year institution; \n '2y all' = Degree-seeking students at 2-year institutions\n4-year degree is bachelor's degree\n2-year degree is associate's degree"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "grad_cohort",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "graduation cohort",
+            "description": "Number of first-time, full-time, degree-seeking students in the cohort being tracked, minus any exclusions",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "grad_100",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "graduation 100",
+            "description": "Number of students who graduated within 100 percent of normal/expected time",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "grad_150",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "graduation 150",
+            "description": "Number of students who graduated within 150 percent of normal/expected time",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "grad_100_rate",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "grad_100_rate",
+            "description": "Percentage of students who graduated within 100 percent of normal/expected time",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "grad_150_rate",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "grad_150_rate",
+            "description": "Percentage of students who graduated within 150 percent of normal/expected time",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "institution_grads",
+          "from_column": "unitid",
+          "to_table": "institution_details",
+          "to_column": "unitid",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "state_sector_details",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"state_sector_details\"\n(\n    stateid                INTEGER,\n    state                  TEXT\n        references institution_details (state),\n    state_post             TEXT,\n    level                  TEXT,\n    control                TEXT,\n    schools_count          INTEGER,\n    counted_pct            TEXT,\n    awards_per_state_value TEXT,\n    awards_per_natl_value  REAL,\n    exp_award_state_value  TEXT,\n    exp_award_natl_value   INTEGER,\n    state_appr_value       TEXT,\n    state_appr_rank        TEXT,\n    grad_rate_rank         TEXT,\n    awards_per_rank        TEXT,\n    primary key (stateid, level, control)\n)",
+      "row_count": 312,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "stateid",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "state id",
+            "description": "state FIPS (Federal Information Processing System) code",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "state name",
+            "description": "state name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "state_post",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "level",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Level of institution",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n4-year: bachelor's degree\n2-year: associate's degree"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "control",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "Public, \nPrivate not-for-profit, \nPrivate for-profit"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "schools_count",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "counted_pct",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "counted percentage",
+            "description": "Percentage of students in the entering class (Fall 2007 at 4-year institutions, Fall 2010 at 2-year institutions) who are first-time, full-time, degree-seeking students and generally part of the official graduation rate",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "awards_per_state_value",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "awards per state value",
+            "description": "Completions per 100 FTE (full-time equivalent) undergraduate students, state and sector average",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "awards_per_natl_value",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "awards per national value",
+            "description": "Completions per 100 FTE (full-time equivalent) undergraduate students, national sector average",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "exp_award_state_value",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "expected award state value",
+            "description": "Spending per completion, state and sector average",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "exp_award_natl_value",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "expected award national value",
+            "description": "Spending per completion, national sector average",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "state_appr_value",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "state appropriation value",
+            "description": "State appropriations to higher education in fiscal year 2011 per resident",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "state_appr_rank",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "grad_rate_rank",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "awards_per_rank",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "state_sector_details",
+          "from_column": "state",
+          "to_table": "institution_details",
+          "to_column": "state",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "state_sector_grads",
+      "type": "table",
+      "create_sql": "CREATE TABLE state_sector_grads\n(\n    stateid        INTEGER,\n    state          TEXT,\n    state_abbr     TEXT,\n    control        TEXT,\n    level          TEXT,\n    year           INTEGER,\n    gender         TEXT,\n    race           TEXT,\n    cohort         TEXT,\n    grad_cohort    TEXT,\n    grad_100       TEXT,\n    grad_150       TEXT,\n    grad_100_rate  TEXT,\n    grad_150_rate  TEXT,\n    grad_cohort_ct INTEGER,\n    foreign key (state) references institution_details(state),\n    foreign key (stateid) references state_sector_details(stateid)\n)",
+      "row_count": 84942,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "stateid",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "state id",
+            "description": "state FIPS (Federal Information Processing System) code",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "state name",
+            "description": "state name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "state_abbr",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "control",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": "Public, \nPrivate not-for-profit, \nPrivate for-profit"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "level",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "Level of institution",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n4-year: bachelor's degree\n2-year: associate's degree"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "year",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "year of data release",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "gender",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "gender of students",
+            "data_format": "text",
+            "value_description": "B' = both genders; 'M' = male; 'F' = female"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "race",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "race/ethnicity of students",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n'X' = all students; 'Ai' = American Indian; 'A' = Asian; 'B' = Black; 'H' = Hispanic; 'W' = White"
+          }
+        },
+        {
+          "cid": 8,
+          "name": "cohort",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "degree-seeking cohort type",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n '4y bach' = Bachelor's/equivalent-seeking cohort at 4-year institutions; \n '4y other' = Students seeking another type of degree or certificate at a 4-year institution; \n '2y all' = Degree-seeking students at 2-year institutions\n4-year degree is bachelor's degree\n2-year degree is associate's degree"
+          }
+        },
+        {
+          "cid": 9,
+          "name": "grad_cohort",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "graduation cohort",
+            "description": "Number of first-time, full-time, degree-seeking students in the cohort being tracked, minus any exclusions",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "grad_100",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "graduation 100",
+            "description": "Number of students who graduated within 100 percent of normal/expected time",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "grad_150",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "graduation 150",
+            "description": "Number of students who graduated within 150 percent of normal/expected time",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "grad_100_rate",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "grad_100_rate",
+            "description": "Percentage of students who graduated within 100 percent of normal/expected time",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "grad_150_rate",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "grad_150_rate",
+            "description": "Percentage of students who graduated within 150 percent of normal/expected time",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "grad_cohort_ct",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "graduation cohort count",
+            "description": "Number of institutions with data included in the cohort",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "state_sector_grads",
+          "from_column": "stateid",
+          "to_table": "state_sector_details",
+          "to_column": "stateid",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "state_sector_grads",
+          "from_column": "state",
+          "to_table": "institution_details",
+          "to_column": "state",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "institution_grads",
+      "from_column": "unitid",
+      "to_table": "institution_details",
+      "to_column": "unitid",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "state_sector_details",
+      "from_column": "state",
+      "to_table": "institution_details",
+      "to_column": "state",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "state_sector_grads",
+      "from_column": "stateid",
+      "to_table": "state_sector_details",
+      "to_column": "stateid",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "state_sector_grads",
+      "from_column": "state",
+      "to_table": "institution_details",
+      "to_column": "state",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

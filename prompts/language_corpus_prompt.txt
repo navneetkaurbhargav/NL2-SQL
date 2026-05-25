@@ -1,0 +1,588 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "language_corpus",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/language_corpus/language_corpus.sqlite",
+  "tables": [
+    {
+      "name": "biwords",
+      "type": "table",
+      "create_sql": "CREATE TABLE biwords(lid    INTEGER REFERENCES langs(lid) ON UPDATE CASCADE ON DELETE CASCADE,\n                                w1st   INTEGER REFERENCES words(wid) ON UPDATE CASCADE ON DELETE CASCADE,\n                                w2nd   INTEGER REFERENCES words(wid) ON UPDATE CASCADE ON DELETE CASCADE,\n                                occurrences INTEGER DEFAULT 0, -- times this pair appears in this language/page\n                                PRIMARY KEY(lid,w1st,w2nd))\n                                WITHOUT ROWID",
+      "row_count": 21587486,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "lid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "language id",
+            "description": "language id",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: \nlid=1 means it's Catalan language."
+          }
+        },
+        {
+          "cid": 1,
+          "name": "w1st",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "word id of the first word",
+            "description": "The word id of the first word of the biwords pair.",
+            "data_format": "integer",
+            "value_description": "The value is unique."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "w2nd",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "word id of the second word",
+            "description": "The word id of the second word of the biwords pair.",
+            "data_format": "integer",
+            "value_description": "The value is unique."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "occurrences",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "0",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "times of this pair appears in this language/page",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "biwords",
+          "from_column": "w2nd",
+          "to_table": "words",
+          "to_column": "wid",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "biwords",
+          "from_column": "w1st",
+          "to_table": "words",
+          "to_column": "wid",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "biwords",
+          "from_column": "lid",
+          "to_table": "langs",
+          "to_column": "lid",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "langs",
+      "type": "table",
+      "create_sql": "CREATE TABLE langs(lid    INTEGER PRIMARY KEY AUTOINCREMENT,\n                            lang   TEXT UNIQUE,\n                            locale TEXT UNIQUE,\n                            pages  INTEGER DEFAULT 0,  -- total pages in this language\n                            words  INTEGER DEFAULT 0)",
+      "row_count": 1,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "lid",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "language id",
+            "description": "language id",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: \nlid=1 means it's the Catalan language."
+          }
+        },
+        {
+          "cid": 1,
+          "name": "lang",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "language",
+            "description": "language name",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n ca means Catalan language."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "locale",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The locale of the language",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "pages",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "0",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "total pages of Wikipedia in this language",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "words",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "0",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "total number of words in this pages",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "langs_words",
+      "type": "table",
+      "create_sql": "CREATE TABLE langs_words(lid INTEGER REFERENCES langs(lid) ON UPDATE CASCADE ON DELETE CASCADE,\n                                        wid INTEGER REFERENCES words(wid) ON UPDATE CASCADE ON DELETE CASCADE,\n                                        occurrences INTEGER, -- repetitions of this word in this language\n                                        PRIMARY KEY(lid,wid))\n                                        WITHOUT ROWID",
+      "row_count": 2764996,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "lid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "language id",
+            "description": "language id",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: \nlid=1 means it's Catalan language."
+          }
+        },
+        {
+          "cid": 1,
+          "name": "wid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "word id",
+            "description": "The word id of the Catalan language",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "occurrences",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "repetitions of this word in this language",
+            "data_format": "integer",
+            "value_description": "it's INTEGER and DEFAULT is 0."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "langs_words",
+          "from_column": "wid",
+          "to_table": "words",
+          "to_column": "wid",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "langs_words",
+          "from_column": "lid",
+          "to_table": "langs",
+          "to_column": "lid",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "pages",
+      "type": "table",
+      "create_sql": "CREATE TABLE pages(pid INTEGER PRIMARY KEY AUTOINCREMENT,\n                            lid INTEGER REFERENCES langs(lid) ON UPDATE CASCADE ON DELETE CASCADE,\n                            page INTEGER DEFAULT NULL, -- wikipedia page id\n                            revision INTEGER DEFAULT NULL, -- wikipedia revision page id\n                            title TEXT,\n                            words INTEGER DEFAULT 0, -- number of different words in this page\n                            UNIQUE(lid,page,title))",
+      "row_count": 1129144,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "pid",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "page id",
+            "description": "page id of Wikipedia about Catalan language",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "lid",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "language id",
+            "description": "language id",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: \nlid=1 means it's Catalan language"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "page",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "wikipedia page id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "revision",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "NULL",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "wikipedia revision page id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The title of this Catalan language Wikipedia page",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "words",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "0",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "number of different words in this page",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "pages",
+          "from_column": "lid",
+          "to_table": "langs",
+          "to_column": "lid",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "pages_words",
+      "type": "table",
+      "create_sql": "CREATE TABLE pages_words(pid INTEGER REFERENCES pages(pid) ON UPDATE CASCADE ON DELETE CASCADE,\n                                        wid INTEGER REFERENCES words(wid) ON UPDATE CASCADE ON DELETE CASCADE,\n                                        occurrences INTEGER DEFAULT 0, -- times this word appears into this page\n                                        PRIMARY KEY(pid,wid))\n                                        WITHOUT ROWID",
+      "row_count": 129131916,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "pid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "page id",
+            "description": "page id of Wikipedia about Catalan language",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "wid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "word id",
+            "description": "The word id of the Catalan language",
+            "data_format": "integer",
+            "value_description": "The value is unique."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "occurrences",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "0",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "times of this word appears into this page",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "pages_words",
+          "from_column": "wid",
+          "to_table": "words",
+          "to_column": "wid",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "pages_words",
+          "from_column": "pid",
+          "to_table": "pages",
+          "to_column": "pid",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "words",
+      "type": "table",
+      "create_sql": "CREATE TABLE words(wid INTEGER PRIMARY KEY AUTOINCREMENT,\n                            word        TEXT UNIQUE,\n                            occurrences INTEGER DEFAULT 0)",
+      "row_count": 2764996,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "wid",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "word id",
+            "description": "The word id of the Catalan language",
+            "data_format": "integer",
+            "value_description": "The value is unique."
+          }
+        },
+        {
+          "cid": 1,
+          "name": "word",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The word itself",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "occurrences",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": "0",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The occurrences of the specific word",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "biwords",
+      "from_column": "w2nd",
+      "to_table": "words",
+      "to_column": "wid",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "biwords",
+      "from_column": "w1st",
+      "to_table": "words",
+      "to_column": "wid",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "biwords",
+      "from_column": "lid",
+      "to_table": "langs",
+      "to_column": "lid",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "langs_words",
+      "from_column": "wid",
+      "to_table": "words",
+      "to_column": "wid",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "langs_words",
+      "from_column": "lid",
+      "to_table": "langs",
+      "to_column": "lid",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "pages",
+      "from_column": "lid",
+      "to_table": "langs",
+      "to_column": "lid",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "pages_words",
+      "from_column": "wid",
+      "to_table": "words",
+      "to_column": "wid",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "pages_words",
+      "from_column": "pid",
+      "to_table": "pages",
+      "to_column": "pid",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

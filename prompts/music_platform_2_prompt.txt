@@ -1,0 +1,324 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "music_platform_2",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/music_platform_2/music_platform_2.sqlite",
+  "tables": [
+    {
+      "name": "categories",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"categories\"\n(\n    podcast_id TEXT not null\n        constraint categories_podcasts_podcast_id_fk\n            references podcasts,\n    category   TEXT not null,\n    constraint \"PRIMARY\"\n        primary key (podcast_id, category)\n)",
+      "row_count": 210329,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "podcast_id",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "podcast id",
+            "description": "The unique id of the podcast",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "category",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "category of the podcast",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \nThis usually represents the topic of the podcast."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "categories",
+          "from_column": "podcast_id",
+          "to_table": "podcasts",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "podcasts",
+      "type": "table",
+      "create_sql": "CREATE TABLE podcasts (\n        podcast_id text primary key,\n        itunes_id integer not null,\n        slug text not null,\n        itunes_url text not null,\n        title text not null\n    )",
+      "row_count": 108578,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "podcast_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "podcast id",
+            "description": "The unique id of the podcast",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "itunes_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "itunes id",
+            "description": "The unique id of the itunes.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "slug",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The slug of the podcast.",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \nIt usually has the same name with the \"title\" column."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "itunes_url",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "itunes url",
+            "description": "The iTunes url of the podcast.",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \nCan visit the webpage of the podcast by clicking the itunes_url."
+          }
+        },
+        {
+          "cid": 4,
+          "name": "title",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The title of the podcast.",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \nIt usually has a very similar name to the \"slug\" column."
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "reviews",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"reviews\"\n(\n    podcast_id TEXT    not null\n        constraint reviews_podcasts_podcast_id_fk\n            references podcasts,\n    title      TEXT    not null,\n    content    TEXT    not null,\n    rating     INTEGER not null,\n    author_id  TEXT    not null,\n    created_at TEXT    not null\n)",
+      "row_count": 1964856,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "podcast_id",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "podcast id",
+            "description": "The unique id of the podcast",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "title",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The title of the podcast review.",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \nThis usually is the abstract of the whole review."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "content",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The content of the podcast review.",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \nThis usually is the detailed explanation of the podcast review title."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "rating",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "The rating of the podcast review.",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: \nAllowed values: 0 to 5. \nThis rating is highly related with \"title\" and \"content\"."
+          }
+        },
+        {
+          "cid": 4,
+          "name": "author_id",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "author id",
+            "description": "The author id of the podcast review.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "created_at",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "created at",
+            "description": "The date and time of the podcast review creation.",
+            "data_format": "text",
+            "value_description": "In the format of \"Date time\". e.g., 2018-05-09T18:14:32-07:00"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "reviews",
+          "from_column": "podcast_id",
+          "to_table": "podcasts",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "runs",
+      "type": "table",
+      "create_sql": "CREATE TABLE runs (\n        run_at text not null,\n        max_rowid integer not null,\n        reviews_added integer not null\n    )",
+      "row_count": 12,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "run_at",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "run at",
+            "description": "The date and time of the podcast review creation.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "max_rowid",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "max row id",
+            "description": "The id of max row of this run.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "reviews_added",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "reviews added",
+            "description": "The number of reviews added in this run.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "categories",
+      "from_column": "podcast_id",
+      "to_table": "podcasts",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "reviews",
+      "from_column": "podcast_id",
+      "to_table": "podcasts",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

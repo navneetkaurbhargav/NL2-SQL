@@ -1,0 +1,1240 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "book_publishing_company",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/book_publishing_company/book_publishing_company.sqlite",
+  "tables": [
+    {
+      "name": "authors",
+      "type": "table",
+      "create_sql": "CREATE TABLE authors\n(\n    au_id    TEXT\n        primary key,\n    au_lname TEXT not null,\n    au_fname TEXT not null,\n    phone    TEXT    not null,\n    address  TEXT,\n    city     TEXT,\n    state    TEXT,\n    zip      TEXT,\n    contract TEXT     not null\n)",
+      "row_count": 23,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "au_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "author id",
+            "description": "unique number identifying authors",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "au_lname",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "author last name",
+            "description": "author last name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "au_fname",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "author first name",
+            "description": "author first name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "phone",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "phone number",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "address",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "address",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "state",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "zip",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "zip code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "contract",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "contract status",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n0: not on the contract\n1: on the contract"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "discounts",
+      "type": "table",
+      "create_sql": "CREATE TABLE discounts\n(\n    discounttype TEXT   not null,\n    stor_id      TEXT,\n    lowqty       INTEGER,\n    highqty      INTEGER,\n    discount     REAL not null,\n    foreign key (stor_id)  references stores(stor_id)\n            on update cascade on delete cascade\n)",
+      "row_count": 3,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "discounttype",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "discount type",
+            "description": "discount type",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "stor_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "store id",
+            "description": "store id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "lowqty",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "low quantity",
+            "description": "low quantity (quantity floor)",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: \nThe minimum quantity to enjoy the discount"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "highqty",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "high quantity",
+            "description": "high quantity (max quantity)",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: \nThe maximum quantity to enjoy the discount"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "discount",
+          "type": "REAL",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "discount",
+            "description": "discount",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "discounts",
+          "from_column": "stor_id",
+          "to_table": "stores",
+          "to_column": "stor_id",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "employee",
+      "type": "table",
+      "create_sql": "CREATE TABLE employee\n(\n    emp_id    TEXT\n        primary key,\n    fname     TEXT not null,\n    minit     TEXT,\n    lname     TEXT not null,\n    job_id    INTEGER     not null,\n    job_lvl   INTEGER,\n    pub_id    TEXT     not null,\n    hire_date DATETIME    not null,\n    foreign key (job_id) references jobs(job_id)\n            on update cascade on delete cascade,\n    foreign key (pub_id) references publishers(pub_id)\n            on update cascade on delete cascade\n)",
+      "row_count": 43,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "emp_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "employee id",
+            "description": "unique number identifying employees",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "fname",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "first name of employees",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "minit",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "middle name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "lname",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "last name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "job_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "job id",
+            "description": "number identifying jobs",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "job_lvl",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "job level",
+            "description": "job level",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nhigher value means job level is higher"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "pub_id",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "publisher id",
+            "description": "id number identifying publishers",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "hire_date",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "hire date",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "employee",
+          "from_column": "pub_id",
+          "to_table": "publishers",
+          "to_column": "pub_id",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "employee",
+          "from_column": "job_id",
+          "to_table": "jobs",
+          "to_column": "job_id",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "jobs",
+      "type": "table",
+      "create_sql": "CREATE TABLE jobs\n(\n    job_id   INTEGER\n        primary key,\n    job_desc TEXT not null,\n    min_lvl  INTEGER     not null,\n    max_lvl  INTEGER     not null\n)",
+      "row_count": 14,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "job_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "job id",
+            "description": "unique id number identifying the jobs",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "job_desc",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "job description",
+            "description": "job description",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nstaff should be mentioned"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "min_lvl",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "min level",
+            "description": "min job level",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "max_lvl",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "max level",
+            "description": "max job level",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nlevel range for jobs mentioned in job_desc is (min_lvl, max_lvl)"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "pub_info",
+      "type": "table",
+      "create_sql": "CREATE TABLE pub_info\n(\n    pub_id  TEXT\n        primary key,\n    logo    BLOB,\n    pr_info TEXT,\n    foreign key (pub_id) references publishers(pub_id)\n            on update cascade on delete cascade\n)",
+      "row_count": 7,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "pub_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "publication id",
+            "description": "unique id number identifying publications",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "logo",
+          "type": "BLOB",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "logo of publications",
+            "data_format": "blob",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "pr_info",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "publisher's information",
+            "description": "publisher's information",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "pub_info",
+          "from_column": "pub_id",
+          "to_table": "publishers",
+          "to_column": "pub_id",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "publishers",
+      "type": "table",
+      "create_sql": "CREATE TABLE publishers\n(\n    pub_id   TEXT\n        primary key,\n    pub_name TEXT,\n    city     TEXT,\n    state    TEXT,\n    country  TEXT\n)",
+      "row_count": 8,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "pub_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "publisher id",
+            "description": "unique id number identifying publisher",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "pub_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "publisher name",
+            "description": "publisher name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "city",
+            "description": "city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "state",
+            "description": "state",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "country",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "country",
+            "description": "country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "roysched",
+      "type": "table",
+      "create_sql": "CREATE TABLE roysched\n(\n    title_id TEXT not null,\n    lorange  INTEGER,\n    hirange  INTEGER,\n    royalty  INTEGER,\n    foreign key (title_id)  references titles(title_id)\n            on update cascade on delete cascade\n)",
+      "row_count": 86,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "title_id",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "unique id number identifying title",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "lorange",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "low range",
+            "description": "low range",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "hirange",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "high range",
+            "description": "high range",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "royalty",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "royalty",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "roysched",
+          "from_column": "title_id",
+          "to_table": "titles",
+          "to_column": "title_id",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "sales",
+      "type": "table",
+      "create_sql": "CREATE TABLE sales\n(\n    stor_id  TEXT     not null,\n    ord_num  TEXT  not null,\n    ord_date DATETIME    not null,\n    qty      INTEGER     not null,\n    payterms TEXT  not null,\n    title_id TEXT   not null,\n    primary key (stor_id, ord_num, title_id),\n    foreign key (stor_id)   references stores(stor_id)\n            on update cascade on delete cascade,\n    foreign key (title_id)  references titles(title_id)\n            on update cascade on delete cascade\n\n)",
+      "row_count": 21,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "stor_id",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "store id",
+            "description": "id number identifying stores",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "ord_num",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "order number",
+            "description": "id number identifying the orders",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "ord_date",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "order date",
+            "description": "the date of the order",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "qty",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "quantity",
+            "description": "quantity of sales",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "payterms",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "payments",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "title_id",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 3,
+          "bird_description": {
+            "semantic_name": "title id",
+            "description": "id number identifying titles",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "sales",
+          "from_column": "title_id",
+          "to_table": "titles",
+          "to_column": "title_id",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "sales",
+          "from_column": "stor_id",
+          "to_table": "stores",
+          "to_column": "stor_id",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "stores",
+      "type": "table",
+      "create_sql": "CREATE TABLE stores\n(\n    stor_id     TEXT\n        primary key,\n    stor_name    TEXT,\n    stor_address TEXT,\n    city         TEXT,\n    state        TEXT,\n    zip          TEXT\n)",
+      "row_count": 6,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "stor_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "store id",
+            "description": "unique id number of stores",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "stor_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "store name",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "stor_address",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "store address",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "city name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "state code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "zip",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "zip code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "titleauthor",
+      "type": "table",
+      "create_sql": "CREATE TABLE titleauthor\n(\n    au_id      TEXT not null,\n    title_id   TEXT  not null,\n    au_ord     INTEGER,\n    royaltyper INTEGER,\n    primary key (au_id, title_id),\n    foreign key (au_id) references authors(au_id)\n            on update cascade on delete cascade,\n    foreign key (title_id)    references titles (title_id)\n            on update cascade on delete cascade\n)",
+      "row_count": 25,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "au_id",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "author id",
+            "description": "author id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "title_id",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "title id",
+            "description": "title id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "au_ord",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "author ordering",
+            "description": "author ordering",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "royaltyper",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "royaltyper",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "titleauthor",
+          "from_column": "title_id",
+          "to_table": "titles",
+          "to_column": "title_id",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "titleauthor",
+          "from_column": "au_id",
+          "to_table": "authors",
+          "to_column": "au_id",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "titles",
+      "type": "table",
+      "create_sql": "CREATE TABLE titles\n(\n    title_id  TEXT\n        primary key,\n    title     TEXT not null,\n    type      TEXT    not null,\n    pub_id    TEXT,\n    price     REAL,\n    advance   REAL,\n    royalty   INTEGER,\n    ytd_sales INTEGER,\n    notes     TEXT,\n    pubdate   DATETIME    not null,\n    foreign key (pub_id) references publishers(pub_id)\n            on update cascade on delete cascade\n)",
+      "row_count": 18,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "title_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "title id",
+            "description": "title id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "title",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "title",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "type",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "type of titles",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "pub_id",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "publisher id",
+            "description": "publisher id",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "price",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "price",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "advance",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "pre-paid amount",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "royalty",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "royalty",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "ytd_sales",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "year to date sales",
+            "description": "year to date sales",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "notes",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "notes if any",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nhad better understand notes contents and put some of them into questions if any"
+          }
+        },
+        {
+          "cid": 9,
+          "name": "pubdate",
+          "type": "DATETIME",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "publication date",
+            "description": "publication date",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "titles",
+          "from_column": "pub_id",
+          "to_table": "publishers",
+          "to_column": "pub_id",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "discounts",
+      "from_column": "stor_id",
+      "to_table": "stores",
+      "to_column": "stor_id",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "employee",
+      "from_column": "pub_id",
+      "to_table": "publishers",
+      "to_column": "pub_id",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "employee",
+      "from_column": "job_id",
+      "to_table": "jobs",
+      "to_column": "job_id",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "pub_info",
+      "from_column": "pub_id",
+      "to_table": "publishers",
+      "to_column": "pub_id",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "roysched",
+      "from_column": "title_id",
+      "to_table": "titles",
+      "to_column": "title_id",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "sales",
+      "from_column": "title_id",
+      "to_table": "titles",
+      "to_column": "title_id",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "sales",
+      "from_column": "stor_id",
+      "to_table": "stores",
+      "to_column": "stor_id",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "titleauthor",
+      "from_column": "title_id",
+      "to_table": "titles",
+      "to_column": "title_id",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "titleauthor",
+      "from_column": "au_id",
+      "to_table": "authors",
+      "to_column": "au_id",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "titles",
+      "from_column": "pub_id",
+      "to_table": "publishers",
+      "to_column": "pub_id",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

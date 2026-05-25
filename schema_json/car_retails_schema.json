@@ -1,0 +1,1088 @@
+{
+  "db_id": "car_retails",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/car_retails/car_retails.sqlite",
+  "tables": [
+    {
+      "name": "customers",
+      "type": "table",
+      "create_sql": "CREATE TABLE customers\n(\n    customerNumber         INTEGER     not null\n        primary key,\n    customerName           TEXT not null,\n    contactLastName        TEXT not null,\n    contactFirstName       TEXT not null,\n    phone                  TEXT not null,\n    addressLine1           TEXT not null,\n    addressLine2           TEXT,\n    city                   TEXT not null,\n    state                  TEXT,\n    postalCode             TEXT,\n    country                TEXT not null,\n    salesRepEmployeeNumber INTEGER,\n    creditLimit            REAL,\n    foreign key (salesRepEmployeeNumber) references employees(employeeNumber)\n)",
+      "row_count": 122,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "customerNumber",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "customer number",
+            "description": "unique id number of customer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "customerName",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "customer name",
+            "description": "the name when the customer registered",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "contactLastName",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "contact last name",
+            "description": "contact last name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "contactFirstName",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "contact first name",
+            "description": "contact first name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "phone",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "phone",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "addressLine1",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "addressLine1",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "addressLine2",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "addressLine2",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \naddressLine1 + addressLine2 = entire address"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "city",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "state",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "postalCode",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "postalCode",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 11,
+          "name": "salesRepEmployeeNumber",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "sales representative employee number",
+            "description": "sales representative employee number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 12,
+          "name": "creditLimit",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "credit limit",
+            "description": "credit limit",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "customers",
+          "from_column": "salesRepEmployeeNumber",
+          "to_table": "employees",
+          "to_column": "employeeNumber",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "employees",
+      "type": "table",
+      "create_sql": "CREATE TABLE employees\n(\n    employeeNumber INTEGER      not null\n        primary key,\n    lastName       TEXT  not null,\n    firstName      TEXT  not null,\n    extension      TEXT  not null,\n    email          TEXT not null,\n    officeCode     TEXT  not null,\n    reportsTo      INTEGER,\n    jobTitle       TEXT  not null,\n    foreign key (officeCode) references offices(officeCode),\n    foreign key (reportsTo) references employees(employeeNumber)\n)",
+      "row_count": 23,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "employeeNumber",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Employee Number",
+            "description": "unique string ID of the employees",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "lastName",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "last name of employees",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "firstName",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "first name of employees",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "extension",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "extension number",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "email",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "email",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "officeCode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "office code",
+            "description": "office code of the employees",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "reportsTo",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "reports to",
+            "description": "represents for organization structure such as who reports to whom",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: \n\"reportsTO\" is the leader of the \"employeeNumber\""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "jobTitle",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "job title",
+            "description": "job title",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "employees",
+          "from_column": "reportsTo",
+          "to_table": "employees",
+          "to_column": "employeeNumber",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "employees",
+          "from_column": "officeCode",
+          "to_table": "offices",
+          "to_column": "officeCode",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "offices",
+      "type": "table",
+      "create_sql": "CREATE TABLE offices\n(\n    officeCode   TEXT not null\n        primary key,\n    city         TEXT not null,\n    phone        TEXT not null,\n    addressLine1 TEXT not null,\n    addressLine2 TEXT,\n    state        TEXT,\n    country      TEXT not null,\n    postalCode  TEXT not null,\n    territory    TEXT not null\n)",
+      "row_count": 7,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "officeCode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "office code",
+            "description": "unique ID of the office",
+            "data_format": "text",
+            "value_description": "unique ID of the office"
+          }
+        },
+        {
+          "cid": 1,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "city",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "phone",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "phone number",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "addressLine1",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "addressLine1",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "addressLine2",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "addressLine2",
+            "data_format": "text",
+            "value_description": "commonsense evidence: \naddressLine1 + addressLine2 = entire address"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "country",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "country",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "postalCode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "postalCode",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "territory",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "territory",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "orderdetails",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"orderdetails\"\n(\n    orderNumber     INTEGER not null\n        references orders,\n    productCode     TEXT    not null\n        references products,\n    quantityOrdered INTEGER not null,\n    priceEach       REAL    not null,\n    orderLineNumber INTEGER not null,\n    primary key (orderNumber, productCode)\n)",
+      "row_count": 2996,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "orderNumber",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "order number",
+            "description": "order number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "productCode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "product code",
+            "description": "product code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "quantityOrdered",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "quantity ordered",
+            "description": "quantity ordered",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "priceEach",
+          "type": "REAL",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "price for each",
+            "description": "price for each",
+            "data_format": "real",
+            "value_description": "commonsense evidence: \ntotal price = quantityOrdered x priceEach"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "orderLineNumber",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "order Line Number",
+            "description": "order Line Number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "orderdetails",
+          "from_column": "productCode",
+          "to_table": "products",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "orderdetails",
+          "from_column": "orderNumber",
+          "to_table": "orders",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "orders",
+      "type": "table",
+      "create_sql": "CREATE TABLE orders\n(\n    orderNumber    INTEGER     not null\n        primary key,\n    orderDate      DATE        not null,\n    requiredDate   DATE        not null,\n    shippedDate    DATE,\n    status         TEXT not null,\n    comments       TEXT,\n    customerNumber INTEGER     not null,\n    foreign key (customerNumber) references customers(customerNumber)\n)",
+      "row_count": 326,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "orderNumber",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "order number",
+            "description": "unique order number",
+            "data_format": "integer",
+            "value_description": "unique order number"
+          }
+        },
+        {
+          "cid": 1,
+          "name": "orderDate",
+          "type": "DATE",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "order date",
+            "description": "order date",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "requiredDate",
+          "type": "DATE",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "required Date",
+            "description": "required Date",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "shippedDate",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "shipped date",
+            "description": "shipped Date",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "status",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "status",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "comments",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "comments",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "customerNumber",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "customer number",
+            "description": "customer number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "orders",
+          "from_column": "customerNumber",
+          "to_table": "customers",
+          "to_column": "customerNumber",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "payments",
+      "type": "table",
+      "create_sql": "CREATE TABLE payments\n(\n    customerNumber INTEGER     not null,\n    checkNumber    TEXT not null,\n    paymentDate    DATE        not null,\n    amount         REAL        not null,\n    primary key (customerNumber, checkNumber),\n    foreign key (customerNumber) references customers(customerNumber)\n)",
+      "row_count": 273,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "customerNumber",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "customer number",
+            "description": "customer number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "checkNumber",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "check Number",
+            "description": "check Number",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "paymentDate",
+          "type": "DATE",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "payment Date",
+            "description": "payment Date",
+            "data_format": "date",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "amount",
+          "type": "REAL",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "amount",
+            "data_format": "real",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "payments",
+          "from_column": "customerNumber",
+          "to_table": "customers",
+          "to_column": "customerNumber",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "productlines",
+      "type": "table",
+      "create_sql": "CREATE TABLE productlines\n(\n    productLine     TEXT not null\n        primary key,\n    textDescription TEXT,\n    htmlDescription TEXT,\n    image           BLOB\n)",
+      "row_count": 7,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "productLine",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "product line",
+            "description": "unique product line name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "textDescription",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "text description",
+            "description": "text description",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "htmlDescription",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "html description",
+            "description": "html description",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "image",
+          "type": "BLOB",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "image",
+            "data_format": "blob",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "products",
+      "type": "table",
+      "create_sql": "CREATE TABLE products\n(\n    productCode        TEXT not null\n        primary key,\n    productName        TEXT not null,\n    productLine        TEXT not null,\n    productScale      TEXT not null,\n    productVendor      TEXT not null,\n    productDescription TEXT        not null,\n    quantityInStock    INTEGER     not null,\n    buyPrice           REAL        not null,\n    MSRP               REAL        not null,\n    foreign key (productLine) references productlines(productLine)\n)",
+      "row_count": 110,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "productCode",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "product code",
+            "description": "unique product code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "productName",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "product name",
+            "description": "product name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "productLine",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "product line",
+            "description": "product line name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "productScale",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "product scale",
+            "description": "product scale",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "productVendor",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "product vendor",
+            "description": "product vendor",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "productDescription",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "product description",
+            "description": "product description",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "quantityInStock",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "quantity in stock",
+            "description": "quantity in stock",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "buyPrice",
+          "type": "REAL",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "buy price",
+            "description": "buy price from vendors",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "MSRP",
+          "type": "REAL",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Manufacturer Suggested Retail Price",
+            "description": "Manufacturer Suggested Retail Price",
+            "data_format": "real",
+            "value_description": "commonsense evidence: \nexpected profits: msrp - buyPrice"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "products",
+          "from_column": "productLine",
+          "to_table": "productlines",
+          "to_column": "productLine",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "customers",
+      "from_column": "salesRepEmployeeNumber",
+      "to_table": "employees",
+      "to_column": "employeeNumber",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "employees",
+      "from_column": "reportsTo",
+      "to_table": "employees",
+      "to_column": "employeeNumber",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "employees",
+      "from_column": "officeCode",
+      "to_table": "offices",
+      "to_column": "officeCode",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "orderdetails",
+      "from_column": "productCode",
+      "to_table": "products",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "orderdetails",
+      "from_column": "orderNumber",
+      "to_table": "orders",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "orders",
+      "from_column": "customerNumber",
+      "to_table": "customers",
+      "to_column": "customerNumber",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "payments",
+      "from_column": "customerNumber",
+      "to_table": "customers",
+      "to_column": "customerNumber",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "products",
+      "from_column": "productLine",
+      "to_table": "productlines",
+      "to_column": "productLine",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}

@@ -1,0 +1,1168 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "books",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/books/books.sqlite",
+  "tables": [
+    {
+      "name": "address",
+      "type": "table",
+      "create_sql": "CREATE TABLE address\n(\n    address_id    INTEGER\n            primary key,\n    street_number TEXT,\n    street_name   TEXT,\n    city          TEXT,\n    country_id    INTEGER,\n    foreign key (country_id) references country(country_id)\n)",
+      "row_count": 1000,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "address_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "address id",
+            "description": "the unique identifier of the address",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "street_number",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "street number",
+            "description": "the street number of the address",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nThe street number is typically used to identify a specific building or residence on a street, with higher numbers generally indicating a location further down the street from the starting point. For example, if a street starts at number 1 and goes up to number 100, a building with the number 50 would be closer to the starting point than a building with the number 75."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "street_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "street name",
+            "description": "the street name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the city where the address belongs",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "country_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "country id",
+            "description": "the id of the country where the address belongs",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nMaps to the country (country id). The full address of the customer is 'No.street_number street_name, city, country'"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "address",
+          "from_column": "country_id",
+          "to_table": "country",
+          "to_column": "country_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "address_status",
+      "type": "table",
+      "create_sql": "CREATE TABLE address_status\n(\n    status_id      INTEGER\n            primary key,\n    address_status TEXT\n)",
+      "row_count": 2,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "status_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "status id",
+            "description": "the unique identifier of the status",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "address_status",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "address status",
+            "description": "the status of the address",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\n\tactive: the address is still in use\n\tinactive: the address is not in use anymore"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "author",
+      "type": "table",
+      "create_sql": "CREATE TABLE author\n(\n    author_id   INTEGER\n            primary key,\n    author_name TEXT\n)",
+      "row_count": 9235,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "author_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "author id",
+            "description": "the unique identifier of the author",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "author_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "author name",
+            "description": "the name of the author",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "book",
+      "type": "table",
+      "create_sql": "CREATE TABLE book\n(\n    book_id          INTEGER\n            primary key,\n    title            TEXT,\n    isbn13           TEXT,\n    language_id      INTEGER,\n    num_pages        INTEGER,\n    publication_date DATE,\n    publisher_id     INTEGER,\n    foreign key (language_id) references book_language(language_id),\n    foreign key (publisher_id) references publisher(publisher_id)\n)",
+      "row_count": 11127,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "book_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "book id",
+            "description": "the unique identifier of the book",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the title of the book",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "isbn13",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the International Standard Book Number of the book",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nAn ISBN is a unique 13-digit number assigned to each book to identify it internationally. The ISBN13 of a book is the specific version of the ISBN that uses 13 digits. It is typically displayed on the back cover of a book, along with the barcode and other information."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "language_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "language id",
+            "description": "the id of the book language\nMaps to book_language (language_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "num_pages",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "number pages",
+            "description": "the number of the pages",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "publication_date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "publication date",
+            "description": "the publication date of the book",
+            "data_format": "date",
+            "value_description": "commonsense evidence:\nThe publication date of a book can provide information about when the book was released to the public. This can be useful for understanding the context in which the book was written, as well as for determining how current or outdated the information in the book might be. Additionally, the publication date can provide insight into the age of the book and its potential value as a collectible."
+          }
+        },
+        {
+          "cid": 6,
+          "name": "publisher_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the id of the publisher\nMaps to publisher (publisher_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "book",
+          "from_column": "publisher_id",
+          "to_table": "publisher",
+          "to_column": "publisher_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "book",
+          "from_column": "language_id",
+          "to_table": "book_language",
+          "to_column": "language_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "book_author",
+      "type": "table",
+      "create_sql": "CREATE TABLE book_author\n(\n    book_id   INTEGER,\n    author_id INTEGER,\n    primary key (book_id, author_id),\n    foreign key (author_id) references author(author_id),\n    foreign key (book_id) references book(book_id)\n)",
+      "row_count": 17642,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "book_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "book id",
+            "description": "the id of the book\nMaps to book(book_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "author_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "author id",
+            "description": "the id of the author\nMaps to author(author_id)",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nBooks with the same author id are written by the same author."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "book_author",
+          "from_column": "book_id",
+          "to_table": "book",
+          "to_column": "book_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "book_author",
+          "from_column": "author_id",
+          "to_table": "author",
+          "to_column": "author_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "book_language",
+      "type": "table",
+      "create_sql": "CREATE TABLE book_language\n(\n    language_id   INTEGER\n            primary key,\n    language_code TEXT,\n    language_name TEXT\n)",
+      "row_count": 27,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "language_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "language id",
+            "description": "the unique identifier of the language",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "language_code",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "language code",
+            "description": "the language code",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nA language code is a unique identifier for a specific language. It is typically used to identify a language in computing and other technical contexts. Some common language codes include \"en\" for English, \"fr\" for French, and \"es\" for Spanish. The specific codes used for each language can vary depending on the context and the system in which they are being used."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "language_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "language name",
+            "description": "the language name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "country",
+      "type": "table",
+      "create_sql": "CREATE TABLE country\n(\n    country_id   INTEGER\n            primary key,\n    country_name TEXT\n)",
+      "row_count": 232,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "country_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "country id",
+            "description": "the unique identifier of the country",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "country_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "country name",
+            "description": "the country name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "cust_order",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"cust_order\"\n(\n    order_id           INTEGER\n        primary key autoincrement,\n    order_date         DATETIME,\n    customer_id        INTEGER\n        references customer,\n    shipping_method_id INTEGER\n        references shipping_method,\n    dest_address_id    INTEGER\n        references address\n)",
+      "row_count": 7550,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "order_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "order id",
+            "description": "the unique identifier of the customer order",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "order_date",
+          "type": "DATETIME",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "order date",
+            "description": "the date of the order",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "customer_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "customer id",
+            "description": "the id of the customer\nMaps to customer(customer_Id)",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nThe number of orders ordered by the customer = the show-up times of the relative customer id in the table"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "shipping_method_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "shipping method id",
+            "description": "the id of the shipping method\nMaps to shipping_method(method_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "dest_address_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "destination address id",
+            "description": "the id of the destination address\nMaps to address(address_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "cust_order",
+          "from_column": "dest_address_id",
+          "to_table": "address",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "cust_order",
+          "from_column": "shipping_method_id",
+          "to_table": "shipping_method",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "cust_order",
+          "from_column": "customer_id",
+          "to_table": "customer",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "customer",
+      "type": "table",
+      "create_sql": "CREATE TABLE customer\n(\n    customer_id INTEGER\n            primary key,\n    first_name  TEXT,\n    last_name   TEXT,\n    email       TEXT\n)",
+      "row_count": 2000,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "customer_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "customer id",
+            "description": "the unique identifier of the customer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "first_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "the first name of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "last_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "the last name of the customer",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nA person's full name is the first name, middle name (if applicable), and last name."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "email",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the email of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "customer_address",
+      "type": "table",
+      "create_sql": "CREATE TABLE customer_address\n(\n    customer_id INTEGER,\n    address_id  INTEGER,\n    status_id   INTEGER,\n    primary key (customer_id, address_id),\n    foreign key (address_id) references address(address_id),\n    foreign key (customer_id) references customer(customer_id)\n)",
+      "row_count": 3350,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "customer_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "customer id",
+            "description": "the id of the customer\nMaps to customer(customer_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "address_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "address id",
+            "description": "the id of the address\nMaps to address(address_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "status_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "status id",
+            "description": "the id of the address status",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nA customer may have several addresses. If a customer has several addresses, the address that the status_id = 1 is the customer's current address that is in use. The other addresses with 2 as status_id is abandoned addresses."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "customer_address",
+          "from_column": "customer_id",
+          "to_table": "customer",
+          "to_column": "customer_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "customer_address",
+          "from_column": "address_id",
+          "to_table": "address",
+          "to_column": "address_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "order_history",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"order_history\"\n(\n    history_id  INTEGER\n        primary key autoincrement,\n    order_id    INTEGER\n        references cust_order,\n    status_id   INTEGER\n        references order_status,\n    status_date DATETIME\n)",
+      "row_count": 22348,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "history_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "history id",
+            "description": "the unique identifier of the order history",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "order_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "order_id",
+            "description": "the id of the order\nMaps to cust_order(order_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "status_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "status id",
+            "description": "the id of the order\nMaps to order_status(status_id)",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nThe order statuses include order received, pending delivery, delivery in progress, delivered, canceled, and returned."
+          }
+        },
+        {
+          "cid": 3,
+          "name": "status_date",
+          "type": "DATETIME",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "status date",
+            "description": "the date of the status updated",
+            "data_format": "datetime",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "order_history",
+          "from_column": "status_id",
+          "to_table": "order_status",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "order_history",
+          "from_column": "order_id",
+          "to_table": "cust_order",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "order_line",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"order_line\"\n(\n    line_id  INTEGER\n        primary key autoincrement,\n    order_id INTEGER\n        references cust_order,\n    book_id  INTEGER\n        references book,\n    price    REAL\n)",
+      "row_count": 7550,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "line_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "line id",
+            "description": "the unique identifier of the order line",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "order_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "order id",
+            "description": "the id of the order\nMaps to cust_order(order_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "book_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "book id",
+            "description": "the id of the book\nMaps to book(book_id)",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "price",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the price of the order",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nEven though the customer ordered the book with the same book id, the price could be different. The price of the order may be influenced by the shipping method, seasonal discount, and the number of books the customer ordered."
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "order_line",
+          "from_column": "book_id",
+          "to_table": "book",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "order_line",
+          "from_column": "order_id",
+          "to_table": "cust_order",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "order_status",
+      "type": "table",
+      "create_sql": "CREATE TABLE order_status\n(\n    status_id    INTEGER\n            primary key,\n    status_value TEXT\n)",
+      "row_count": 6,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "status_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "status id",
+            "description": "the unique identifier of the order status",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "status_value",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "status value",
+            "description": "the status value",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nThe order statuses include order received, pending delivery, delivery in progress, delivered, canceled, and returned."
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "publisher",
+      "type": "table",
+      "create_sql": "CREATE TABLE publisher\n(\n    publisher_id   INTEGER\n            primary key,\n    publisher_name TEXT\n)",
+      "row_count": 2264,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "publisher_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "publisher id",
+            "description": "the unique identifier of the publisher",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "publisher_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "publisher name",
+            "description": "the name of the publisher",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "shipping_method",
+      "type": "table",
+      "create_sql": "CREATE TABLE shipping_method\n(\n    method_id   INTEGER\n            primary key,\n    method_name TEXT,\n    cost        REAL\n)",
+      "row_count": 4,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "method_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "method id",
+            "description": "the unique identifier of the method",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "method_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "method name",
+            "description": "the method name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "cost",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the cost of the shipping method",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\nThe main difference between the various shipping methods, such as standard, priority, express, and international, is the speed at which the item is delivered. Standard shipping is the slowest and least expensive option, while express and priority shipping are faster and more expensive. International shipping is for items that are being shipped to a destination outside of the country where they originated."
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "address",
+      "from_column": "country_id",
+      "to_table": "country",
+      "to_column": "country_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "book",
+      "from_column": "publisher_id",
+      "to_table": "publisher",
+      "to_column": "publisher_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "book",
+      "from_column": "language_id",
+      "to_table": "book_language",
+      "to_column": "language_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "book_author",
+      "from_column": "book_id",
+      "to_table": "book",
+      "to_column": "book_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "book_author",
+      "from_column": "author_id",
+      "to_table": "author",
+      "to_column": "author_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "cust_order",
+      "from_column": "dest_address_id",
+      "to_table": "address",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "cust_order",
+      "from_column": "shipping_method_id",
+      "to_table": "shipping_method",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "cust_order",
+      "from_column": "customer_id",
+      "to_table": "customer",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "customer_address",
+      "from_column": "customer_id",
+      "to_table": "customer",
+      "to_column": "customer_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "customer_address",
+      "from_column": "address_id",
+      "to_table": "address",
+      "to_column": "address_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "order_history",
+      "from_column": "status_id",
+      "to_table": "order_status",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "order_history",
+      "from_column": "order_id",
+      "to_table": "cust_order",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "order_line",
+      "from_column": "book_id",
+      "to_table": "book",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "order_line",
+      "from_column": "order_id",
+      "to_table": "cust_order",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

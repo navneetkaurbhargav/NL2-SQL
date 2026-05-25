@@ -1,0 +1,335 @@
+{
+  "db_id": "sales",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/sales/sales.sqlite",
+  "tables": [
+    {
+      "name": "Customers",
+      "type": "table",
+      "create_sql": "CREATE TABLE Customers\n(\n    CustomerID    INTEGER         not null\n        primary key,\n    FirstName     TEXT not null,\n    MiddleInitial TEXT null,\n    LastName      TEXT not null\n)",
+      "row_count": 19759,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "CustomerID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Customer ID",
+            "description": "the unique id of the customer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "FirstName",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "First Name",
+            "description": "the customer's first name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "MiddleInitial",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Middle Initial",
+            "description": "the customer's middle initial",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "LastName",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Last Name",
+            "description": "the customer's last name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Employees",
+      "type": "table",
+      "create_sql": "CREATE TABLE Employees\n(\n    EmployeeID    INTEGER         not null\n        primary key,\n    FirstName     TEXT not null,\n    MiddleInitial TEXT null,\n    LastName      TEXT not null\n)",
+      "row_count": 22,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "EmployeeID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Employee ID",
+            "description": "the unique id of the employee",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "FirstName",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "First Name",
+            "description": "the employee's first name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "MiddleInitial",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Middle Initial",
+            "description": "the employee's middle initial",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "LastName",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Last Name",
+            "description": "the employee's last name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Products",
+      "type": "table",
+      "create_sql": "CREATE TABLE Products\n(\n    ProductID INTEGER            not null\n        primary key,\n    Name      TEXT    not null,\n    Price     REAL null\n)",
+      "row_count": 504,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "ProductID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Product ID",
+            "description": "the unique id of the product",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Name",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the product name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Price",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the price of the product",
+            "data_format": "real",
+            "value_description": "unit price\ncommonsense evidence:\nif the price = 0.0, it means this product is free or a gift"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "Sales",
+      "type": "table",
+      "create_sql": "CREATE TABLE Sales\n(\n    SalesID       INTEGER not null\n        primary key,\n    SalesPersonID INTEGER not null,\n    CustomerID    INTEGER not null,\n    ProductID     INTEGER not null,\n    Quantity      INTEGER not null,\n    foreign key (SalesPersonID) references Employees (EmployeeID)\n            on update cascade on delete cascade,\n        foreign key (CustomerID) references Customers (CustomerID)\n            on update cascade on delete cascade,\n        foreign key (ProductID) references Products (ProductID)\n            on update cascade on delete cascade\n)",
+      "row_count": 6715221,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "SalesID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "Sales ID",
+            "description": "the unique id of the sales",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "SalesPersonID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "SalesPerson ID",
+            "description": "the unique id of the sale person",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "CustomerID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Customer ID",
+            "description": "the unique id of the customer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "ProductID",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Product ID",
+            "description": "the unique id of the product",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Quantity",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "trading quantity",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\ntotal price = quantity x Products' Price"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "Sales",
+          "from_column": "ProductID",
+          "to_table": "Products",
+          "to_column": "ProductID",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "Sales",
+          "from_column": "CustomerID",
+          "to_table": "Customers",
+          "to_column": "CustomerID",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "Sales",
+          "from_column": "SalesPersonID",
+          "to_table": "Employees",
+          "to_column": "EmployeeID",
+          "on_update": "CASCADE",
+          "on_delete": "CASCADE",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "Sales",
+      "from_column": "ProductID",
+      "to_table": "Products",
+      "to_column": "ProductID",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "Sales",
+      "from_column": "CustomerID",
+      "to_table": "Customers",
+      "to_column": "CustomerID",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "Sales",
+      "from_column": "SalesPersonID",
+      "to_table": "Employees",
+      "to_column": "EmployeeID",
+      "on_update": "CASCADE",
+      "on_delete": "CASCADE",
+      "match": "NONE"
+    }
+  ]
+}

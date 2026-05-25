@@ -1,0 +1,758 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "food_inspection_2",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/food_inspection_2/food_inspection_2.sqlite",
+  "tables": [
+    {
+      "name": "employee",
+      "type": "table",
+      "create_sql": "CREATE TABLE employee\n(\n    employee_id INTEGER\n            primary key,\n    first_name  TEXT,\n    last_name   TEXT,\n    address     TEXT,\n    city        TEXT,\n    state       TEXT,\n    zip         INTEGER,\n    phone       TEXT,\n    title       TEXT,\n    salary      INTEGER,\n    supervisor  INTEGER,\n    foreign key (supervisor) references employee(employee_id)\n)",
+      "row_count": 75,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "employee_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "employee id",
+            "description": "the unique id for the employee",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "first_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "first name of the employee",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "last_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "last name of the employee",
+            "data_format": "text",
+            "value_description": "commonsense evidence: full name: first name + last_name"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "address",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "physical street address of the employee",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "city of the employee's address",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "state of the customer's address",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "zip",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "postal code of the employee's address",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "phone",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "telephone number to reach the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "title",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "career title of the employee",
+            "data_format": "text",
+            "value_description": " Sanitarian \n Supervisor \n Division Manager"
+          }
+        },
+        {
+          "cid": 9,
+          "name": "salary",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the salary of the employee",
+            "data_format": "integer",
+            "value_description": "us dollars / year\ncommonsense evidence: monthly salary: salary / 12"
+          }
+        },
+        {
+          "cid": 10,
+          "name": "supervisor",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the employee id of the employee's supervisor",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "employee",
+          "from_column": "supervisor",
+          "to_table": "employee",
+          "to_column": "employee_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "establishment",
+      "type": "table",
+      "create_sql": "CREATE TABLE establishment\n(\n    license_no    INTEGER\n            primary key,\n    dba_name      TEXT,\n    aka_name      TEXT,\n    facility_type TEXT,\n    risk_level    INTEGER,\n    address       TEXT,\n    city          TEXT,\n    state         TEXT,\n    zip           INTEGER,\n    latitude      REAL,\n    longitude     REAL,\n    ward          INTEGER\n)",
+      "row_count": 31642,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "license_no",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "license number",
+            "description": "the license number of the facility",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "dba_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "doing business as name",
+            "description": "the dba name of the facility",
+            "data_format": "text",
+            "value_description": "commonsense evidence: DBA stands for doing business as. It's also referred to as your business's assumed, trade or fictitious name."
+          }
+        },
+        {
+          "cid": 2,
+          "name": "aka_name",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "as know as name",
+            "description": "the aka name of the facility",
+            "data_format": "text",
+            "value_description": "commonsense evidence: the aka name is used to indicate another name that a person or thing has or uses"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "facility_type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "facility type",
+            "description": "the facility type",
+            "data_format": "text",
+            "value_description": "commonsense evidence: can ask some questions about its categories, for i.e.:  \n \"Restaurant\" and \"Cafeteria\" refers to restaurants \n PASTRY school and \"CULINARY ARTS SCHOOL\" belongs to \"Education\" or \"School\". Please design this and mention your evidence in the commonsense part of questions, thanks"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "risk_level",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "risk level",
+            "description": "the risk level of the facility",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: Facilities with higher risk level have more serious food safety issues"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "address",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "physical street address of the facility",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "city",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "city of the facility's address",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "state",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "state of the facility's address",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "zip",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "postal code of the facility's address",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "latitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the latitude of the facility",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "longitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the longitude of the facility",
+            "data_format": "real",
+            "value_description": "commonsense evidence: location = POINT(latitude, longitude)"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "ward",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the ward number of the facility",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: Ward number is the number assigned by the local authorities to identify the population count in each town, village and district usually for electoral purposes or to extract property and locality details"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "inspection",
+      "type": "table",
+      "create_sql": "CREATE TABLE inspection\n(\n    inspection_id   INTEGER\n            primary key,\n    inspection_date DATE,\n    inspection_type TEXT,\n    results         TEXT,\n    employee_id     INTEGER,\n    license_no      INTEGER,\n    followup_to     INTEGER,\n    foreign key (employee_id) references employee(employee_id),\n    foreign key (license_no) references establishment(license_no),\n    foreign key (followup_to) references inspection(inspection_id)\n)",
+      "row_count": 143870,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "inspection_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "inspection id",
+            "description": "the unique id for the inspection",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "inspection_date",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "inspection date",
+            "description": "the date of the inspection",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "inspection_type",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "inspection type",
+            "description": "the type of the inspection",
+            "data_format": "text  s",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "results",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the inspection results",
+            "data_format": "text",
+            "value_description": " Pass \n Pass w/ Conditions \n Fail \n Out of Business \n Business Not Located \n No Entry \n Not Ready \ncommonsense evidence: the quality is verified: Pass + Pass w/ Conditions"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "employee_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "employee id",
+            "description": "the id of the employee who is responsible for the inspection",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "license_no",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "license number",
+            "description": "the license number of the facility that is inspected",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "followup_to",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "followup to",
+            "description": "the id of inspections that this inspection is following up",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: 'No data' means the inspection has no followup.\nif followup_to has value: \n it's the parent inspection id, and this value represents child inspection id  \n the entire inspection: followup_to + inspection_id"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "inspection",
+          "from_column": "followup_to",
+          "to_table": "inspection",
+          "to_column": "inspection_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "inspection",
+          "from_column": "license_no",
+          "to_table": "establishment",
+          "to_column": "license_no",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "inspection",
+          "from_column": "employee_id",
+          "to_table": "employee",
+          "to_column": "employee_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "inspection_point",
+      "type": "table",
+      "create_sql": "CREATE TABLE inspection_point\n(\n    point_id    INTEGER\n            primary key,\n    Description TEXT,\n    category    TEXT,\n    code        TEXT,\n    fine        INTEGER,\n    point_level TEXT\n)",
+      "row_count": 46,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "point_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "point id",
+            "description": "the unique id for the inspection point",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the specific description of the inspection results",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "category",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the inspection category",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "code",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the sanitary operating requirement code",
+            "data_format": "text",
+            "value_description": "commonsense evidence: Each code stands for an operating requirement"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "fine",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the fines for food safety problems",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: The fine of more serious food safety problems will be higher. \r\n Minor: 100 \r\n Serious: 250 \r\n Critical: 500"
+          }
+        },
+        {
+          "cid": 5,
+          "name": "point_level",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "point level",
+            "data_format": "text",
+            "value_description": "Critical / Serious/ Minor"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "violation",
+      "type": "table",
+      "create_sql": "CREATE TABLE violation\n(\n    inspection_id     INTEGER,\n    point_id          INTEGER,\n    fine              INTEGER,\n    inspector_comment TEXT,\n    primary key (inspection_id, point_id),\n    foreign key (inspection_id) references inspection(inspection_id),\n    foreign key (point_id) references inspection_point(point_id)\n)",
+      "row_count": 525709,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "inspection_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "inspection id",
+            "description": "the unique id for the inspection",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "point_id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "point id",
+            "description": "the inspection point id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "fine",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the fine of the violation",
+            "data_format": "integer",
+            "value_description": "commonsense evidence: The fine of more serious food safety problems will be higher. \n Minor: 100 \n Serious: 250 \n Critical: 500"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "inspector_comment",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the comment of the inspector",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "violation",
+          "from_column": "point_id",
+          "to_table": "inspection_point",
+          "to_column": "point_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "violation",
+          "from_column": "inspection_id",
+          "to_table": "inspection",
+          "to_column": "inspection_id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "employee",
+      "from_column": "supervisor",
+      "to_table": "employee",
+      "to_column": "employee_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "inspection",
+      "from_column": "followup_to",
+      "to_table": "inspection",
+      "to_column": "inspection_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "inspection",
+      "from_column": "license_no",
+      "to_table": "establishment",
+      "to_column": "license_no",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "inspection",
+      "from_column": "employee_id",
+      "to_table": "employee",
+      "to_column": "employee_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "violation",
+      "from_column": "point_id",
+      "to_table": "inspection_point",
+      "to_column": "point_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "violation",
+      "from_column": "inspection_id",
+      "to_table": "inspection",
+      "to_column": "inspection_id",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

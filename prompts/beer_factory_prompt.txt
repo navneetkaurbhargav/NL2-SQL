@@ -1,0 +1,1160 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "beer_factory",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/beer_factory/beer_factory.sqlite",
+  "tables": [
+    {
+      "name": "customers",
+      "type": "table",
+      "create_sql": "CREATE TABLE customers\n(\n    CustomerID            INTEGER\n            primary key,\n    First                 TEXT,\n    Last                  TEXT,\n    StreetAddress         TEXT,\n    City                  TEXT,\n    State                 TEXT,\n    ZipCode               INTEGER,\n    Email                 TEXT,\n    PhoneNumber           TEXT,\n    FirstPurchaseDate     DATE,\n    SubscribedToEmailList TEXT,\n    Gender                TEXT\n)",
+      "row_count": 554,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "CustomerID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "customer id",
+            "description": "the unique id for the customer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "First",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first name",
+            "description": "the first name of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Last",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "last name",
+            "description": "the last name of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "StreetAddress",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "street address",
+            "description": "the address of the customer",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "City",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the city where the customer lives",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "State",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the state code",
+            "data_format": "text",
+            "value_description": "commonsense evidence: please refer to https://www23.statcan.gc.ca/imdb/p3VD.pl?Function=getVD&TVD=53971\r\nand mention its corresponding state name in the question. i.e. New York-- NY"
+          }
+        },
+        {
+          "cid": 6,
+          "name": "ZipCode",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "zip code",
+            "description": "the zip code",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Email",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the customer's email",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "PhoneNumber",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "phone number",
+            "description": "the customer's phone number",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "FirstPurchaseDate",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first purchase date",
+            "description": "the first purchase date of the customer",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 10,
+          "name": "SubscribedToEmailList",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "subscribed to email list",
+            "description": "whether the customer subscribe to the email list",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\r\n 'true' means the user permits the company to send regular emails to them."
+          }
+        },
+        {
+          "cid": 11,
+          "name": "Gender",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the customer's gender",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "geolocation",
+      "type": "table",
+      "create_sql": "CREATE TABLE geolocation\n(\n    LocationID INTEGER\n            primary key,\n    Latitude   REAL,\n    Longitude  REAL,\n    foreign key (LocationID) references location(LocationID)\n)",
+      "row_count": 3,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "LocationID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "location id",
+            "description": "the id of the location",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Latitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the latitude of the location",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Longitude",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the longitude of the location",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\r\nprecise location / coordinate = POINT(latitude, longitude)"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "geolocation",
+          "from_column": "LocationID",
+          "to_table": "location",
+          "to_column": "LocationID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "location",
+      "type": "table",
+      "create_sql": "CREATE TABLE location\n(\n    LocationID    INTEGER\n            primary key,\n    LocationName  TEXT,\n    StreetAddress TEXT,\n    City          TEXT,\n    State         TEXT,\n    ZipCode       INTEGER,\n    foreign key (LocationID) references geolocation(LocationID)\n)",
+      "row_count": 3,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "LocationID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "location id",
+            "description": "the unique id for the location",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "LocationName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "location name",
+            "description": "the name of the location",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "StreetAddress",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "street address",
+            "description": "the street address",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "City",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the city where the location locates",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "State",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the state code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "ZipCode",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "zip code",
+            "description": "the zip code of the location",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "location",
+          "from_column": "LocationID",
+          "to_table": "geolocation",
+          "to_column": "LocationID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "rootbeer",
+      "type": "table",
+      "create_sql": "CREATE TABLE rootbeer\n(\n    RootBeerID    INTEGER\n            primary key,\n    BrandID       INTEGER,\n    ContainerType TEXT,\n    LocationID    INTEGER,\n    PurchaseDate  DATE,\n    foreign key (LocationID) references geolocation(LocationID),\n    foreign key (LocationID) references location(LocationID),\n    foreign key (BrandID) references rootbeerbrand(BrandID)\n)",
+      "row_count": 6430,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "RootBeerID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "root beer id",
+            "description": "the unique id for the root beer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "BrandID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "brandid",
+            "description": "the brand id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "ContainerType",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "container type",
+            "description": "the type of the container",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "LocationID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "location id",
+            "description": "the location id of the selling company",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "PurchaseDate",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "purchase date",
+            "description": "the purchase date of the root beer",
+            "data_format": "date",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "rootbeer",
+          "from_column": "BrandID",
+          "to_table": "rootbeerbrand",
+          "to_column": "BrandID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "rootbeer",
+          "from_column": "LocationID",
+          "to_table": "location",
+          "to_column": "LocationID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "rootbeer",
+          "from_column": "LocationID",
+          "to_table": "geolocation",
+          "to_column": "LocationID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "rootbeerbrand",
+      "type": "table",
+      "create_sql": "CREATE TABLE rootbeerbrand\n(\n    BrandID             INTEGER\n            primary key,\n    BrandName           TEXT,\n    FirstBrewedYear     INTEGER,\n    BreweryName         TEXT,\n    City                TEXT,\n    State               TEXT,\n    Country             TEXT,\n    Description         TEXT,\n    CaneSugar           TEXT,\n    CornSyrup           TEXT,\n    Honey               TEXT,\n    ArtificialSweetener TEXT,\n    Caffeinated         TEXT,\n    Alcoholic           TEXT,\n    AvailableInCans     TEXT,\n    AvailableInBottles  TEXT,\n    AvailableInKegs     TEXT,\n    Website             TEXT,\n    FacebookPage        TEXT,\n    Twitter             TEXT,\n    WholesaleCost       REAL,\n    CurrentRetailPrice  REAL\n)",
+      "row_count": 24,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "BrandID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "brand id",
+            "description": "the unique id for the brand",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "BrandName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "brand name",
+            "description": "the brand name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "FirstBrewedYear",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "first brewed year",
+            "description": "the first brewed year of the brand",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\nbrand with earlier first brewed year has a much longer brewed history"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "BreweryName",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "brewery name",
+            "description": "the brewery name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "City",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the city where the brewery locates",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "State",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the state code",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "Country",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the country where the brewery locates",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\r\ncan find its corresponding continent. e.g., U.S.--> North America"
+          }
+        },
+        {
+          "cid": 7,
+          "name": "Description",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the description of the brand",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 8,
+          "name": "CaneSugar",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "cane sugar",
+            "description": "whether the drink contains cane sugar",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 9,
+          "name": "CornSyrup",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "corn syrup",
+            "description": "whether the drink contains the corn syrup",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 10,
+          "name": "Honey",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the drink contains the honey",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\r\nif the beer has honey, it means this beer is sweeter or has sweetness"
+          }
+        },
+        {
+          "cid": 11,
+          "name": "ArtificialSweetener",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "artificial sweetener",
+            "description": "whether the drink contains the artificial sweetener",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\r\nif the beer has artificial sweetener, it means this beer is sweeter or has sweetness"
+          }
+        },
+        {
+          "cid": 12,
+          "name": "Caffeinated",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the drink is caffeinated",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 13,
+          "name": "Alcoholic",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "whether the drink is alcoholic",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 14,
+          "name": "AvailableInCans",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "available in cans",
+            "description": "whether the drink is available in cans",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 15,
+          "name": "AvailableInBottles",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "available in bottles",
+            "description": "whether the drink is available in bottles",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 16,
+          "name": "AvailableInKegs",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "available in kegs",
+            "description": "whether the drink is available in kegs",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 17,
+          "name": "Website",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the website of the brand",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 18,
+          "name": "FacebookPage",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "facebook page",
+            "description": "the facebook page of the brand",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\r\nif not, it means this brand doesn't advertise on facebook"
+          }
+        },
+        {
+          "cid": 19,
+          "name": "Twitter",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the twitter of the brand",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\r\nif not, it means this brand doesn't advertise on twitter"
+          }
+        },
+        {
+          "cid": 20,
+          "name": "WholesaleCost",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "wholesale cost",
+            "description": "the wholesale cost",
+            "data_format": "real",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 21,
+          "name": "CurrentRetailPrice",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "current retail price",
+            "description": "the current retail price",
+            "data_format": "real",
+            "value_description": "commonsense evidence:\r\nThe unit profit available to wholesalers = current retail price - wholesale cost"
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "rootbeerreview",
+      "type": "table",
+      "create_sql": "CREATE TABLE rootbeerreview\n(\n    CustomerID INTEGER,\n    BrandID    INTEGER,\n    StarRating INTEGER,\n    ReviewDate DATE,\n    Review     TEXT,\n    primary key (CustomerID, BrandID),\n    foreign key (CustomerID) references customers(CustomerID),\n    foreign key (BrandID) references rootbeerbrand(BrandID)\n)",
+      "row_count": 713,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "CustomerID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "customer id",
+            "description": "the id of the customer",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "BrandID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 2,
+          "bird_description": {
+            "semantic_name": "brand id",
+            "description": "the id of the brand",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "StarRating",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "star rating",
+            "description": "the star rating of the root beer",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\r\nroot beer with higher star rating has higher market evaluation and acceptance"
+          }
+        },
+        {
+          "cid": 3,
+          "name": "ReviewDate",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "review date",
+            "description": "the review date",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "Review",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "the specific review content",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "rootbeerreview",
+          "from_column": "BrandID",
+          "to_table": "rootbeerbrand",
+          "to_column": "BrandID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "rootbeerreview",
+          "from_column": "CustomerID",
+          "to_table": "customers",
+          "to_column": "CustomerID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "transaction",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"transaction\"\n(\n    TransactionID    INTEGER\n            primary key,\n    CreditCardNumber INTEGER,\n    CustomerID       INTEGER,\n    TransactionDate  DATE,\n    CreditCardType   TEXT,\n    LocationID       INTEGER,\n    RootBeerID       INTEGER,\n    PurchasePrice    REAL,\n    foreign key (CustomerID) references customers(CustomerID),\n    foreign key (LocationID) references location(LocationID),\n    foreign key (RootBeerID) references rootbeer(RootBeerID)\n)",
+      "row_count": 6312,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "TransactionID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "transaction id",
+            "description": "the unique id for the transaction",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "CreditCardNumber",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "credit card number",
+            "description": "the number of the credit card used for payment",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "CustomerID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "customer id",
+            "description": "the customer id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "TransactionDate",
+          "type": "DATE",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "transaction date",
+            "description": "the transaction date",
+            "data_format": "date",
+            "value_description": "yyyy-mm-dd"
+          }
+        },
+        {
+          "cid": 4,
+          "name": "CreditCardType",
+          "type": "TEXT",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "credit card type",
+            "description": "the credit card type",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 5,
+          "name": "LocationID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "location id",
+            "description": "the location id of the selling company",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 6,
+          "name": "RootBeerID",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "root beer id",
+            "description": "the root beer id",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 7,
+          "name": "PurchasePrice",
+          "type": "REAL",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "purchase price",
+            "description": "the unit purchase price of the root beer",
+            "data_format": "real",
+            "value_description": "us dollars"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "transaction",
+          "from_column": "RootBeerID",
+          "to_table": "rootbeer",
+          "to_column": "RootBeerID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "transaction",
+          "from_column": "LocationID",
+          "to_table": "location",
+          "to_column": "LocationID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "sequence": 0,
+          "from_table": "transaction",
+          "from_column": "CustomerID",
+          "to_table": "customers",
+          "to_column": "CustomerID",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "geolocation",
+      "from_column": "LocationID",
+      "to_table": "location",
+      "to_column": "LocationID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "location",
+      "from_column": "LocationID",
+      "to_table": "geolocation",
+      "to_column": "LocationID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "rootbeer",
+      "from_column": "BrandID",
+      "to_table": "rootbeerbrand",
+      "to_column": "BrandID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "rootbeer",
+      "from_column": "LocationID",
+      "to_table": "location",
+      "to_column": "LocationID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "rootbeer",
+      "from_column": "LocationID",
+      "to_table": "geolocation",
+      "to_column": "LocationID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "rootbeerreview",
+      "from_column": "BrandID",
+      "to_table": "rootbeerbrand",
+      "to_column": "BrandID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "rootbeerreview",
+      "from_column": "CustomerID",
+      "to_table": "customers",
+      "to_column": "CustomerID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "transaction",
+      "from_column": "RootBeerID",
+      "to_table": "rootbeer",
+      "to_column": "RootBeerID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "transaction",
+      "from_column": "LocationID",
+      "to_table": "location",
+      "to_column": "LocationID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 2,
+      "sequence": 0,
+      "from_table": "transaction",
+      "from_column": "CustomerID",
+      "to_table": "customers",
+      "to_column": "CustomerID",
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>

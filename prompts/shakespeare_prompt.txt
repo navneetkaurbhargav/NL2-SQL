@@ -1,0 +1,388 @@
+You are an expert SQLite text-to-SQL assistant.
+Use only the tables, columns, primary keys, and foreign keys in this schema JSON.
+Return one valid SQLite query and no extra explanation.
+
+Schema JSON:
+```json
+{
+  "db_id": "shakespeare",
+  "sqlite_path": "/Users/nav/Downloads/train/train_databases/shakespeare/shakespeare.sqlite",
+  "tables": [
+    {
+      "name": "chapters",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"chapters\"\n(\n    id          INTEGER\n        primary key autoincrement,\n    Act         INTEGER not null,\n    Scene       INTEGER not null,\n    Description TEXT    not null,\n    work_id     INTEGER not null\n        references works\n)",
+      "row_count": 945,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "id",
+            "description": "unique id number identifying the chapter",
+            "data_format": "integer auto_increment",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Act",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "An act is a major division of a theatre work, including a play, film, opera, or musical theatre",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nAn act can consist of one or more scenes"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Scene",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "A scene is a dramatic part of a story, at a specific time and place, between specific characters.",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Description",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "textual description of the chapter.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "work_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "work id",
+            "description": "id number identifying the work",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "chapters",
+          "from_column": "work_id",
+          "to_table": "works",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "characters",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"characters\"\n(\n    id          INTEGER\n        primary key autoincrement,\n    CharName    TEXT not null,\n    Abbrev      TEXT not null,\n    Description TEXT not null\n)",
+      "row_count": 1266,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "id",
+            "description": "unique id number identifying the characters",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "CharName",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "char name",
+            "description": "character name",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "Abbrev",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "abbreviation",
+            "description": "abbreviation. An abbreviation is a shortened form of a word or phrase.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Description",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "description of the character.",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    },
+    {
+      "name": "paragraphs",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"paragraphs\"\n(\n    id           INTEGER\n        primary key autoincrement,\n    ParagraphNum INTEGER           not null,\n    PlainText    TEXT              not null,\n    character_id INTEGER           not null\n        references characters,\n    chapter_id   INTEGER default 0 not null\n        references chapters\n)",
+      "row_count": 35126,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "id",
+            "description": "unique id number identifying the paragraphs",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "ParagraphNum",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "paragraph number",
+            "description": "unique id number identifying the paragraph number",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 2,
+          "name": "PlainText",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Plain Text",
+            "description": "main content of the paragraphs",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "character_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "character id",
+            "description": "unique id number identifying the mentioned character",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "chapter_id",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": "0",
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "chapter id",
+            "description": "unique id number identifying the related chapter",
+            "data_format": "integer",
+            "value_description": "commonsense evidence:\nif number of the paragraphs is > 150, then it means this is a long chapter"
+          }
+        }
+      ],
+      "foreign_keys": [
+        {
+          "id": 0,
+          "sequence": 0,
+          "from_table": "paragraphs",
+          "from_column": "chapter_id",
+          "to_table": "chapters",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "sequence": 0,
+          "from_table": "paragraphs",
+          "from_column": "character_id",
+          "to_table": "characters",
+          "to_column": null,
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ]
+    },
+    {
+      "name": "works",
+      "type": "table",
+      "create_sql": "CREATE TABLE \"works\"\n(\n    id        INTEGER\n        primary key autoincrement,\n    Title     TEXT    not null,\n    LongTitle TEXT    not null,\n    Date      INTEGER not null,\n    GenreType TEXT    not null\n)",
+      "row_count": 43,
+      "columns": [
+        {
+          "cid": 0,
+          "name": "id",
+          "type": "INTEGER",
+          "not_null": false,
+          "default": null,
+          "primary_key_position": 1,
+          "bird_description": {
+            "semantic_name": "id",
+            "description": "unique id number identifying the work",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 1,
+          "name": "Title",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "",
+            "description": "title of the work",
+            "data_format": "text",
+            "value_description": "commonsense evidence:\nthe short title or abbreviated title"
+          }
+        },
+        {
+          "cid": 2,
+          "name": "LongTitle",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "Long Title",
+            "description": "full title of the work",
+            "data_format": "text",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 3,
+          "name": "Date",
+          "type": "INTEGER",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "character id",
+            "description": "date of the work",
+            "data_format": "integer",
+            "value_description": ""
+          }
+        },
+        {
+          "cid": 4,
+          "name": "GenreType",
+          "type": "TEXT",
+          "not_null": true,
+          "default": null,
+          "primary_key_position": 0,
+          "bird_description": {
+            "semantic_name": "genre type",
+            "description": "the type of the genere",
+            "data_format": "text",
+            "value_description": ""
+          }
+        }
+      ],
+      "foreign_keys": []
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "chapters",
+      "from_column": "work_id",
+      "to_table": "works",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 0,
+      "sequence": 0,
+      "from_table": "paragraphs",
+      "from_column": "chapter_id",
+      "to_table": "chapters",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    },
+    {
+      "id": 1,
+      "sequence": 0,
+      "from_table": "paragraphs",
+      "from_column": "character_id",
+      "to_table": "characters",
+      "to_column": null,
+      "on_update": "NO ACTION",
+      "on_delete": "NO ACTION",
+      "match": "NONE"
+    }
+  ]
+}
+```
+
+Question:
+<USER_QUESTION_HERE>
