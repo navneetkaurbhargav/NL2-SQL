@@ -29,22 +29,22 @@ Output:
 From the project folder:
 
 ```bash
-cd "/Users/nav/Documents/NL2 SQL"
+cd /path/to/NL2-SQL
 python3 -m pip install -r requirements.txt
 ```
 
 ## 2. Dataset Location
 
-The BIRD train databases were found here:
+Set the path to your local BIRD train databases folder:
 
-```text
-/Users/nav/Downloads/train/train_databases
+```bash
+export BIRD_TRAIN_DATABASES_DIR="/path/to/train/train_databases"
 ```
 
 Each database folder contains a SQLite database, for example:
 
 ```text
-/Users/nav/Downloads/train/train_databases/european_football_1/european_football_1.sqlite
+${BIRD_TRAIN_DATABASES_DIR}/european_football_1/european_football_1.sqlite
 ```
 
 ## 3. Generate Schema JSON Files
@@ -53,7 +53,7 @@ Run this when the databases are new or changed:
 
 ```bash
 python3 extract_bird_schema.py \
-  --database-path /Users/nav/Downloads/train/train_databases \
+  --database-path "$BIRD_TRAIN_DATABASES_DIR" \
   --output schema_json \
   --prompt-output prompts
 ```
@@ -221,7 +221,7 @@ Regenerate all schemas:
 
 ```bash
 python3 extract_bird_schema.py \
-  --database-path /Users/nav/Downloads/train/train_databases \
+  --database-path "$BIRD_TRAIN_DATABASES_DIR" \
   --output schema_json \
   --prompt-output prompts
 ```
@@ -230,7 +230,7 @@ Generate schema for one DB:
 
 ```bash
 python3 extract_bird_schema.py \
-  --database-path /Users/nav/Downloads/train/train_databases/european_football_1/european_football_1.sqlite \
+  --database-path "$BIRD_TRAIN_DATABASES_DIR/european_football_1/european_football_1.sqlite" \
   --output schema_json/european_football_1_schema.json \
   --prompt-output prompts/european_football_1_prompt.txt
 ```
