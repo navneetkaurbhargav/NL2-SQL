@@ -7,6 +7,7 @@ import argparse
 import json
 import os
 import re
+import requests
 import sqlite3
 import time
 from dataclasses import dataclass
@@ -20,6 +21,8 @@ from openai import OpenAI
 DEFAULT_SCHEMA_DIR = Path("schema_json")
 DEFAULT_TRAIN_DATABASES = Path("/Users/nav/Downloads/train/train_databases")
 DEFAULT_MODEL = "gpt-5.1"
+DEFAULT_OLLAMA_MODEL = "llama3.1:8b"
+DEFAULT_OLLAMA_URL = "http://127.0.0.1:11434"
 FORBIDDEN_SQL_PATTERN = re.compile(
     r"\b(ALTER|ATTACH|CREATE|DELETE|DETACH|DROP|INSERT|PRAGMA|REINDEX|REPLACE|UPDATE|VACUUM)\b",
     re.IGNORECASE,
@@ -161,6 +164,47 @@ def call_openai_json(model: str, system_prompt: str, user_prompt: str) -> dict[s
         input=user_prompt,
     )
     return extract_json_object(response.output_text)
+
+
+def call_ollama_json(
+    model: str,
+    system_prompt: str,
+    user_prompt: str,
+    ollama_url: str,
+) -> dict[str, Any]:
+    response = requests.post(
+        f"{ollama_url.rstrip('/')}/api/chat",
+        json={
+            "model": model,
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            "stream": False,
+            "format": "json",
+            "options": {
+                "temperature": 0,
+            },
+        },
+        timeout=300,
+    )
+    response.raise_for_status()
+    data = response.json()
+    return extract_json_object(data["message"]["content"])
+
+
+def call_llm_json(
+    provider: str,
+    model: str,
+    system_prompt: str,
+    user_prompt: str,
+    ollama_url: str,
+) -> dict[str, Any]:
+    if provider == "openai":
+        return call_openai_json(model, system_prompt, user_prompt)
+    if provider == "ollama":
+        return call_ollama_json(model, system_prompt, user_prompt, ollama_url)
+    raise ValueError(f"Unsupported provider: {provider}")
 
 
 def build_sql_planning_prompt(schema: dict[str, Any], question: str) -> tuple[str, str]:
@@ -350,7 +394,9 @@ def execute_with_repairs(
     sqlite_path: Path,
     question: str,
     query: dict[str, Any],
+    provider: str,
     model: str,
+    ollama_url: str,
     max_rows: int,
     max_repairs: int,
     timeout_steps: int,
@@ -378,7 +424,7 @@ def execute_with_repairs(
             query=current_query,
             error=trace.error or "Unknown SQL error",
         )
-        current_query = call_openai_json(model, system_prompt, user_prompt)
+        current_query = call_llm_json(provider, model, system_prompt, user_prompt, ollama_url)
 
     return traces
 
@@ -425,13 +471,21 @@ def run_pipeline(args: argparse.Namespace) -> dict[str, Any]:
             "dry_run": True,
             "schema_path": str(schema_path),
             "sqlite_path": str(sqlite_path),
+            "provider": args.provider,
+            "model": args.model,
             "planning_prompt": {
                 "system": planning_system,
                 "user": planning_user,
             },
         }
 
-    plan = call_openai_json(args.model, planning_system, planning_user)
+    plan = call_llm_json(
+        args.provider,
+        args.model,
+        planning_system,
+        planning_user,
+        args.ollama_url,
+    )
 
     # Step 2: Validate, execute, and repair SQL when needed.
     all_attempts: list[QueryAttempt] = []
@@ -442,7 +496,9 @@ def run_pipeline(args: argparse.Namespace) -> dict[str, Any]:
                 sqlite_path=sqlite_path,
                 question=args.question,
                 query=query,
+                provider=args.provider,
                 model=args.model,
+                ollama_url=args.ollama_url,
                 max_rows=args.max_result_rows,
                 max_repairs=args.max_repairs,
                 timeout_steps=args.timeout_steps,
@@ -452,12 +508,19 @@ def run_pipeline(args: argparse.Namespace) -> dict[str, Any]:
 
     # Step 3: Ask the LLM for a final multi-section report grounded in traces.
     report_system, report_user = build_report_prompt(schema, args.question, plan, execution_traces)
-    report = call_openai_json(args.model, report_system, report_user)
+    report = call_llm_json(
+        args.provider,
+        args.model,
+        report_system,
+        report_user,
+        args.ollama_url,
+    )
 
     # Step 4: Persist the report, SQL traces, and result previews.
     return {
         "request": args.question,
         "db_id": args.db_id,
+        "provider": args.provider,
         "model": args.model,
         "schema_path": str(schema_path),
         "sqlite_path": str(sqlite_path),
@@ -470,13 +533,24 @@ def run_pipeline(args: argparse.Namespace) -> dict[str, Any]:
 def parse_args() -> argparse.Namespace:
     load_env_file(Path(".env"))
     parser = argparse.ArgumentParser(
-        description="Run an OpenAI-powered NL-to-SQL analytical reporting pipeline."
+        description="Run an LLM-powered NL-to-SQL analytical reporting pipeline."
     )
     parser.add_argument("--db-id", required=True, help="BIRD database id, e.g. european_football_1.")
     parser.add_argument("--question", required=True, help="Natural language analytical request.")
     parser.add_argument("--schema-dir", type=Path, default=DEFAULT_SCHEMA_DIR)
     parser.add_argument("--train-databases", type=Path, default=DEFAULT_TRAIN_DATABASES)
-    parser.add_argument("--model", default=os.getenv("OPENAI_MODEL", DEFAULT_MODEL))
+    parser.add_argument(
+        "--provider",
+        choices=["openai", "ollama"],
+        default=os.getenv("LLM_PROVIDER", "openai"),
+        help="LLM provider to use.",
+    )
+    parser.add_argument("--model", help="Model name. Defaults depend on provider.")
+    parser.add_argument(
+        "--ollama-url",
+        default=os.getenv("OLLAMA_URL", DEFAULT_OLLAMA_URL),
+        help="Ollama base URL when using --provider ollama.",
+    )
     parser.add_argument("--output", type=Path, default=Path("analysis_outputs/result.json"))
     parser.add_argument("--markdown-output", type=Path, help="Optional Markdown report output path.")
     parser.add_argument("--max-result-rows", type=int, default=50)
@@ -490,9 +564,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="Build the first LLM prompt without calling OpenAI or executing SQL.",
+        help="Build the first LLM prompt without calling the provider or executing SQL.",
     )
-    return parser.parse_args()
+    args = parser.parse_args()
+    if not args.model:
+        args.model = (
+            os.getenv("OPENAI_MODEL", DEFAULT_MODEL)
+            if args.provider == "openai"
+            else os.getenv("OLLAMA_MODEL", DEFAULT_OLLAMA_MODEL)
+        )
+    return args
 
 
 def main() -> None:
@@ -508,7 +589,7 @@ def main() -> None:
     if args.markdown_output and not args.dry_run:
         print(f"Wrote Markdown report: {args.markdown_output}")
     if args.dry_run:
-        print("Dry run complete. Set OPENAI_API_KEY later to run the full pipeline.")
+        print("Dry run complete. No provider call or SQL execution was performed.")
 
 
 if __name__ == "__main__":
